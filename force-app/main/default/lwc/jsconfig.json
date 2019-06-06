@@ -2,7 +2,14 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "c/ChelseaTemplate": [
+                "ChelseaTemplate/ChelseaTemplate.js"
+            ],
+            "c/chelseaTemplate": [
+                "chelseaTemplate/chelseaTemplate.js"
+            ]
+        }
     },
     "include": [
         "**/*",

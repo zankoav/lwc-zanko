@@ -1,13 +1,21 @@
 <apex:page standardStylesheets="false" sidebar="false" showHeader="false" controller="AppController">
     <apex:includeLightning />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html, body, #app{
+            height:100%;
+        }
+
+    </style>
     <div id="app"></div>
     <script>
-        console.log('Hello World');
         $Lightning.use("c:appTemplate", function () {
-            // $Lightning.createComponent("c:stepAura", {}, "app", function (cmp) {
-            //     console.log("Component is created!");
-            //     console.log(cmp);
-            // });
+            $Lightning.createComponent("c:chelseaTemplate", {step:"{!step}"}, "app", function (cmp) {
+                console.log("Ready to work!");
+            });
         });
     </script>
 </apex:page>

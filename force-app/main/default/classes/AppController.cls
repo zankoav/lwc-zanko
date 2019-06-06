@@ -1,6 +1,6 @@
 public class AppController {
     
-    public String getName(){
-        return 'Hello from Controller';
+    public String getStep(){
+        return 'Step 1';
     }
 }
