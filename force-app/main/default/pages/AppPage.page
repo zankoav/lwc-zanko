@@ -1,0 +1,13 @@
+<apex:page standardStylesheets="false" sidebar="false" showHeader="false" controller="AppController">
+    <apex:includeLightning />
+    <div id="app"></div>
+    <script>
+        console.log('Hello World');
+        // $Lightning.use("c:clearapp", function () {
+        //     $Lightning.createComponent("c:stepAura", {}, "app", function (cmp) {
+        //         console.log("Component is created!");
+        //         console.log(cmp);
+        //     });
+        // });
+    </script>
+</apex:page>
