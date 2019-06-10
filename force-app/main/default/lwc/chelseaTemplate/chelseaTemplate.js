@@ -1,7 +1,3 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement} from 'lwc';
 
-export default class ChelseaTemplate extends LightningElement {
-
-    @api step;
-
-}
+export default class ChelseaTemplate extends LightningElement {}

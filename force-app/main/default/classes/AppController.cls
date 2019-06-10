@@ -1,6 +1,6 @@
 public class AppController {
     
-    public String getStep(){
-        return 'Step 1';
+    public Integer getStep(){
+        return null;
     }
 }

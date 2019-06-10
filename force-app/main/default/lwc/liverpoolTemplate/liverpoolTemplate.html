@@ -1,0 +1,26 @@
+<template>
+    <div class="liverpool">
+        <header class="liverpool__header">
+             <div class="liverpool__container">
+                <slot name="header">Header</slot>
+            </div>
+        </header>
+        <div class="liverpool__container-wrapper">
+            <div class="liverpool__container">
+                <div class="liverpool__container-inner">
+                    <main class="liverpool__main">
+                        <slot name="main">Main</slot>
+                    </main>
+                    <div class={sidebarClassName}>
+                        <slot name="sidebar">Sidebar</slot>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="liverpool__footer">
+            <div class="liverpool__container">
+                <slot name="footer">Footer</slot>
+            </div>
+        </footer>
+    </div>
+</template>
