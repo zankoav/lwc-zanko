@@ -1,0 +1,30 @@
+.fc-button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 0;
+    font-family: inherit;
+    background: #EE3A43;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: .75rem 2rem;
+    transition: .4s all ease-out;
+    outline: none;
+    cursor: pointer;
+    -webkit-font-smoothing:initial;
+}
+
+.fc-button:hover, .fc-button_disabled{
+    background: rgb(255, 131, 138);
+}
+
+.fc-button_disabled{
+    cursor: not-allowed;
+}
+
+
+
+
+
