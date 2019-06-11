@@ -1,1 +1,1 @@
-<aura:application access="GLOBAL" extends="ltng:outApp"></aura:application>	
+<aura:application access="GLOBAL" extends="ltng:outAppUnstyled"></aura:application>

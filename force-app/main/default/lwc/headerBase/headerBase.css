@@ -1,0 +1,38 @@
+.header-base{
+    padding: 2rem 0;
+}
+
+@media (min-width:768px){
+    .header-base{
+        padding: 4rem 0;
+    }
+}
+
+.header-base__title{
+    font-weight: bold;
+    font-size: 2rem;
+    color: #444;
+}
+
+@media (min-width:768px){
+    .header-base__title{
+        font-size: 3.5rem;
+    }
+}
+
+.header-base__subtitle{
+    font-size: .75rem;
+    color: #444;
+}
+
+@media (min-width:768px){
+    .header-base__subtitle{
+        font-size: 1rem;
+    }
+}
+
+@media (min-width:1280px){
+    .header-base__subtitle{
+        font-size: 1.25rem;
+    }
+}

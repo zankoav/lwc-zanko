@@ -2,7 +2,68 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "c/ChelseaTemplate": [
+                "ChelseaTemplate/ChelseaTemplate.js"
+            ],
+            "c/chelseaTemplate": [
+                "chelseaTemplate/chelseaTemplate.js"
+            ],
+            "c/HeaderBase": [
+                "HeaderBase/HeaderBase.js"
+            ],
+            "c/headerBase": [
+                "headerBase/headerBase.js"
+            ],
+            "c/FooterBase": [
+                "FooterBase/FooterBase.js"
+            ],
+            "c/footerBase": [
+                "footerBase/footerBase.js"
+            ],
+            "c/StepRouter": [
+                "StepRouter/StepRouter.js"
+            ],
+            "c/stepRouter": [
+                "stepRouter/stepRouter.js"
+            ],
+            "c/Step1": [
+                "Step1/Step1.js"
+            ],
+            "c/step1": [
+                "step1/step1.js"
+            ],
+            "c/Step2": [
+                "Step2/Step2.js"
+            ],
+            "c/step2": [
+                "step2/step2.js"
+            ],
+            "c/Step": [
+                "Step/Step.js"
+            ],
+            "c/step": [
+                "step/step.js"
+            ],
+            "c/BaseStep": [
+                "BaseStep/BaseStep.js"
+            ],
+            "c/baseStep": [
+                "baseStep/baseStep.js"
+            ],
+            "c/TemplateWrapper": [
+                "TemplateWrapper/TemplateWrapper.js"
+            ],
+            "c/templateWrapper": [
+                "templateWrapper/templateWrapper.js"
+            ],
+            "c/LiverpoolTemplate": [
+                "LiverpoolTemplate/LiverpoolTemplate.js"
+            ],
+            "c/liverpoolTemplate": [
+                "liverpoolTemplate/liverpoolTemplate.js"
+            ]
+        }
     },
     "include": [
         "**/*",
