@@ -62,6 +62,12 @@
             ],
             "c/liverpoolTemplate": [
                 "liverpoolTemplate/liverpoolTemplate.js"
+            ],
+            "c/FcButton": [
+                "FcButton/FcButton.js"
+            ],
+            "c/fcButton": [
+                "fcButton/fcButton.js"
             ]
         }
     },
