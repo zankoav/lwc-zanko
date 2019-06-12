@@ -16,6 +16,8 @@ export default class FcButton extends LightningElement {
     @track className = BASE_CLASS_NAME;
     @track _disabled;
 
+    @api cssClass;
+    @api title = 'Button';
     @api 
     set disabled(value){
         this._disabled = value;
@@ -30,13 +32,9 @@ export default class FcButton extends LightningElement {
             .join(' ');
         }
     }
-
     get disabled(){
         return this._disabled;
     }
-
-    @api cssClass;
-    @api title = 'Button';
 
     connectedCallback() {
         if(this.cssClass){

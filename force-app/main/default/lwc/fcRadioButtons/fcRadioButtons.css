@@ -1,0 +1,41 @@
+.fc-radio-buttons{
+    display: flex;
+}
+
+.fc-radio-buttons__item{
+    padding: .5rem .75rem;
+    flex: 1 0;
+    color: #333333;
+    cursor: pointer;
+    font-size: 15px;
+    border: 2px solid #dedede;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-right:0;
+    transition: background-color .3s ease-out;
+}
+
+.fc-radio-buttons__item:last-child{
+    border-right: 2px solid #dedede;
+}
+.fc-radio-buttons__item:hover{
+    border: 2px solid #c4c4c4;
+    background-color: #fcfcfc;
+}
+.fc-radio-buttons__item:hover ~ .fc-radio-buttons__item{
+    border-left:0;
+    border-right: 2px solid #dedede;
+}
+
+.fc-radio-buttons__item.fc-radio-buttons__item_active{
+    font-weight: 700;
+    background-color: #E0E9ED;
+}
+
+
+
+
+
+

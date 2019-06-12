@@ -68,6 +68,12 @@
             ],
             "c/fcButton": [
                 "fcButton/fcButton.js"
+            ],
+            "c/FcRadioButtons": [
+                "FcRadioButtons/FcRadioButtons.js"
+            ],
+            "c/fcRadioButtons": [
+                "fcRadioButtons/fcRadioButtons.js"
             ]
         }
     },

@@ -10,7 +10,7 @@
     text-transform: uppercase;
     color: #FFFFFF;
     padding: .75rem 2rem;
-    transition: .4s all ease-out;
+    transition: .3s all ease-out;
     outline: none;
     cursor: pointer;
     -webkit-font-smoothing:initial;
@@ -22,6 +22,10 @@
 
 .fc-button_disabled{
     cursor: not-allowed;
+}
+
+.fc-button_full-width{
+    width: 100%;
 }
 
 
