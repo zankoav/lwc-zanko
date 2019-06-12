@@ -1,13 +1,9 @@
 <template>
-    <c-chelsea-template sidebar="right">
-        <c-header-base slot="header" title="Header Base" subtitle="Welcome to the page with Base Header">
-        </c-header-base>
+    <c-liverpool-template sidebar="right">
+        <c-fc-header slot="header"></c-fc-header>
         <c-step-router slot="main" current-step={args}>
             <c-step order="1">
-                <c-step-2 data-step></c-step-2>
-            </c-step>
-            <c-step order="2">
-                <c-step-1 data-step></c-step-1>
+                <c-step-contact-details data-step></c-step-contact-details>
             </c-step>
             <c-step order="3">
                 <c-step-2 data-step></c-step-2>
@@ -22,5 +18,5 @@
         <c-footer-base slot="footer" company="FLEETCOR" right-resived="&copy;2019 All rights reserved."
             cookie-title="Cookies Policy" cookie-link="#" policy-title="Privacy Policy" policy-link="#">
         </c-footer-base>
-    </c-chelsea-template>
+    </c-liverpool-template>
 </template>

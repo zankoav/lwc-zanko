@@ -4,9 +4,7 @@ export default class StepRouter extends LightningElement {
 
     stepsElements;
     stepsOrders;
-
     @api currentStep;
-
     @api setStep(step) {
         if (step) {
             this.currentStep = step;

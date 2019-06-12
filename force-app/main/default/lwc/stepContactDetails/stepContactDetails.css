@@ -1,0 +1,115 @@
+.contact-details-cart__title{
+	font-weight: 700;
+    font-size: 17px;
+    color: #1A1A1A;
+    margin-bottom: .5rem;
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__title{
+		font-size: 24px;
+	}
+}
+
+.contact-details-cart__description{
+	font-size: 13px;
+    color: #1A1A1A;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__description{
+		font-size: 15px;
+		color: #1A1A1A;
+	}
+}
+
+.contact-details-cart__group{
+	margin-bottom: 1rem;
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__group{
+		display: flex;
+		align-items: center;
+	}
+}
+
+
+
+.contact-details-cart__label{
+	font-size: 15px;
+}
+
+.contact-details-cart__label_required::after{
+	content: '*';
+	color: red;
+	margin-left: 0.25rem;
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__label{
+		max-width: 200px;
+		flex: 1 0 200px;
+		padding-right: 1rem
+	}	
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__action{
+		flex: 1;
+	}	
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__action_sex-buttons{
+		max-width: 160px;
+	}	
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__line{
+		height: 2px;
+		background-color: #DEDEDE;
+		margin: 2rem 0 1.5rem;
+	}
+}
+
+.contact-details__link{
+	color: #074ec9;
+}
+
+.contact-details-cart__submit-group{
+	margin-bottom: 1rem;
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__submit-group{
+		display: flex;
+		margin-bottom: 0;
+	}
+}
+
+.contact-details-cart__submit-group-checkbox{
+	margin-bottom: 1.5rem;
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__submit-group-checkbox{
+		flex-shrink: 1;
+		margin-bottom: 0;
+	}
+}
+
+.contact-details-cart__submit-group-submit{
+	text-align: center;
+}
+
+@media (min-width:1280px){
+	.contact-details-cart__submit-group-submit{
+		flex-shrink: 0;
+		padding-left: 2rem;
+		text-align: initial;
+	}
+}
+

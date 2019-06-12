@@ -1,0 +1,66 @@
+<template>
+    <div class="contact-details">
+        <c-fc-cart class="contact-details-cart">
+            <template if:false={loading}>
+            <h2 class="contact-details-cart__title">Kontaktdaten</h2>
+            <p class="contact-details-cart__description">Ansprechpartner, der für das Unternehmen zeichnungsberechtigt ist</p>
+            <div class="contact-details-cart__group">
+                <div class="contact-details-cart__label"></div>
+                <div class="contact-details-cart__action contact-details-cart__action_sex-buttons">
+                    <c-fc-radio-buttons options={sexOptions}></c-fc-radio-buttons>
+                </div>
+            </div>
+            <div class="contact-details-cart__group">
+                <div class="contact-details-cart__label contact-details-cart__label_required">Vorname</div>
+                <div class="contact-details-cart__action">
+                    input place
+                </div>
+            </div>
+            <div class="contact-details-cart__group">
+                <div class="contact-details-cart__label contact-details-cart__label_required">Nachname</div>
+                <div class="contact-details-cart__action">
+                    input place
+                </div>
+            </div>
+            <div class="contact-details-cart__group">
+                <div class="contact-details-cart__label contact-details-cart__label_required">Handynummer</div>
+                <div class="contact-details-cart__action">
+                    input place
+                </div>
+            </div>
+            <div class="contact-details-cart__group">
+                <div class="contact-details-cart__label contact-details-cart__label_required">E-Mail-Adresse</div>
+                <div class="contact-details-cart__action">
+                    input place
+                </div>
+            </div>
+            <div class="contact-details-cart__group">
+                <div class="contact-details-cart__label contact-details-cart__label_required">Anzahl der Karten</div>
+                <div class="contact-details-cart__action">
+                    input place
+                </div>
+            </div>
+            <div class="contact-details-cart__group">
+                <div class="contact-details-cart__label contact-details-cart__label_required">Geschäftsform</div>
+                <div class="contact-details-cart__action">
+                        <c-fc-radio-buttons options={businesTypesOptions}></c-fc-radio-buttons>
+                </div>
+            </div>
+            <div class="contact-details-cart__line"></div>
+            <div class="contact-details-cart__submit-group">
+                    <div class="contact-details-cart__submit-group-checkbox">
+                        <c-fc-checkbox>
+                            Ja, ich möchte von der FLEETCOR Deutschland GmbH Informationen und Werbung für die Shell Tankkarte erhalten. Ich möchte zu diesem Zweck per Email, Textnachricht oder Telefonanruf kontaktiert werden. Diese Einwilligung ist jederzeit widerruflich. Durch den Widerruf der Einwilligung wird die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung nicht berührt. Ihren Widerruf können Sie an die FLEETCOR Deutschland GmbH, Frankenstraße 150c, 90461 Nürnberg richten oder per E-Mail an kundenservice@fleetcor.de erklären. Die Verarbeitung Ihrer Daten erfolgt entsprechend unserer <a class="contact-details__link" href="https://fleetcor.de/datenschutzrichtlinie">Datenschutzerklärung</a>.
+                        </c-fc-checkbox>
+                    </div>
+                    <div class="contact-details-cart__submit-group-submit">
+                        <c-fc-button title="starten" disabled></c-fc-button>
+                    </div>
+                </div>
+            </template>
+            <template if:true={loading}>
+                <c-fc-loader></c-fc-loader>
+            </template>
+        </c-fc-cart>
+    </div>
+</template>

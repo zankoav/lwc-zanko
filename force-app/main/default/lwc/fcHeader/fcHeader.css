@@ -1,0 +1,20 @@
+.fc-header{
+    padding-top: 1.5rem;
+}
+
+@media (min-width:1280px){
+    .fc-header{
+        padding-top: 2rem;
+    }
+}
+
+.fc-header__logo{
+    width: 100px;
+    object-fit: contain;
+}
+
+@media (min-width:1280px){
+    .fc-header__logo{
+        width: 160px;
+    }
+}

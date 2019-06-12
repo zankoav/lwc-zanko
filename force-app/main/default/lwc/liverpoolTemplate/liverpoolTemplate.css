@@ -7,15 +7,12 @@
 
 .liverpool__header{
     flex: 0 0 auto;
-    background-color: #eeeeee;
-    box-shadow: 0px 1px 2px #cccccc;
     position: relative;
 }
 
 .liverpool__container-wrapper{
     flex: 1;
     padding: 1.5rem 0;
-    background-color: #fefefe;
 }
 
 @media (min-width:768px){
@@ -32,8 +29,6 @@
 
 .liverpool__footer{
     flex: 0 0 auto;
-    background-color: #eeeeee;
-    box-shadow: 0px -1px 2px #cccccc;
 }
 
 .liverpool__container{
@@ -58,17 +53,11 @@
 
 @media (min-width:1280px){
     .liverpool__container{
-        max-width: 1204px;
+        max-width: 1024px;
         padding-left: 0;
         padding-right: 0;
         margin-left: auto;
         margin-right: auto;
-    }
-}
-
-@media (min-width:1920px){
-    .liverpool__container{
-        max-width: 1440px;
     }
 }
 
@@ -88,34 +77,20 @@
 @media (min-width:1280px){
     .liverpool__main{
         padding: 0 1rem;
-        max-width: calc(100% - 280px);
-        flex: 1 0 calc(100% - 280px);
+        max-width: calc(100% - 360px);
+        flex: 1 0 calc(100% - 360px);
     }   
-}
-
-@media (min-width:1920px){
-    .liverpool__main{
-        max-width: calc(100% - 300px);
-        flex: 1 0 calc(100% - 300px);
-    }
 }
 
 @media (min-width:1280px){
     .liverpool__sidebar{
         order:-1;
         padding: 0 1rem;
-        max-width: 280px;
-        flex: 1 0 280px;
+        max-width: 360px;
+        flex: 1 0 360px;
     }
 
     .liverpool__sidebar_right{
         order:initial;
-    }
-}
-
-@media (min-width:1920px){
-    .liverpool__sidebar{
-        max-width: 300px;
-        flex: 1 0 300px;
     }
 }
