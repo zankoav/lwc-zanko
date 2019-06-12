@@ -1,0 +1,9 @@
+<template>
+    <ul class="fc-radio-buttons">
+        <template for:each={items} for:item="item">
+            <li key={item.value} onclick={chooseOption} class={item.className}>
+                {item.label}
+            </li>
+        </template>
+    </ul>
+</template>
