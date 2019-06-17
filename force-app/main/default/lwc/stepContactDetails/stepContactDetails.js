@@ -41,26 +41,26 @@ export default class StepContactDetails extends BaseStep {
 
     connectedCallback() {
         getState({ stepContent: this.stepContent, apexService: this.apexService })
-        .then(result => {
-            console.log(result);
-            this.staticData = result;
-            this.stateStep = {
-                country: this.staticData.country,
-                language: this.staticData.language,
-                salutation: this.staticData.salutation.value,
-                first_name: this.staticData.first_name.value,
-                last_name: this.staticData.last_name.value,
-                phone: this.staticData.phone.value,
-                email: this.staticData.email.value,
-                number_of_cards: this.staticData.number_of_cards.value,
-                business_type: this.staticData.business_type.value,
-                news_agreement: this.staticData.news_agreement.value,
-                continue_button: this.staticData.continue_button.disabled,
-            };
-            this.loading = false;
-        }).catch(error => {
-            console.log('Error:', error);
-        });
+            .then(result => {
+                console.log(result);
+                this.staticData = result;
+                this.stateStep = {
+                    country: this.staticData.country,
+                    language: this.staticData.language,
+                    salutation: this.staticData.salutation.value,
+                    first_name: this.staticData.first_name.value,
+                    last_name: this.staticData.last_name.value,
+                    phone: this.staticData.phone.value,
+                    email: this.staticData.email.value,
+                    number_of_cards: this.staticData.number_of_cards.value,
+                    business_type: this.staticData.business_type.value,
+                    news_agreement: this.staticData.news_agreement.value,
+                    continue_button: this.staticData.continue_button.disabled,
+                };
+                this.loading = false;
+            }).catch(error => {
+                console.log('Error:', error);
+            });
     }
 
     renderedCallback() {
@@ -141,7 +141,7 @@ export default class StepContactDetails extends BaseStep {
                 this.nextStep();
             })
             .catch(error => {
-                console.log(error);
+                console.log('stepSubmit Error:', error);
                 this.loading = false;
             })
     }
@@ -179,7 +179,7 @@ export default class StepContactDetails extends BaseStep {
 
         if (this.submitButton) {
             this.submitButton.setState(result);
-            this.stateStep.continue_button = result ? "" : "disabled";
+            this.stateStep.continue_button = result ? '' : 'disabled';
         }
     }
 
