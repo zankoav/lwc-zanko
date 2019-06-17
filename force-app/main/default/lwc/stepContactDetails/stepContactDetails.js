@@ -1,11 +1,10 @@
-import { track, api, wire } from 'lwc';
+import { track, api } from 'lwc';
 import BaseStep from 'c/baseStep';
 import apexStepSubmit from '@salesforce/apex/StepContactDetailsController.stepSubmit';
 import getState from '@salesforce/apex/StaticResourceClass.getStaticData';
 
 export default class StepContactDetails extends BaseStep {
 
-    nameStep = "contactDetails";
     @api lang;
     @api stateId;
 
@@ -17,37 +16,51 @@ export default class StepContactDetails extends BaseStep {
     submitButton;
 
 
-    @wire(getState, { stateId: '$stateId', stepContent: '$stepContent', apexService: '$apexService' })
-    wireState({ error, data }) {
-        if (data) {
-            if (data.status) {
-                this.staticData = data.resource;
-                this.stateStep = {
-                    country: this.staticData.country,
-                    language: this.staticData.language,
-                    salutation: this.staticData.salutation.value,
-                    first_name: this.staticData.first_name.value,
-                    last_name: this.staticData.last_name.value,
-                    phone: this.staticData.phone.value,
-                    email: this.staticData.email.value,
-                    number_of_cards: this.staticData.number_of_cards.value,
-                    business_type: this.staticData.business_type.value,
-                    news_agreement: this.staticData.news_agreement.value,
-                    continue_button: this.staticData.continue_button.disabled,
-                };
-                console.log('loading complate', this.stateStep);
-                this.loading = false;
-            } else {
-                console.log('Message:', data);
-            }
-        }
-        if (error) {
-            console.log(error);
-        }
-    }
+    // @wire(getState, { stepContent: '$stepContent', apexService: '$apexService' })
+    // wireState({ error, data }) {
+    //     if (data) {
+    //         this.staticData = data.resource;
+    //         this.stateStep = {
+    //             country: this.staticData.country,
+    //             language: this.staticData.language,
+    //             salutation: this.staticData.salutation.value,
+    //             first_name: this.staticData.first_name.value,
+    //             last_name: this.staticData.last_name.value,
+    //             phone: this.staticData.phone.value,
+    //             email: this.staticData.email.value,
+    //             number_of_cards: this.staticData.number_of_cards.value,
+    //             business_type: this.staticData.business_type.value,
+    //             news_agreement: this.staticData.news_agreement.value,
+    //             continue_button: this.staticData.continue_button.disabled,
+    //         };
+    //     }
+    //     if (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     connectedCallback() {
-        this.stateId = `${this.nameStep}_${this.lang}`;
+        getState({ stepContent: this.stepContent, apexService: this.apexService })
+        .then(result => {
+            console.log(result);
+            this.staticData = result;
+            this.stateStep = {
+                country: this.staticData.country,
+                language: this.staticData.language,
+                salutation: this.staticData.salutation.value,
+                first_name: this.staticData.first_name.value,
+                last_name: this.staticData.last_name.value,
+                phone: this.staticData.phone.value,
+                email: this.staticData.email.value,
+                number_of_cards: this.staticData.number_of_cards.value,
+                business_type: this.staticData.business_type.value,
+                news_agreement: this.staticData.news_agreement.value,
+                continue_button: this.staticData.continue_button.disabled,
+            };
+            this.loading = false;
+        }).catch(error => {
+            console.log('Error:', error);
+        });
     }
 
     renderedCallback() {
