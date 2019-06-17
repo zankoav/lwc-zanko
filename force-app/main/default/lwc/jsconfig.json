@@ -9,8 +9,23 @@
             "c/chelseaTemplate": [
                 "chelseaTemplate/chelseaTemplate.js"
             ],
+            "c/enwayInput": [
+                "enwayInput/enwayInput.js"
+            ],
             "c/fcButton": [
                 "fcButton/fcButton.js"
+            ],
+            "c/fcCart": [
+                "fcCart/fcCart.js"
+            ],
+            "c/fcCheckbox": [
+                "fcCheckbox/fcCheckbox.js"
+            ],
+            "c/fcHeader": [
+                "fcHeader/fcHeader.js"
+            ],
+            "c/fcLoader": [
+                "fcLoader/fcLoader.js"
             ],
             "c/fcRadioButtons": [
                 "fcRadioButtons/fcRadioButtons.js"
@@ -30,32 +45,14 @@
             "c/step1": [
                 "step1/step1.js"
             ],
-            "c/step2": [
-                "step2/step2.js"
+            "c/stepContactDetails": [
+                "stepContactDetails/stepContactDetails.js"
             ],
             "c/stepRouter": [
                 "stepRouter/stepRouter.js"
-            ],
-            "c/templateWrapper": [
-                "templateWrapper/templateWrapper.js"
-            ],
-            "c/fcCart": [
-                "fcCart/fcCart.js"
-            ],
-            "c/fcCheckbox": [
-                "fcCheckbox/fcCheckbox.js"
-            ],
-            "c/fcHeader": [
-                "fcHeader/fcHeader.js"
-            ],
-            "c/fcLoader": [
-                "fcLoader/fcLoader.js"
-            ],
-            "c/stepContactDetails": [
-                "stepContactDetails/stepContactDetails.js"
             ]
         }
-    },
+    },templateWrapperDe/templateWrapper.js
     "include": [
         "**/*",
         "../../../../.sfdx/typings/lwc/**/*.d.ts"

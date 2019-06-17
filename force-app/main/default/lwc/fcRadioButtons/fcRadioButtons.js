@@ -1,6 +1,7 @@
 /** 
     <c-fc-radio-buttons
         current="value_1"
+        variant="much"
         options={items}
         onchange={changeButtons}>
     </c-fc-radio-buttons>
@@ -19,17 +20,24 @@
  */
 import { LightningElement, api, track } from 'lwc';
 
-const BASE_ITEM_CLASS_NAME = 'fc-radio-buttons__item';
+let BASE_ITEM_CLASS_NAME = 'fc-radio-buttons__item';
 const ACTIVE_ITEM_CLASS_NAME = 'fc-radio-buttons__item_active';
+const MUCH_ITEM_CLASS_NAME = 'fc-radio-buttons__item_mobile_fontsize11';
 
 export default class FcRadioButtons extends LightningElement {
 
     @api current;
     @api options;
+    @api variant;
 
     @track items;
 
     connectedCallback() {
+
+        if (this.variant === 'mutch') {
+            BASE_ITEM_CLASS_NAME = `${BASE_ITEM_CLASS_NAME} ${MUCH_ITEM_CLASS_NAME}`;
+        }
+
         const items = [];
         if (this.options && this.options.length) {
             this.options.forEach((item, index) => {
@@ -54,13 +62,13 @@ export default class FcRadioButtons extends LightningElement {
         this.template.querySelectorAll('li').forEach((element, index) => {
             element.className = BASE_ITEM_CLASS_NAME;
 
-            if(event.currentTarget === element && this.current !== this.options[index].value){
+            if (event.currentTarget === element && this.current !== this.options[index].value) {
                 element.className += ` ${ACTIVE_ITEM_CLASS_NAME}`;
                 this.current = this.options[index].value;
                 this.dispatchEvent(
                     new CustomEvent('change', { detail: this.current })
                 );
-            }else if (event.currentTarget === element){
+            } else if (event.currentTarget === element) {
                 element.className += ` ${ACTIVE_ITEM_CLASS_NAME}`;
             }
         });

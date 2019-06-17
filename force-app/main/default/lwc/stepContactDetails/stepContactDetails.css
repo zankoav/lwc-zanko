@@ -35,7 +35,9 @@
 	}
 }
 
-
+.contact-details-cart__group_d-block{
+	display: block;
+}
 
 .contact-details-cart__label{
 	font-size: 15px;
@@ -75,7 +77,7 @@
 	}
 }
 
-.contact-details__link{
+c-fc-checkbox a{
 	color: #074ec9;
 }
 

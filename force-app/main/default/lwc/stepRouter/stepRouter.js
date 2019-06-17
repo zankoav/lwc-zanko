@@ -44,7 +44,6 @@ export default class StepRouter extends LightningElement {
                 this.setStep(toStep);
             }
         }
-
     }
 
     toStep(event) {

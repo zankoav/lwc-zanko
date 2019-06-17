@@ -1,0 +1,16 @@
+<template>
+    <div class="enway-counter">
+        <label class={labelClassName}>{label}</label>
+        <div class="enway-input__wrapper">
+            <input class={inputClassName} value={inputValue} onblur={handlerBlur} oninput={handleEvent} />
+            <div class="enway-counter__regulator">
+                <span data-plus="1" class="regulator__option" onclick={handleEvent}>
+                    <span class="arrow arrow_top"></span>
+                </span>
+                <span data-plus="-1" class="regulator__option" onclick={handleEvent}>
+                    <span class="arrow arrow_bottom"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</template>

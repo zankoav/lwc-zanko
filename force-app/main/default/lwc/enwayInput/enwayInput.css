@@ -1,0 +1,82 @@
+@media (min-width:1280px){
+    .enway-input{
+        display: flex;
+    }
+}
+
+.enway-input__label {
+    color: #1a1a1a;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.enway-input__label_required:after {
+    padding-left: 4px;
+    content: '*';
+    color:#EE3A43;
+}
+
+@media (min-width:1280px) {
+    .enway-input__label {
+        max-width: 200px;
+        flex: 1 0 200px;
+        line-height: 38px;
+    }
+}
+
+@media (min-width:1280px){
+    .enway-input__wrapper {
+        max-width: calc(100% - 200px);
+        flex: 1 0 calc(100% - 200px);
+    }
+}
+
+.enway-input__error-message {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #EE3A43;
+}
+
+.enway-input__error-message:before {
+    content: '!';
+    display: inline-block;
+    margin-right: 4px;
+    width: 16px;
+    height: 16px;
+    line-height: 15px;
+    border-radius: 100%;
+    border: 1px solid #EE3A43;
+    vertical-align: top;
+    text-align: center;
+    font-weight: bold;
+}
+
+.enway-input__input {
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    padding: 6px 12px;
+    line-height: 18px;
+    font-size: 15px;
+    text-transform: uppercase;
+    border-radius: unset;
+    border: 2px solid #edebe9;
+    outline: none;
+    font-family: inherit;
+}
+
+.enway-input__input:hover{
+    border-color:#dedad6;
+}
+
+.enway-input__input:focus{
+    border-color:#b5b1af;
+}
+
+.enway-input__input.enway-input__input_error{
+    border-color:#EE3A43;
+}
+
+.enway-input__input.enway-input__input_success{
+    border-color:#BFDEDE;
+}

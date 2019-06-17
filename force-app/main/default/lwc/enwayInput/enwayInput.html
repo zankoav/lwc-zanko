@@ -1,0 +1,11 @@
+<template>
+    <div class="enway-input">
+        <label class={labelClassName} for="inputId">{label}</label>
+        <div class="enway-input__wrapper">
+            <input type={type} class={inputClassName} value={inputValue} oninput={handleChange} maxlength={maxLength} />
+            <template if:true={error}>
+                <p class="enway-input__error-message">{error}</p>
+            </template>
+        </div>
+    </div>
+</template>

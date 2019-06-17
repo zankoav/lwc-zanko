@@ -1,19 +1,19 @@
 import { LightningElement, api, track } from 'lwc';
-
 export default class BaseStep extends LightningElement {
-    
+
     @api order;
     @track loading = true;
+    nameStep = 'baseStep';
 
-    nextStep(){
+    nextStep() {
         this.stepComplate('nextstep');
     }
 
-    backStep(){
+    backStep() {
         this.stepComplate('backstep');
     }
 
-    stepComplate(navigationType){
+    stepComplate(navigationType) {
         this.dispatchEvent(
             new CustomEvent(navigationType, {
                 detail: this.order,
@@ -21,6 +21,4 @@ export default class BaseStep extends LightningElement {
             })
         );
     }
-
-
 }

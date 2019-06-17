@@ -34,6 +34,15 @@
     background-color: #E0E9ED;
 }
 
+@media(max-width:767px){
+    .fc-radio-buttons__item_mobile_fontsize11{
+        font-size: 11px;
+    }
+}
+
+
+
+
 
 
 

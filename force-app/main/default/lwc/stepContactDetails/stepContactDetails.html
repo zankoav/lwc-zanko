@@ -2,59 +2,94 @@
     <div class="contact-details">
         <c-fc-cart class="contact-details-cart">
             <template if:false={loading}>
-            <h2 class="contact-details-cart__title">Kontaktdaten</h2>
-            <p class="contact-details-cart__description">Ansprechpartner, der für das Unternehmen zeichnungsberechtigt ist</p>
-            <div class="contact-details-cart__group">
-                <div class="contact-details-cart__label"></div>
-                <div class="contact-details-cart__action contact-details-cart__action_sex-buttons">
-                    <c-fc-radio-buttons options={sexOptions}></c-fc-radio-buttons>
+                <h2 class="contact-details-cart__title">{staticData.fields_header}</h2>
+                <p class="contact-details-cart__description">{staticData.fields_subheader}</p>
+                <div class="contact-details-cart__group">
+                    <div class="contact-details-cart__label"></div>
+                    <div class="contact-details-cart__action contact-details-cart__action_sex-buttons">
+                        <c-fc-radio-buttons 
+                            current={stateStep.salutation} 
+                            options={staticData.salutation.options} 
+                            onchange={sexChange}>
+                        </c-fc-radio-buttons>
+                    </div>
                 </div>
-            </div>
-            <div class="contact-details-cart__group">
-                <div class="contact-details-cart__label contact-details-cart__label_required">Vorname</div>
-                <div class="contact-details-cart__action">
-                    input place
+                <div class="contact-details-cart__group contact-details-cart__group_d-block">
+                    <c-enway-input 
+                        key-name="first_name"
+                        type={staticData.first_name.type}
+                        input-value={stateStep.first_name} 
+                        label={staticData.first_name.label} 
+                        variant={staticData.first_name.required}  
+                        max-length={staticData.first_name.maxLength}
+                        error-text={staticData.first_name.errorMessage}
+                        onchange={firstNameHandler}>
+                    </c-enway-input>
                 </div>
-            </div>
-            <div class="contact-details-cart__group">
-                <div class="contact-details-cart__label contact-details-cart__label_required">Nachname</div>
-                <div class="contact-details-cart__action">
-                    input place
+                <div class="contact-details-cart__group contact-details-cart__group_d-block">
+                    <c-enway-input 
+                        key-name="last_name"
+                        type={staticData.last_name.type}
+                        input-value={stateStep.last_name} 
+                        label={staticData.last_name.label} 
+                        variant={staticData.last_name.required}  
+                        max-length={staticData.last_name.maxLength}
+                        error-text={staticData.last_name.errorMessage}
+                        onchange={lastNameHandler}>
+                    </c-enway-input>
                 </div>
-            </div>
-            <div class="contact-details-cart__group">
-                <div class="contact-details-cart__label contact-details-cart__label_required">Handynummer</div>
-                <div class="contact-details-cart__action">
-                    input place
+                <div class="contact-details-cart__group contact-details-cart__group_d-block">
+                    <c-enway-input 
+                        key-name="phone"
+                        type={staticData.phone.type}
+                        input-value={stateStep.phone} 
+                        label={staticData.phone.label}
+                        variant={staticData.phone.required}
+                        max-length={staticData.phone.maxLength}
+                        error-text={staticData.phone.errorMessage}
+                        onchange={phoneHandler}>
+                    </c-enway-input>
                 </div>
-            </div>
-            <div class="contact-details-cart__group">
-                <div class="contact-details-cart__label contact-details-cart__label_required">E-Mail-Adresse</div>
-                <div class="contact-details-cart__action">
-                    input place
+                <div class="contact-details-cart__group contact-details-cart__group_d-block">
+                    <c-enway-input 
+                        key-name="email"
+                        type={staticData.email.type}
+                        input-value={stateStep.email} 
+                        label={staticData.email.label} 
+                        variant={staticData.email.required}
+                        max-length={staticData.email.maxLength}
+                        error-text={staticData.email.errorMessage}
+                        onchange={emailHandler}>
+                    </c-enway-input>
                 </div>
-            </div>
-            <div class="contact-details-cart__group">
-                <div class="contact-details-cart__label contact-details-cart__label_required">Anzahl der Karten</div>
-                <div class="contact-details-cart__action">
-                    input place
+                <div class="contact-details-cart__group">
+                    <c-enway-counter 
+                        label={staticData.number_of_cards.label} 
+                        input-value={stateStep.number_of_cards} 
+                        variant={staticData.number_of_cards.required}
+                        onchange={numberOfCardsHandler}
+                        key-name="number_of_cards">
+                    </c-enway-counter>
                 </div>
-            </div>
-            <div class="contact-details-cart__group">
-                <div class="contact-details-cart__label contact-details-cart__label_required">Geschäftsform</div>
-                <div class="contact-details-cart__action">
-                        <c-fc-radio-buttons options={businesTypesOptions}></c-fc-radio-buttons>
+                <div class="contact-details-cart__group">
+                    <div class="contact-details-cart__label contact-details-cart__label_required">{staticData.business_type.label}</div>
+                    <div class="contact-details-cart__action">
+                        <c-fc-radio-buttons 
+                            current={stateStep.business_type} 
+                            options={staticData.business_type.options} 
+                            onchange={changeBusinesType}>
+                        </c-fc-radio-buttons>
+                    </div>
                 </div>
-            </div>
-            <div class="contact-details-cart__line"></div>
-            <div class="contact-details-cart__submit-group">
+                <div class="contact-details-cart__line"></div>
+                <div class="contact-details-cart__submit-group">
                     <div class="contact-details-cart__submit-group-checkbox">
-                        <c-fc-checkbox>
-                            Ja, ich möchte von der FLEETCOR Deutschland GmbH Informationen und Werbung für die Shell Tankkarte erhalten. Ich möchte zu diesem Zweck per Email, Textnachricht oder Telefonanruf kontaktiert werden. Diese Einwilligung ist jederzeit widerruflich. Durch den Widerruf der Einwilligung wird die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung nicht berührt. Ihren Widerruf können Sie an die FLEETCOR Deutschland GmbH, Frankenstraße 150c, 90461 Nürnberg richten oder per E-Mail an kundenservice@fleetcor.de erklären. Die Verarbeitung Ihrer Daten erfolgt entsprechend unserer <a class="contact-details__link" href="https://fleetcor.de/datenschutzrichtlinie">Datenschutzerklärung</a>.
+                        <c-fc-checkbox active={stateStep.news_agreement} onchange={changeNewsAgreement}>
+                            {staticData.news_agreement.label}
                         </c-fc-checkbox>
                     </div>
                     <div class="contact-details-cart__submit-group-submit">
-                        <c-fc-button title="starten" disabled></c-fc-button>
+                        <c-fc-button onclick={stepSubmit} title={staticData.continue_button.label} disabled={stateStep.continue_button}></c-fc-button>
                     </div>
                 </div>
             </template>
