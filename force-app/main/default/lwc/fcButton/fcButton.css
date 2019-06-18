@@ -24,6 +24,15 @@
     cursor: not-allowed;
 }
 
+.fc-button_gray{
+    background: #CECECE;
+    color: #1A1A1A;
+    font-weight: 400;
+}
+.fc-button_gray:hover{
+    background: rgb(224, 224, 224);
+}
+
 .fc-button_full-width{
     width: 100%;
 }

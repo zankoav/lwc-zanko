@@ -2,16 +2,17 @@
     <c-liverpool-template sidebar="right">
         <c-fc-header slot="header"></c-fc-header>
         <c-step-router slot="main" current-step={args}>
-            <c-step order="1">
+            <c-step order="3">
                 <c-step-contact-details data-step lang={lang} step-content="contactDetails_DE"
                     apex-service="E2EContactDetailsBasicImpl"></c-step-contact-details>
             </c-step>
             <c-step order="2">
-                <c-step-search-company data-step lang={lang} step-content="search_company_de"
-                    apex-service="E2ESearchCompanyBasicImpl"></c-step-search-company>
+                <!-- <c-step-search-company data-step lang={lang} step-content="search_company_de"
+                    apex-service="E2ESearchCompanyBasicImpl"></c-step-search-company> -->
             </c-step>
-            <c-step order="4">
-                <c-step-1 data-step></c-step-1>
+            <c-step order="1">
+                <c-step-credit-scoring data-step lang={lang} step-content="credit_scoring_de"
+                    apex-service="E2EContactDetailsBasicImpl"></c-step-credit-scoring>
             </c-step>
             <c-step order="6">
                 <c-step-1 data-step></c-step-1>

@@ -1,0 +1,71 @@
+<template>
+    <c-fc-cart class="contact-details-cart">
+        <template if:false={loading}>
+            <h2 class="credit-scoring__title">Folgender Kreditrahmen steht Ihnen zur Verfügung</h2>
+            <div class="credit-scoring__group">
+                <p class="credit-scoring__label">Welche Zahlungsmethode bevorzugen Sie?</p>
+                <div class="credit-scoring__content">
+                    <c-fc-radio-buttons class="credit-scoring__paymants" current="lastschrift" options={paymantMethods}
+                        onchange={changePaymentMethod}>
+                    </c-fc-radio-buttons>
+                    <p class="credit-scoring__description">
+                        Eine Lastschrift ist der direkte Einzug des geforderten Rechnungsbetrags von Ihrem Bankkonto,
+                        der nach Ihrer Einzugsermächtigung erfolgt. Sie sparen Zeit und vermeiden das Risiko, dass
+                        Karten nicht genutzt werden können.
+                    </p>
+                </div>
+            </div>
+            <div class="credit-scoring__group">
+                <p class="credit-scoring__label">Wie oft möchten Sie Rechnungen zahlen?</p>
+                <div class="credit-scoring__content">
+                    <c-fc-radio-buttons class="credit-scoring__pay-bills" current="wöchentlich" options={payBills}
+                        onchange={changePayBills}>
+                    </c-fc-radio-buttons>
+                    <p class="credit-scoring__description">
+                        Die Kontobelastung findet am 7ten Tag nach Ablauf statt.
+                    </p>
+                </div>
+            </div>
+            <div class="credit-scoring__credit-limit-title">
+                Wählen Sie Ihr Kreditlimit
+            </div>
+            <p class="credit-scoring__credit-limit-subtitle">Dieses Kreditlimit deckt alle Karten ab, die Sie bestellen
+                möchten
+            </p>
+            <div class="credit-scoring__group">
+                <p class="credit-scoring__label credit-scoring__label_requered">Kreditlimit</p>
+                <div class="credit-scoring__content">
+                    <div class="credit-scoring__counter">
+                        <div class="credit-scoring__counter-result" data-currency="€">500</div>
+                        <div class="credit-scoring__counter-action">&ndash;</div>
+                        <div class="credit-scoring__counter-action">+</div>
+                    </div>
+                    <div class="credit-scoring__range">
+                        <div class="credit-scoring__range-min">500</div>
+                        <input type="range" min="500" max="1000" step="100" class="credit-scoring__range-line"/>
+                        <div class="credit-scoring__range-max">1000</div>
+                    </div>
+                </div>
+            </div>
+            <div class="credit-scoring__group">
+                <p class="credit-scoring__label">Kaution</p>
+                <div class="credit-scoring__content">
+                    <span class="credit-scoring__current-result" data-currency="€">700</span>
+                    <span class="credit-scoring__current-help"
+                        data-content="Die Kaution ist eine Einzahlung auf das Konto. Sie wird einmalig gezahlt und verbleibt unangetastet auf Ihrem Konto. Falls Rechnungen nicht rechtzeitig beglichen werden, können wir den offenen Betrag von der Kaution einziehen. Die Karten werden erst ausgestellt, nachdem die Kaution eingezahlt wurde.">?</span>
+                    <p class="credit-scoring__description">
+                        Muss nur einmalig gezahlt werden
+                    </p>
+                </div>
+            </div>
+            <div class="credit-scoring__line"></div>
+            <div class="credit-scoring__actions">
+                <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
+                <c-fc-button onclick={stepSubmit} title="Weiter" disabled="disabled"></c-fc-button>
+            </div>
+        </template>
+        <template if:true={loading}>
+            <c-fc-loader></c-fc-loader>
+        </template>
+    </c-fc-cart>
+</template>

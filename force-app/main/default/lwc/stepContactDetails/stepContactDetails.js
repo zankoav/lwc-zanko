@@ -6,38 +6,14 @@ import getState from '@salesforce/apex/StaticResourceClass.getStaticData';
 export default class StepContactDetails extends BaseStep {
 
     @api lang;
-    @api stateId;
-
     @api stepContent;
     @api apexService;
 
+    @track loading = true;
     @track staticData;
     @track stateStep;
+
     submitButton;
-
-
-    // @wire(getState, { stepContent: '$stepContent', apexService: '$apexService' })
-    // wireState({ error, data }) {
-    //     if (data) {
-    //         this.staticData = data.resource;
-    //         this.stateStep = {
-    //             country: this.staticData.country,
-    //             language: this.staticData.language,
-    //             salutation: this.staticData.salutation.value,
-    //             first_name: this.staticData.first_name.value,
-    //             last_name: this.staticData.last_name.value,
-    //             phone: this.staticData.phone.value,
-    //             email: this.staticData.email.value,
-    //             number_of_cards: this.staticData.number_of_cards.value,
-    //             business_type: this.staticData.business_type.value,
-    //             news_agreement: this.staticData.news_agreement.value,
-    //             continue_button: this.staticData.continue_button.disabled,
-    //         };
-    //     }
-    //     if (error) {
-    //         console.log(error);
-    //     }
-    // }
 
     connectedCallback() {
         getState({ stepContent: this.stepContent, apexService: this.apexService })
@@ -138,6 +114,7 @@ export default class StepContactDetails extends BaseStep {
         console.log("stateStep:", this.stateStep);
         apexStepSubmit({ state: this.stateStep, apexService: this.apexService })
             .then(() => {
+                console.log('go to next step');
                 this.nextStep();
             })
             .catch(error => {
