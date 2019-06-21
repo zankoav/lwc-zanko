@@ -77,8 +77,7 @@
 @media (min-width:1280px){
     .liverpool__main{
         padding: 0 1rem;
-        max-width: calc(100% - 360px);
-        flex: 1 0 calc(100% - 360px);
+        flex: 1;
     }   
 }
 

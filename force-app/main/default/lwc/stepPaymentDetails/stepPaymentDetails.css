@@ -1,0 +1,120 @@
+:host{
+    color: #333;
+}
+
+.payment-details__block{
+    margin-bottom: 1.5rem;
+    display: block;
+   
+}
+
+.payment-details__checkbox-text{
+    font-size: 15px;
+}
+
+.payment-details__description{
+    font-size: 15px;
+    color: #1A1A1A;
+    line-height: 18px;
+}
+
+@media (min-width:1280px){
+	.payment-details__line{
+		height: 2px;
+		background-color: #DEDEDE;
+		margin: 2rem 0 1.5rem;
+	}
+}
+
+.payment-details__actions{
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-details__title{
+    font-weight: 700;
+    line-height: 24px;
+    font-size: 18px;
+    color: #1A1A1A;
+    margin-bottom: 1rem;
+}
+
+@media (min-width:768px){
+    .payment-details__title{
+        line-height: 28px;
+        font-size: 24px;
+    }
+}
+
+.payment-details__greed{
+    margin: 1rem 0 1.5rem;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+@media (min-width:768px){
+    .payment-details__greed{
+        display: flex;
+        max-width: initial;
+        margin-left: -.5rem;
+        margin-right: -.5rem
+    }
+}
+
+@media (min-width:768px){
+    .payment-details__item{
+        max-width: 200px;
+        flex: 1 0 200px;
+        padding: 0 .5rem;
+    }
+
+    .payment-details__item:last-child{
+        max-width: calc(100% - 200px);
+        flex: 1 0 calc(100% - 200px);
+    }
+
+}
+
+.payment-details__info{
+    background-color: #F5F5F5;
+    border: 1px solid rgba(128, 128, 128, 0.26);
+}
+
+.payment-details__info-header-block, .payment-details__info-footer-block{
+    padding: 1rem;
+}
+
+.payment-details__info-header-document{
+    background-color: #fff;
+    padding:0 1rem;
+    height:200px;
+    overflow: auto; 
+    border-top: 2px solid rgba(128, 128, 128, 0.26);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.26);
+}
+
+.payment-details__info-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.payment-details__info-actions{
+    flex: 1 0 140px;
+    max-width: 140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-details__title_margin_no{
+    margin-bottom: 0;
+}
+
+.payment-details__action{
+    margin: 0 .5rem;
+}
+
+.payment-details__action:last-child{
+    margin-right: 0;
+}

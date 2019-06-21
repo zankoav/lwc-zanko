@@ -1,8 +1,6 @@
 <template>
     <div class="fc-checkbox">
         <span class={className} onclick={change}></span>
-        <label class="fc-checkbox__label" onclick={change}>
-            <slot></slot>
-        </label>
+        <label class="fc-checkbox__label" onclick={change} lwc:dom="manual"></label>
     </div>
 </template>

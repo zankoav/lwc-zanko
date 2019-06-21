@@ -71,7 +71,7 @@ a {
 		-moz-border-radius: 50%;
 	perspective: 780px;
 }
-
+/* Loader Srart */
 .cssload-inner {
 	position: absolute;
 	width: 100%;
@@ -256,4 +256,23 @@ a {
 	100% {
 		-moz-transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
 	}
+}
+/* Loader End */
+
+.fade-out-1{
+	animation:fade-out-1 .4s;
+}
+
+.fade-out-2{
+	animation:fade-out-2 .4s;
+}
+
+@keyframes fade-out-1 {
+	0%{opacity: 0; transform: translateY(12px);}
+	100%{opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fade-out-2 {
+	0%{opacity: 0; transform: translateY(8px);}
+	100%{opacity: 1; transform: translateY(0);}
 }

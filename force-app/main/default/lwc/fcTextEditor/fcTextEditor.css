@@ -1,0 +1,63 @@
+:host{
+    display: block;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: .67em
+}
+h2 {
+    font-size: 1.5em;
+    margin-bottom: .75em
+}
+h3 {
+    font-size: 1.17em;
+    margin-bottom: .83em
+}
+h5 {
+    font-size: .83em;
+    margin-bottom: 1.5em
+}
+h6 {
+    font-size: .75em;
+    margin-bottom: 1.67em
+}
+h1, h2, h3, h4,
+h5, h6 {
+    font-weight: 700 !important;
+}
+
+p {
+    display: block;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    font-size: 15px;
+    color: #1A1A1A;
+    line-height: 18px;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-bottom: 1em;
+    padding-left: 40px;
+}
+
+ol {
+    display: block;
+    list-style-type: decimal;
+    margin-bottom: 1em;
+    padding-left: 40px;
+}
+
+b {
+    font-weight: 700;
+}
+
+i {
+    font-style: italic;
+}
+
+a{
+    color: #0093EE;
+}

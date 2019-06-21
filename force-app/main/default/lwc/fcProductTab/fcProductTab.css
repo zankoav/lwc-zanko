@@ -1,0 +1,58 @@
+:host{
+    display: block;
+    font-size: 14px;
+    color: #333;
+}
+
+.product-tab{
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: #F6F6F6;
+    padding: 1rem;
+    transition: .4s ease-out;
+}
+
+.product-tab_active{
+    background: #CECECE;
+}
+
+.product-tab__header-title{
+    font-weight: 500;
+}
+
+.product-tab__header{
+    margin-bottom: 1rem;
+    display: flex;
+    cursor: pointer;
+}
+
+.product-tab__header:before{
+    content: '';
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.26);
+    flex-shrink: 0;
+}
+
+.product-tab__header-wrapp{
+    flex: 1;
+    padding-left: 0.5rem;
+}
+
+.product-tab_active .product-tab__header:before{
+    border-color:  #d9534f;
+    background: #EE3A43 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.product-tab__list{
+    padding-left: 16px;
+}
+
+.product-tab__item{
+    list-style-type: disc;
+    line-height: 20px;
+}

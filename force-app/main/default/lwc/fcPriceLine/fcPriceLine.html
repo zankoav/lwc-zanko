@@ -1,0 +1,9 @@
+<template>
+    <div class="line">
+        <span class={className}>{title}</span>
+        <c-fc-tooltip if:true={helpText} help-text={helpText}>
+        </c-fc-tooltip>
+        <span class="line__price" data-currency={currency}>{price}</span>
+        <div if:true={sublabel} class="line__sublabel">{sublabel}</div>
+    </div>
+</template>

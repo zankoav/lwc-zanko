@@ -1,6 +1,11 @@
 <template>
     <div class="enway-input">
-        <label class={labelClassName} for="inputId">{label}</label>
+        <div class="enway-label__wrapper">
+            <label if:true={label} class={labelClassName} for="inputId">{label}</label>
+            <div if:true={helpText} class="enway-input__label-help">
+                <c-fc-tooltip help-text={helpText}></c-fc-tooltip>
+            </div>
+        </div>
         <div class="enway-input__wrapper">
             <input type={type} class={inputClassName} value={inputValue} oninput={handleChange} maxlength={maxLength} />
             <template if:true={error}>

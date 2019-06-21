@@ -3,6 +3,7 @@ import { LightningElement, api, track } from 'lwc';
 
 const LABEL_CLASS_NAME = 'enway-input__label';
 const LABEL_REQUIRED_CLASS_NAME = 'enway-input__label_required';
+const LABEL_LONG_CLASS_NAME = ' enway-input__label_long';
 const INPUT_CLASS_NAME = 'enway-input__input';
 const INPUT_ERROR_CLASS_NAME = 'enway-input__input_error';
 const INPUT_SUCCESS_CLASS_NAME = 'enway-input__input_success';
@@ -10,7 +11,9 @@ const INPUT_SUCCESS_CLASS_NAME = 'enway-input__input_success';
 export default class EnwayInput extends LightningElement {
 
     @api maxLength;
-    @api label = 'Label';
+    @api label;
+    @api labelVariant;
+    @api helpText;
     @api type = 'text';
     @api inputValue = '';
     @api keyName;
@@ -41,6 +44,7 @@ export default class EnwayInput extends LightningElement {
 
     connectedCallback() {
         this.labelClassName = this.variant === 'required' ? `${LABEL_CLASS_NAME} ${LABEL_REQUIRED_CLASS_NAME}` : LABEL_CLASS_NAME;
+        this.labelClassName += this.labelVariant === 'long' ? `${LABEL_LONG_CLASS_NAME}` : ' ';
     }
 
     handleChange(event) {

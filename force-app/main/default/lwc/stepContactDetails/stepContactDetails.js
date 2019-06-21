@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 import { track, api } from 'lwc';
 import BaseStep from 'c/baseStep';
 import apexStepSubmit from '@salesforce/apex/StepContactDetailsController.stepSubmit';
-import getState from '@salesforce/apex/StaticResourceClass.getStaticData';
+import getState from '@salesforce/apex/StepContactDetailsController.getStaticData';
 
 export default class StepContactDetails extends BaseStep {
 
@@ -18,7 +19,6 @@ export default class StepContactDetails extends BaseStep {
     connectedCallback() {
         getState({ stepContent: this.stepContent, apexService: this.apexService })
             .then(result => {
-                console.log(result);
                 this.staticData = result;
                 this.stateStep = {
                     country: this.staticData.country,
@@ -113,8 +113,15 @@ export default class StepContactDetails extends BaseStep {
         this.loading = true;
         console.log("stateStep:", this.stateStep);
         apexStepSubmit({ state: this.stateStep, apexService: this.apexService })
-            .then(() => {
-                console.log('go to next step');
+            .then((result) => {
+                this.globalCache.opportunitySource = result;
+                console.log(result);
+                this.dispatchEvent(
+                    new CustomEvent('cookie', {
+                        detail: result,
+                        bubbles: true
+                    })
+                );
                 this.nextStep();
             })
             .catch(error => {

@@ -1,0 +1,59 @@
+.fc-tooltip{
+    position: relative;
+    border: 1px solid #333;
+    border-radius: 100%;
+    width: 16px;
+    font-size: 11px;
+    line-height: 17px;
+    height: 16px;
+    margin-left: .25rem;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.fc-tooltip::after{
+    content: attr(data-content);
+    position: absolute;
+    display: none;
+    top: calc(100%);
+    font-size: 15px;
+    line-height: 18px;
+    background-color: #eee;
+    padding: 1rem;
+    box-shadow: 0px 2px 4px #ccc;
+    text-align: left;
+    max-width: 280px;
+    width: 280px;
+    left: -48px;
+    top: 24px;
+    z-index: 2;
+}
+
+.fc-tooltip:hover.fc-tooltip:after{
+    display: block;
+}
+
+@media (min-width:1280px){
+	.fc-tooltip:hover.fc-tooltip:after{
+        left: -132px;
+    }
+}
+
+.fc-tooltip:hover.fc-tooltip:before{
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    transform: rotate(45deg);
+    left: 0;
+    background-color: #eee;
+    top: 18px;
+    box-shadow: 0px 2px 4px #ccc;
+    z-index: 1;
+}
+
+strong{
+    font-weight: bold;
+}

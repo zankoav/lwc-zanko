@@ -1,0 +1,37 @@
+<template>
+    <c-fc-cart>
+        <template if:false={loading}>
+            <div class="additional-parameters__card">
+                <h4 class="additional-parameters__title">Sauber unterwegs: Aktiver Klimaschutz mit FLEETCOR</h4>
+                <p class="additional-parameters__subtitle">Verbessern Sie Ihre CO2-Bilanz und investieren Sie mit uns in
+                    weltweite Kompensationsprojekte</p>
+                <div class="additional-parameters__greed">
+                    <div class="additional-parameters__item">
+                        FLEETCOR unterstützt auf der ganzen Welt Projekte zur CO2-Kompensation und hilft dabei, diese
+                        nachhaltig zu entwickeln. Mit einem kleinen Zusatzbeitrag (1% Ihrer Tankkosten) können Sie dazu
+                        beitragen und so die CO2-Emissionen Ihrer Flotte ausgleichen – denn Klimaschutz geht uns alle
+                        an.
+                    </div>
+                    <div class="additional-parameters__item">
+                        <img class="additional-parameters__image"
+                            src="https://e2e-e2efleetcor.cs101.force.com/resource/1559576527000/e2e_images/eco1.png"
+                            alt="picture">
+                    </div>
+                </div>
+                <c-fc-checkbox onchange={checkBoxHandler}>
+                    <p class="additional-parameters__checkbox-label-title">Ja, ich möchte mit FLEETCOR aktiv den Klimaschutz unterstützen.</p>
+                    <p class="additional-parameters__checkbox-label-subtitle">Mit dem Zusatzbeitrag von 1% meines Tankbetrags erkläre ich mich einverstanden.</p>
+                </c-fc-checkbox>
+            </div>
+            <div class="additional-parameters__line"></div>
+            <div class="additional-parameters__actions">
+                <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
+                <c-fc-button onclick={stepSubmit} title="24 Karten Bestellen">
+                </c-fc-button>
+            </div>
+        </template>
+        <template if:true={loading}>
+            <c-fc-loader></c-fc-loader>
+        </template>
+    </c-fc-cart>
+</template>

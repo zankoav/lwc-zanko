@@ -1,0 +1,80 @@
+<template>
+    <template if:true={isEdit}>
+        <div class="card-editor">
+            <div class="card-info__header card-info__header_mb_small">
+                <h4 class="card-info__title" data-before="Zusätzliche Parameter für ">Karte Nr. 2</h4>
+            </div>
+            <c-fc-text-editor class="card-editor__custom-html"
+                html-text="<p>Fahrzeugbezogene Produkte, Tanken in Deutschland, Tanken an Shell und Partnerstationen</p>">
+            </c-fc-text-editor>
+            <div class="card-info__block">
+                <div class="card-info__subtitle">Was möchten Sie auf Ihrer Karte prägen?</div>
+                <div class="card-editor__group">
+                    <div class="card-editor__label">
+                        <span class="card-editor__label-inner">Firmenname<br>(alle Karten)</span>
+                    </div>
+                    <div class="card-editor__action">
+                        <template if:false={isEditFirmen}>
+                            <div class="fade-out-2">
+                                <span class="card-editor__firmenname">BBEWSBSB</span>
+                                <span class="card-info__edit" onclick={editFirmen}>Ändern</span>
+                            </div>
+                        </template>
+                        <template if:true={isEditFirmen}>
+                            <div class="fade-out-2">
+                                <c-enway-input key-name="firmen" type="text" input-value="BBEWSBSB"
+                                    error-text="!Bitte geben Sie den Firmennamen in einem gültigen Format ein Sonderzeichen sind nicht zulässig."
+                                    onchange={firmenHandler}>
+                                </c-enway-input>
+                                <p class="card-editor__firmenname-description">Die Prägung des Firmennamens auf der
+                                    Karte kann höchstens 25 Zeichen umfassen. Bitte geben Sie den korrekten Firmennamen
+                                    an.
+                                </p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <div class="card-info__block">
+                <div class="card-info__subtitle">Für welchen Fahrzeugtyp wird diese Karte verwendet?</div>
+                <div class="card-editor__group">
+                    <div class="card-editor__label">
+                        <span class="card-editor__label-inner">Fahrzeugtyp</span>
+                        <c-fc-tooltip
+                            help-text="Wenn Karten außerhalb von Deutschland verwendet werden, wird sowohl für Kraftstoff-Transaktionen als auch für Waren und Dienstleistungen eine Zusatzgebühr erhoben.">
+                        </c-fc-tooltip>
+                    </div>
+                    <div class="card-editor__action card-editor__action_sex-buttons">
+                        <c-fc-radio-buttons variant="much" current="pkw" options={options}></c-fc-radio-buttons>
+                    </div>
+                </div>
+            </div>
+            <c-fc-check-box-ios class="card-info__block" active="ewvw" title-on="ein" title-off="aus"
+                title="Kilometerzähler-Option"
+                help-text="Wurde die Kilometerzähler-Option aktiviert, muss der Fahrer den aktuellen Kilometerstand zusammen mit der Karten-PIN am Terminal der Station eingeben. Der Kilometerstand wird später auf der Rechnung ausgewiesen."
+                subtitle="Um die Ausgaben besser unter Kontrolle zu haben, kann beim Tanken die zurückgelegte Strecke erfasst werden.">
+            </c-fc-check-box-ios>
+            <div class="card-editor__button-wrapper">
+                <c-fc-button title="Speichern" onclick={save}></c-fc-button>
+            </div>
+        </div>
+    </template>
+    <template if:false={isEdit}>
+        <div class="card-init">
+            <div class="card-info">
+                <div class="card-info__header">
+                    <h4 class="card-info__title">Karte Nr. 24</h4>
+                    <span class="card-info__edit" onclick={edit}>Ändern</span>
+                </div>
+                <c-fc-text-editor
+                    html-text="<p>Fahrzeugbezogene Produkte, Tanken in Deutschland, Tanken an Shell und Partnerstationen</p><p>Fahrzeugtyp: PKW,<br>Kilometerzähler-Option: AUS</p>">
+                </c-fc-text-editor>
+            </div>
+            <div if:true={cardImageView} class="card-img">
+                <c-fc-card-image-view title="Shell Card" number="1111 2222 3333 4444 023" label-card="SHELL CARD 23"
+                    label-number="BBEWSBSB" counter="06/23">
+                </c-fc-card-image-view>
+            </div>
+        </div>
+    </template>
+</template>

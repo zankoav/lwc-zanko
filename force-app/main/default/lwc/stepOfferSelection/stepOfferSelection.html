@@ -1,0 +1,54 @@
+<template>
+    <c-fc-cart>
+        <template if:false={loading}>
+            <p class="offer-section__title">Sparen Sie mit FLEETCOR und unserem exklusiven Angebot für Sie</p>
+            <p class="offer-section__subtitle">Entscheiden Sie sich für das passende Angebot</p>
+
+
+
+            <div class="offer-block">
+                <p class="offer-block__info-title">Rabatt an allen Shell-Stationen bundesweit</p>
+                <div class="offer-block__info">
+                    <div class="offer-block__info-text">Mit diesem Angebot tanken Sie deutschlandweit flexibel.</div>
+                    <div class="offer-block__info-text"><span class="offer-block__info-text-bold">2 Cent Rabatt</span> pro Liter auf alle Shell-Stationen</div>
+                </div>
+                <div class="flag-wrapper">
+                    <div class="arrow"></div>
+                    <div class="flag">
+                        <p class="flag-title">2 Cent Rabatt</p>
+                        <p class="flag-text">pro Liter</p>
+                    </div>
+                </div>
+                
+
+                <c-fc-accordion-item>
+                    <div class="detail-line">
+                        <span class="detail-line-label">Rabatt:</span>
+                        <span>2 Cent Rabatt pro Liter</span>
+                    </div>
+                    <div class="detail-line">
+                        <span class="detail-line-label">Zeitraum:</span>
+                        <span>Unbegrenzt</span>
+                    </div>
+                    <div class="detail-line">
+                        <span class="detail-line-label">Kraftstoffart:</span>
+                        <span>Diesel (alle Arten), Benzin (alle Arten), außer V-Power</span>
+                    </div>
+                </c-fc-accordion-item>
+            </div>  
+
+
+
+
+            <div class="offer-section__line"></div>
+            <div class="offer-section__actions">
+                <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
+                <c-fc-button onclick={stepSubmit} title="Weiter" disabled="disabled">
+                </c-fc-button>
+            </div>
+        </template>
+        <template if:true={loading}>
+            <c-fc-loader></c-fc-loader>
+        </template>
+    </c-fc-cart>
+</template>

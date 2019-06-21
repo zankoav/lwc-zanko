@@ -1,21 +1,102 @@
 <template>
     <c-liverpool-template sidebar="right">
         <c-fc-header slot="header"></c-fc-header>
-        <c-step-router slot="main" current-step={args}>
-            <c-step order="3">
-                <c-step-contact-details data-step lang={lang} step-content="contactDetails_DE"
-                    apex-service="E2EContactDetailsBasicImpl"></c-step-contact-details>
+        <c-step-router slot="main" current-step={step}>
+            <c-step order="1">
+                <c-step-contact-details 
+                    data-step 
+                    lang={lang} 
+                    step-content="contactDetails_DE" 
+                    apex-service="E2EContactDetailsBasicImpl"
+                ></c-step-contact-details>
             </c-step>
             <c-step order="2">
-                <!-- <c-step-search-company data-step lang={lang} step-content="search_company_de"
-                    apex-service="E2ESearchCompanyBasicImpl"></c-step-search-company> -->
+                <c-step-search-company 
+                    data-step 
+                    lang={lang} 
+                    step-content="search_company_de"
+                    apex-service="E2ESearchCompanyBasicImpl"
+                ></c-step-search-company>
             </c-step>
-            <c-step order="1">
-                <c-step-credit-scoring data-step lang={lang} step-content="credit_scoring_de"
-                    apex-service="E2EContactDetailsBasicImpl"></c-step-credit-scoring>
+            <c-step order="3">
+                <c-step-tax-id 
+                    data-step 
+                    lang={lang} 
+                    step-content="tax_id_de"
+                    apex-service="E2ETaxIdBasicImpl"
+                ></c-step-tax-id>
+            </c-step>
+            <c-step order="4">
+                <c-step-total-consumption 
+                    data-step 
+                    lang={lang} 
+                    step-content="total_consumption_de"
+                    apex-service="E2ETotalConsumptionBasicImpl"
+                ></c-step-total-consumption>
+            </c-step>
+            <c-step order="5">
+                <c-step-credit-scoring 
+                    data-step 
+                    lang={lang} 
+                    step-content="credit_scoring_de"
+                    apex-service="E2ECreditScoringBasicImpl"
+                ></c-step-credit-scoring>
             </c-step>
             <c-step order="6">
-                <c-step-1 data-step></c-step-1>
+                <c-step-cart-configuration 
+                    data-step 
+                    lang={lang} 
+                    step-content="cards_configuration_de"
+                    apex-service="E2ECardsConfigurationBasicImpl">
+                </c-step-cart-configuration>
+            </c-step>
+            <c-step order="7">
+                <c-step-offer-selection 
+                    data-step 
+                    lang={lang} 
+                    step-content="offer_selection_de"
+                    apex-service="E2EOfferSelectionBasicImpl">
+                </c-step-offer-selection>
+            </c-step>
+            <c-step order="8">
+                <c-step-technical-parameters 
+                    data-step 
+                    lang={lang} 
+                    step-content="technical_parameters_de"
+                    apex-service="E2ETechnicalParametersBasicImpl">
+                </c-step-technical-parameters>
+            </c-step>
+            <c-step order="9">
+                <c-step-additional-parameters 
+                    data-step 
+                    lang={lang} 
+                    step-content="additiona_parameters_de"
+                    apex-service="">
+                </c-step-additional-parameters>
+            </c-step>
+            <c-step order="10">
+                <c-step-payment-details 
+                    data-step 
+                    lang={lang} 
+                    step-content="payment_details_de"
+                    apex-service="">
+                </c-step-payment-details >
+            </c-step>
+            <c-step order="11">
+                <c-step-deposit-options 
+                    data-step 
+                    lang={lang} 
+                    step-content="deposit_options_de"
+                    apex-service="">
+                </c-step-deposit-options>
+            </c-step>
+            <c-step order="12">
+                <c-step-congratulations
+                    data-step 
+                    lang={lang} 
+                    step-content="congratulations_de"
+                    apex-service="">
+                </c-step-congratulations>
             </c-step>
         </c-step-router>
         <c-footer-base slot="footer" company="FLEETCOR" right-resived="&copy;2019 All rights reserved."

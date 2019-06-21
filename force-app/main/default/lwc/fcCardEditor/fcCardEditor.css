@@ -1,0 +1,195 @@
+:host{
+    display: flex;
+    padding: 1rem 0;
+    border-bottom: 2px solid #DEDEDE;
+}
+
+:host:first-child{
+    padding-top: 0;
+}
+
+.card-init{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    animation: fade-out-1 .4s;
+}
+
+@media(min-width:768px){
+    .card-init{
+        flex-direction: row;
+    }
+}
+
+@media(min-width:768px){
+    .card-info{
+        flex-grow: 1;
+    }
+}
+
+@media(min-width:768px){
+    .card-img{
+        flex: 0 0 262px;
+        padding-left: 2rem
+    }
+}
+
+.card-info__header{
+    margin-bottom: 0.5rem;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.card-info__header_mb_small{
+    margin-bottom: 0.25rem;
+}
+
+.card-info__title{
+    font-weight: 700;
+    line-height: 18px;
+    font-size: 20px;
+    color: #1A1A1A;
+    display: inline-block;
+}
+
+.card-info__title:before{
+    content: attr(data-before);
+}
+
+@media(min-width:1280px){
+    .card-info__title{
+        line-height: 28px;
+        font-size: 24px;
+    }
+}
+
+.card-info__edit{
+    color: #0093EE;
+    cursor: pointer;
+    line-height: 18px;
+    font-size: 11px;
+    margin-left: 0.5rem;
+}
+
+.card-info__edit:before{
+    content: '';
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 0.125rem;
+    background: url('https://e2e-e2efleetcor.cs101.force.com/resource/1559576527000/e2e_images/pen.png') no-repeat;
+    background-size: contain;
+    transition: .4s;
+}
+
+.card-info__edit:hover:before{
+    transform: translateY(-.25rem);
+} 
+
+.card-editor{
+    animation: fade-out-1 .4s;
+    width: 100%;
+}
+
+.card-editor__custom-html{
+    margin-bottom: 2rem;
+}
+
+.card-info__block{
+    margin-bottom: 1rem;
+}
+
+@media(min-width:1280px){
+    .card-info__block{
+        margin-bottom: 2rem;
+    }
+}
+
+.card-info__subtitle{
+    line-height: 18px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+@media(min-width:1280px){
+    .card-info__subtitle{
+        line-height: 23px;
+        font-size: 18px;
+        margin-bottom: 1rem;
+    }
+}
+
+.card-editor__button-wrapper{
+    text-align: right;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+.card-editor__group{
+	margin-bottom: 1rem;
+}
+
+@media (min-width:1280px){
+	.card-editor__group{
+		display: flex;
+		align-items: center;
+	}
+}
+
+.card-editor__group_d-block{
+	display: block;
+}
+
+.card-editor__label{
+    font-size: 15px;
+    align-self: flex-start;
+}
+
+.card-editor__label_required::after{
+	content: '*';
+	color: red;
+	margin-left: 0.25rem;
+}
+
+@media (min-width:1280px){
+	.card-editor__label{
+		max-width: 200px;
+		flex: 1 0 200px;
+		padding-right: 1rem
+	}	
+}
+
+@media (min-width:1280px){
+	.card-editor__action_sex-buttons{
+        max-width: 180px;
+        flex-basis: 160px;
+	}	
+}
+
+.card-editor__firmenname{
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+}
+
+.card-editor__action{
+    flex: 1;
+}
+
+.card-editor__firmenname-description{
+    line-height: 18px;
+    font-size: 12px;
+    margin-top: 0.25rem;
+}
+
+@media (min-width:1280px){
+	.card-editor__firmenname-description{
+        max-width: calc(100% - 200px);
+	}	
+}

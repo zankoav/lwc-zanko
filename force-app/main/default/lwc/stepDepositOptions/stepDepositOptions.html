@@ -1,0 +1,63 @@
+<template>
+    <c-fc-cart>
+        <template if:false={loading}>
+            <h4 class="deposit-options__title">Kaution jetzt bezahlen</h4>
+            <div class="deposit-options__description">Um den Bestellprozess abzuschließen und Ihre Tankkarten sofort
+                nach Erhalt nutzen zu können, möchten wir Sie bitten, die Kaution jetzt mit der Zahlungsmethode Ihrer
+                Wahl einzuzahlen</div>
+            <div class="deposit-options__info">
+                <div class="deposit-options__info-title deposit-options__info-title_main">Höhe der zu zahlenden Kaution:
+                    6700 €</div>
+                <div class="deposit-options__info-title">Karten</div>
+                <div class="deposit-options__info-subtitle">Allgemeine Kredit-/Debitkartenzahlungen</div>
+                <div class="deposit-options__info-greed">
+                    <div class="deposit-options__info-greed-item">
+                        <c-fc-visa-card></c-fc-visa-card>
+                    </div>
+                    <div class="deposit-options__info-greed-item">
+                        <c-fc-visa-card></c-fc-visa-card>
+                    </div>
+                    <div class="deposit-options__info-greed-item">
+                        <c-fc-visa-card></c-fc-visa-card>
+                    </div>
+                </div>
+                <div class="deposit-options__info-title">Zahlung über Ihre Online-Bank</div>
+                <div class="deposit-options__info-subtitle">Einfache, schnelle und bequeme Zahlungsmethode.</div>
+                <div class="deposit-options__info-greed">
+                    <div class="deposit-options__info-greed-item">
+                        <c-fc-visa-card></c-fc-visa-card>
+                    </div>
+                    <div class="deposit-options__info-greed-item">
+                        <c-fc-visa-card></c-fc-visa-card>
+                    </div>
+                </div>
+                <div class="deposit-options__line"></div>
+                <div class="deposit-options__info-footer">
+                    <div class="deposit-options__info-footer-left">
+                        Alle Zahlungen werden von Ingenico ePayments unterstützt, einem Bereich der Ingenico Group,
+                        einem führenden globalen Anbieter von sicheren Zahlungsverkehrsleistungen. Er bietet sichere,
+                        intelligente und nahtlose Zahlungslösungen, die Zahlungen weniger komplex machen und Einkäufe
+                        schnell, nahtlos und sicher abwickeln. Ingenico ePayments verpflichtet sich, die Sicherheit der
+                        verarbeiteten Zahlungen und der persönlichen Daten der Verbraucher zu schützen.
+                    </div>
+                    <div class="deposit-options__info-footer-right">
+                        <img class="deposit-options__info-footer-img"
+                            src="https://e2e-e2efleetcor.cs101.force.com/resource/1559576527000/e2e_images/ingenico.png">
+                    </div>
+                </div>
+            </div>
+            <c-fc-checkbox class="deposit-options__block" onchange={changeZahlung}
+                label='Ich erkläre mich mit der Zahlung der <a href="#">Kaution</a> in Höhe von 6700 € einverstanden.'>
+            </c-fc-checkbox>
+            <div class="deposit-options__line"></div>
+            <div class="deposit-options__actions">
+                <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
+                <c-fc-button onclick={stepSubmit} title="Weiter zur Zahlung">
+                </c-fc-button>
+            </div>
+        </template>
+        <template if:true={loading}>
+            <c-fc-loader></c-fc-loader>
+        </template>
+    </c-fc-cart>
+</template>

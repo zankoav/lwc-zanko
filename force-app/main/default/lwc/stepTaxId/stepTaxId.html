@@ -1,0 +1,44 @@
+<template>
+        <div class="tax-id">
+            <c-fc-cart class="tax-id-cart">
+                <template if:false={loading}>
+                    <h2 class="tax-id-cart__title">{staticData.fields_header}</h2>
+                    <p class="tax-id-cart__description">{staticData.fields_subheader}</p>
+    
+                    <div class="tax-id-cart__group tax-id-cart__group_d-block">
+                        <c-enway-input 
+                            key-name="tax_id"
+                            input-value={stateStep.tax_id} 
+                            label={staticData.tax_id.label}  
+                            help-text={staticData.tax_id.hint}
+                            variant={staticData.tax_id.required}  
+                            max-length={staticData.tax_id.maxLength}
+                            error-text={staticData.tax_id.errorMessage}
+                            onchange={taxIdHandler}>
+                        </c-enway-input>
+                    </div>
+    
+                    <div class="tax-id-cart__line"></div>
+    
+                    <div class="tax-id-cart__navigation-group">
+                        <c-fc-button 
+                            onclick={backHandle} 
+                            title={staticData.back_button.label} 
+                            disabled={stateStep.back_button}
+                            variant="gray"
+                        ></c-fc-button>
+    
+                        <c-fc-button 
+                            onclick={stepSubmit} 
+                            title={staticData.continue_button.label} 
+                            disabled={stateStep.continue_button}
+                            data-button="continue"
+                        ></c-fc-button>
+                    </div>
+                </template>
+                <template if:true={loading}>
+                    <c-fc-loader></c-fc-loader>
+                </template>
+            </c-fc-cart>
+        </div>
+    </template>

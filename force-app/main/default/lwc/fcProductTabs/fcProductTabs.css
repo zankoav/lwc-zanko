@@ -1,0 +1,16 @@
+:host{
+    display: flex;
+    flex-direction: column;
+}
+
+@media(min-width:1280px){
+    :host{
+        flex-direction: row;
+    }
+}
+
+@media(min-width:1280px){
+    .tab{
+        flex: 1 0 0;
+    }
+}

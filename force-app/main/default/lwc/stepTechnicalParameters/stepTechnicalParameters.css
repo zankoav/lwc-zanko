@@ -1,0 +1,23 @@
+.technical_parameters__title{
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 1rem;
+}
+
+@media(min-width:1280px){
+    .technical_parameters__title{
+        font-size: 24px;
+    }
+}
+
+.technical_parameters__actions{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+@media(min-width:1280px){
+    .technical_parameters__actions{
+        margin-top: 2rem;
+    }
+}

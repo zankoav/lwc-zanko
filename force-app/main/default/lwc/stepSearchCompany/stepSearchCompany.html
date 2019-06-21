@@ -1,0 +1,90 @@
+<template>
+    <div class="search-company">
+        <c-fc-cart class="search-company-cart">
+            <template if:false={loading}>
+                <h2 class="search-company-cart__title">{staticData.fields_header}</h2>
+                <p class="search-company-cart__description">{staticData.fields_subheader}</p>
+
+                <div class="search-company__country-of-entry">
+                    <p class="search-company__country-of-entry-label">{staticData.сountry_of_entry.label}</p>
+                    <div class="search-company__country-of-entry-wrapper">
+                        <p class="search-company__country-of-entry-value">{staticData.сountry_of_entry.value}</p>
+                        <p class="search-company__country-of-entry-remark">{staticData.сountry_of_entry.remark}</p>
+                    </div>
+                </div>
+                
+                <div class="search-company-cart__group search-company-cart__group_d-block">
+                    <c-enway-input 
+                        key-name="company_name"
+                        input-value={stateStep.company_name} 
+                        label={staticData.company_name.label}  
+                        variant={staticData.company_name.required}  
+                        max-length={staticData.company_name.maxLength}
+                        error-text={staticData.company_name.errorMessage}
+                        onchange={companyNameHandler}>
+                    </c-enway-input>
+                </div>
+
+                <div class="search-company-cart__group search-company-cart__group_d-block search-company-cart__group-city">
+                    <c-enway-input 
+                        key-name="city"
+                        input-value={stateStep.city} 
+                        label={staticData.city.label}  
+                        variant={staticData.city.required}  
+                        max-length={staticData.city.maxLength}
+                        error-text={staticData.city.errorMessage}
+                        onchange={cityHandler}>
+                    </c-enway-input>
+                </div>
+                
+                <div class="search-company-cart__search">
+                    <c-fc-button 
+                        onclick={selectCompanies} 
+                        title={staticData.search_button.label} 
+                        disabled={stateStep.search_button}
+                        data-button="search"
+                    ></c-fc-button>
+                </div>
+
+                <templaete if:true={companies}>
+                    <div class="search-company__companies">
+                        <h2 class="search-company__companies-title">{staticData.companies_found_heading}</h2>
+                        <p class="search-company__companies-description">{staticData.companies_found_subheading}</p>
+
+                        <div class="search-company__companies-list">
+                            <template for:each={companies} for:item="company">
+                                <div key={company.id} data-label={company.id} class="companies-list__company" onclick={companySelectionHandler}>
+                                    <div class="companies-list__company-wrapper">
+                                        <p class="companies-list__company-label" data-label={company.id} onclick={companySelectionHandler}>{company.name}</p>
+                                        <p class="compamies-list__company-description" data-label={company.id} onclick={companySelectionHandler}>{company.description}</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </templaete>
+                
+                <div class="search-company-cart__line"></div>
+
+                <div class="search-company-cart__navigation-group">
+                    <c-fc-button 
+                        onclick={backHandle} 
+                        title={staticData.back_button.label} 
+                        disabled={stateStep.back_button}
+                        variant="gray"
+                    ></c-fc-button>
+
+                    <c-fc-button 
+                        onclick={stepSubmit} 
+                        title={staticData.continue_button.label} 
+                        disabled={stateStep.continue_button}
+                        data-button="continue"
+                    ></c-fc-button>
+                </div>
+            </template>
+            <template if:true={loading}>
+                <c-fc-loader></c-fc-loader>
+            </template>
+        </c-fc-cart>
+    </div>
+</template>

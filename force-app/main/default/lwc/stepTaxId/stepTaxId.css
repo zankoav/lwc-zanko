@@ -1,0 +1,53 @@
+.tax-id-cart__title{
+	font-weight: 700;
+    font-size: 17px;
+    color: #1A1A1A;
+    margin-bottom: .5rem;
+}
+
+@media (min-width:1280px){
+	.tax-id-cart__title{
+		font-size: 24px;
+	}
+}
+
+.tax-id-cart__description{
+	font-size: 13px;
+    color: #1A1A1A;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width:1280px){
+	.tax-id-cart__description{
+		font-size: 15px;
+		color: #1A1A1A;
+	}
+}
+
+.tax-id-cart__group{
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+@media (min-width:1280px){
+	.tax-id-cart__group{
+		display: flex;
+		align-items: center;
+	}
+}
+
+.tax-id-cart__group_d-block{
+	display: block;
+}
+
+.tax-id-cart__line{
+	height: 2px;
+	background-color: #DEDEDE;
+	margin: 2rem 0 1.5rem;
+}
+
+.tax-id-cart__navigation-group{
+	display: flex;
+	justify-content: space-between;
+}

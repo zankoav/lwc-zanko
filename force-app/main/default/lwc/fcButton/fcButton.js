@@ -11,7 +11,6 @@ import { LightningElement, api, track } from 'lwc';
 const BASE_CLASS_NAME = "fc-button";
 const DISABLED_CLASS_NAME = "fc-button_disabled";
 const GRAY_CLASS_NAME = "fc-button_gray";
-const DISABLED = "disabled";
 const BASE_LABEL = "Button";
 
 export default class FcButton extends LightningElement {
@@ -22,7 +21,7 @@ export default class FcButton extends LightningElement {
     @api variant;
 
     activate() {
-        this.disabled = null;
+        this.disabled = false;
         this.className = BASE_CLASS_NAME;
         if (this.variant === "gray") {
             this.className += ' ' + GRAY_CLASS_NAME;
@@ -30,7 +29,7 @@ export default class FcButton extends LightningElement {
     }
 
     deactivate() {
-        this.disabled = DISABLED;
+        this.disabled = true;
         this.className = `${BASE_CLASS_NAME} ${DISABLED_CLASS_NAME}`;
         if (this.variant === "gray") {
             this.className += ' ' + GRAY_CLASS_NAME;
@@ -46,7 +45,7 @@ export default class FcButton extends LightningElement {
     }
 
     connectedCallback() {
-        this.className = this.disabled === DISABLED ? `${BASE_CLASS_NAME} ${DISABLED_CLASS_NAME}` : BASE_CLASS_NAME;
+        this.className = this.disabled ? `${BASE_CLASS_NAME} ${DISABLED_CLASS_NAME}` : BASE_CLASS_NAME;
         if (this.variant === "gray") {
             this.className += ' ' + GRAY_CLASS_NAME;
         }

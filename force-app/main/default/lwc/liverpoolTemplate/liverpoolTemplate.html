@@ -1,5 +1,5 @@
 <template>
-    <div class="liverpool">
+    <div class="liverpool" onsidebarhide={sidebarHide} onsidebarshow={sidebarShow}>
         <header class="liverpool__header">
              <div class="liverpool__container">
                 <slot name="header">Header</slot>
@@ -11,7 +11,7 @@
                     <main class="liverpool__main">
                         <slot name="main">Main</slot>
                     </main>
-                    <div class={sidebarClassName}>
+                    <div if:true={isNeedSidebar} class={sidebarClassName}>
                         <slot name="sidebar">Sidebar</slot>
                     </div>
                 </div>

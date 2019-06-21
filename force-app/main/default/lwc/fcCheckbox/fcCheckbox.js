@@ -7,9 +7,14 @@ export default class FcCheckbox extends LightningElement {
 
     @track className = BASE_CLASS_NAME;
     @api active = false;
+    @api label;
 
     connectedCallback(){
         this.className = this.active ? `${BASE_CLASS_NAME} ${ACTIVE_CLASS_NAME}` : BASE_CLASS_NAME;
+    }
+
+    renderedCallback(){
+        this.template.querySelector('label').innerHTML = this.label;
     }
 
     change() {

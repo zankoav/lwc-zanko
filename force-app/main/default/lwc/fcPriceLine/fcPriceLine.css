@@ -1,0 +1,34 @@
+.line{
+    color: #333;
+}
+
+.line__title{
+    font-size: 14px;
+}
+
+.line__title_small{
+    font-size: 12px;
+}
+
+.line__price{
+    font-size: 14px;
+    float: right;
+    padding-left: .25rem;
+}
+
+.line__price:after{
+    content: attr(data-currency);
+    margin-left: 0.125rem;
+}
+
+.line__sublabel{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    font-size: 12px;
+    margin-top: 0.125rem;
+}
+
+.line__title_small{
+    font-size: 12px;
+}

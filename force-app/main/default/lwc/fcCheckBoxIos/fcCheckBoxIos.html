@@ -1,0 +1,15 @@
+<template>
+    <div class="fc-checkbox-ios__action-wrapper">
+        <div class={className} onclick={clickHandler}>
+            <div class="fc-checkbox-ios__action-circle"></div>
+            <div class="fc-checkbox-ios__action-item fc-checkbox-ios__action-item-on">{titleOn}</div>
+            <div class="fc-checkbox-ios__action-item fc-checkbox-ios__action-item-off">{titleOff}</div>
+        </div>
+    </div>
+    <div class="fc-checkbox-ios__content-wrapper">
+        <h6 class="fc-checkbox-ios__title">{title}</h6>
+        <c-fc-tooltip if:true={helpText} help-text={helpText}></c-fc-tooltip>
+        <p class="fc-checkbox-ios__subtitle">{subtitle}</p>
+        <p class="fc-checkbox-ios__subtitle fc-checkbox-ios__subtitle_gray">{description}</p>
+    </div>
+</template>

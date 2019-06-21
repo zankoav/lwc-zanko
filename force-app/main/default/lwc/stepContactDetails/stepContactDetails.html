@@ -84,9 +84,7 @@
                 <div class="contact-details-cart__line"></div>
                 <div class="contact-details-cart__submit-group">
                     <div class="contact-details-cart__submit-group-checkbox">
-                        <c-fc-checkbox active={stateStep.news_agreement} onchange={changeNewsAgreement}>
-                            {staticData.news_agreement.label}
-                        </c-fc-checkbox>
+                        <c-fc-checkbox active={stateStep.news_agreement} onchange={changeNewsAgreement} label={staticData.news_agreement.label}></c-fc-checkbox>
                     </div>
                     <div class="contact-details-cart__submit-group-submit">
                         <c-fc-button onclick={stepSubmit} title={staticData.continue_button.label} disabled={stateStep.continue_button}></c-fc-button>

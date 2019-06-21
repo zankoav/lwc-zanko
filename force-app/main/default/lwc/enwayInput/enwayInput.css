@@ -4,10 +4,33 @@
     }
 }
 
+.enway-label__wrapper {
+    display: flex;
+    line-height: 20px;
+    align-items: center;
+    align-self: flex-start;
+}
+
+.enway-label__wrapper:empty{
+    display: none;
+}
+
+@media (min-width:1280px) { 
+    .enway-label__wrapper {
+        max-width: 200px;
+        flex: 1 0 200px;
+        line-height: 38px;
+    }
+}
+
+.enway-input__label-help {
+    margin-left: 0.5rem;
+}
+
 .enway-input__label {
     color: #1a1a1a;
     font-size: 15px;
-    line-height: 20px;
+    display: inline-block;
 }
 
 .enway-input__label_required:after {
@@ -17,10 +40,8 @@
 }
 
 @media (min-width:1280px) {
-    .enway-input__label {
-        max-width: 200px;
-        flex: 1 0 200px;
-        line-height: 38px;
+    .enway-input__label_long {
+        line-height: 19px;
     }
 }
 

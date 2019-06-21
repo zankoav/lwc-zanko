@@ -1,0 +1,89 @@
+:host {
+    display: flex;
+    background-color: #f6f6f6;
+    padding: 1rem;
+    color: #333;
+}
+
+.fc-checkbox-ios__title{
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 15px;
+    margin-right: 0.25rem;
+    display: inline-block;
+}
+
+.fc-checkbox-ios__subtitle{
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.fc-checkbox-ios__subtitle_gray{
+    color: #808080;
+}
+
+.fc-checkbox-ios__action-wrapper{
+    flex: 1 0 60px;
+    max-width: 60px;
+}
+
+.fc-checkbox-ios__content-wrapper{
+    flex: 1;
+    padding-left: 1rem; 
+}
+
+@media (min-width:1280px){
+    .fc-checkbox-ios__content-wrapper{
+        padding-left: 1.5rem; 
+    }
+}
+
+.fc-checkbox-ios__action-circle{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: calc(50% - 9px);
+    left: 6px;
+    border-radius: 100%;
+    background: #FFFFFF;
+    transition: .4s ease-out;
+    box-shadow: 0 0 2px #999;
+}
+
+.fc-checkbox-ios__action-item{
+    text-transform: uppercase;
+    background-color: #EEEEEE;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    max-width: initial;
+    width: 100%;
+    display: block;
+    padding: 8px 8px 8px 27px;
+    transition: .4s ease-out;
+}
+
+.fc-checkbox-ios__action-item-on{
+    background-color: #ee3a43;
+    color: #fff;
+    margin-left: -100%;
+    padding: 8px 28px 8px 8px;
+}
+
+.fc-checkbox-ios__action-view-port{
+    align-self: flex-start;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #CECECE;
+    position: relative;
+}
+
+.fc-checkbox-ios__action-view-port_active .fc-checkbox-ios__action-item-on{
+    margin-left: 0;
+}
+
+.fc-checkbox-ios__action-view-port_active .fc-checkbox-ios__action-circle{
+    left: calc(100% - 22px);
+}

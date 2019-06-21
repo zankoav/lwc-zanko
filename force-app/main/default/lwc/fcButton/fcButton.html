@@ -1,3 +1,4 @@
 <template>
-    <button class={className} disabled={disabled}>{title}</button>
+    <button if:true={disabled} class={className} disabled="disabled">{title}</button>
+    <button if:false={disabled} class={className}>{title}</button>
 </template>

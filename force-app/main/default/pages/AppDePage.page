@@ -16,13 +16,45 @@
             $Lightning.use("c:appTemplate", function () {
                 $Lightning.createComponent("c:templateWrapperDe",
                     {
-                        args:"{!step}"
+                        step: "{!state['step']}",
+                        source: "{!state['source']}"
                     },
-                    "app",
-                    function (cmp) {
-                        console.log("Ready to work!");
-                    });
+                    "app"
+                );
             });
+
+            window.addEventListener('cookie',setCookie);
+
+            function setCookie(event) {
+                var value = event.detail;
+                console.log('value',value);
+                var name = 'apex__source';
+                var props = {};
+                var exp = 60 * 60 * 24 * 365; // 1 year;
+
+                if (typeof exp == "number" && exp) {
+                    var d = new Date();
+                    d.setTime(d.getTime() + exp * 1000);
+                    exp = props.expires = d;
+                }
+
+                if (exp && exp.toUTCString) {
+                    props.expires = exp.toUTCString();
+                }
+
+                value = encodeURIComponent(value)
+                var updatedCookie = name + "=" + value;
+
+                for (var propName in props) {
+                    updatedCookie += "; " + propName;
+                    var propValue = props[propName];
+                    if (propValue !== true) {
+                        updatedCookie += "=" + propValue;
+                    }
+                }
+
+                document.cookie = updatedCookie;
+            }
         </script>
     </body>
 

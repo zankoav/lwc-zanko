@@ -1,0 +1,82 @@
+<template>
+    <c-fc-cart>
+        <template if:false={loading}>
+            <h4 class="payment-details__title">Zahlungsdaten für das Lastschriftverfahren
+                </h4>
+            <div class="payment-details__greed">
+                <div class="payment-details__item">
+                        Zahlungsziel
+                </div>
+                <div class="payment-details__item">
+                        Vierzehntägig
+                </div>
+            </div>
+            <c-enway-input class="payment-details__block"
+                key-name="name"
+                type="text"
+                input-value="ALEXANDR ZANKO" 
+                label="Kontoinhaber"
+                variant="required"
+                error-text="!Bitte geben Sie Ihren Kontoinhaber"
+                onchange={nameHandler}>
+            </c-enway-input>
+            <c-enway-input class="payment-details__block"
+                key-name="iban"
+                type="text"
+                input-value="DE89370400440532013000" 
+                label="IBAN"
+                help-text="Die IBAN ist die eindeutige Kontonummer, die zur Durchführung des Lastschriftverfahrens verwendet wird."
+                variant="required"
+                error-text="Bitte geben Sie die IBAN in einem gültigen Format ein."
+                onchange={ibanHandler}>
+            </c-enway-input>
+            <div class="payment-details__block payment-details__description">Alle Rechnungen werden in elektronischer Form ausgestellt
+            </div>
+            <div class="payment-details__block">
+                <c-fc-check-box-ios title-on="ein" title-off="aus"
+                    title="Papierrechnung"
+                    subtitle="Alle Rechnungen werden kostenlos in elektronischer Form ausgestellt, falls Sie einen Ausdruck wünschen, werden wir Ihnen diesen zusenden."
+                    description="7.50 € pro 1 Papierrechnung">
+                </c-fc-check-box-ios>
+            </div>
+            <div class="payment-details__info payment-details__block">
+                <div class="payment-details__info-header-block">
+                    <header class="payment-details__info-header">
+                        <h4 class="payment-details__title payment-details__title_margin_no">SEPA-Firmenlastschrift-Mandat ?</h4>
+                        <div class="payment-details__info-actions">
+                                <c-fc-tooltip help-text="Das  SEPA-Firmenlastschrift-Mandat ist ein Dokument, das von dem Kunden ausgefüllt wird, der Waren oder Dienstleistungen erwirbt, und den Dienstleister ermächtigt, die Zahlungen per Lastschrift einzuziehen."></c-fc-tooltip>
+                                <a class="payment-details__action" href="#">
+                                    <img class="payment-details__action-img" src="https://e2e-e2efleetcor.cs101.force.com/resource/1559576527000/e2e_images/full-screen.png">
+                                </a>
+                                <a class="payment-details__action" href="#">
+                                    <img class="payment-details__action-img" src="https://e2e-e2efleetcor.cs101.force.com/resource/1559576527000/e2e_images/download.png">
+                                </a>
+                                <a class="payment-details__action" href="#">
+                                    <img class="payment-details__action-img" src="https://e2e-e2efleetcor.cs101.force.com/resource/1559576527000/e2e_images/print.png">
+                                </a>
+                        </div>
+                    </header>
+                    <div class="payment-details__description">Informieren Sie Ihre Bank über das neue, bestätigte SEPA-Firmenlastschrift-Mandat.</div>
+                </div>
+                <div class="payment-details__info-header-document">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore blanditiis dolorem, necessitatibus enim rerum veritatis iste! Blanditiis eveniet praesentium nostrum qui aliquam, ea aliquid, harum rerum totam cum odit aspernatur sapiente et optio eaque facere dignissimos aperiam. Dolorum reprehenderit culpa dicta cumque itaque consequuntur magnam deleniti suscipit, numquam necessitatibus corporis consequatur nulla commodi amet fuga deserunt dolore minus sint reiciendis nobis nam cupiditate officiis nesciunt. Sint totam, ad accusamus ipsum vel blanditiis iure cum eaque recusandae laborum dignissimos vero natus nulla? Magnam unde omnis, ratione a suscipit non cumque labore nulla repellendus sequi placeat aut libero ea, quasi obcaecati laboriosam doloremque id debitis beatae illum dignissimos odio blanditiis cupiditate veniam. Ut explicabo vero, eveniet rem quod asperiores vel hic deleniti quisquam ab commodi. Excepturi ducimus ut maxime eaque fuga est. Earum autem saepe iusto quibusdam vero? Architecto vitae excepturi harum, sunt cumque ducimus explicabo magnam accusantium adipisci esse sed odit minima corrupti possimus praesentium veritatis quae autem cupiditate blanditiis suscipit facere, qui aperiam ea. Animi soluta mollitia maiores at odit assumenda quo hic nihil ab! Ducimus aliquam, illo incidunt officiis, libero tempora sapiente et nulla dicta doloribus impedit harum. Sunt porro blanditiis id fugiat sint incidunt corporis, et labore pariatur optio praesentium eum dolor quia saepe enim possimus, iusto nulla odit illo eligendi aperiam quidem sed dicta consectetur. Voluptatibus, impedit, cumque quos veniam sit iste doloremque vero incidunt, quia esse ab est dolorum eaque? Repellat itaque obcaecati eius quibusdam libero eos! Debitis dignissimos, eius alias excepturi blanditiis veritatis maiores eaque amet ea suscipit similique praesentium voluptate odit, quidem autem ab recusandae iusto vero laborum error? Amet delectus voluptas, iure aliquid quidem omnis expedita eligendi laudantium minus repellendus obcaecati vitae aspernatur earum sed officia officiis facere inventore libero doloremque incidunt non sapiente tempora quos labore! Dignissimos iusto praesentium eveniet aliquid? Voluptatibus totam quia ipsa ratione eum eius! Quidem quia harum maiores minima hic facilis excepturi earum voluptatem rerum magnam. Et impedit eveniet fuga deleniti eos natus praesentium nihil, officiis nobis velit laboriosam tempora ad doloremque pariatur omnis! Numquam voluptas ut optio, laboriosam ea, rerum distinctio maxime quae modi autem non omnis corporis ex eius quis cupiditate sapiente suscipit tempora. Consequatur similique pariatur dolorum magni dignissimos tempora, sed minus minima, optio quia, hic iure repellat voluptate alias nemo vero sapiente necessitatibus rerum. Officiis cupiditate quisquam iusto deleniti odit assumenda quam neque rerum voluptatum modi eos aliquid, non quidem labore nesciunt velit nobis.
+                </div>
+                <div class="payment-details__info-footer-block">
+                    <c-fc-checkbox onchange={changeDocument} label="Ich erteile FLEETCOR ein SEPA-Firmenlastschriftmandat und autorisiere A) FLEETCOR Zahlungen von meinem Bankkonto mittels Lastschrift einzuziehen und weise B) mein Kreditinstitut an, die von FLEETCOR gezogenen Lastschriften einzulösen. Dieses Lastschriftmandat dient nur dem Einzug von Lastschriften, die auf Konten von Unternehmern gezogen sind. Ich bin nicht berechtigt, nach der erfolgten Einlösung eine Erstattung des belasteten Betrages zu verlangen. Ich bin berechtigt, mein Kreditinstitut bis zum Fälligkeitstag anzuweisen, Lastschriften nicht einzulösen."></c-fc-checkbox>
+                </div>
+            </div>
+            <c-fc-checkbox class="payment-details__block" onchange={changeVersichere} label="Ich versichere, dass ich berechtigt bin, diese Handlungen für die Kundentestsystem Warnampel gelb - BITTE NICHT ÄNDERN vorzunehmen."></c-fc-checkbox>
+            <c-fc-checkbox class="payment-details__block" onchange={changeMit} label='Ich erkläre mich mit den <a href="#">Allgemeinen Geschäftsbedingungen</a> einverstanden.'>
+            </c-fc-checkbox>
+            <div class="payment-details__line"></div>
+            <div class="payment-details__actions">
+                <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
+                <c-fc-button onclick={stepSubmit} title="Weiter">
+                </c-fc-button>
+            </div>
+        </template>
+        <template if:true={loading}>
+            <c-fc-loader></c-fc-loader>
+        </template>
+    </c-fc-cart>
+</template>

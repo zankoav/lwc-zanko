@@ -1,7 +1,10 @@
 import { track, api } from 'lwc';
 import BaseStep from 'c/baseStep';
+import getState from '@salesforce/apex/StepCreditScoringController.getStaticData';
 import apexStepSubmit from '@salesforce/apex/StepCreditScoringController.stepSubmit';
-import getState from '@salesforce/apex/StaticResourceClass.getStaticData';
+import apexChangePaymantMethod from '@salesforce/apex/StepCreditScoringController.changePaymantMethod';
+import apexChangeBillingPeriod from '@salesforce/apex/StepCreditScoringController.changeBillingPeriod';
+import apexChangeCreditLimit from '@salesforce/apex/StepCreditScoringController.changeCreditLimit';
 
 export default class StepCreditScoring extends BaseStep {
     @api lang;
@@ -11,68 +14,148 @@ export default class StepCreditScoring extends BaseStep {
     @track loading = true;
     @track staticData;
     @track stateStep;
+    @track paymentDescription;
+    @track billingDescription;
 
     submitButton;
 
-    @track paymantMethods = [
-        {
-            label: 'Lastschrift',
-            value: 'lastschrift'
-        }, {
-            label: 'Überweisung',
-            value: 'uberweisung'
-        }
-    ];
-
-    @track payBills = [
-        {
-            label: 'Wöchentlich',
-            value: 'wöchentlich'
-        }, {
-            label: 'Vierzehntägig',
-            value: 'vierzehntägig'
-        }
-    ];
-
     connectedCallback() {
-        // getState({ stepContent: this.stepContent, apexService: this.apexService })
-        //     .then(result => {
-        //         console.log(result);
-        //         this.staticData = result;
-        //         this.stateStep = {
-
-        //         };
-        //         this.loading = false;
-        //     }).catch(error => {
-        //         console.log('Error:', error);
-        //     });
-
-        this.stateStep = {
-
-        };
-        this.loading = false;
+        getState({ stepContent: this.stepContent })
+            .then(result => {
+                console.log('result', result);
+                this.staticData = result;
+                this.stateStep = {
+                    country: this.staticData.country,
+                    language: this.staticData.language,
+                    payment_method: this.staticData.payment_method.value,
+                    billing_period: this.staticData.billing_period.value,
+                    credit_limit: this.staticData.credit_limit.value,
+                    credit_limit_min: this.staticData.credit_limit_min,
+                    credit_limit_max: this.staticData.credit_limit_max,
+                    credit_limit_step: this.staticData.credit_limit_step,
+                    deposit: this.staticData.deposit.value,
+                };
+                this.paymentDescription = this.getPaymantDescriptionByValue(this.stateStep.payment_method);
+                this.billingDescription = this.getBillingDescriptionByValue(this.stateStep.billing_period);
+                console.log('stateStep', this.stateStep);
+                this.loading = false;
+            }).catch(error => {
+                console.log('Error:', error);
+            });
     }
 
     renderedCallback() {
-        this.submitButton = this.template.querySelector('c-fc-button');
+        this.submitButton = this.template.querySelectorAll('c-fc-button')[1];
     }
 
     changePaymentMethod(event) {
-        const value = event.detail;
-        console.log('paymentMethod', value);
+        this.stateStep.payment_method = event.detail;
+        this.paymentDescription = this.getPaymantDescriptionByValue(this.stateStep.payment_method);
+        this.loading = true;
+        apexChangePaymantMethod({ paymantMethod: this.stateStep.payment_method })
+            .then(result => {
+                console.log(result);
+                this.loading = false;
+            })
+            .catch(error => {
+                console.log('error apexChangePaymantMethod', error);
+                this.loading = false;
+            });
     }
 
     changePayBills(event) {
-        const value = event.detail;
-        console.log('changePayBills', value);
+        this.stateStep.billing_period = event.detail;
+        this.billingDescription = this.getBillingDescriptionByValue(this.stateStep.billing_period);
+        this.loading = true;
+        apexChangeBillingPeriod({ billingPeriod: this.stateStep.billing_period })
+            .then(result => {
+                console.log(result);
+                this.loading = false;
+            })
+            .catch(error => {
+                console.log('error apexChangeBillingPeriod', error);
+                this.loading = false;
+            });
     }
 
-    stepBack(){
+    stepBack() {
         console.log('stepBack');
         this.backStep();
     }
 
-    stepSubmit(){
-        console.log('stepSubmit');
+    stepSubmit() {
+        this.loading = true;
+        apexStepSubmit({ state: this.stateStep })
+            .then(result => {
+                console.log('result apexStepSubmit', result);
+                this.nextStep();
+            })
+            .catch(error => {
+                console.log('error apexStepSubmit', error);
+                this.loading = false;
+            });
     }
+
+    addCreditLimit() {
+        const maxValue = parseInt(this.stateStep.credit_limit_max, 10);
+        const stepValue = parseInt(this.stateStep.credit_limit_step, 10);
+        const currentValue = parseInt(this.stateStep.credit_limit, 10);
+
+        if (currentValue + stepValue <= maxValue) {
+            this.stateStep.credit_limit = currentValue + stepValue;
+            this.stateStep = iterationCopy(this.stateStep);
+            this.changeCreditLimitHelper();
+        }
+    }
+
+    minusCreditLimit() {
+        const minValue = parseInt(this.stateStep.credit_limit_min, 10);
+        const stepValue = parseInt(this.stateStep.credit_limit_step, 10);
+        const currentValue = parseInt(this.stateStep.credit_limit, 10);
+
+        if (currentValue - stepValue >= minValue) {
+            this.stateStep.credit_limit = currentValue - stepValue;
+            this.stateStep = iterationCopy(this.stateStep);
+            this.changeCreditLimitHelper();
+        }
+    }
+
+    changeCreditLimit(event) {
+        this.stateStep.credit_limit = parseInt(event.target.value, 10);
+        this.stateStep = iterationCopy(this.stateStep);
+        this.changeCreditLimitHelper();
+    }
+
+    getPaymantDescriptionByValue(value) {
+        const methodItem = this.staticData.payment_method.options.find(item => item.value === value);
+        return methodItem ? methodItem.description : null;
+    }
+
+    getBillingDescriptionByValue(value) {
+        const methodItem = this.staticData.billing_period.options.find(item => item.value === value);
+        return methodItem ? methodItem.description : null;
+    }
+
+    changeCreditLimitHelper() {
+        this.loading = true;
+        apexChangeCreditLimit({ creditLimit: this.stateStep.credit_limit })
+            .then(result => {
+                console.log('result', result);
+                this.loading = false;
+            })
+            .catch(error => {
+                console.log('error', error);
+                this.loading = false;
+            });
+    }
+}
+
+function iterationCopy(src) {
+    let target = {};
+    for (let prop in src) {
+        if (src.hasOwnProperty(prop)) {
+            target[prop] = src[prop];
+        }
+    }
+    return target;
 }

@@ -1,0 +1,17 @@
+<template>
+        <c-fc-cart>
+            <template if:false={loading}>
+                <template for:each={cards} for:item="acc">
+                    <c-fc-card-editor key={acc}></c-fc-card-editor>
+                </template>
+                <div class="technical_parameters__actions">
+                    <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
+                    <c-fc-button onclick={stepSubmit} title="Weiter" disabled="disabled">
+                    </c-fc-button>
+                </div>
+            </template>
+            <template if:true={loading}>
+                <c-fc-loader></c-fc-loader>
+            </template>
+        </c-fc-cart>
+    </template>
