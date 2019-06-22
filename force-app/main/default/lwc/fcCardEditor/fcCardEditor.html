@@ -2,27 +2,25 @@
     <template if:true={isEdit}>
         <div class="card-editor">
             <div class="card-info__header card-info__header_mb_small">
-                <h4 class="card-info__title" data-before="Zusätzliche Parameter für ">Karte Nr. 2</h4>
+                <h4 class="card-info__title" data-before={staicData.card_complete_header}>Nr.{number}</h4>
             </div>
-            <c-fc-text-editor class="card-editor__custom-html"
-                html-text="<p>Fahrzeugbezogene Produkte, Tanken in Deutschland, Tanken an Shell und Partnerstationen</p>">
-            </c-fc-text-editor>
+            <p class="card-info__paragraph card-editor__custom-html">{staicData.card_subheader}</p>
             <div class="card-info__block">
-                <div class="card-info__subtitle">Was möchten Sie auf Ihrer Karte prägen?</div>
+                <div class="card-info__subtitle">{staicData.card_what_to_emboss}</div>
                 <div class="card-editor__group">
                     <div class="card-editor__label">
-                        <span class="card-editor__label-inner">Firmenname<br>(alle Karten)</span>
+                        <span class="card-editor__label-inner">{staicData.card_firmname}</span>
                     </div>
                     <div class="card-editor__action">
                         <template if:false={isEditFirmen}>
                             <div class="fade-out-2">
-                                <span class="card-editor__firmenname">BBEWSBSB</span>
-                                <span class="card-info__edit" onclick={editFirmen}>Ändern</span>
+                                <span class="card-editor__firmenname">{companyName}</span>
+                                <span class="card-info__edit" onclick={editFirmen}>{staicData.edit_label}</span>
                             </div>
                         </template>
                         <template if:true={isEditFirmen}>
                             <div class="fade-out-2">
-                                <c-enway-input key-name="firmen" type="text" input-value="BBEWSBSB"
+                                <c-enway-input key-name="firmen" type="text" input-value={companyName}
                                     error-text="!Bitte geben Sie den Firmennamen in einem gültigen Format ein Sonderzeichen sind nicht zulässig."
                                     onchange={firmenHandler}>
                                 </c-enway-input>
@@ -36,26 +34,28 @@
                 </div>
             </div>
             <div class="card-info__block">
-                <div class="card-info__subtitle">Für welchen Fahrzeugtyp wird diese Karte verwendet?</div>
+                <div class="card-info__subtitle">{staicData.need_odometer}</div>
                 <div class="card-editor__group">
                     <div class="card-editor__label">
-                        <span class="card-editor__label-inner">Fahrzeugtyp</span>
+                        <span class="card-editor__label-inner">{staicData.odometer_label}</span>
                         <c-fc-tooltip
                             help-text="Wenn Karten außerhalb von Deutschland verwendet werden, wird sowohl für Kraftstoff-Transaktionen als auch für Waren und Dienstleistungen eine Zusatzgebühr erhoben.">
                         </c-fc-tooltip>
                     </div>
                     <div class="card-editor__action card-editor__action_sex-buttons">
-                        <c-fc-radio-buttons variant="much" current="pkw" options={options}></c-fc-radio-buttons>
+                        <c-fc-radio-buttons variant="much" current={cardType} options={staicData.car_type.options} onchange={carTypeHandler}>
+                        </c-fc-radio-buttons>
                     </div>
                 </div>
             </div>
-            <c-fc-check-box-ios class="card-info__block" active="ewvw" title-on="ein" title-off="aus"
-                title="Kilometerzähler-Option"
+            <c-fc-check-box-ios class="card-info__block" active={card.need_odometer_options} title-on="ein" title-off="aus"
+                title={staicData.odometer_header}
                 help-text="Wurde die Kilometerzähler-Option aktiviert, muss der Fahrer den aktuellen Kilometerstand zusammen mit der Karten-PIN am Terminal der Station eingeben. Der Kilometerstand wird später auf der Rechnung ausgewiesen."
-                subtitle="Um die Ausgaben besser unter Kontrolle zu haben, kann beim Tanken die zurückgelegte Strecke erfasst werden.">
+                subtitle={staicData.odometer_subheader}
+                onchange={odometerHandler}>
             </c-fc-check-box-ios>
             <div class="card-editor__button-wrapper">
-                <c-fc-button title="Speichern" onclick={save}></c-fc-button>
+                <c-fc-button title={staicData.save_card.label} onclick={saveHandler}></c-fc-button>
             </div>
         </div>
     </template>
@@ -63,16 +63,18 @@
         <div class="card-init">
             <div class="card-info">
                 <div class="card-info__header">
-                    <h4 class="card-info__title">Karte Nr. 24</h4>
-                    <span class="card-info__edit" onclick={edit}>Ändern</span>
+                    <h4 class="card-info__title">{staicData.card_incomplete_header} {number}</h4>
+                    <span class="card-info__edit" onclick={edit}>{staicData.edit_label}</span>
                 </div>
-                <c-fc-text-editor
-                    html-text="<p>Fahrzeugbezogene Produkte, Tanken in Deutschland, Tanken an Shell und Partnerstationen</p><p>Fahrzeugtyp: PKW,<br>Kilometerzähler-Option: AUS</p>">
-                </c-fc-text-editor>
+                <p class="card-info__paragraph">{staicData.card_subheader}</p>
+                <p class="card-info__paragraph">
+                    {staicData.pkw_type_teaser},<br>
+                    {staicData.false_odometer_teaser}
+                </p>
             </div>
             <div if:true={cardImageView} class="card-img">
-                <c-fc-card-image-view title="Shell Card" number="1111 2222 3333 4444 023" label-card="SHELL CARD 23"
-                    label-number="BBEWSBSB" counter="06/23">
+                <c-fc-card-image-view title={card.card_name} number={staicData.card_number_emboss}
+                    label-card={labelCard} label-number={companyName} counter={staicData.emit_date_emboss}>
                 </c-fc-card-image-view>
             </div>
         </div>

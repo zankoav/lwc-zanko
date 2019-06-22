@@ -1,8 +1,8 @@
+/* eslint-disable no-console */
 import { track, api } from 'lwc';
 import BaseStep from 'c/baseStep';
 import getState from '@salesforce/apex/StepCreditScoringController.getStaticData';
 import apexStepSubmit from '@salesforce/apex/StepCreditScoringController.stepSubmit';
-import apexChangePaymantMethod from '@salesforce/apex/StepCreditScoringController.changePaymantMethod';
 import apexChangeBillingPeriod from '@salesforce/apex/StepCreditScoringController.changeBillingPeriod';
 import apexChangeCreditLimit from '@salesforce/apex/StepCreditScoringController.changeCreditLimit';
 
@@ -20,27 +20,35 @@ export default class StepCreditScoring extends BaseStep {
     submitButton;
 
     connectedCallback() {
-        getState({ stepContent: this.stepContent })
+        getState({ 
+            stepContent: this.stepContent, 
+            apexService: this.apexService, 
+            source : this.opportunitySource 
+        })
             .then(result => {
-                console.log('result', result);
+                console.log('static loaded : ', result);
                 this.staticData = result;
                 this.stateStep = {
                     country: this.staticData.country,
                     language: this.staticData.language,
-                    payment_method: this.staticData.payment_method.value,
-                    billing_period: this.staticData.billing_period.value,
-                    credit_limit: this.staticData.credit_limit.value,
+                    payment_method: this.staticData.payment_method,
+                    billing_period: this.staticData.billing_period,
+                    credit_limit: iterationCopy(this.staticData.credit_limit),
                     credit_limit_min: this.staticData.credit_limit_min,
                     credit_limit_max: this.staticData.credit_limit_max,
                     credit_limit_step: this.staticData.credit_limit_step,
-                    deposit: this.staticData.deposit.value,
+                    deposit: this.staticData.deposit,
+                    opportunity_id: this.staticData.opportunity_id,
+                    account_id: this.staticData.account_id,
+                    monthly_volume: this.staticData.monthly_volume,
+                    total_consumption: this.staticData.total_consumption,
                 };
-                this.paymentDescription = this.getPaymantDescriptionByValue(this.stateStep.payment_method);
-                this.billingDescription = this.getBillingDescriptionByValue(this.stateStep.billing_period);
-                console.log('stateStep', this.stateStep);
+                this.paymentDescription = this.getPaymantDescriptionByValue(this.stateStep.payment_method.value);
+                this.billingDescription = this.getBillingDescriptionByValue(this.stateStep.billing_period.value);
                 this.loading = false;
-            }).catch(error => {
-                console.log('Error:', error);
+            })
+            .catch(error => {
+                console.log('static load error : ', error);
             });
     }
 
@@ -49,25 +57,18 @@ export default class StepCreditScoring extends BaseStep {
     }
 
     changePaymentMethod(event) {
-        this.stateStep.payment_method = event.detail;
+        this.stateStep.payment_method.value = event.detail;
         this.paymentDescription = this.getPaymantDescriptionByValue(this.stateStep.payment_method);
-        this.loading = true;
-        apexChangePaymantMethod({ paymantMethod: this.stateStep.payment_method })
-            .then(result => {
-                console.log(result);
-                this.loading = false;
-            })
-            .catch(error => {
-                console.log('error apexChangePaymantMethod', error);
-                this.loading = false;
-            });
     }
 
     changePayBills(event) {
-        this.stateStep.billing_period = event.detail;
-        this.billingDescription = this.getBillingDescriptionByValue(this.stateStep.billing_period);
+        this.stateStep.billing_period.value = event.detail;
+        this.billingDescription = this.getBillingDescriptionByValue(this.stateStep.billing_period.value);
         this.loading = true;
-        apexChangeBillingPeriod({ billingPeriod: this.stateStep.billing_period })
+        apexChangeBillingPeriod({ 
+            apexService: this.apexService,
+            stateStep: this.stateStep,
+        })
             .then(result => {
                 console.log(result);
                 this.loading = false;
@@ -78,31 +79,15 @@ export default class StepCreditScoring extends BaseStep {
             });
     }
 
-    stepBack() {
-        console.log('stepBack');
-        this.backStep();
-    }
-
-    stepSubmit() {
-        this.loading = true;
-        apexStepSubmit({ state: this.stateStep })
-            .then(result => {
-                console.log('result apexStepSubmit', result);
-                this.nextStep();
-            })
-            .catch(error => {
-                console.log('error apexStepSubmit', error);
-                this.loading = false;
-            });
-    }
+    
 
     addCreditLimit() {
         const maxValue = parseInt(this.stateStep.credit_limit_max, 10);
         const stepValue = parseInt(this.stateStep.credit_limit_step, 10);
-        const currentValue = parseInt(this.stateStep.credit_limit, 10);
+        const currentValue = parseInt(this.stateStep.credit_limit.value, 10);
 
         if (currentValue + stepValue <= maxValue) {
-            this.stateStep.credit_limit = currentValue + stepValue;
+            this.stateStep.credit_limit.value = currentValue + stepValue;
             this.stateStep = iterationCopy(this.stateStep);
             this.changeCreditLimitHelper();
         }
@@ -111,17 +96,17 @@ export default class StepCreditScoring extends BaseStep {
     minusCreditLimit() {
         const minValue = parseInt(this.stateStep.credit_limit_min, 10);
         const stepValue = parseInt(this.stateStep.credit_limit_step, 10);
-        const currentValue = parseInt(this.stateStep.credit_limit, 10);
+        const currentValue = parseInt(this.stateStep.credit_limit.value, 10);
 
         if (currentValue - stepValue >= minValue) {
-            this.stateStep.credit_limit = currentValue - stepValue;
+            this.stateStep.credit_limit.value = currentValue - stepValue;
             this.stateStep = iterationCopy(this.stateStep);
             this.changeCreditLimitHelper();
         }
     }
 
     changeCreditLimit(event) {
-        this.stateStep.credit_limit = parseInt(event.target.value, 10);
+        this.stateStep.credit_limit.value = parseInt(event.target.value, 10);
         this.stateStep = iterationCopy(this.stateStep);
         this.changeCreditLimitHelper();
     }
@@ -138,7 +123,10 @@ export default class StepCreditScoring extends BaseStep {
 
     changeCreditLimitHelper() {
         this.loading = true;
-        apexChangeCreditLimit({ creditLimit: this.stateStep.credit_limit })
+        apexChangeCreditLimit({ 
+            apexService: this.apexService,
+            stateStep: this.stateStep,
+        })
             .then(result => {
                 console.log('result', result);
                 this.loading = false;
@@ -148,6 +136,25 @@ export default class StepCreditScoring extends BaseStep {
                 this.loading = false;
             });
     }
+
+    stepSubmit() {
+        this.loading = true;
+        console.log("state step  = ", this.stateStep);
+        console.log("state step credit value = ", this.stateStep.credit_limit.value);
+        apexStepSubmit({
+            apexService : this.apexService, 
+            stateStep : this.stateStep
+        })
+            .then(result => {
+                console.log('result apexStepSubmit', result);
+                this.nextStep();
+            })
+            .catch(error => {
+                console.log('error apexStepSubmit', error);
+                this.loading = false;
+            });
+    }
+
 }
 
 function iterationCopy(src) {

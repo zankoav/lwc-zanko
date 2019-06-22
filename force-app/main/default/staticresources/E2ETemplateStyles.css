@@ -1,0 +1,371 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: #F2F2F2;
+    min-height: 100%;
+    height: 100%;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    width: 100%;
+}
+
+.parsley-error {
+    border-color: red !important;
+}
+
+.parsley-custom-error-message {
+    color: red !important;
+}
+
+.b-page-logo {
+	margin: 33px 45px 30px 45px;
+}
+
+.btn-select {
+    background: rgba(245, 245, 245, 0.0001);
+    border: 2px solid #DEDEDE;
+    box-sizing: border-box;
+    border-radius: unset;
+    font-size: 15px;
+    width: auto;
+    height: 40px;
+}
+
+.btn-select.selected {
+    background: #E0E9ED;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 15px;
+    width: auto;
+}
+
+.wrapper {
+    background: #FFFFFF;
+    padding-bottom: 35px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.b-page-header {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: -0.8px;
+    color: #1A1A1A;
+    margin: 0 0 30px 45px;
+}
+
+.b-header {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 28px;
+    font-size: 24px;
+    letter-spacing: -0.3px;
+    margin-bottom: 25px;
+}
+
+.b-block-header {
+    font-family: Montserrat;
+    font-weight: 700;
+    line-height: 28px;
+    font-size: 24px;
+    letter-spacing: -0.3px;
+    color: #1A1A1A;
+    margin: 35px 45px 8px 30px;
+}
+
+.b-row-header {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 23px;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 20px 30px 4px 30px;
+}
+
+.b-col-header {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 26px;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.b-desc {
+    font-size: 15px;
+    color: #1A1A1A;
+    margin: 0 30px;
+    line-height: 18px;
+}
+
+.b-block-form {
+    margin-left: 30px;
+}
+
+.f-label {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 11px 0;
+    line-height: 16px;
+}
+
+.f-required {
+    font-size: 15px;
+    color: red;
+    margin-left: 3px;
+    display: inline-block;
+}
+
+.input {
+    background: rgba(245, 245, 245, 0.0001);
+    border: 2px solid #DEDEDE;
+    box-sizing: border-box;
+    height: 40px;
+    border-radius: unset;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 18px;
+    font-size: 15px;
+}
+
+.b-splitter {
+    border-bottom: 2px solid #DEDEDE;
+    margin-bottom: 10px;
+    margin: 40px 30px;
+}
+
+.checkbox, .radio {
+    min-height: 27px;
+    margin-left: 51px;
+}
+
+.form-check .form-check-label {
+    word-break: break-word;
+    vertical-align: top;
+}
+
+.splashStatus .circle img {
+    border-radius: 50%;
+}
+
+.font-11 {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 18px;
+    font-size: 11px;
+}
+
+.font-12 {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 18px;
+    font-size: 12px;
+}
+
+.font-13 {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 18px;
+    font-size: 13px;
+}
+
+.font-14 {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 18px;
+    font-size: 14px;
+}
+
+.font-15 {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 18px;
+    font-size: 15px;
+}
+
+.f-label {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 11px 0;
+    line-height: 16px;
+}
+
+.f-required {
+    font-size: 15px;
+    color: red;
+    margin-left: 3px;
+    display: inline-block;
+}
+
+.fleetcor .fleetcor-desc {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 15px;
+    font-size: 13px;
+    margin-left: 30px;
+}
+
+.b-splitter {
+    border-bottom: 2px solid #DEDEDE;
+    margin-bottom: 10px;
+    margin: 40px 30px;
+}
+
+.b-card-splitter {
+    border-bottom: 2px solid #DEDEDE;
+    margin-bottom: 10px;
+    margin: 20px 30px;
+}
+
+.form-check .form-check-label {
+    word-break: break-word;
+    vertical-align: top;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.btn-red {
+    width: auto;
+    height: auto;
+    line-height: 25px;
+    background: #EE3A43;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border-radius: unset;
+    min-width: 125px;
+    max-width: 200px;
+    white-space: normal;
+}
+
+.btn-red.continue {
+    float: right;
+}
+
+.btn-red:visited {
+    color: #FFFFFF ;
+}
+
+.btn-red:hover{
+    color: #FFFFFF;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #EE3A43;
+}
+
+.btn-red:focus{
+    color: #FFFFFF;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), #EE3A43;
+    outline: unset;
+}
+
+.btn-red[disabled] {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.btn-gray {
+    width: auto;
+    height: auto;
+    line-height: 25px;
+    background: #CECECE;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    border-radius: unset;
+    min-width: 100px;
+    max-width: 200px;
+    white-space: normal;
+}
+
+.btn-gray:visited {
+    color: #1A1A1A;
+}
+
+.btn-gray:hover{
+    color: #1A1A1A;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), #CECECE;
+}
+
+.btn-gray:focus{
+    outline: 0;
+    color: #1A1A1A;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), #CECECE;
+}
+
+/* CHECKBOX */
+
+.checkbox {
+    margin-left: 51px;
+}
+
+.checkbox label {
+    display: inline-block;
+    position: relative;
+    padding-left: 5px;
+}
+
+.checkbox label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 0;
+    top: 3px;
+    border: 2px solid #BDBDBD;
+    box-sizing: border-box;
+    margin-left: -20px;
+    background-color: #fff;
+    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.checkbox label:hover::before {
+    background: rgba(245, 245, 245, 0.0001);
+    border: 2px solid #B8C9D0;
+    box-sizing: border-box;
+}
+
+.checkbox label:active::before {
+    background: rgba(245, 245, 245, 0.0001);
+    border: 2px solid #90A2A9;
+    box-sizing: border-box;
+}
+
+.checkbox label::after {
+    display: inline-block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 0;
+    top: 3px;
+    margin-left: -19px;
+    padding-left: 3px;
+    padding-top: 2px;
+    font-size: 11px;
+    color: #555555;
+    -webkit-transform: rotate(11deg);
+    -ms-transform: rotate(11deg);
+    transform: rotate(11deg);
+}
+
+.checkbox input[type="checkbox"] {
+    opacity: 0;
+}
+
+.checkbox input[type="checkbox"]:focus + label::before {
+    outline: 0;
+}

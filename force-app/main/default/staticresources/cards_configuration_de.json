@@ -1,0 +1,165 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",
+	"fields_header": "Folgender Kreditrahmen steht Ihnen zur Verfügung",
+	"number_of_cards": {
+		"label": "Anzahl der Karten",
+		"value": 1,
+		"required": "required",
+		"min": 1,
+		"max": 50,
+		"errorMessage": ""
+	},
+	"same_cards_tab": {
+		"label": "",
+		"label2": ""
+	},
+	"diff_cards_tab": {
+		"label": "",
+		"label2": ""
+	},
+	"category": "All vehicle related product",
+	"pumpOutsideCountry": "true",
+	"pumpAtPartners": "true",
+	"choose_type_section": {
+		"single_card_header": "Welche Produkte und Dienstleistungen möchten Sie mit Ihrer Karte bezahlen?",
+		"some_cards_header": "Welche Produkte und Dienstleistungen möchten Sie mit Ihren Karten bezahlen?",
+		"remark": "Die Wahl der Kategorien beeinflusst die Kartengebühren nicht.",
+		"selected_value": "All vehicle related product",
+		"card_type_1": {
+			"label": "Fahrzeugbezogene Produkte",
+			"value": "All vehicle related product",
+			"description": {
+				"item_1": "Kraftstoff: alle Arten",
+				"item_2": "Treib- und Schmierstoffe",
+				"item_3": "Autozubehör",
+				"item_4": "Dienstleistungen",
+				"item_5": "Mautgebühren"
+			}
+		},
+		"card_type_2": {
+			"label": "Kraftstoff: alle Arten",
+			"value": "All fuel types",
+			"description": {
+				"item_1": "Kraftstoff: alle Arten",
+				"item_2": "Mautgebühren"
+			}
+		},
+		"card_type_3": {
+			"label": "Kraftstoff: Diesel",
+			"value": "Diesel",
+			"description": {
+				"item_1": "Kraftstoff: Diesel",
+				"item_2": "AdBlue",
+				"item_3": "Mautgebühren"
+			}
+		}
+	},
+	"choose_pump_type_section": {
+		"header1": "Netzabdeckung für",
+		"header2": "Karte",
+		"header3": "Karten",
+		"items": [
+			{
+				"true_value": "EIN",
+				"false_value": "AUS",
+				"selected_value": "true",
+				"label": "Tanken im Ausland",
+				"remark1": "Erweitern Sie die Gültigkeit Ihrer Karte auf ganz Europa.",
+				"remark2": "Tanken Sie auch, wenn Sie bzw. Ihr Fahrer weit weg von zuhause sind."
+			},
+			{
+				"true_value": "EIN",
+				"false_value": "AUS",
+				"selected_value": "true",
+				"label": "Tanken an Shell Partnerstationen",
+				"remark1": "Aktivieren Sie das Shell Partnernetz und tanken Sie in Deutschland bei ESSO, AVIA, OMV, Westfalen.",
+				"remark2": "Bleiben Sie flexibel, wann immer es erforderlich ist."
+			}
+		] 
+	},
+	"feescosts_section": {
+		"header": "Gesamtgebühren",
+		"items": [
+			{
+				"price_items": [
+					{
+						"label": "Monatliche Kartengebühr",
+						"value": "3.95",
+						"currency": "€",
+						"description1": "für",
+						"description2": "Karte",
+						"description3": "Karten"
+					}
+				]
+			},
+			{
+				"header": "Nationale Transaktionen",
+				"price_items": [
+					{
+						"label": "Kraftstoff (Shell Stationen)",
+						"value": "0.00",
+						"currency": "€"
+					},
+					{
+						"label": "Kraftstoff (Shell Partner)",
+						"value": "2.00",
+						"currency": "€"
+					},
+					{
+						"label": "Shopartikel",
+						"value": "1.00",
+						"currency": "€"
+					}	
+				]
+			},
+			{
+				"header": "Internationale Transaktionen",
+				"price_items": [
+					{
+						"label": "Alle Arten",
+						"value": "1.00",
+						"currency": "%",
+						"remark": "Alle Preise exkl. MwSt."
+					}	
+				]
+			},
+			{
+				"collapsed_block_header": "Weitere mögliche Gebühren",
+				"header": "Werden nur in Sonderfällen erhoben",
+				"price_items": [
+					{
+						"label": "Rechnungsduplikat",
+						"value": "5.00",
+						"currency": "€"
+					},
+					{
+						"label": "Zahlungsverzug",
+						"value": "50.00",
+						"currency": "€"
+					}	
+				]
+			}
+		]
+	},
+	"discount_section": {
+		"header": "Sparen Sie ganz einfach",
+		"discount_value": "70",
+		"currency": "€",
+		"description": "Schauen Sie sich unseren Sonderpreis für Benzin bei den nächsten Schritten an und erhalten Sie einen besonderen Anreiz, wenn Sie Ihre Bestellung online abschließen.",
+		"items": [
+			{
+				"label": "Durchschnittliche Einsparungen pro Jahr basierend auf Ihrem Profil."
+			}
+		]
+	},
+	"continue_button": {
+		"label": "weiter",
+		"disabled": ""
+	},
+	"back_button": {
+		"label": "zurück",
+		"disabled": ""
+	}
+}

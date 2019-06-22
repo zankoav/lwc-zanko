@@ -1,0 +1,68 @@
+<apex:page controller="CustomSubmitForApprovalCtrl" action="{! init }" sidebar="true">
+    <apex:form id="formId">
+        <style>
+            .submitButton {
+                margin-left: 15% !important;        
+            }
+            .saveAndBack {
+                margin: 5px !important;
+            }
+            .bPageBlock .pbBody .black .pbSubheader {
+                background-color: black;
+            }
+        </style>
+        <apex:pageMessages />           
+        <apex:pageBlock id="mainBlock">
+            <apex:outputPanel styleClass="black" layout="block" id="panelblock">
+                <apex:pageBlockSection title="Account" columns="1" collapsible="false">
+                    <apex:repeat value="{! finalAccountFieldsList }" var="accFieldApiName">
+                        <apex:inputField value="{! acc[accFieldApiName] }" required="true"/>
+                    </apex:repeat>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Registered Country"/>
+                        <apex:outputPanel >
+                            <apex:outputField value="{! acc.BillingCountry }"/><apex:commandLink action="{! changeRegisteredCountry }" value="[Change]" style="margin-left: 5px;" immediate="true"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="black" layout="block">
+                <apex:pageBlockSection title="Opportunity" columns="1" collapsible="false">
+                    <apex:repeat value="{! finalOpportunityFieldsList }" var="oppFieldApiName">
+                        <apex:inputField value="{! opp[oppFieldApiName] }" required="true"/>
+                    </apex:repeat>
+                    <apex:inputField value="{! opp.Sec_Channel__c }" id="secChannel" required="true" rendered="{! IF(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'), true, false) }"/>
+                    <apex:inputField value="{! opp.Channel__c }" id="channel" required="true" rendered="{! IF(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'), true, false) }"/>
+                    <apex:inputField value="{! opp.Product__c }" id="product" rendered="{! IF(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'), true, false) }">
+                        <apex:actionSupport event="onchange"/>
+                    </apex:inputField>
+                    <apex:inputField value="{! opp.Angebotsdauer__c }" id="offerDuration" rendered="{! IF(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'), true, false) }"/>
+                    <apex:inputField value="{! opp.Home_Station__c }" id="homeStation" rendered="{! IF(AND(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'), OR(opp.Product__c = 'Home Station offer (v.1)', opp.Product__c = 'Sales no fee promo Feb 2016')), true, false) }"/>
+                    <apex:inputField value="{! opp.ESI__c }" id="esi" rendered="{! IF(AND(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'), OR(opp.Product__c = 'Home Station offer (v.1)', opp.Product__c = 'Sales no fee promo Feb 2016')), true, false) }"/>
+                    <apex:inputField value="{! opp.Zahlungsart__c }" id="paymentMethod" required="true" rendered="{! IF(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'), true, false) }">
+                        <apex:actionSupport event="onchange"/>
+                    </apex:inputField>  
+                    <apex:inputField id="mandateType" value="{! opp.Direct_Debit_Mandate_Type__c }" rendered="{! IF(AND(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'),opp.Zahlungsart__c = 'Lastschrift'), true, false) }"/>
+                    <apex:inputField id="iban" value="{! opp.IBAN__c }" rendered="{! IF(AND(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'),opp.Zahlungsart__c = 'Lastschrift'), true, false) }"/>
+                    <apex:inputField id="swift" value="{! opp.SWIFT_BIC__c }" rendered="{! IF(AND(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'),opp.Zahlungsart__c = 'Lastschrift'), true, false) }"/>
+                    <apex:inputField id="ecoFee" value="{! opp.Eco_Fee__c }" rendered="{! IF(OR(opp.RecordType.Name = 'Euroshell', opp.RecordType.Name = 'Euroshell Starts'), true, false) }"/>
+                    <script>
+                        function changePicklist() {
+                            if (document.getElementById('{! $Component.paymentMethod }').value != '{! opp.Zahlungsart__c }') {
+                                document.getElementById('{! $Component.paymentMethod }').value = '{! opp.Zahlungsart__c }';
+                            }
+                            if (document.getElementById('{! $Component.product }').value != '{! opp.Product__c }') {
+                                document.getElementById('{! $Component.product }').value = '{! opp.Product__c }';
+                            }       
+                        }
+                        window.onload = changePicklist;
+                    </script>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:commandButton value="Submit for Approval" action="{! submitForApprovalFromValidationPage }" styleClass="submitButton" rendered="{! type = 'submitforapproval'}"/>
+        <apex:commandButton value="Save and Process Credit Factory" action="{! redirectToCreditFactory }" styleClass="submitButton" rendered="{! type = 'creditfactory'}"/>
+        <apex:commandButton value="Save and Back" action="{! saveAndBack }" styleClass="saveAndBack" rendered="{! type = 'submitforapproval'}"/>
+        <apex:commandButton value="Cancel" action="{! backToOpportunity }" immediate="true"/>
+    </apex:form>
+</apex:page>

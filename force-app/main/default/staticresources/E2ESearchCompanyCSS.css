@@ -1,0 +1,194 @@
+.b-page-header {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: -0.8px;
+    color: #1A1A1A;
+    margin: 0 0 30px 45px;
+}
+
+.block {
+    margin: 5px 30px 10px 30px;
+}
+
+.credit-scoring .b-splitter {
+    margin: 40px 30px 25px 30px;
+}
+
+.credit-scoring .buttons {
+    margin-top: 0;
+}
+
+.credit-scoring .select-company .b-desc {
+    margin-bottom: 15px;
+}
+
+.country .country-msg {
+    margin-top: 4px;
+    width: 106%;
+}
+
+.cf-companies-list {
+    position: relative;
+}
+
+.cf-companies-list .cf-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 280px;
+    width: 95%;
+}
+
+.cf-companies-list .cf-list::-webkit-scrollbar {
+    width: 12px;
+    border:1px solid #e8e8e8;
+    background-color:#fafafa;
+}
+.cf-companies-list .cf-list::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #c1c1c1;
+}
+.cf-companies-list .cf-list::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.cf-companies-list .radio {
+    width: 95%;
+    margin: 0px 0 20px 30px;
+    background: #F6F6F6;
+}
+
+.cf-companies-list .radio label {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    font-size: 15px;
+    width: 100%;
+    margin: 15px 0 15px 0px;
+    word-break: break-word;
+}
+
+.cf-companies-list .radio label span{
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
+.cf-companies-list .cf-company {
+    margin: -5px 10px 0 16px;
+    vertical-align: top;
+}
+
+
+/* RADIO BUTTON */
+
+.radio {
+  padding-left: 20px;
+}
+
+.radio label {
+    display: inline-block;
+    position: relative;
+    padding-left: 5px;
+    line-height: 18px;
+}
+
+.radio label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 0;
+    margin-left: -20px;
+    border-radius: 50%;
+    -webkit-transition: border 0.15s ease-in-out;
+    -o-transition: border 0.15s ease-in-out;
+    transition: border 0.15s ease-in-out;
+    background: rgba(0, 0, 0, 0.0001);
+    border: 2px solid rgba(0, 0, 0, 0.26);
+    box-sizing: border-box;
+}
+
+.radio label:hover::before {
+    background: rgba(245, 245, 245, 0.0001);
+    border: 2px solid #B8C9D0;
+    box-sizing: border-box;
+}
+
+.radio label:active::before {
+    background: rgba(245, 245, 245, 0.0001);
+    border: 2px solid #90A2A9;
+    box-sizing: border-box;
+}
+
+.radio label::after {
+    display: inline-block;
+    position: absolute;
+    content: " ";
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 0px;
+    margin-left: -23px;
+    border-radius: 100%;
+    background-color: #555555;
+    -webkit-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
+    -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+    -moz-transition: -moz-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+    -o-transition: -o-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+    transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+}
+
+.radio label:hover::after {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #EE3A43;
+}
+
+.radio input[type="radio"] {
+    opacity: 0;
+}
+
+.radio input[type="radio"]:focus + label::before {
+    outline: 0;
+}
+
+.radio input[type="radio"]:checked + label::after {
+    content: "\2714";
+    padding-left: 5px;
+    font-size: 11px;
+    -webkit-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    transform: scale(1, 1);
+    -webkit-transform: rotate(11deg);
+    -ms-transform: rotate(11deg);
+    transform: rotate(11deg);
+}
+
+.radio input[type="radio"]:disabled + label {
+    opacity: 0.65;
+}
+
+.radio input[type="radio"]:disabled + label::before {
+    cursor: not-allowed;
+}
+
+.radio-red input[type="radio"] + label::after {
+    background-color: #EE3A43;
+}
+
+.radio-red input[type="radio"]:checked + label::before {
+    border-color: #d9534f;
+}
+
+.radio-red input[type="radio"]:checked + label::after {
+    color: #fff;
+    background-color: #EE3A43;
+}
+
+.radio.radio-red.selected {
+    background-color: #CECECE;
+}

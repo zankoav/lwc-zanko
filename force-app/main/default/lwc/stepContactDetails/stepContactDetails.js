@@ -17,7 +17,12 @@ export default class StepContactDetails extends BaseStep {
     submitButton;
 
     connectedCallback() {
-        getState({ stepContent: this.stepContent, apexService: this.apexService })
+        console.log("connected call back - contact details");
+        getState({ 
+            stepContent: this.stepContent, 
+            apexService: this.apexService,
+            source: this.opportunitySource ? this.opportunitySource : null
+        })
             .then(result => {
                 this.staticData = result;
                 this.stateStep = {
@@ -30,10 +35,11 @@ export default class StepContactDetails extends BaseStep {
                     email: this.staticData.email.value,
                     number_of_cards: this.staticData.number_of_cards.value,
                     business_type: this.staticData.business_type.value,
-                    news_agreement: this.staticData.news_agreement.value,
+                    news_agreement: this.staticData.news_agreement.value === "true" ? true : false,
                     continue_button: this.staticData.continue_button.disabled,
                 };
                 this.loading = false;
+                console.log(this.stateStep);
             }).catch(error => {
                 console.log('Error:', error);
             });

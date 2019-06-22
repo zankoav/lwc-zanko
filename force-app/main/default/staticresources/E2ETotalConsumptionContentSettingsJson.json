@@ -1,0 +1,54 @@
+{
+	"component": {
+		"contentElements": [
+			{
+				"name": "HEADER",
+				"value": "Kunde werden und Tankkarten beantragen"
+			},
+			{
+				"name": "MENU ITEM 1",
+				"value": "1. Kreditprüfung",
+				"type": "text"
+			},
+			{
+				"name": "MENU ITEM 2",
+				"value": "2. Kartenkonfiguration",
+				"type": "text"
+			},
+			{
+				"name": "MENU ITEM 3",
+				"value": "3. Zusätzlicher Service",
+				"type": "text"
+			},
+			{
+				"name": "MENU ITEM 4",
+				"value": "4. Zahlungsdaten",
+				"type": "text"
+			},			
+			{
+				"name": "FIELDS HEADER",
+				"value": "Wie viel Kraftstoff verbrauchen alle Fahrzeuge zusammen?"
+			},
+			{
+				"name": "TOTAL CONSUMPTION",
+				"label": "Kraftstoffverbrauch <br/>aller Fahrzeuge",
+				"label2": "Liter Monat",
+				"apiName": "",
+				"value": "",
+				"helpText": "Für Ihren Komfort haben wir den durchschnittlichen Kraftstoffverbrauch, basierend auf der von Ihnen angegebenen Kartenanzahl, ermittelt.",
+				"type": "field",
+				"errorMessage": "Bitte geben Sie Ihren monatlichen Kraftstoffverbrauch in Litern an (mindestens 75 Liter)."
+			},
+			{
+				"name": "CONTINUE BUTTON",
+				"value": "Weiter",
+				"type": "button"
+			},
+			{
+				"name": "BACK BUTTON",
+				"value": "Zurück",
+				"type": "button"
+			}			
+		]
+	}
+}

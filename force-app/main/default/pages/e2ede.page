@@ -1,0 +1,83 @@
+<apex:page controller="E2ENewController" docType="html-5.0" standardStylesheets="false" showHeader="false" sidebar="false">
+	<apex:form id="formId">		
+		<apex:actionFunction action="{! doNext }" reRender="component-id" name="doNext" oncomplete="endSplash();"/>
+		<apex:actionFunction action="{! doBack }" reRender="component-id" name="doBack" oncomplete="endSplash();"/>
+		<apex:composition template="e2etemplate">			
+			<apex:define name="body">
+				<apex:outputPanel id="component-id">
+					<c:E2EContactDetails rendered="{! activeStep = '0' }"
+										jsResource="E2EContactDetailsScripts" 
+										cssResource="E2EContactDetailsCSS" 
+										apexService="E2EContactDetailsBasicImpl" 
+										stepContent="contactDetails_DE"/>
+
+					<c:E2ESearchCompany rendered="{! activeStep = '1' }"
+										jsResource="E2ESearchCompanyScripts" 
+										cssResource="E2ESearchCompanyCSS" 
+										apexService="E2ESearchCompanyBasicImpl" 
+										stepContent="search_company_de"/>
+
+					<c:E2ETaxId rendered="{! activeStep = '2' }"
+										jsResource="E2ETaxIdScripts" 
+										cssResource="E2ETaxIdCSS" 
+										apexService="E2ETaxIdBasicImpl" 
+										stepContent="tax_id_de"/>
+
+					<c:E2ETotalConsumption rendered="{! activeStep = '3' }"
+										jsResource="E2ETotalConsumptionScripts" 
+										cssResource="E2ETotalConsumptionCSS" 
+										apexService="E2ETotalConsumptionBasicImpl" 
+										stepContent="total_consumption_de"/>
+
+					<c:E2ECreditScoring rendered="{! activeStep = '4' }"
+										jsResource="E2ECreditScoringScripts" 
+										cssResource="E2ECreditScoringCSS" 
+										apexService="E2ECreditScoringBasicImpl" 
+										stepContent="credit_scoring_de"/>
+
+					<c:E2ECardsConfiguration rendered="{! activeStep = '5' }"
+										jsResource="E2ECardsConfigurationScripts" 
+										cssResource="E2ECardsConfigurationCSS" 
+										apexService="E2ECardsConfigurationBasicImpl" 
+										stepContent="cards_configuration_de"/>
+
+					<c:E2EOfferSelection rendered="{! activeStep = '6' }"
+										jsResource="E2EOfferSelectionScripts" 
+										cssResource="E2EOfferSelectionCSS" 
+										apexService="E2EOfferSelectionBasicImpl" 
+										stepContent="offer_selection_de"/>
+
+					<c:E2ETechnicalParameters rendered="{! activeStep = '7' }"
+										jsResource="E2ETechnicalParametersScripts" 
+										cssResource="E2ETechnicalParametersCSS" 
+										apexService="E2ETechnicalParametersBasicImpl" 
+										stepContent="technical_parameters_de"/>
+
+					<c:E2EAdditionalParameters rendered="{! activeStep = '8' }"
+										jsResource="E2EAdditionalParametersScripts" 
+										cssResource="E2EAdditionalParametersCSS" 
+										apexService="E2EAdditionalParametersBasicImpl" 
+										stepContent="additional_parameters_de"/>
+
+					<c:E2EPaymentOptions rendered="{! activeStep = '9' }"
+										jsResource="E2EPaymentOptionsScripts" 
+										cssResource="E2EPaymentOptionsCSS" 
+										apexService="E2EPaymentOptionsBasicImpl" 
+										stepContent="payment_options_de"/>
+
+					<c:E2EDepositOptions rendered="{! activeStep = '10' }"
+										jsResource="E2EDepositOptionsScripts" 
+										cssResource="E2EDepositOptionsCSS" 
+										apexService="E2EDepositOptionsBasicImpl" 
+										stepContent="deposit_options_de"/>
+
+					<c:E2ECongratulations rendered="{! activeStep = '11' }"
+										jsResource="E2ECongratulationsScripts" 
+										cssResource="E2ECongratulationsCSS" 
+										apexService="E2ECongratulationsBasicImpl" 
+										stepContent="congratulations_de"/>
+				</apex:outputPanel>
+			</apex:define>
+		</apex:composition>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,143 @@
+/* SPECIAL OFFERS START */
+
+.special-offers .offer {
+    background-color: #F6F6F6;
+    margin: 20px 30px;
+}
+
+.special-offers .offer .b-locator {
+    margin-top: 10px;
+}
+
+.special-offers .offer .b-locator .invalid-feedback {
+    display: inline-block;
+    margin: -10px 0 10px 30px;
+}
+
+.special-offers .offer .info {
+    margin: 0 0px 20px 30px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 18px;
+    font-size: 12px;
+}
+
+.special-offers .offer .info .point {
+    text-transform: capitalize;
+}
+
+.special-offers .offer .info .point span {
+    padding-right: 5px;
+}
+
+.special-offers .offer .edit {
+    vertical-align: middle;
+}
+
+.special-offers .offer .edit img {
+    vertical-align: middle;
+    padding-bottom: 5px;
+    margin-right: 5px;
+}
+
+.special-offers .offer .offer-buttons {
+    margin: 25px 0 30px 30px;
+    vertical-align: top;
+}
+
+.special-offers .offer .special-desc {
+    margin: 5px 0px 4px 30px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 18px;
+    font-size: 15px;
+    width: 55%;
+}
+
+.special-offers .offer .collapse-block .detail-list {
+    margin: 5px 0 0 45px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 21px;
+    font-size: 12px;
+}
+
+.special-offers .offer .collapse-block .detail-list .l-detail {
+    width: 100px;
+}
+
+.special-offers .offer .collapse-block .detail-list span {
+    margin-left: 10px;
+}
+
+.special-offers .offer .offer-label {
+    width: 35%;
+    float: right;
+    margin-top: 10px;
+}
+
+.special-offers .offer .special-desc .fee {
+    margin-top: 5px;
+}
+
+.special-offers .offer .offer-label .arrow-right {
+    background-color: #E0E9ED;
+    width: 0;
+    height: 0;
+    border-top: 28px solid transparent;
+    border-bottom: 28px solid transparent;
+    border-left: 20px solid #F6F6F6;
+    margin: 0px 0px 0px 29px;
+}
+
+.special-offers .offer .offer-label .arrow-right.selected {
+    background-color: #EE3A43;
+}
+
+.special-offers .offer .offer-label .price-right {
+    background-color: #E0E9ED;
+    padding: 5px 0 5px 0;
+    height: 56px;
+    width: 75%;
+    vertical-align: top;
+}
+
+.special-offers .offer .offer-label .price-right.selected {
+    background-color: #EE3A43;
+    color: #fff;
+}
+
+.special-offers .offer .offer-label .price-right .f-box {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    font-size: 18px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.special-offers .offer .offer-label .price-right .f-box-desc {
+    line-height: 18px;
+    font-size: 15px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.special-offers .button-info {
+    text-align: right;
+    width: 90%;
+    margin-left: 30px;
+}
+
+.collapse-block .link {
+    color: #0093EE;
+    cursor: pointer;
+}
+
+.inline-block {
+    display: inline-block;
+    vertical-align: top;
+    width: 400px;
+}
+/* SPECIAL OFFERS END */

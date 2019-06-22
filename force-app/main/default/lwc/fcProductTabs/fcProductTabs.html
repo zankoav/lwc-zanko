@@ -1,5 +1,13 @@
 <template>
-    <c-fc-product-tab onactive={tabChange} class="tab" tab-value="1" tab-item="item"></c-fc-product-tab>
-    <c-fc-product-tab onactive={tabChange} class="tab" tab-value="10" tab-item="item" active="active"></c-fc-product-tab>
-    <c-fc-product-tab onactive={tabChange} class="tab" tab-value="100" tab-item="item"></c-fc-product-tab>
+    <template for:each={tabs} for:item="tab">
+        <c-fc-product-tab 
+            key={tab.Id} 
+            onactive={tabChange} 
+            class="tab" 
+            tab-value={tab.value}
+            tab-label={tab.label}
+            tab-items={tab.items}
+            active={tab.active}
+        ></c-fc-product-tab>
+    </template>
 </template>

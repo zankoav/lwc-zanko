@@ -1,0 +1,19 @@
+public class stepTaxIdController {
+
+	@AuraEnabled
+	public static Map<String, Object> getStaticData (String stepContent, String apexService, String source) {
+		Type customType = Type.forName(apexService);
+		E2ETaxId service = (E2ETaxId)customType.newInstance();
+		service.selectContent(stepContent, source);
+		return service.getContent();
+	}
+
+	@AuraEnabled
+	public static void save (String apexService, Map<String, Object> stateStep) {
+		Type customType = Type.forName(apexService);
+		E2ETaxId service = (E2ETaxId)customType.newInstance();
+		service.setContent(stateStep);
+		service.save();
+	}
+
+}

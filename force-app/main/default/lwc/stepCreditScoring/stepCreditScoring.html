@@ -5,18 +5,19 @@
             <div class="credit-scoring__group">
                 <p class="credit-scoring__label">{staticData.payment_method.label}</p>
                 <div class="credit-scoring__content">
-                    <c-fc-radio-buttons class="credit-scoring__paymants" current={stateStep.payment_method}
-                        options={staticData.payment_method.options} onchange={changePaymentMethod}>
-                    </c-fc-radio-buttons>
-                    <p class="credit-scoring__description">
-                        {paymentDescription}
-                    </p>
+                    <c-fc-radio-buttons 
+                        class="credit-scoring__paymants" 
+                        current={stateStep.payment_method.value}
+                        options={staticData.payment_method.options} 
+                        onchange={changePaymentMethod}
+                    ></c-fc-radio-buttons>
+                    <p class="credit-scoring__description">{paymentDescription}</p>
                 </div>
             </div>
             <div class="credit-scoring__group">
                 <p class="credit-scoring__label">{staticData.billing_period.label}</p>
                 <div class="credit-scoring__content">
-                    <c-fc-radio-buttons class="credit-scoring__pay-bills" current={stateStep.billing_period}
+                    <c-fc-radio-buttons class="credit-scoring__pay-bills" current={stateStep.billing_period.value}
                         options={staticData.billing_period.options} onchange={changePayBills}>
                     </c-fc-radio-buttons>
                     <p class="credit-scoring__description">{billingDescription}</p>
@@ -29,16 +30,22 @@
                 <div class="credit-scoring__content">
                     <div class="credit-scoring__counter">
                         <div class="credit-scoring__counter-result" data-currency={staticData.deposit_currency}>
-                            {stateStep.credit_limit}
+                            {stateStep.credit_limit.value}
                         </div>
                         <div class="credit-scoring__counter-action" onclick={minusCreditLimit}>&ndash;</div>
                         <div class="credit-scoring__counter-action" onclick={addCreditLimit}>+</div>
                     </div>
                     <div class="credit-scoring__range">
                         <div class="credit-scoring__range-min">{stateStep.credit_limit_min}</div>
-                        <input type="range" onchange={changeCreditLimit} min={stateStep.credit_limit_min}
-                            max={stateStep.credit_limit_max} step={stateStep.credit_limit_step}
-                            value={stateStep.credit_limit} class="credit-scoring__range-line" />
+                        <input 
+                            type="range" 
+                            onchange={changeCreditLimit} 
+                            min={stateStep.credit_limit_min}
+                            max={stateStep.credit_limit_max} 
+                            step={stateStep.credit_limit_step}
+                            value={stateStep.credit_limit.value} 
+                            class="credit-scoring__range-line" 
+                        />
                         <div class="credit-scoring__range-max">{stateStep.credit_limit_max}</div>
                     </div>
                 </div>
@@ -47,7 +54,7 @@
                 <p class="credit-scoring__label">{staticData.deposit.label}</p>
                 <div class="credit-scoring__content">
                     <span class="credit-scoring__current-result"
-                        data-currency={staticData.deposit_currency}>{stateStep.deposit}</span>
+                        data-currency={staticData.deposit_currency}>{stateStep.deposit.value}</span>
                     <c-fc-tooltip help-text={staticData.deposit.helpText}></c-fc-tooltip>
                     <p class="credit-scoring__description">
                         {staticData.deposit.description}
@@ -56,7 +63,7 @@
             </div>
             <div class="credit-scoring__line"></div>
             <div class="credit-scoring__actions">
-                <c-fc-button variant="gray" onclick={stepBack} title={staticData.back_button.label}></c-fc-button>
+                <c-fc-button variant="gray" onclick={backStep} title={staticData.back_button.label}></c-fc-button>
                 <c-fc-button onclick={stepSubmit} title={staticData.continue_button.label}
                     disabled={staticData.continue_button.disabled}></c-fc-button>
             </div>

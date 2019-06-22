@@ -1,0 +1,24 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",
+	"additional_services": [
+		{
+			"title": "Sauber unterwegs: Aktiver Klimaschutz mit FLEETCOR",
+			"subtitle": "Verbessern Sie Ihre CO2-Bilanz und investieren Sie mit uns in weltweite Kompensationsprojekte",
+			"description": "FLEETCOR unterstützt auf der ganzen Welt Projekte zur CO2-Kompensation und hilft dabei, diese nachhaltig zu entwickeln. Mit einem kleinen Zusatzbeitrag (1% Ihrer Tankkosten) können Sie dazu beitragen und so die CO2-Emissionen Ihrer Flotte ausgleichen – denn Klimaschutz geht uns alle an.",
+			"image_url": "https://c.cs101.visual.force.com/resource/1559576527000/e2e_images/eco1.png",
+			"checkbox_label": "Ja, ich möchte mit FLEETCOR aktiv den Klimaschutz unterstützen.",
+			"checkbox_sublabel": "Mit dem Zusatzbeitrag von 1% meines Tankbetrags erkläre ich mich einverstanden.",
+			"checkbox_value": "false"
+		}
+	],
+	"continue_button": {
+		"label": "Weiter",
+		"disabled": ""
+	},
+	"back_button": {
+		"label": "Zurück",
+		"disabled": ""
+	}
+}

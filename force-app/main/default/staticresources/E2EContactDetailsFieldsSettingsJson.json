@@ -1,0 +1,46 @@
+{
+	"component": {
+		"contentElements": [
+			{
+				"name": "FIRST NAME",
+				"label": "First Name",
+				"apiName": "FirstName",
+				"value": "",
+				"type": "field"
+			},
+			{
+				"name": "LAST NAME",
+				"label": "Last Name",
+				"apiName": "LastName",
+				"value": "",
+				"type": "field"
+			},
+			{
+				"name": "PHONE",
+				"label": "Phone",
+				"apiName": "Phone",
+				"value": "",
+				"type": "field"
+			},
+			{
+				"name": "EMAIL",
+				"label": "Email",
+				"apiName": "Email",
+				"value": "",
+				"type": "field"
+			},	
+			{
+				"name": "NEWS AGREEMENT",
+				"label": "News Agreement",
+				"apiName": "Agree_to_Privacy_Policy__c",
+				"value": "",
+				"type": "field"
+			},
+			{
+				"name": "CONTINUE BUTTON",
+				"label": "CONTINUE",
+				"value": ""
+			}								
+		]
+	}
+}

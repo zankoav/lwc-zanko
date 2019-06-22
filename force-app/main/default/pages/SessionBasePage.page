@@ -1,0 +1,6 @@
+<apex:page controller="SessionBasePageController">
+	<apex:form >
+		<apex:commandButton action="{! testsession }" value="set test session"/>
+		<apex:commandButton action="{! testgetsession }" value="get test session"/>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,38 @@
+<apex:page controller="DataComLeadPhoneController" action="{! init}" >
+    <apex:pageMessages />
+    <style>
+        .btn {
+            text-decoration: none;
+        }
+        .separator {
+            display: inline-block;
+            padding: 0 5px;
+        }
+    </style>
+	<apex:form >
+		<apex:pageBlock title="Data.com Information">
+			<apex:pageBlockButtons >
+                <apex:commandButton value="Back to Lead" action="{!backToLead}"/>
+            </apex:pageBlockButtons>
+	        <apex:outputText style="font-weight:800" value="Salesforce phone: {! currentLead.Phone}"/><br/>
+	        <apex:outputText style="font-weight:800" value="Current Data.com phone: {! currentLead.Data_com_phone__c}"/>
+            <apex:pageBlockTable value="{! dataCloudCompanies}" var="company">
+                <apex:column >
+                    <apex:commandLink styleClass="btn" value="Purchase Company" action="{! purchaseCompanyFromDataCom}"> 
+                        <apex:param name="companyId" value="{! company.CompanyId}"/>
+                    </apex:commandlink>
+                    <span class="separator">|</span>
+                    <apex:commandLink styleClass="btn" value="Update Phone in Lead" action="{! updatePhone}"> 
+                        <apex:param name="companyId" value="{! company.CompanyId}"/>
+                    </apex:commandlink>
+                </apex:column>
+                <apex:column headerValue="Company Name" value="{! company.Name}"/>
+                <apex:column headerValue="Industry" value="{! company.Industry}"/>
+                <apex:column headerValue="Country" value="{! company.Country}"/>
+                <apex:column headerValue="City" value="{! company.City}"/>
+                <apex:column headerValue="Postal Code" value="{! company.Zip}"/>
+                <apex:column headerValue="Phone" value="{! company.Phone}"/>
+        	</apex:pageBlockTable>
+        </apex:pageBlock>
+	</apex:form>
+</apex:page>

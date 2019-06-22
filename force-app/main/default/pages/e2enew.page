@@ -1,0 +1,23 @@
+<apex:page controller="E2ENewController" docType="html-5.0" standardStylesheets="false" showHeader="false" sidebar="false">
+	<apex:form id="formId">		
+		<apex:actionFunction action="{! doNext }" reRender="component-id" name="doNext" oncomplete="endSplash();">
+			<apex:param name="encodedUrl" value="" assignTo="{! encodedUrl }"/>
+		</apex:actionFunction>
+		<apex:composition template="{! activeStep.E2E_Form__r.Template_Name__c }">			
+			<apex:define name="body">
+				<apex:outputPanel id="component-id">
+					<c:E2EContactDetails activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2EContactDetails' }"/>
+					<c:E2ESearchCompany activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2ESearchCompany' }"/>
+					<c:E2ETotalConsumption activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2ETotalConsumption' }"/>
+					<c:E2ECreditScoring activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2ECreditScoring' }"/>
+					<c:E2ECardsConfiguration activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2ECardsConfiguration' }"/>
+					<c:E2EOfferSelection activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2EOfferSelection' }"/>
+					<c:E2ETechnicalParameters activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2ETechnicalParameters' }"/>
+					<c:E2EAdditionalServices activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2EAdditionalServices' }"/>
+					<c:E2EPaymentOptions activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2EPaymentOptions' }"/>
+					<c:E2ECongratulations activeStep="{! activeStep }" rendered="{! activeStep.Name == 'E2ECongratulations' }"/>
+				</apex:outputPanel>
+			</apex:define>
+		</apex:composition>
+	</apex:form>
+</apex:page>

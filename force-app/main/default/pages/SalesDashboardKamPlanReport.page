@@ -1,0 +1,54 @@
+<apex:page controller="SalesDashboardKamPlanReport" action="{!init}">
+	<apex:form >
+        <apex:pageMessages />
+
+	    <apex:pageBlock >
+	    <h1 style="margin: 15px 0; font-size: 15px; display: block;">{! currentUser.Name }: Meetings report for {! selectedMonth } {! currentYear } ({! startDateOfMonthString } - {! endDateOfMonthString })</h1>
+	        <apex:pageBlockTable value="{! allAccountsForReport }" var="accList">
+
+	        	<apex:column >
+					<apex:facet name="header">
+				    	<apex:outputText value="Account Name"/>
+					</apex:facet>
+					<apex:outputLink value="/{! accList.Id }" target="_blank">{! accList.Name }</apex:outputLink>
+				</apex:column>
+
+				<apex:column >
+					<apex:facet name="header">
+				    	<apex:outputLabel value="{!$ObjectType.Account.fields.OwnerId.Label }"/>
+					</apex:facet>
+					<apex:outputLink value="/{! accList.OwnerId }" target="_blank">{! accList.Owner.Name }</apex:outputLink>
+				</apex:column>
+
+				<apex:column >
+					<apex:facet name="header">
+				    	<apex:outputLabel value="{!$ObjectType.Account.fields.BillingCountry.Label }"/>
+					</apex:facet>
+					{! accList.BillingCountry }
+				</apex:column>
+
+				<apex:column >
+					<apex:facet name="header">
+				    	<apex:outputLabel value="{!$ObjectType.Account.fields.OBN__c.Label }"/>
+					</apex:facet>
+					{! accList.OBN__c }
+				</apex:column>
+
+				<apex:column >
+					<apex:facet name="header">
+				    	<apex:outputLabel value="{!$ObjectType.Account.fields.Last_contact_date__c.Label }"/>
+					</apex:facet>
+					{! accList.Last_contact_date__c }
+				</apex:column>
+
+				<apex:column >
+					<apex:facet name="header">
+				    	<apex:outputLabel value="{!$ObjectType.Account.fields.Last_contact_results__c.Label }"/>
+					</apex:facet>
+					{! accList.Last_contact_results__c }
+				</apex:column>
+
+            </apex:pageBlockTable>
+	    </apex:pageBlock>
+    </apex:form>
+</apex:page>

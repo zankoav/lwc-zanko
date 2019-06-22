@@ -1,0 +1,2608 @@
+/* E2E Long Form mobile styles */
+
+/* MOBILE STYLE ================================================ */
+
+/* SX - PHONE and SM - TABLET less then 1367px */
+/* latin */
+
+@media screen and (max-width: 1367px) {
+
+    /* General */
+
+    body::-webkit-scrollbar-thumb {
+        display: none;
+    }
+
+    /* FOR TEST */
+    /*body::-webkit-scrollbar {
+        background: #cecece;
+    }*/
+
+    body {
+        overflow-x: hidden;
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 13px;
+    }
+
+    .row {
+        margin-right: 0px;
+    }
+
+    .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5,
+    .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12,
+    .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9,
+    .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5,
+    .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12,
+    .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+        padding-right: 0;
+    }
+
+    main {
+        margin-bottom: 25px;
+        min-height: 365px;
+    }
+
+    footer {
+        padding-bottom: 0;
+        height: 175px;
+    }
+
+    .container {
+        width: 100%;
+        overflow-x: hidden;
+        /*padding: 0;*/
+    }
+
+    .popover-content {
+        font-size: 13px;
+    }
+
+    .wrapper {
+       width: 100%;
+       padding-bottom: 25px;
+       margin-bottom: 10px;
+    }
+
+    .wrapper:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .fees-and-costs .wrapper {
+        background: #e0e9ed;
+        padding: 0 15px 0 12px;
+    }
+
+    /*.contact-details-collapsed .wrapper-collapsed,
+    .company-details-collapsed .wrapper-collapsed {
+        border-bottom: 2px solid #DEDEDE;
+    }*/
+
+    .wrapper-collapsed {
+        width: 100%;
+        background: #e0eded;
+        padding: 15px ;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .wrapper-collapsed .inner-block {
+        margin-left: 15px;
+    }
+
+    .wrapper-collapsed .collapse-block .link {
+        font-size: 14px;
+        margin-top: 8px;
+    }
+
+    .wrapper-collapsed .collapse-block .expand-detail {
+        margin: 0 0 -3px 8px;
+    }
+
+    /* wrapper blue-block */
+    .wrapper.blue-block {
+        margin-top: -10px;
+    }
+
+    .wrapper.blue-block .b-block-header {
+        margin: 18px 12px 14px 12px;
+    }
+
+    .wrapper.blue-block .inner-block {
+        margin-bottom: 10px;
+    }
+
+    .wrapper.blue-block .fees-and-costs {
+        width: unset;
+        margin: 0px 12px 15px 12px;
+    }
+
+    .wrapper.blue-block .fees-and-costs .item .f-item, .fees-and-costs .item .f-val {
+        font-size: 15px;
+        background-color: #E0E9ED;
+    }
+
+    .wrapper.blue-block .fees-and-costs .item {
+        margin-top: 0px;
+        background-color: #e0e9ed;
+        background-image: linear-gradient(to right, #1a1a1a 15%, #e0e9ed 0%);
+    }
+
+    .wrapper.blue-block .fees-and-costs .f-desc {
+        font-size: 11px;
+    }
+
+    .cards-order .configurations .wrapper.blue-block .collapse-block {
+        cursor: pointer;
+        width: auto;
+        margin: 17px 0px 0 12px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1.2px;
+        font-size: 15px;
+    }
+
+    .cards-order .configurations .wrapper.blue-block .fees-inner-block {
+        margin-left: 3px;
+    }
+
+    .cards-order .configurations .wrapper.blue-block .fees-inner-text {
+        margin: 5px 12px 0;
+    }
+
+    .config-cards-shadow {
+        margin-bottom: 10px;
+        padding-bottom: 25px;
+        box-shadow: 0 10px 5px 0 #00000010;
+    }
+
+    .wrapper.blue-block .fee-national-header,
+    .wrapper.blue-block .fee-international-header {
+        font-size: 15px;
+        margin: 28px 12px 9px 12px;
+    }
+
+    .wrapper.blue-block .fee-other {
+        margin: 29px 12px 0 12px;
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+    .b-steps-splitter {
+        border-bottom: 2px solid #DEDEDE;
+        margin: 0 12px;
+    }
+
+    .font-15 {
+        font-size: 15px;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .font-14 {
+        font-size: 14px;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .font-13 {
+        font-size: 13px;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .font-12 {
+        font-size: 12px;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .font-11 {
+        font-size: 11px;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .tag-font-15 {
+        font-family: 'Montserrat';
+        font-size: 15px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.73;
+        letter-spacing: normal;
+        text-align: right;
+    }
+
+    .tag-font-13 {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 13px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.38;
+        letter-spacing: normal;
+        text-align: right;
+    }
+
+    a:visited {
+       color: #0093EE;
+    }
+
+    .i-helper {
+        font-size: 13px;
+        vertical-align: middle;
+        opacity: 1;
+        margin-left: 2px;
+    }
+
+    .buttons {
+        margin-top: 0;
+    }
+
+    .b-page-logo {
+        margin: 11px 15px 8px 15px;
+    }
+
+    .b-page-logo img {
+        width: 105px;
+        height: 12px;
+    }
+
+    .b-block-header {
+        font-size: 17px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: -0.2px;
+        margin: 16px 34px 0px 12px;
+    }
+
+    .b-row-header {
+        /*font-family: Montserrat bold;
+        font-style: normal;
+        line-height: 23px;
+        font-weight: 500;*/
+        font-size: 13px;
+        line-height: normal;
+        letter-spacing: normal;
+        margin: 20px 30px 1px 0px;
+    }
+
+    .m-row-header {
+        font-family: 'Montserrat';
+        font-weight: 500;
+        font-size: 15px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .b-semibold-header {
+        font-family: 'Montserrat';
+        font-weight: 600;
+        font-size: 15px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #1a1a1a;
+    }
+
+    .b-small-header {
+        font-family: 'Montserrat';
+        font-weight: 600;
+        font-size: 14px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #1a1a1a;
+        margin-bottom: 4px;
+    }
+
+    .b-grey-block{
+        margin: 0px 12px 15px 12px;
+        border: 1px solid #f2f2f2;
+        background-color: #f2f2f2;
+    }
+
+    .b-desc {
+        /*font-family: Montserrat medium;*/
+        font-size: 13px;
+        color: #1A1A1A;
+        margin: 5px 12px 0px 12px;
+        font-weight: 400;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .btn-red {
+        font-family: 'Montserrat';
+        font-weight: 500;
+        line-height: unset;
+        /*font-size: 13px;*/
+        min-width: 145px;
+        max-width: 210px;
+        height: 32px;
+    }
+
+    .btn-red.continue {
+        float: unset;
+    }
+
+    .btn-gray {
+        font-family: 'Montserrat';
+        font-weight: 500;
+        line-height: unset;
+        font-size: 13px;
+        min-width: 145px;
+        max-width: 210px;
+        height: 32px;
+    }
+
+    .btn-group.btn-group-justified input {
+        width: 50%;
+    }
+
+    .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+        opacity: .25;
+    }
+
+    .nav-gray {
+        min-height: 40px;
+        margin-bottom: -8px;
+        border: unset;
+    }
+
+    .nav-gray .navbar-header {
+        float: none;
+    }
+
+    .nav-gray .container-fluid>.navbar-header {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .nav-gray .nav.navbar-nav {
+        margin: 10px 0px;
+    }
+
+    .nav-gray .nav>li>a {
+        padding: 4px 0px;
+    }
+
+    .nav-gray .nav.navbar-nav.menu li a {
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-size: 17px;        
+        line-height: normal;
+        letter-spacing: -0.2px;
+        color: #1A1A1A;
+    }
+
+    .nav-gray .nav.navbar-nav.menu .expanded + .expanded {
+        margin-top: 5px;
+    }
+
+    .nav-gray .nav.navbar-nav.menu .nav-list li a {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 15px;
+        font-style: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #0093ee;
+        padding: 0px 0px;
+    }
+
+    .nav-gray .nav.navbar-nav.menu .nav-list .nav-item {
+        padding: 4px 0;
+    }
+
+    .nav-gray {
+        background-color: #F2F2F2;
+        border-color: #F2F2F2;
+    }
+
+    .nav-gray .navbar-collapse {
+        position: absolute;
+        width: 74.5%;
+        background-color: #ffffff;
+        box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.3);
+        margin-top: -5px;
+        margin-right: -17px;
+        left: 1%;
+        z-index: 1;
+        transition: all 0.5s ease-out;
+    }
+
+    .nav-gray .navbar-collapse.collapse {
+        display: none!important;
+    }
+
+    .nav-gray .navbar-collapse.collapsing {
+        height: auto !important;
+        transition: all 0.3s ease;
+        left: 110%;
+    }
+
+    .nav-gray .navbar-collapse.in {
+        display: block!important;
+        left: 35%;
+    }
+
+    .nav-gray .navbar-toggle {
+        display: block !important;
+        background-color: #636363;
+        margin: 9px 0;
+        padding: 1px 1px;
+        width: 26px;
+        height: 22px;
+    }
+
+    .nav-gray .navbar-toggle.collapsed {
+        background-color: #cecece;
+    }
+
+    .nav-gray .nav-list {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .nav-gray .navbar-nav .expanded {
+        padding-right: 10px;
+    }
+
+    .b-page-header {
+        font-size: 24px;
+        margin: 10px 0 15px 15px;
+    }
+
+    .m-grey-block .b-col-header {
+        font-family: 'Montserrat';
+        font-weight: 500;
+        font-size: 15px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        margin-bottom: 0px;
+    }
+
+    .b-col-header {
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-size: 17px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: -0.2px;
+    }
+
+    .b-block-form {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .radio label::after {
+        -webkit-transition: unset;
+        -moz-transition: unset;
+        -o-transition: unset;
+        transition: unset;
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: 0;
+    }
+
+    .form-horizontal .radio {
+        padding-top: 0px;
+    }
+
+    .form-check .form-check-label {
+        width: 95%;
+        font-size: 13px;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .form-check .form-check-labelHeader {
+        font-size: 15px;
+        margin: 0px;
+        font-family: 'Montserrat';
+        font-weight: 400;
+    }
+
+    .form-check .desc {
+        font-size: 11px;
+        padding-left: 8px;
+        margin-top: -2px;
+    }
+
+    .checkbox {
+        margin-left: 32px;
+    }
+
+    .checkbox label {
+        margin-bottom: 7px;
+    }
+
+    .block {
+        margin: 25px 12px 0px 12px;
+    }
+
+    .b-what-need {
+        width: 100%;
+        margin-top: 0;
+        padding: 18px;
+        background: #FFFFFF;
+        padding-bottom: 25px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .b-what-need .need-list li {
+        width: 100%;
+        margin-bottom: 19px;
+    }
+
+    .b-what-need .warn img {
+        vertical-align: bottom;
+        margin-bottom: 8px;
+    }
+
+    .m-buttons {
+        margin-top: 15px;
+    }
+
+    .m-help-info {
+        margin: 28px 12px 12px 30px;
+    }
+
+    .m-help-info .info,
+    .m-help-info .why-info,
+    .m-help-info .pay-info {
+        border-bottom: 2px solid #e1e1e1;
+        padding: 13px 0 13px 0;
+    }
+
+    .b-how-pay .pay-info {
+        margin-left: -15px;
+    }
+
+    .m-help-info .desc {
+        margin: 12px 40px 5px 15px;
+        width: 85%;
+        min-width: 261px;
+    }
+
+    .m-help-info .b-header {
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+
+    .m-help-info .b-col-header {
+        margin-bottom: 0px;
+    }
+
+    .m-help-info .collapse-block .link {
+        font-family: 'Montserrat';
+        font-weight: 500;
+        font-style: normal;
+        line-height: normal;
+        font-size: 15px;
+        color: #1a1a1a;
+        cursor: pointer;
+    }
+
+    .m-help-info .block-expand,
+    .m-help-info .block-collapse {
+        margin: 8px 7px 10px 0px;
+    }
+
+    .back-to-top {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 15px;
+        text-align: center;
+        color: #0093ee;
+        margin-top: 16px;
+    }
+
+    .order-details-link {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 15px;
+        text-align: center;
+        color: #0093ee;
+        margin: 15px 0 15px 0;
+    }
+
+    .fleetcor .fleetcor-desc {
+        line-height: 1.36;
+        font-size: 11px;
+        margin-left: 0;
+        border-bottom: 2px solid #ccdae2;
+        padding-bottom: 12px;
+    }
+
+    .b-copyright {
+        font-size: 11px;
+        margin: 12px 0 0 12px;
+    }
+
+    .f-label {
+        font-size: 13px;
+        font-weight: 400;
+        margin: 11px 0px 0px 0px;
+        color: #9299a2;
+        line-height: 18px;
+    }
+
+    .f-value {
+        font-size: 15px;
+        margin: 4px 0px 0px 0px;
+        line-height: 18px;
+        font-family: 'Montserrat';
+        font-weight: 400;
+    }
+
+    .b-form-field {
+        width: 100%;
+        font-size: 13px;
+        line-height: 20px;
+        vertical-align: top;
+        text-align: left;
+    }
+
+    .b-form-field .form-field {
+        width: 100%;
+    }
+
+    .b-form-field .form-field .f-input {
+        display: -webkit-flex;
+        display: flex;
+        width: 100%;
+        height: 45px;
+        text-align: left;
+        cursor: text;
+    }
+
+    .b-form-field .form-field .f-input .f-container {
+        -webkit-align-items: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 0;
+        border-bottom: 1px solid #7d7d7d;
+    }
+
+    .b-form-field .form-field .f-input .f-container.error {
+        border-bottom: 1px solid #EE3A43;
+    }
+
+    .b-form-field .form-field .f-input .f-container .column {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .b-form-field .form-field .f-input .f-container .column input {
+        top: 0;
+        padding-right: 18px;
+        width: 100%;
+        border: 0;
+        background: 0 0;
+        resize: none;
+        outline: 0;
+        padding: 15px 0 0 0;
+        height: 45px;
+        box-shadow: none;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #1a1a1a;
+    }
+
+    .input-label {
+        /*font-family: Montserrat medium;*/
+        position: absolute;
+        top: 18px;
+        left: 15px;
+        color: #1a1a1a;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        text-align: left;
+    }
+
+    input.not-empty~.input-label.invalid,
+    input:focus~.input-label.invalid {
+        color: #EE3A43;
+    }
+
+    input.not-empty~.input-label.invalid,
+    input:focus~.input-label.invalid {
+        color: #EE3A43;
+    }
+
+    input.not-empty~.input-label,
+    input:focus~.input-label {
+        top: 0;
+        color: #9299a2;
+        font-size: 13px;
+        line-height: 16px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+    }
+
+    .invalid-feedback {
+        width: 100%;
+    }
+
+    .invalid-feedback,
+    .invalid-feedback-driver,
+    .invalid-feedback-car-number {
+        font-size: 11px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .invalid-feedback-driver {
+        width: 90%;
+    }
+
+    .additional {
+        margin-top: 18px;
+        margin-left: 11px;
+    }
+
+    .collapsable-head {
+        width: 110px;
+    }
+
+    .collapsable-body {
+        width: 65%;
+        vertical-align: top;
+    }
+
+    .eco-img {
+        min-width: 296px;
+        width: 100%;
+    }
+
+    .error-label {
+        color: #ee3a43;
+    }
+
+    .notification-email {
+        color: #777;
+        text-align: center;
+    }
+
+    .margin-borders {
+        margin: 0px 12px;
+    }
+
+    /* Fees and costs */
+
+    .fees-and-costs .btn-red {
+        width: 220px;
+        max-width: 220px;
+    }
+
+    .fees-and-costs .b-block-header {
+        margin: 16px 0;
+    }
+
+    .fees-and-costs .item {
+        height: 20px;
+        background-color: #e0eded;
+        background-image: linear-gradient(to right, #1a1a1a 15%, #e0eded 0%);
+        background-position: bottom;
+        background-size: 8px 2px;
+        background-repeat: repeat-x;
+        margin-top: 5px;
+    }
+
+    .fees-and-costs .item .f-item,
+    .fees-and-costs .item .f-val {
+        height: 20px;
+        background-color: #E0EDED;
+        line-height: 30px;
+    }
+
+    .fees-and-costs .item .f-item {
+        padding-right: 4px;
+    }
+
+    .fees-and-costs .item .f-val {
+        float: right;
+        padding-left: 5px;
+    }
+
+    .fees-and-costs .f-desc {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 11px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: right;
+        color: rgba(0, 0, 0, 0.5);
+        clear: both;
+    }
+
+    .fees-and-costs .text-center .font-11 {
+        margin-bottom: 24px;
+    }
+
+    .fees-and-costs .vat-reclaim .vat-list {
+        font-size: 50%;
+        line-height: 2;
+    }
+
+    .fees-and-costs .vat-reclaim .vat-list ul {
+        padding-left: 10px;
+        margin-bottom: 0px;
+    }
+
+    .fee-national-header {        
+        font-family: 'Montserrat';
+        font-weight: 600;
+        margin-top: 12px;
+    }
+
+    .fee-international-header {
+        font-family: 'Montserrat';
+        font-weight: 600;
+        margin-top: 15px;
+    }
+
+    .fee-other {
+        margin-top: 18px;
+    }
+
+    /* Start Page */
+
+    .details-content .m-buttons{
+        margin-top: 23px;
+    }
+
+    /* Start Page Table */
+    .div-table {
+        display: table;
+        width: 100%;
+        border-collapse: collapse;
+        color: #1a1a1a;
+        line-height: normal;
+    }
+
+    .div-table-row {
+        display: table-row;
+        border-bottom: 2px solid #d9d9d9;
+    }
+
+    .div-table-heading .div-table-row {
+        border-bottom: unset;
+    }
+
+    .div-table-heading {
+        display: table-header-group;
+    }
+
+    .div-table-cell, .div-table-head {
+        display: table-cell;
+    }
+
+    .div-table-head {
+        text-align: left;
+        transform: rotate(-90deg);
+        vertical-align: middle;
+    }
+
+    .div-table-heading .first-div {
+        width: 54px;
+    }
+
+    .div-table-head:first-of-type {
+        transform: none;
+        height: 88px;
+    }
+
+    .div-table-cell {
+        text-align: center;
+        vertical-align: middle;
+        padding: 4px;
+    }
+
+    .div-table-body {
+        display: table-row-group;
+    }
+
+    .div-table-cell:first-of-type {
+        min-width: 121px;
+        text-align: unset;
+    }
+
+    /* Steps list block*/
+
+    .b-steps-list-cards {
+        padding: 0 12px;
+        background-color: #fff;
+    }
+
+    .b-steps-list-cards .li {
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-size: 15px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 52px;
+        letter-spacing: -0.2px;
+        text-align: left;
+        color: #00000080;
+        border-bottom: 2px solid #DEDEDE;
+    }
+
+    .b-steps-list-cards .li:not(:last-child) {
+        border-bottom: 2px solid #d9d9d9;
+    }
+
+    .b-steps-list {
+        margin-top: 10px;
+        padding: 0 12px;
+        background-color: #f8f8f8;
+        box-shadow: 0 1px 5px 0 #00000010;
+    }
+
+    .b-step .b-step-header {
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-size: 17px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 52px;
+        letter-spacing: -0.2px;
+        text-align: left;
+        color: #00000080;
+    }
+
+    .b-step .b-step-header {
+        line-height: normal;
+        color: #6f7676;
+    }
+
+    .b-step .b-step-header img {
+        margin-right: 7px;
+    }
+
+    .b-steps-list .li {
+        margin-left: 15px;
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-size: 17px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 52px;
+        letter-spacing: -0.2px;
+        text-align: left;
+        color: #00000080;
+    }
+
+    .b-steps-list .li:not(:last-child) {
+        border-bottom: 2px solid #d9d9d9;
+    }
+
+    .step-content .wrapper-collapsed .edit {
+        float: right;
+        margin-right: 5px;
+    }
+
+    .b-step-details {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        margin-top: 7px;
+    }
+
+    .b-step-details .info {
+        font-size: 11px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #00000080;
+        margin: 3px 0 5px 0;
+    }
+
+    /* Chat */
+    .chat-button{
+        margin-left: 0px;
+        right: 1px;
+    }
+
+    .chat-box {
+        margin-left: 0px;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        max-height:362px;
+        position: absolute;
+    }
+
+    #liveAgentChatLog {
+       /* height: 173px; */
+    }
+
+    .liveAgentChatTextArea {
+        height:43px;
+    }
+
+
+    /* Contact details */
+    .contact-details .salutation {
+        margin-top: 16px;
+    }
+
+    .contact-details .btn-select {
+        height: 35px;
+    }
+
+    .contact-details .b-checkbox {
+        margin-top: 13px;
+    }
+
+    /* Company details */
+    .credit-scoring {
+        line-height: normal;
+    }
+
+    .credit-scoring .country {
+        margin-top: 5px;
+    }
+
+    .credit-scoring .country .country-msg {
+        font-size: 11px;
+        line-height: normal;
+        color: #00000080;
+        margin-top: 6px;
+        width: 95%;
+    }
+
+    .credit-scoring .select-company {
+        margin: 26px 12px 0 12px;
+    }
+
+    .credit-scoring .select-company .b-col-header,
+    .credit-scoring .credit-scoring-sub .b-col-header{
+        font-family: 'Montserrat';
+        font-weight: 500;
+        font-size: 15px;
+    }
+
+    .credit-scoring .select-company .b-col-header {
+        margin-bottom: 3px;
+    }
+
+    .credit-scoring .m-buttons {
+        margin-top: 24px;
+    }
+
+    .credit-scoring .select-company .m-buttons {
+        margin-top: 10px;
+    }
+
+    .credit-scoring .cf-companies-list .radio {
+        width: 100%;
+        margin: 0;
+        background: #fff;
+    }
+
+    .credit-scoring .cf-companies-list {
+        margin-bottom: -15px;
+        overflow: auto;
+    }
+
+    .credit-scoring .cf-companies-list .cf-company {
+        margin: 0;
+    }
+
+    .credit-scoring .cf-companies-list .radio label {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 13px;
+        font-style: normal;
+        line-height: normal;
+        width: 100%;
+        margin: 15px 0;
+        word-break: break-word;
+        padding-left: 9px;
+        min-height: auto;
+    }
+
+    .cf-companies-list .radio label span {
+        font-family: 'Montserrat';
+        font-weight: 400;
+    }
+
+    .credit-scoring .cf-companies-list .select-item {
+        margin-bottom: 8px;
+    }
+
+    .credit-scoring .select-company .cf-companies-list .b-splitter {
+        margin: 0 7px 2px 12px;
+        background-color: rgba(0, 0, 0, 0.07);
+    }
+
+    .credit-scoring .save-and-continue {
+        margin: 25px 12px 0 12px;
+    }
+
+    .credit-scoring .credit-scoring-sub {
+        margin-top: 22px;
+    }
+
+    .credit-scoring .credit-scoring-sub .i-image {
+       width: 34px;
+       height: 34px;
+       float: right;
+    }
+
+    .credit-scoring .credit-scoring-sub .b-collapsed-company {
+        padding: 14px 12px 12px;
+        background: #f8f8f8;
+    }
+
+    .credit-scoring .credit-scoring-sub .b-collapsed-company .collapsed-company {
+        width: 85%;
+    }
+
+    .credit-scoring .credit-scoring-sub .b-col-header {
+        margin-bottom: 0px;
+    }
+
+    .credit-scoring .b-warning-block {
+        margin: 24px 12px 0;
+        background:  #f2f2f2;
+    }
+
+    .credit-scoring .b-inside-warning {
+        padding: 0 12px 20px 12px;
+    }
+
+    .credit-scoring .b-inside-warning .m-buttons {
+        margin-top: 20px;
+    }
+
+    .credit-scoring .b-inside-warning .warn img {
+        vertical-align: unset;
+        margin-right: 5px;
+    }
+
+    .credit-scoring .b-warning-block .b-inside-warning .b-col-header {
+        margin-bottom: 6px;
+        padding-top: 12px;
+    }
+
+    .credit-scoring .b-warning-block .b-inside-warning .cf-companies-list {
+        margin: 5px 0 -5px 0;
+    }
+
+    .credit-scoring .b-warning-block .b-inside-warning .cf-companies-list .radio {
+        background:  #f2f2f2;
+    }
+
+    .credit-scoring .b-warning-block .b-inside-warning .cf-companies-list .radio label {
+        line-height: 18px;
+        margin: 8px 0;
+    }
+
+    .credit-scoring .b-warning-block .b-inside-warning .select-item {
+        margin-bottom: 2px;
+    }
+
+    .credit-scoring .b-fuel-consumption {
+        margin: 24px 12px 0;
+    }
+
+    .credit-scoring .pump .litters {
+        position: relative;
+        float: right;
+        margin-top: -25px;
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 11px;
+        font-weight: normal;
+        color: #777;
+    }
+
+    .credit-scoring .fuel-consumption .sufficient-volume-text {
+        margin-top: 0.5rem;
+    }
+
+    .modal-body .select-company {
+        margin: 0px 12px 0 12px;
+    }
+
+    .modal-body .cf-companies-list .radio {
+        width: 100%;
+        margin: 0;
+        background: #fff;
+        background-color: #f8f8f8;
+    }
+
+    .modal-body .cf-companies-list {
+        margin-bottom: -15px;
+        overflow: auto;
+    }
+
+    .modal-body .cf-companies-list .cf-company {
+        margin: 0;
+    }
+
+    .modal-body .cf-companies-list .radio label {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 13px;
+        font-style: normal;
+        line-height: normal;
+        width: 100%;
+        margin: 15px 0;
+        word-break: break-word;
+        padding-left: 9px;
+        min-height: auto;
+    }
+
+    .modal-body .cf-companies-list .select-item {
+        margin-bottom: 8px;
+    }
+
+    .modal-body .select-company .cf-companies-list .b-splitter {
+        margin: 0 7px 2px 12px;
+        background-color: rgba(0, 0, 0, 0.07);
+    }
+
+    .modal-body .credit-scoring-sub {
+        margin-top: 22px;
+    }
+
+    .modal-body .credit-scoring-sub .b-collapsed-company {
+        padding: 14px 12px 12px;
+        background: #f8f8f8;
+    }
+
+    .modal-body .credit-scoring-sub .b-collapsed-company .collapsed-company {
+        width: 85%;
+    }
+
+    .modal-body .credit-scoring-sub .b-col-header {
+        margin-bottom: 0px;
+    }
+
+    .modal-footer .save-station-btn .my-station {
+        margin-right: 12px;
+        min-width: 125px;
+        font-size: 12px;
+    }
+
+    .modal-footer .save-station-btn .btn-gray {
+        margin-left: 12px;
+        min-width: 125px;
+        font-size: 12px;
+    }
+
+    /* Credit Line step */
+
+    .credit-line .wrapper {
+        padding-bottom: 0px;
+    }
+
+    .credit-line .m-under-header {
+        margin: 8px 12px 0px;
+    }
+
+    .credit-line .pay-method-msg, .credit-line .billing-period-msg {
+        margin-top: 5px;
+    }
+
+    .credit-line .payment-method .m-debit-block .btn-select {
+        min-width: 148px;
+        height: 36px;
+        width: 50%;
+    }
+
+    .credit-line .payment-method .m-debit-block .btn-select.selected {
+        min-width: 148px;
+        height: 36px;
+        width: 50%;
+    }
+
+    .credit-line .billing-period .m-calendar-deposit .btn-select {
+        min-width: 99px;
+        height: 36px;
+        width: 33.33%;
+        width: calc(100% / 3);
+    }
+
+    .credit-line .billing-period .m-calendar-deposit .btn-select.selected {
+        min-width: 99px;
+        height: 36px;
+        width: 33.33%;
+        width: calc(100% / 3);
+    }
+
+    .credit-line .payment-method .btn-group {
+        width: 100%;
+    }
+
+    .credit-line .billing-period .btn-group {
+            width: 100%;
+    }
+
+    .credit-line .payment-method .btn-group {
+        width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .credit-line .payment-method .btn {
+        white-space:normal;
+    }
+
+    .credit-line .billing-period .btn-group {
+        width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .credit-line .billing-period .btn {
+        white-space:normal;
+    }
+
+    .credit-line .m-block-around {
+        margin: 25px 12px 0px;
+    }
+
+    .credit-line .credit-limit .range-slider {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 0px;
+    }
+
+    .credit-line .credit-limit .label-last {
+        line-height: normal;
+        margin-left: 0px;
+    }
+
+    .credit-line .deposit-numbers {
+        width: 100%;
+    }
+
+    .credit-line #slider {
+        min-width: 296px;
+        width: 100%;
+        margin: 0px;
+    }
+
+    .m-credit-value {
+        margin-bottom: 20px;
+    }
+
+    .m-credit-value .credit-value-block {
+        background-color: #eee; height: 36px; min-width: 120px; cursor: initial;
+    }
+
+    .m-credit-value .action-btn {
+        width: 40px;
+        height: 36px;
+    }
+
+    .credit-line .collapse-block .block-expand {
+        height: 10px;
+        margin: 8px 10px;
+    }
+
+    .credit-line .collapse-block .block-collapse {
+        height: 10px;
+        margin: 8px 10px;
+    }
+
+    .credit-line .collapse-block {
+        background-color: #f8f8f8;
+        padding: 11px 13px 13px 11px;
+        margin: 0;
+    }
+
+    .credit-line .collapse-block .credit-line-collapse .block-gap {
+        margin-bottom: 11px;
+    }
+
+    .credit-line .min-limit,
+    .credit-line .max-limit {
+        color: #808080;
+        font-style: normal;
+        font-weight: normal;
+        line-height: normal;
+        font-size: 11px;
+    }
+
+    .credit-line .min-limit {
+        margin-right: 5px;
+    }
+
+    .credit-line .max-limit {
+        margin-left: 5px;
+    }
+
+    /* Cards configurations */
+    .cards-order .save-and-continue {
+        margin: 24px 0 -1px 0;
+    }
+
+    .cards-order .configurations .card-list .b-block-header {
+        font-size: 15px;
+        margin-top: 21px;
+    }
+
+    .cards-order .configurations .b-row-header {
+        margin-top: 13px;
+    }
+
+    .cards-order .configurations .b-option .b-splitter {
+        margin: 15px 5px 6px 10px;
+    }
+
+    .cards-order .configurations .b-option .item .form-check .form-check-label {
+        line-height: 22px;
+    }
+
+    .cards-order .configurations .b-configs-block {
+        margin: 12px 12px 0 12px;
+    }
+
+    .cards-order .configurations .config-list {
+        font-size: 15px;
+        margin-bottom: 23px;
+    }
+
+    .cards-order .configurations .config-list .config {
+        width: 32%;
+        display: inline-block;
+    }
+
+    .cards-order .configurations .config-list .config:nth-child(1) {
+        text-align: start;
+    }
+
+    .cards-order .configurations .config-list .config:nth-child(2) {
+        text-align: center;
+    }
+
+    .cards-order .configurations .config-list .config:nth-child(3) {
+        text-align: end;
+    }
+
+    .cards-order .configurations .config-list .config .link {
+        line-height: 27px;
+    }
+
+    .cards-order .configurations .config-list .config.active .link {
+        border-bottom: 2px solid #00000078;
+    }
+
+    .cards-order .configurations .config-list .config.blue .link {
+        color: #0093EE;
+    }
+
+    .cards-order .configurations .config-list .config .link {
+        vertical-align: text-bottom;
+    }
+
+    .cards-order .configurations .config-list .config.active .link {
+        color: #1a1a1a;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+
+    .cards-order .configurations .config-list .config.disabled .link {
+        color: #9299a2;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+
+    .cards-order .configurations .config-list .config:nth-child(2) .link {
+        margin-left: 15px;
+    }
+
+
+    .cards-order .configurations .config-list .config:nth-child(3) .link {
+        margin-left: 20px;
+    }
+
+    .cards-order .configurations .b-category .m-buttons {
+        margin-top: 8px;
+    }
+
+    .cards-order .category-list .radio {
+        width: 100%;
+        margin: 0;
+        background: #fff;
+        border: unset;
+        min-height: unset;
+        min-width: unset;
+    }
+
+    .discount-ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .cards-order .category-list .category  li,
+    .discount-ul li {
+        list-style: none;
+        font-size: 10px;
+    }
+
+    .cards-order .category-list .category  li:before,
+    .discount-ul li:before {
+        content:"·";
+        vertical-align: baseline;
+        line-height: 20px;
+        font-size: 15px;
+    }
+
+    .cards-order .category-list {
+       margin: 8px 0 0 0px;
+    }
+
+    .cards-order .category-list .category {
+        margin: 5px 0 0 0;
+    }
+
+    .cards-order .category-list .category ul {
+        padding-left: 2px;
+        margin-top: 4px;
+    }
+
+    .cards-order .category-list .category ul span,
+    .discount-ul span {
+        padding-left: 10px
+    }
+
+    .cards-order .category-list .radio label {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 13px;
+        font-style: normal;
+        line-height: 19px;
+        width: 100%;
+        margin: 12px 0 5px 0;
+        word-break: break-word;
+        padding-left: 9px;
+        min-height: auto;
+    }
+
+    .cards-order .category-list .b-splitter {
+        margin: 0 20px 0 8px;
+        background-color: rgba(0, 0, 0, 0.07);
+    }
+
+    .cards-order .configurations .b-option .options {
+        margin: -10px 0 10px 0;
+    }
+
+    .cards-order .configurations .b-option .car-type {
+        margin-top: 15px;
+    }
+
+    .cards-order .configurations .b-option .checkbox {
+        margin-left: 20px;
+    }
+
+    .cards-order .b-card-list {
+        margin-top: 10px;
+        padding-right: 12px;
+        background-color: #ffffff;
+        box-shadow: 0 1px 5px 0 #00000010;
+    }
+
+    .cards-order .b-card-list .li {
+        margin-left: 13px;
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-size: 15px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 52px;
+        letter-spacing: -0.2px;
+        text-align: left;
+        color: #00000080;
+    }
+
+    .cards-order .b-card-list .li:not(:last-child) {
+        border-bottom: 2px solid #d9d9d9;
+    }
+
+    .cards-order .configurations .b-embossing .card-owner-type {
+        margin-top: 12px;
+    }
+
+    .cards-order .configurations .b-embossing .len-company-name {
+        position: relative;
+        float: right;
+        margin-top: -22px;
+        background: #fff;
+        line-height: 26px;
+        font-size: 13px;
+        line-height: normal;
+        color: #00000080;
+    }
+
+    .cards-order .configurations .b-embossing .m-buttons {
+        margin-top: 23px;
+    }
+
+
+    .cards-order .configurations .b-embossing .m-company-output .edit {
+        vertical-align: text-bottom;
+        padding-left: 7px;
+    }
+
+    .cards-order .configurations .b-embossing .block {
+        margin: 25px 3px 0px 2px;
+    }
+
+    .cards-order .configurations .card-item .b-block-header {
+        font-size: 15px;
+    }
+
+    .cards-list .card-item .delete {
+        cursor: pointer;
+        float: right;
+        display: inline-block;
+        margin: 14px 0px 9px 0px;
+    }
+
+    .cards-list .card-item .delete a {
+        height: 24px;
+    }
+
+    .cards-list .card-item .b-splitter {
+        margin: 12px 12px 0px;
+    }
+
+    .cards-order .configurations .card-item .edit {
+        margin: 20px 0 0 10px;
+    }
+
+    .cards-order .configurations .card-item .config-desc {
+        margin: 0 12px;
+    }
+
+    /* Special Offers */
+
+    .special-offers {
+        font-size: 10px;
+        line-height: normal;
+        color: #1a1a1a;
+    }
+
+    .special-offers .wrapper {
+        padding-bottom: 24px;
+    }
+
+    .special-offers .m-offer .b-col-header {
+        margin-bottom: 6px;
+    }
+
+    .special-offers .m-offer {
+        margin: 16px 12px 0px;
+    }
+
+    .special-offers .offer {
+        background-color: #fff;
+        margin: 0 0 0 12px;
+    }
+
+    .special-offers .price-right.inline-block {
+                           color: #000000;
+    }
+
+    .special-offers .offer .offer-label .price-right.selected .text-decor {
+        color: #fff !important;
+    }
+
+    .special-offers .price-right.inline-block .text-decor {
+        color: #777;
+    }
+
+    .special-offers .offer .collapse-block .detail-list {
+        margin: 0;
+    }
+
+    .special-offers .offer .offer-buttons {
+        margin: 0 0 24px;
+    }
+
+    .special-offers .offer .save-station-btn {
+        margin-bottom: 24px;
+    }
+
+    .special-offers .offer .fav-station {
+        margin-bottom: 24px;
+    }
+
+    .special-offers .offer .b-locator {
+        margin: 0 12px 24px;
+    }
+
+    .special-offers .offer .offer-label .arrow-right {
+        background-color: #E0E9ED;
+        width: 20px;
+        height: 0;
+        border-top: 25px solid transparent;
+        border-bottom: 25px solid transparent;
+        border-left: 15px solid #fff;
+        margin: 0 -5px 0 0;
+    }
+
+    .special-offers .offer .price-tag-text {
+        width: 52%;
+    }
+
+    .special-offers .offer .collapse-block .font-11 {
+        width: 100%;
+        line-height: 1.91;
+    }
+
+    .special-offers .offer .offer-label .price-right {
+        padding: 2px 9px 2px 20px;
+        height: 50px;
+        width: auto;
+    }
+
+    .special-offers .offer .offer-label {
+        margin: 5px 0 0 0;
+        width: auto;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .special-offers .offer .agree .form-check {
+        vertical-align: super;
+    }
+
+    .special-offers .b-splitter {
+        margin: 0px 12px 22px 0px;
+    }
+
+    .special-offers .fav-station .point {
+        display: inline-block;
+        margin-left: 0px;
+        vertical-align: middle;
+    }
+
+    .special-offers .button-info {
+        text-align: center;
+        width: auto;
+        margin: 0 auto 10px;
+    }
+
+    .special-offers .btn-red.continue {
+        float: none;
+    }
+
+    .special-offers .continue-btn {
+        margin: 10px 0 24px 0;
+    }
+
+    .special-offers .btn-red {
+        padding: 8px 8px;
+    }
+
+    #specialOffersContinueBlock.text-center .bottom-continue-btn {
+        margin-bottom: 0px;
+    }
+
+    .special-offers .bottom-continue-btn {
+        margin-bottom: 24px;
+    }
+
+    .special-offers .save-station-btn .btn-gray {
+        min-width: 100px;
+    }
+
+    .special-offers .edit-special-offer {
+        margin: 9px 9px 0 0;
+    }
+
+    .special-offers .offer .info {
+        margin: 0;
+        width: 85%;
+    }
+
+    .special-offers .top-gray-block {
+        background-color: #f8f8f8;
+        margin-top: 10px;
+    }
+
+    .special-offers .top-gray-block .b-shell-header {
+        margin: 11px 12px 9px 12px;
+    }
+
+    .special-offers .top-gray-block .b-shell-header .b-semibold-header {
+        margin-bottom: 6px;
+    }
+
+    .special-offers .offer .m-nature-block {
+        margin: 12px 0 8px;
+    }
+
+    .special-offers .offer .m-second-care-block {
+        margin: 16px 0 8px;
+    }
+
+    .special-offers .offer .text-under-picture {
+        margin: 6px 12px 0 0;
+    }
+
+    .special-offers .offer .text-under-picture .font-11 {
+        width: 99%;
+    }
+
+    .special-offers .offer .agree .checkbox input[type=checkbox] {
+        position: relative;
+        margin: 24px 0 0 -25px;
+    }
+
+    .special-offers .offer .text {
+        width: 82%;
+    }
+
+    .special-offers .offer .agree .font-11 {
+        width: 100%;
+    }
+
+    .special-offers .offer .b-locator .invalid-feedback {
+        margin: -10px 0 0px -30px;
+    }
+
+    .special-offers .offer .b-text-img {
+        width: 100%;
+    }
+
+    /* Payment step */
+
+    .payment-direct-debit {
+        color: #1a1a1a;
+        line-height: normal;
+    }
+
+    .m-term-condition {
+        width: 50%;
+    }
+
+    .payment-modal-body {
+        background-color: #ffffff;
+        height:500px;
+        padding:25px 7px 0px 18px ;
+        overflow-y: hidden;
+    }
+
+    .payment-deposit-footer {
+        margin: 0px 12px;
+        line-height: normal;
+    }
+
+    .payment-bank-transfer .payment-pay-deposit,
+    .payment-direct-debit-deposit .payment-pay-deposit{
+        margin:20px 12px 0px 12px;
+    }
+
+    .payment-direct-debit-deposit .payment-to-deposit {
+        padding: 11px 12px 11px 12px;
+        background-color: #f8f8f8;
+        margin:16px 0px 24px;
+    }
+
+    .sepa-accepted{
+        font-size: 12px;
+        font-weight: normal;
+        /*margin: 11px 0px 0px 0px;*/
+        color: #9299a2;
+        line-height: normal;
+    }
+
+    .payment-direct-debit .form-group .f-container .i-helper {
+        margin-left: 0;
+        margin-top: -25px;
+        float: right;
+        position: relative;
+    }
+
+    .payment-direct-debit .form-group .f-container .i-helper .f-container {
+        border-bottom: none;
+    }
+
+    .payment-direct-debit .form-check .form-check-label {
+        width: 85%;
+        font-size: 12px;
+        line-height: normal;
+        font-family: 'Montserrat';
+        font-weight: 400;
+    }
+    
+    .payment-direct-debit .checkbox.checkbox-red {
+        padding-top: 0px;
+    }
+
+    .payment-direct-debit .deposit-button {
+        margin-top: 9px;
+    }
+
+    .payment-direct-debit-deposit .payment-pay-deposit .b-splitter {
+        margin: 15px 0px 12px 0px;
+    }
+
+    .payment-direct-debit-deposit .payment-pay-deposit .b-splitter:last-of-type {
+        margin: 15px 0px 15px 0px;
+    }
+
+    .payment-direct-debit-deposit .checkbox.checkbox-red {
+        padding-top: 0px;
+    }
+
+    .payment-direct-debit-deposit .form-check .form-check-label {
+        width: 85%;
+        font-size: 12px;
+        line-height: normal;
+        font-family: 'Montserrat';
+        font-weight: 400;
+    }
+
+    .payment-direct-debit-deposit .payment-pay-deposit .pay-logo {
+        float: right;
+    }
+
+/*    .payment-direct-debit-deposit .payment-pay-deposit .pay-logo:nth-of-type(1) img {
+        height: 21px;
+        width: 130px;
+    }*/
+
+    .payment-direct-debit-deposit .ingenico {
+        margin: 6px 12px 10px 16px;
+    }
+
+    .payment-direct-debit-deposit .payment-pay-deposit .payment-desc-text {
+        margin-left: 27px;
+    }
+
+    .payment-bank-transfer .block {
+        margin-top: 0px;
+    }
+
+    .payment-bank-transfer .choose-pay-method {
+        margin: 20px 0px 16px 0px;
+    }
+
+    .payment-bank-transfer .payment-pay-deposit .b-splitter {
+        margin: 20px 0px 20px 0px;
+    }
+
+    .payment-bank-transfer .payment-pay-deposit .b-splitter:last-of-type {
+        margin: 20px 0px 16px 0px;
+    }
+
+    .payment-bank-transfer .checkbox.checkbox-red {
+        padding-top: 0px;
+    }
+
+    .payment-bank-transfer .form-check .form-check-label {
+        width: 85%;
+        font-size: 12px;
+        line-height: normal;
+        font-family: 'Montserrat';
+        font-weight: 400;
+    }
+
+    .payment-bank-transfer .form-check .terms-text {
+        padding-top: 4px;
+    }
+
+    .payment-bank-transfer .payment-pay-deposit .pay-logo {
+        float: right;
+    }
+
+/*    .payment-bank-transfer .payment-pay-deposit .pay-logo img {
+        height: 21px;
+        width: 130px;
+    }*/
+
+    .payment-bank-transfer .ingenico {
+        margin: 6px 12px 10px 16px;
+    }
+
+    .payment-bank-transfer .b-splitter {
+        margin: 16px 12px;
+    }
+
+    .payment-bank-transfer .pay-deposit {
+        margin: 0px 45px 0px 12px;
+    }
+
+    .payment-bank-transfer .payment-pay-deposit .payment-desc-text {
+        margin-left: 27px;
+    }
+
+    .payment-bank-transfer-no-deposit .form-check .terms-text {
+        padding-top: 4px;
+    }
+
+    .payment-bank-transfer-no-deposit .checkbox.checkbox-red {
+        padding-top: 0px;
+    }
+
+    .payment-bank-transfer-no-deposit .form-check .form-check-label {
+        width: 85%;
+        font-size: 12px;
+        line-height: normal;
+        font-family: 'Montserrat';
+        font-weight: 400;
+    }
+
+    .payment-bank-transfer-no-deposit .b-splitter {
+        margin: 16px 12px;
+    }
+
+    /* Congratulation */
+    .congratulations .wrapper {
+        width: 100%;
+        margin: 0 0 10px 0;
+        padding: 0 12px;
+    }
+
+    .congratulations .end-logo {
+        margin-top: 25px;
+    }
+
+    .congratulations .b-header {
+        text-align: center;
+        margin: 16px 4px;
+        letter-spacing: -0.5px;
+        font-stretch: normal;
+        line-height: normal;
+    }
+
+    .congratulations .text-muted {
+        color: #777;
+    }
+
+    .congratulations .middle-border {
+        margin: 8px 0 0;
+    }
+
+    .congratulations .bottom-border {
+        margin-bottom: 17px;
+        margin-top: 12px;
+    }
+
+    .m-grey-block {
+        border: 1px solid #F5F5F5;
+        background-color: #F5F5F5;
+    }
+
+    .congratulations .m-grey-block {
+        margin-top: 16px;
+        margin-bottom: 12px;
+    }
+
+    .congratulations .b-description-block {
+        margin: 12px;
+    }
+
+    .congratulations .b-description-block .btn-xs {
+        padding: 0;
+    }
+
+    .congratulations .b-description-block .download-img {
+        margin-right: 12px;
+        height: 17px;
+        width: 16px;
+    }
+
+    .congratulations .b-description-block .envelope-img {
+        height: 17px;
+        width: 24px;
+    }
+
+    .congratulations .b-description-block .collapse {
+        margin-left: 0px;
+    }
+
+    .congratulations .b-description-block .collapse-block .font-15 {
+        margin-top: 4px;
+    }
+
+    .congratulations .b-description-block .link {
+        margin-top: 8px;
+    }
+
+    .congratulations .smart-img img {
+        max-height: 140px;
+        max-width: 223px;
+        width: auto;
+        height: auto;
+    }
+
+    .congratulations .smart-img {
+        text-align: center;
+    }
+
+    .congratulations .m-inside-wrapper .point-list {
+        color: #fff;
+        cursor: default;
+        background-color: #1A1A1A;
+        width: 18px;
+        height: 18px;
+        margin-right: 11px;
+        display: inline-block;
+        border-radius: 100%;
+        font-weight: bold;
+        line-height: normal;
+        font-size: 12px;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 1px 1px;
+    }
+
+    .congratulations .m-inside-wrapper .need-list {
+        list-style-type: none;
+        padding: 0px 5px 0px 0px;
+    }
+
+    .congratulations .m-inside-wrapper .need-list .point {
+        display: inline-block;
+        word-break: break-word;
+        vertical-align: text-top;
+        width: 90%;
+    }
+
+    .congratulations .m-inside-wrapper {
+        margin-top: 12px;
+        margin-bottom: 27px;
+    }
+
+    .congratulations .m-inside-wrapper .need-list li {
+        margin-bottom: 12px;
+    }
+
+    .congratulations .m-inside-wrapper .need-list li:last-of-type {
+        margin-bottom: 0px;
+    }
+
+    .congratulations .m-header {
+        margin: 15px 8px 12px 0px;
+    }
+
+    .congratulations .m-header:first-of-type {
+        margin-bottom: 8px;
+    }
+
+    .congratulations .m-exclusive-block {
+        margin: 12px 8px 20px 0;
+    }
+
+    .congratulations .clubsmart-buttons {
+        margin-bottom: 16px;
+    }
+
+    .congratulations .clubsmart-buttons .btn-red {
+        min-width: 185px;
+    }
+
+    .congratulations .success-strip {
+        margin: 0 0 12px 0;
+        background-color: #BFDEDE;
+        padding: 8px 12px;
+    }
+
+    .congratulations .success-strip .success-img img{
+        width: 14px;
+        height: 11px;
+        margin-right: 12px;
+    }
+
+    .congratulations .success-strip .success-img {
+        display: inline-block;
+    }
+
+    .congratulations .success-strip .point {
+        display: inline-block;
+        word-break: break-word;
+        vertical-align: text-top;
+        width: 90%;
+    }
+
+    .congratulations-info .info-block {
+        margin-left: 12px;
+        margin-right: 20px;
+    }
+
+    .congratulations-info .info-block .font-15 {
+        font-family: 'Montserrat';
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .congratulations-info .info-block .font-13 {
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        margin-bottom: 16px;
+    }
+
+    .congratulations-info .info-block .b-col-header {
+        margin: 16px 0;
+    }
+
+    .congratulations-info .buttons-block .buttons .btn-gray {
+        min-width: 185px;
+        min-height: 32px;
+        line-height: 0px;
+    }
+
+    .congratulations-info .info-block .customer-care {
+        line-height: 1.85;
+        margin-bottom: 24px;
+    }
+
+    .congratulations-info .info-block .assistance-info {
+        color: #0093ee;
+    }
+
+    .congratulations-info .info-block .customer-care img {
+        margin-left: 10px;
+        padding-bottom: 3px;
+    }
+
+
+    /* ADDITION BLOCK */
+
+    .addition-info .cards-types {
+        margin-left: -15px;
+    }
+
+    .addition-info .cards-types .table {
+        margin-bottom: 0;
+    }
+
+    .addition-info .cards-types .table > thead > tr > th:first-child {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    .addition-info .cards-types .table > thead > tr > th {
+        -webkit-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        vertical-align: middle;
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 11px;
+        line-height: normal;
+        letter-spacing: normal;
+        /*padding: 0 0 0 20px;*/
+    }
+
+    .addition-info .cards-types .table > thead > tr {
+        height: 90px;
+    }
+
+    .addition-info .cards-types .table > thead > tr > th div {
+        /*width: 85px;*/
+        text-align: left;
+        display: inline-block;
+    }
+
+    .addition-info .cards-types tbody > tr > td:first-child div {
+        width: 121px;
+    }
+
+    /*.cards-types tbody > tr > td {
+        width: 0;
+    }*/
+
+    .addition-info .table-striped > tbody > tr {
+        background-color: unset;
+        border-bottom: 2px solid #e1e1e1;
+    }
+
+    .addition-info .cards-types thead > tr > th {
+        width: 0;
+    }
+
+    .addition-info .cards-types tbody > tr > td:first-child {
+        text-align: unset;
+        width: 0px;
+    }
+
+    /* MODAL DIALOG WINDOW */
+
+    .modal-dialog .m-block-header {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 15px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #1a1a1a;
+    }
+
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+
+    .modal-dialog {
+        display: inline-block;
+        margin: 0;
+        padding: 0 12px;
+        vertical-align: middle;
+    }
+
+    .modal-body {
+        position: relative;
+        overflow-y: hidden;
+        max-height: 390px;
+        padding: 0 0 0 15px;
+    }
+
+    .modal-body .font-13 {
+        font-size: 13px;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+    }
+
+    .modal-body .modal-text {
+        margin: 10px 10px 10px 17px;
+    }
+
+    .modal-body .modal-header-text {
+        margin: 0 10px 0 17px;
+    }
+
+    .modal-body .more-info .link {
+        margin-left: 5px;
+    }
+
+    .modal-body .details-list {
+        font-style: normal;
+        font-weight: normal;
+        line-height: 18px;
+        font-size: 15px;
+        margin-bottom: 0px;
+    }
+
+    .modal-body .details-list .program-details {
+        list-style-type: none;
+        padding: 0px 0px 0px 32px;
+    }
+
+    .modal-body .details-list .program-details li {
+        margin: 0px 20px 15px -15px;
+    }
+
+    .modal-body .details-list .program-details li span {
+        margin-left: 10px;
+    }
+
+    .modal-body .details-list .program-details li img {
+        vertical-align: top;
+    }
+
+    .modal-body .details-list .program-details .point {
+        width: 90%;
+        margin-left: 5px;
+    }
+
+    .modal-content {
+        border-radius: unset;
+    }
+
+    .modal-title {
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        font-size: 17px;
+        letter-spacing: -0.2px;
+        text-align: left;
+        margin: 0px 0px 0px 0px;
+    }
+
+    .modal-header {
+        padding: 15px 15px 5px 17px;
+        border-bottom: 0;
+    }
+
+    .modal-footer .modal-buttons {
+        text-align: center;
+        margin: 20px 0 20px 15px;
+    }
+
+    .modal-footer {
+        padding: 0;
+        border-top: 0;
+    }
+
+    .modal-body .more-info {
+        line-height: normal;
+        font-size: 13px;
+    }
+
+    /* SLIDER */
+
+    #slider {
+        vertical-align: middle;
+    }
+
+    .ui-widget.ui-widget-content {
+        border: 1px solid #DEDEDE;
+        border-top-width: 0px;
+    }
+
+    .ui-slider-horizontal {
+        height: 0;
+    }
+
+    .ui-state-default {
+        font-weight: normal;
+        border: 2px solid #EE3A43;
+        border-radius: 100%;
+        font-size: 23px;
+    }
+
+    .ui-slider .slider-active-line {
+        border: 1px solid #EE3A43;
+    }
+
+    .ui-slider .ui-slider-handle {
+        width: 0.65em;
+        height: 0.65em;
+    }
+
+    .ui-widget-content .ui-state-default{
+        background: #EE3A43;
+        border: 2px solid #EE3A43;
+    }
+
+    .ui-widget-content .ui-state-default:focus {
+        outline: 0;
+    }
+
+    .ui-widget-content .ui-state-default:hover,
+    .ui-widget-content .ui-state-default:active {
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #EE3A43;
+        border: 2px solid #EE3A43;
+    }
+
+    .ui-widget-content .ui-state-default {
+        margin-left: 0px;
+    }
+
+    .credit-line #slider {
+        min-width: 280px;
+        width: 95%;
+    }
+
+    .ui-slider-horizontal {
+        min-width: 290px;
+    }
+
+    /* MOBILE ERROR PAGE */
+
+    .mobile-error-page {
+        color: #1a1a1a;
+    }
+
+    .mobile-error-page .b-error-text {
+        margin: 6px 20px 24px 12px;
+    }
+
+    .mobile-error-page .btn-gray {
+        min-width: 185px;
+    }
+
+    .mobile-error-info .customer-care {
+        margin: 12px 20px 0px 12px;
+    }
+
+    .mobile-error-info .b-block-header {
+        margin-top: 24px;
+    }
+
+    .mobile-error-info .customer-care {
+        line-height: 1.85;
+    }
+
+    .mobile-error-info .assistance-info {
+        color: #0093ee;
+    }
+
+    .mobile-error-info .customer-care img {
+        margin-left: 10px;
+        padding-bottom: 3px;
+    }
+
+}
+
+/* SM - TABLET more then 768px and less then 1367px */
+@media screen and (min-width: 768px) and (max-width: 1367px){
+    .nav-gray .navbar-nav .expanded {
+        padding-right: 10px;
+        width: 25%;
+        height: 135px;
+    }
+
+    .nav-gray .navbar-collapse.in {
+        display: block!important;
+        right: 0;
+        left: auto;
+    }
+}
+
+/* MD - LAPTOP more then 992px and less then 1367px */
+@media screen and (min-width: 992px) and (max-width: 1367px){
+
+}
+
+/* LG - DESKTOP more then 1200px */
+@media screen and (min-width: 1200px){
+
+}
+
+@media screen and (max-height: 320px){
+    .b-locator .frame{
+        height: 160px;
+    }
+}
+
+@media screen and (max-height: 500px){
+    .b-locator .frame{
+        height: 200px;
+    }
+}

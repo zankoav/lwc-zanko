@@ -1,0 +1,38 @@
+.fc-flag {
+    display: flex;
+    align-items: center;
+}
+
+.fc-flag__block {
+    background-color: #E0E9ED;
+    width: 170px;
+    height: 56px;
+    margin-left: -20px;
+    color: #333333;
+    text-align: right;
+    vertical-align: middle;
+    padding-right: .5rem;
+}
+
+.fc-flag__red {
+    background-color: #EE3943;
+    color: #FFFFFF;
+}
+
+.fc-flag__block-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: .5rem;
+}
+
+.fc-flag__block-text {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.fc-flag__arrow {
+    width: 40px;
+    height: 40px;
+    background-color: #F6F6F6;
+    transform: rotate(45deg);
+}

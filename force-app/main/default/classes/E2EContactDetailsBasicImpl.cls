@@ -1,70 +1,54 @@
 public class E2EContactDetailsBasicImpl implements E2EContactDetails {    
-    public E2EContactDetailsDAO dao;
     private Map<String, Object> content;
 
-    public void setContent(String jsonSettings, String source) {
-        StaticResource resource = [SELECT Body FROM StaticResource WHERE Name = :jsonSettings LIMIT 1];
-        this.content = (Map<String, Object>)JSON.deserializeUntyped(resource.Body.toString());
+    public void selectContent(String jsonSettings, String source) {
+        E2EContactDetailsDAO dao = new E2EContactDetailsDAOImpl();
+        dao.selectSettings(jsonSettings);        
+        StaticResource settings = (StaticResource)dao.getSettings();
+        this.content = (Map<String, Object>)JSON.deserializeUntyped(settings.Body.toString());
+        this.content.put('first_name', addParamToField(this.content.get('first_name'), 'validationRegex', String.valueOf(E2E_Regex__c.getInstance('de_first_name').Regex__c)));
+        this.content.put('last_name', addParamToField(this.content.get('last_name'), 'validationRegex', String.valueOf(E2E_Regex__c.getInstance('de_last_name').Regex__c)));
+        this.content.put('phone', addParamToField(this.content.get('phone'), 'validationRegex', String.valueOf(E2E_Regex__c.getInstance('de_phone').Regex__c)));
+        this.content.put('email', addParamToField(this.content.get('email'), 'validationRegex', String.valueOf(E2E_Regex__c.getInstance('de_email').Regex__c)));
 
         if (source != null) {
-            String opportunityId = E2ENewUtils.decryptOpportunityId(source);
-            this.dao = new E2EContactDetailsDAOImpl();
-            this.dao.selectRecord(opportunityId);
-            List<OpportunityContactRole> oppContactRoles = (List<OpportunityContactRole>)this.dao.getRecord('Opportunity').getSObjects('OpportunityContactRoles');
-            String contactId = oppContactRoles.get(0).ContactId;
-            this.dao.selectRecord(contactId);
-
-            content.put(
-                'salutation', 
-                addParamToField(content.get('salutation'), 'value',(String)this.dao.getRecord('Contact').get('Salutation')));
-            content.put(
-                'first_name', 
-                addParamToField(content.get('first_name'), 'value',(String)this.dao.getRecord('Contact').get('FirstName')));            
-            content.put(
-                'last_name', 
-                addParamToField(content.get('last_name'), 'value',(String)this.dao.getRecord('Contact').get('LastName')));
-            content.put(
-                'phone', 
-                addParamToField(content.get('phone'), 'value',(String)this.dao.getRecord('Contact').get('Phone')));
-            content.put(
-                'email', 
-                addParamToField(content.get('email'), 'value',(String)this.dao.getRecord('Contact').get('Email')));
-            content.put(
-                'business_type', 
-                addParamToField(content.get('business_type'), 'value',(String)this.dao.getRecord('Opportunity').get('E2E_Form_of_Business__c')));
-            content.put(
-                'number_of_cards', 
-                addParamToField(content.get('number_of_cards'), 'value',(String)this.dao.getRecord('Opportunity').get('Anzahl_der_Karten__c')));
-            content.put(
-                'news_agreement', 
-                addParamToField(content.get('news_agreement'), 'value',(String)this.dao.getRecord('Opportunity').get('Agree_to_Privacy_Policy__c')));
+            this.content = dao.addDataFromDatabase(content, source);
         }
     }
-
 
     public Map<String, Object> getContent() {
         return this.content;
     }
 
-    public void save(Map<String, Object> data) {
-        data.put('phone',returnPhone((String)data.get('phone'),'Germany'));
-        if (this.dao != null) {
-            // update
-            this.dao.updateRecords(data);
-        } else {
-            this.dao = new E2EContactDetailsDAOImpl();
-            this.dao.insertRecords(data);
-        }
-        Cookie sourceCookie = new Cookie('source', (String)this.dao.getRecord('Opportunity').get('E2E_Encoded_URL__c'), null, 315569260, false);
-        ApexPages.currentPage().setCookies(new Cookie[]{sourceCookie});
+    public void setContent(Map<String, Object> data) {
+        this.content = data;
     }
 
-    public void validate(Map<String, Object> data) {
-        validateField((String)data.get('first_name'), returnFieldValue(content.get('first_name'),'validationRegex'));
-        validateField((String)data.get('last_name'), returnFieldValue(content.get('last_name'),'validationRegex'));
-        validateField((String)data.get('email'), returnFieldValue(content.get('email'),'validationRegex'));
-        validateField((String)data.get('phone'), returnFieldValue(content.get('phone'),'validationRegex'));
-        validateField((String)data.get('business_type'), returnFieldValue(content.get('business_type'),'validationRegex'));
+    public String save() {
+        Integer startCPU = Limits.getCpuTime();
+        System.debug('DEBUG: startCPU === ' + startCPU);
+        this.content.put('phone',returnPhone((String)content.get('phone'),'Germany'));
+        E2EContactDetailsDAO dao = new E2EContactDetailsDAOImpl();
+        String source;
+        if (this.content.containsKey('opportunity_id') && this.content.get('opportunity_id') != null) {
+            // update            
+            source = dao.updateRecords(this.content);
+        } else {
+            // insert
+            source = dao.insertRecords(this.content);
+        }
+        Integer endCPU = Limits.getCpuTime();
+        System.debug('DEBUG: endCPU === ' + endCPU);
+        System.debug('DEBUG: Processing time === ' + (endCPU - startCPU));
+
+        return source;
+    }
+
+    public void validate() {
+        validateField((String)this.content.get('first_name'), String.valueOf(E2E_Regex__c.getInstance('de_first_name').Regex__c));
+        validateField((String)this.content.get('last_name'), String.valueOf(E2E_Regex__c.getInstance('de_last_name').Regex__c));
+        validateField((String)this.content.get('email'), String.valueOf(E2E_Regex__c.getInstance('de_email').Regex__c));
+        validateField((String)this.content.get('phone'), String.valueOf(E2E_Regex__c.getInstance('de_phone').Regex__c));
     }
 
     private void validateField(String fieldValue, String regex) {

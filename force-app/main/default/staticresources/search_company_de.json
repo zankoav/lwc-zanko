@@ -1,0 +1,44 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",	
+	"fields_header": "Alle unsere Karten haben einen Kreditrahmen",
+	"fields_subheader": "Um Ihnen den passenden Kreditrahmen anbieten zu können, müssen wir Ihr Unternehmen identifizieren",
+	"selected_company_id": "",
+	"сountry_of_entry": {
+		"label": "Land der Eintragung",
+		"value": "Deutschland",
+		"type": "text",
+		"required": "",
+		"remark": "Dieser Service ist nur für Unternehmen verfügbar, die in Deutschland eingetragen sind."
+	},
+	"company_name": {
+		"label": "Firmenname",
+		"value": "",
+		"required": "required",
+		"maxLength": 120,
+		"errorMessage": "Bitte geben Sie den Firmennamen in einem gültigen Format ein Sonderzeichen sind nicht zulässig."
+	},
+	"city": {
+		"label": "Stadt",
+		"value": "",
+		"required": "required",
+		"maxLength": 50,
+		"errorMessage": "Bitte geben Sie Ihre Handynummer im korrekten Format ein."
+	},
+	"companies_found_heading": "Wählen Sie Ihr Unternehmen",
+	"companies_found_subheading": "Die Karten werden an diese Adresse geliefert",
+
+	"search_button": {
+		"label": "suchen",
+		"disabled": "disabled"
+	},
+	"back_button": {
+		"label": "zurück",
+		"disabled": ""
+	},
+	"continue_button": {
+		"label": "weiter",
+		"disabled": "disabled"
+	}
+}

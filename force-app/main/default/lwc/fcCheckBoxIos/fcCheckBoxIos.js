@@ -2,7 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 
 const CLASS_NAME = 'fc-checkbox-ios__action-view-port';
 const CLASS_NAME_ACTIVE = 'fc-checkbox-ios__action-view-port_active';
-const ACTIVE = 'active';
+const ACTIVE = 'true';
 
 export default class FcCheckBoxIos extends LightningElement {
     @api title;

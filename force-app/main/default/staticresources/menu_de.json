@@ -1,0 +1,28 @@
+{
+	"menu": [
+		{
+			"name": "1. Kreditprüfung",
+			"step_status": "step",
+			"steps": "1,2,3,4",
+			"width": "15.1%"
+		},
+		{
+			"name": "2. Kartenkonfiguration",
+			"step_status": "step",
+			"steps": "5,6,7",
+			"width": "20.6%"
+		},
+		{
+			"name": "3. Zusätzlicher Service",
+			"step_status": "step",
+			"steps": "8",
+			"width": "18.4%"
+		},
+		{
+			"name": "4. Zahlungsdaten",
+			"step_status": "step",
+			"steps": "9,10",
+			"width": "20%"
+		}
+	]
+}

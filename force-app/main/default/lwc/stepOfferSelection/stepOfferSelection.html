@@ -1,49 +1,39 @@
 <template>
     <c-fc-cart>
         <template if:false={loading}>
-            <p class="offer-section__title">Sparen Sie mit FLEETCOR und unserem exklusiven Angebot für Sie</p>
-            <p class="offer-section__subtitle">Entscheiden Sie sich für das passende Angebot</p>
-
-
-
-            <div class="offer-block">
-                <p class="offer-block__info-title">Rabatt an allen Shell-Stationen bundesweit</p>
-                <div class="offer-block__info">
-                    <div class="offer-block__info-text">Mit diesem Angebot tanken Sie deutschlandweit flexibel.</div>
-                    <div class="offer-block__info-text"><span class="offer-block__info-text-bold">2 Cent Rabatt</span> pro Liter auf alle Shell-Stationen</div>
-                </div>
-                <div class="flag-wrapper">
-                    <div class="arrow"></div>
-                    <div class="flag">
-                        <p class="flag-title">2 Cent Rabatt</p>
-                        <p class="flag-text">pro Liter</p>
+            <p class="offer-section__title">{staticData.block_header}</p>
+            <p class="offer-section__subtitle">{staticData.block_subheader}</p>
+            <template for:each={staticData.non_home_offers} for:item="offer">
+                <div key={offer.product_name} class="offer-block">
+                    <p class="offer-block__title">{offer.name}</p>
+                    <div class="offer-block__wrapper">
+                        <div class="offer-block__wrapper-info">
+                            <div class="offer-block__wrapper-text">{offer.description}</div>
+                            <div class="offer-block__wrapper-text">
+                                <span class="offer-block__wrapper-text-bold">{offer.discount}</span> {offer.discount_unit} {offer.discount_location}
+                            </div>
+                        </div>
+                        <c-fc-flag active={offer1FlagActive} title={offer.discount} description={offer.discount_unit} data-offer="1"></c-fc-flag>
+                    </div>
+                    <c-fc-accordion-item title={offer.label_of_details}>
+                        <template for:each={offer.details} for:item="detail">
+                            <div key={detail.label} class="detail-line">
+                                <span class="detail-line-label">{detail.label}</span>
+                                <span class="detail-line-value">{detail.value}</span>
+                            </div>
+                        </template>
+                    </c-fc-accordion-item>
+                    <div class="offer-block__button">
+                        <c-fc-button variant={buttonVariant} onclick={offer1Handler} title={offer.remove_offer_button.label}>
+                        </c-fc-button>
                     </div>
                 </div>
-                
-
-                <c-fc-accordion-item>
-                    <div class="detail-line">
-                        <span class="detail-line-label">Rabatt:</span>
-                        <span>2 Cent Rabatt pro Liter</span>
-                    </div>
-                    <div class="detail-line">
-                        <span class="detail-line-label">Zeitraum:</span>
-                        <span>Unbegrenzt</span>
-                    </div>
-                    <div class="detail-line">
-                        <span class="detail-line-label">Kraftstoffart:</span>
-                        <span>Diesel (alle Arten), Benzin (alle Arten), außer V-Power</span>
-                    </div>
-                </c-fc-accordion-item>
-            </div>  
-
-
-
-
+            </template>
             <div class="offer-section__line"></div>
             <div class="offer-section__actions">
-                <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
-                <c-fc-button onclick={stepSubmit} title="Weiter" disabled="disabled">
+                <c-fc-button variant="gray" onclick={backStep} disabled={staticData.back_button.disabled}
+                    title={staticData.back_button.label}></c-fc-button>
+                <c-fc-button class="submit" onclick={stepSubmit} title={staticData.continue_button.label}>
                 </c-fc-button>
             </div>
         </template>

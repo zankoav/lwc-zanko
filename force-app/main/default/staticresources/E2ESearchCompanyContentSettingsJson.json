@@ -1,0 +1,86 @@
+{
+	"component": {
+		"contentElements": [
+			{
+				"name": "HEADER",
+				"value": "Kunde werden und Tankkarten beantragen"
+			},
+			{
+				"name": "MENU ITEM 1",
+				"value": "1. Kreditprüfung",
+				"type": "text"
+			},
+			{
+				"name": "MENU ITEM 2",
+				"value": "2. Kartenkonfiguration",
+				"type": "text"
+			},
+			{
+				"name": "MENU ITEM 3",
+				"value": "3. Zusätzlicher Service",
+				"type": "text"
+			},
+			{
+				"name": "MENU ITEM 4",
+				"value": "4. Zahlungsdaten",
+				"type": "text"
+			},			
+			{
+				"name": "FIELDS HEADER",
+				"value": "Alle unsere Karten haben einen Kreditrahmen"
+			},
+			{
+				"name": "FIELDS SUBHEADER",
+				"value": "Um Ihnen den passenden Kreditrahmen anbieten zu können, müssen wir Ihr Unternehmen identifizieren"
+			},
+			{
+				"name": "COMPANIES HEADING",
+				"value": "Wählen Sie Ihr Unternehmen"
+			},
+			{
+				"name": "COMPANIES SUBHEADING",
+				"value": "Die Karten werden an diese Adresse geliefert"
+			},
+			{
+				"name": "COUNTRY",
+				"label": "Land der Eintragung",
+				"apiName": "",
+				"value": "Deutschland",
+				"helpText": "Dieser Service ist nur für Unternehmen verfügbar, die in Deutschland eingetragen sind.",
+				"type": "field",
+				"errorMessage": "Bitte geben Sie Ihren Vornamen ein."
+			},
+			{
+				"name": "COMPANY NAME",
+				"label": "Firmenname",
+				"apiName": "",
+				"value": "",
+				"type": "field",
+				"errorMessage": "Bitte geben Sie den Firmennamen in einem gültigen Format ein Sonderzeichen sind nicht zulässig."
+			},
+			{
+				"name": "CITY",
+				"label": "Stadt",
+				"apiName": "",
+				"value": "",
+				"type": "field",
+				"errorMessage": "Bitte tragen Sie die Stadt des Firmensitzes ein."
+			},
+			{
+				"name": "SEARCH BUTTON",
+				"value": "SUCHEN",
+				"type": "button"
+			},
+			{
+				"name": "CONTINUE BUTTON",
+				"value": "Weiter",
+				"type": "button"
+			},
+			{
+				"name": "BACK BUTTON",
+				"value": "Zurück",
+				"type": "button"
+			}			
+		]
+	}
+}

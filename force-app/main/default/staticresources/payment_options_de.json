@@ -1,0 +1,84 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",
+	"fields_header": "Zahlungsdaten für das Lastschriftverfahren",
+	"billing_period": {
+		"label": "Zahlungsziel",
+		"value": "Monatlich"
+	},
+	"account_holder": {
+		"label": "Kontoinhaber",
+		"value": "",
+		"type": "text",
+		"required": "required",
+		"maxLength": 40,
+		"minLength": 1,
+		"errorMessage": "Bitte geben Sie Ihren Kontoinhaber"
+	},
+	"iban": {
+		"label": "IBAN",
+		"value": "",
+		"type": "text",
+		"required": "required",
+		"maxLength": 26,
+		"minLength": 1,
+		"errorMessage": "Bitte geben Sie die IBAN in einem gültigen Format ein."
+	},
+	"swift": {
+		"label": "SWIFT \\ BIC",
+		"value": "",
+		"show_field": "true",
+		"type": "text",
+		"required": "required",
+		"maxLength": 11,
+		"minLength": 1,
+		"errorMessage": "Bitte geben Sie die BIC in einem gültigen Format ein."
+	},
+	"paper_invoice": {
+		"info_message": "Alle Rechnungen werden in elektronischer Form ausgestellt",
+		"label": "Papierrechnung",
+		"description": "Alle Rechnungen werden kostenlos in elektronischer Form ausgestellt, falls Sie einen Ausdruck wünschen, werden wir Ihnen diesen zusenden.",
+		"price_info": "7.50 € pro 1 Papierrechnung",
+		"value": "false",
+		"true_value": "EIN",
+		"false_value": "AUS",
+		"type": "radio-button"
+	},
+	"sepa_block": {
+		"dd_manadate_type": "Core",
+		"accept_value": "false",
+		"iframe_url": "/apex/E2EAdditionalDocuments?hash=",
+		"core": {
+			"header": "SEPA-Lastschriftmandat",
+			"accept_label": "Ich erteile FLEETCOR ein SEPA-Lastschriftmandat und autorisiere A) FLEETCOR Zahlungen von meinem Bankkonto mittels Lastschrift einzuziehen und weise B) mein Kreditinstitut an, die von FLEETCOR gezogenen Lastschriften einzulösen. Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrags verlangen. Es gelten dabei die mit meiner Bank vereinbarten Bedingungen."
+		},
+		"b2b": {
+			"header": "SEPA-Firmenlastschrift-Mandat",
+			"description": "Informieren Sie Ihre Bank über das neue, bestätigte SEPA-Firmenlastschrift-Mandat.",
+			"accept_label": "Ich erteile FLEETCOR ein SEPA-Firmenlastschriftmandat und autorisiere A) FLEETCOR Zahlungen von meinem Bankkonto mittels Lastschrift einzuziehen und weise B) mein Kreditinstitut an, die von FLEETCOR gezogenen Lastschriften einzulösen. Dieses Lastschriftmandat dient nur dem Einzug von Lastschriften, die auf Konten von Unternehmern gezogen sind. Ich bin nicht berechtigt, nach der erfolgten Einlösung eine Erstattung des belasteten Betrages zu verlangen. Ich bin berechtigt, mein Kreditinstitut bis zum Fälligkeitstag anzuweisen, Lastschriften nicht einzulösen."
+		}
+	},
+	"decision_agreement": {
+		"label1": "Ich versichere, dass ich berechtigt bin, diese Handlungen für die",
+		"label2": "vorzunehmen.",
+		"value": false
+	},
+	"terms_and_cond_agreement": {
+		"label1": "Ich erkläre mich mit den",
+		"label2": {
+			"value": "Allgemeinen Geschäftsbedingungen",
+			"iframe_url": "/apex/E2EAdditionalDocuments?hash="
+		},
+		"label3": "einverstanden.",
+		"value": false
+	},
+	"back_button": {
+		"label": "zurück",
+		"disabled": ""
+	},
+	"continue_button": {
+		"label": "Weiter",
+		"disabled": "disabled"
+	}
+}

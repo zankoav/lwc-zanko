@@ -1,0 +1,129 @@
+<apex:page controller="InvalidLeadsCounterReport" action="{!init}" id="thepage" standardStylesheets="false">
+    <apex:includeScript value="{! $Resource.jQuery }"/>
+    <apex:includeScript value="{! URLFOR($Resource.jQueryUI,'jquery-ui.min.js') }"/>
+    <apex:includeScript value="{! URLFOR($Resource.Tablesorter,'jquery.tablesorter.min.js') }"/>
+
+    <style>
+		body .pbBody table.list tr.headerRow th {
+			background-image: url({! URLFOR($Resource.Tablesorter,'blue/bg.gif') });
+			background-repeat: no-repeat;
+			background-position: center right;
+			cursor: pointer;
+			padding-right: 20px;
+		}
+
+		body .pbBody table.list tr.headerRow th.headerSortUp {
+			background: url({! URLFOR($Resource.Tablesorter,'blue/asc.gif') }) grey no-repeat center right;
+			color: white;
+			font-weight: bold;
+		}
+
+		body .pbBody table.list tr.headerRow th.headerSortDown {
+			background: url({! URLFOR($Resource.Tablesorter,'blue/desc.gif') }) grey no-repeat center right;
+			color: white;
+			font-weight: bold;
+		}
+    </style>
+
+    <script type="text/javascript">
+        $j = jQuery.noConflict();    
+        $j(document).ready(function () {
+        $j("[id$=blockTable]").tablesorter();
+        });    
+    </script>
+    
+	<apex:form >
+	    <apex:pageMessages />
+	    <apex:pageBlock title="Unallocated Leads ({! realNumberOfInvalidLead })" id="theblock">
+	        <apex:pageBlockTable value="{! finalInvalidLeadList }" var="listInvalidLead" id="blockTable" styleClass="tablesorter" headerClass="header">
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Name"/>
+	                </apex:facet>
+	            	<apex:outputLink value="/{! listInvalidLead.id }" target="_blank">{! listInvalidLead.FirstName } {! listInvalidLead.LastName }</apex:outputLink>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Last Transfer Date"/>
+	                </apex:facet>
+	            	<apex:outputText styleClass="header" value="{0,date,MM'/'dd'/'yyyy}">
+	            		<apex:param value="{! listInvalidLead.LastTransferDate }" />
+            		</apex:outputText>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Converted"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.isConverted }"/>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Sec. Channel"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.Sec_Channel__c }"/>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Channel"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.Channel__c }"/>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Lead Source"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.LeadSource }"/>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Lead Status"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.Status }"/>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Lead Owner"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.OwnerId }"/>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Lead #"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.Lead_Nr__c }"/>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Lead ID"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.id }"/>
+	            </apex:column>
+
+	            <apex:column >
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Country"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.Country }"/>
+	            </apex:column>
+
+	            <apex:column style="text-align: center;">
+	                <apex:facet name="header">
+	                    <apex:outputText styleClass="header" value="Number of days from Lead creation"/>
+	                </apex:facet>
+	            	<apex:outputField value="{! listInvalidLead.Number_of_days__c }"/>
+	            </apex:column>
+
+            </apex:pageBlockTable>
+	    </apex:pageBlock>
+	</apex:form>
+</apex:page>

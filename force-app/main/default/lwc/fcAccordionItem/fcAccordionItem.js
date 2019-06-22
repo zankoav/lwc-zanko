@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { LightningElement, api, track } from 'lwc';
 
 const CLASS_NAME_CONTENT = 'accordion-item';
@@ -7,6 +8,7 @@ const ACTIVE = 'active';
 export default class FcAccordionItem extends LightningElement {
 
     @api active;
+    @api title = 'Weitere mögliche Gebühren';
     @track className;
 
     contentView;

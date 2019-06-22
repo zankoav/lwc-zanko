@@ -1,0 +1,127 @@
+{
+	"component": {
+		"contentElements": [
+			{
+				"name": "HEADER",
+				"value": "Kunde werden und Tankkarten beantragen"
+			},
+			{
+				"name": "MENU ITEM 1",
+				"value": "1. Kreditprüfung",
+				"type": "text"
+			},
+			{
+				"name": "MENU ITEM 2",
+				"value": "2. Kartenkonfiguration",
+				"type": "text"
+			},
+			{
+				"name": "MENU ITEM 3",
+				"value": "3. Zusätzlicher Service",
+				"type": "text"
+			},
+			{
+				"name": "MENU ITEM 4",
+				"value": "4. Zahlungsdaten",
+				"type": "text"
+			},			
+			{
+				"name": "FIELDS HEADER",
+				"value": "Folgender Kreditrahmen steht Ihnen zur Verfügung"
+			},
+			{
+				"name": "PAYMENT METHOD",
+				"label": "Welche Zahlungsmethode bevorzugen Sie?",
+				"apiName": "",
+				"value": "Lastschrift",
+				"type": "field",
+				"errorMessage": "",
+				"helpText": "",
+				"options": [
+					{
+						"label": "Lastschrift",
+						"value": "Lastschrift",
+						"helpText": "Eine Lastschrift ist der direkte Einzug des geforderten Rechnungsbetrags von Ihrem Bankkonto, der nach Ihrer Einzugsermächtigung erfolgt. Sie sparen Zeit und vermeiden das Risiko, dass Karten nicht genutzt werden können."
+					},
+					{
+						"label": "Überweisung",
+						"value": "Banküberweisung",
+						"helpText": "Überweisungen führen Sie auf der Basis der Rechnungen und des bevorzugten Abrechnungszeitraums selbst durch. Die Rechnungen müssen rechtzeitig bezahlt werden, ansonsten besteht die Gefahr, dass Karten nicht genutzt werden können, bis die Rechnung beglichen ist."
+					}
+				]
+			},
+			{
+				"name": "BILLING PERIOD",
+				"label": "Wie oft möchten Sie Rechnungen zahlen?",
+				"apiName": "",
+				"value": "7",
+				"type": "field",
+				"errorMessage": "",
+				"helpText": "",
+				"options": [
+					{
+						"label": "Wöchentlich",
+						"value": "7",
+						"helpText": "Die Rechnung ist 7 Tage nach dem Ausstellungsdatum der Rechnung fällig."
+					},
+					{
+						"label": "Vierzehntägig",
+						"value": "15",
+						"helpText": "Die Rechnung ist 7 Tage nach dem Ausstellungsdatum der Rechnung fällig."
+					},
+					{
+						"label": "Monatlich",
+						"value": "30",
+						"helpText": "Die Rechnung ist 7 Tage nach dem Ausstellungsdatum der Rechnung fällig."
+					}
+				]
+			},
+			{
+				"name": "CHOOSE CREDIT LIMIT HEADER",
+				"value": "Wählen Sie Ihr Kreditlimit"
+			},
+			{
+				"name": "CHOOSE CREDIT LIMIT SUBHEADER",
+				"value": "Dieses Kreditlimit deckt alle Karten ab, die Sie bestellen möchten"
+			},
+			{
+				"name": "CREDIT LIMIT",
+				"label": "Kreditlimit",
+				"apiName": "",
+				"value": "",
+				"helpText": "",
+				"type": "field",
+				"errorMessage": ""
+			},
+			{
+				"name": "TOTAL CONSUMPTION",
+				"label": "Kraftstoffverbrauch <br/>aller Fahrzeuge",
+				"label2": "Liter Monat",
+				"apiName": "",
+				"value": "",
+				"helpText": "Für Ihren Komfort haben wir den durchschnittlichen Kraftstoffverbrauch, basierend auf der von Ihnen angegebenen Kartenanzahl, ermittelt.",
+				"type": "field",
+				"errorMessage": "Bitte geben Sie Ihren monatlichen Kraftstoffverbrauch in Litern an (mindestens 75 Liter)."
+			},
+			{
+				"name": "DEPOSIT",
+				"label": "Kaution",
+				"label2": "€",
+				"apiName": "",
+				"value": "",
+				"helpText": "Muss nur einmalig gezahlt werden",
+				"type": "field"
+			},			
+			{
+				"name": "CONTINUE BUTTON",
+				"value": "Weiter",
+				"type": "button"
+			},
+			{
+				"name": "BACK BUTTON",
+				"value": "Zurück",
+				"type": "button"
+			}			
+		]
+	}
+}

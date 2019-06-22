@@ -1,0 +1,182 @@
+<apex:page controller="SalesDashboardKamPlanCtrl" action="{! init }" sidebar="false" showHeader="false">
+    <apex:includeScript value="{!$Resource.jQuery}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Highcharts,'js/highcharts.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Highcharts,'js/modules/exporting.js')}"/>
+    <apex:form >
+        <apex:pageBlock >
+            <h1 style="margin-bottom: 10px; font-size: 15px; display: block;">KAM plan for <apex:selectList value="{! selectedMonth }" size="1" multiselect="false" style="margin-left: 5px;">
+                <apex:selectOptions value="{! currentMonths }"/>
+                <apex:actionSupport action="{! init }" event="onchange"/>
+            </apex:selectList> <apex:selectList value="{! selectedYear }" size="1" multiselect="false" style="margin: 0 5px;">
+                <apex:selectOptions value="{! years }"/>
+                <apex:actionSupport action="{! changeYear }" event="onchange"/>
+            </apex:selectList>({! startDateOfMonthString } - {! endDateOfMonthString })</h1>
+            <apex:pageMessages />
+            
+            <div>
+                <apex:outputPanel rendered="{! OR(currentUser.Profile.Name == 'Sales Director', currentUser.Profile.Name == 'System Administrator') }">
+                    <div id="salesteamDirector" style="width: 100%; float: left; height: 340px;"></div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{! OR(currentUser.Profile.Name == 'Key Account Manager') }">
+                    <div id="keyAccountManager" style="width: 100%; float: left; height: 140px;"></div>
+                </apex:outputPanel>
+                <div style="clear: both;"></div>
+            </div>
+        </apex:pageBlock>
+        <script>
+            $(function () { 
+                $('#salesteamDirector').highcharts({
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: '',
+                        style: {
+                            display: 'none'
+                        }
+                    },
+                    xAxis: {
+                        categories: [
+                        <apex:repeat value="{! finalList }" var="key">
+                            '<a href="/apex/SalesDashboardKamPlanReport?userid={! salesTeamMap[key.Id].Id }&month={!currentMonth}&year={!selectedYear}" target="_blank">{! salesTeamMap[key.Id].Name }</a>',
+                        </apex:repeat>
+                        ],
+                        labels: {
+                            useHTML: true
+                        }
+                    },
+                    yAxis: [{
+                        min: 0,
+                        title: {
+                            text: ''
+                        }
+                    }, {
+                        title: {
+                            text: 'Number of meetings'
+                        },
+                        opposite: true
+                    }],
+                    legend: {
+                        shadow: false,
+                        labelFormatter: function() {
+                          var total = 0;
+                          for(var i=this.yData.length; i--;) { total += this.yData[i]; };
+                          return this.name + ' - Total: ' + total;
+                        }
+                    },
+                    exporting: { enabled: false },
+                    credits: {
+                          enabled: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        column: {
+                            grouping: false,
+                            shadow: false,
+                            borderWidth: 0
+                        },
+                        bar: {
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function () {
+                                    return this.y;  
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Plan',
+                        color: '#ccc',
+                        data: [<apex:repeat value="{! finalList }" var="key">
+                        {! usersWithMeetingsPlanMap[key.Id] },
+                        </apex:repeat>],
+                        pointPadding: -0.0,
+                        pointPlacement: -0.15
+                    }, {
+                        name: 'Current number of meetings',
+                        color: 'rgba(126,86,134,9)',
+                        data: [<apex:repeat value="{! finalList }" var="key">
+                        {! usersWithMeetingsFinal[key.Id] },
+                        </apex:repeat>],
+                        pointPadding: -0.0,
+                        pointPlacement: 0.15
+                    }]
+                });          
+                $('#keyAccountManager').highcharts({
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: '',
+                        style: {
+                            display: 'none'
+                        }
+                    },
+                    xAxis: {
+                        categories: [
+                        '<a href="/apex/SalesDashboardKamPlanReport?userid={! $User.Id }&month={!currentMonth}&year={!selectedYear}"" target="_blank"><span style="font-weight: bold;">{! currentUser.Name }</a>'
+                        ],
+                        labels: {
+                            useHTML: true
+                        }
+                    },
+                    yAxis: [{
+                        min: 0,
+                        title: {
+                            text: ''                                
+                        }, 
+                        style: {
+                            display: 'none'
+                        }
+                    }, {
+                        title: {
+                            text: 'Number of meetings'
+                        },
+                        opposite: true
+                    }],
+                    legend: {
+                        shadow: false
+                    },
+                    exporting: { enabled: false },
+                    credits: {
+                          enabled: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        column: {
+                            grouping: false,
+                            shadow: false,
+                            borderWidth: 0
+                        },
+                        bar: {
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function () {
+                                    return this.y;  
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Plan',
+                        color: '#ccc',
+                        data: [{! numberAllMeetingsPlan }],
+                        pointPadding: -0.5,
+                        pointPlacement: -0.15
+                    }, {
+                        name: 'Current number of meetings',
+                        color: 'rgba(126,86,134,9)',
+                        data: [{! numberAllTask }],
+                        pointPadding: -0.5,
+                        pointPlacement: 0.15
+                    }]
+                });
+            });
+        </script>
+        <br/>
+    </apex:form>        
+</apex:page>

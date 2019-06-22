@@ -1,0 +1,468 @@
+<apex:page language="en-US" controller="LongFormJITBController" id="longFormJITB" action="{! init }" sidebar="false" showHeader="false" standardStylesheets="false" docType="html-5.0" cache="false">
+    <apex:form id="form" styleClass="form-horizontal" html-autocomplete="off">
+        <head>
+            <link rel="shortcut icon" href="{!$Resource.FleetcorFavicon}" type="image/x-icon; charset=binary"/>
+            <apex:includeScript value="{!$Resource.jQuery}"/>
+            <!-- <apex:includeScript value="{! URLFOR($Resource.E2E_Analytics_DE) }"/> -->
+            <apex:includeScript value="{! URLFOR($Resource.jQueryUISlider,'jquery-ui-1.12.1.custom/jquery-ui.min.js') }"/>
+            <!-- <apex:includeScript value="{!$Resource.jqueryInputMask}"/> -->
+            <!-- <apex:includeScript value="{!$Resource.e2e_scripts_de}"/> -->
+            <!-- <apex:includeScript value="{!$Resource.e2e_scripts_de_mobile}"/> -->
+            <apex:includeScript value="{!URLFOR($Resource.bootstrap_3_3_7,'bootstrap-3.3.7/js/bootstrap.min.js')}"/>
+            <script>
+
+                $j = jQuery.noConflict();
+
+                //Function is used to get splash status bar when server side call is going on
+                function startSplash() {
+                    document.getElementById('splashDiv').style.display='table-cell';
+                    jQuery('.lightbox').fadeIn(50);
+                }
+
+                //Function will make the splash status to be stopped.
+                function endSplash() {
+                    document.getElementById('splashDiv').style.display='none';
+                    jQuery('.lightbox').fadeOut(50);
+                }
+
+                jQuery.loadScript = function (url, callback) {
+                    jQuery.ajax({ url: url,  dataType: 'script', success: callback,  async: true });
+                };
+
+                function getAllUrlParams(url) {
+                    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+                    var obj = {};
+                    if (queryString) {
+                        queryString = queryString.split('#')[0];
+                        var arr = queryString.split('&');
+                        for (var i=0; i<arr.length; i++) {
+                            var a = arr[i].split('=');
+
+                            var paramNum = undefined;
+                            var paramName = a[0].replace(/\[\d*\]/, function(v) {
+                                paramNum = v.slice(1,-1);
+                                return '';
+                            });
+
+                            var paramValue = typeof(a[1])==='undefined' ? true : a[1];
+
+                            if (obj[paramName]) {
+                                if (typeof obj[paramName] === 'string') {
+                                    obj[paramName] = [obj[paramName]];
+                                }
+                                if (typeof paramNum === 'undefined') {
+                                    obj[paramName].push(paramValue);
+                                }
+                                else {
+                                    obj[paramName][paramNum] = paramValue;
+                                }
+                            }
+                            else {
+                                obj[paramName] = paramValue;
+                            }
+                        }
+                    }
+                    return obj;
+                };
+            </script>
+            <apex:stylesheet value="{! URLFOR($Resource.jQueryUI,'jquery-ui-1.12.1/jquery-ui.css') }"/>
+            <apex:stylesheet value="{!URLFOR($Resource.bootstrap_3_3_7,'bootstrap-3.3.7/css/desktop_bootstrap.min.css')}"/>
+            <!-- <apex:stylesheet value="{!$Resource.e2e_style_de_desktop}"/> -->
+
+
+            <!-- <apex:stylesheet value="{!$Resource.e2e_style_de_desktop}"/> -->
+            <!-- <apex:stylesheet value="{!$Resource.e2e_style_de_mobile}"/> -->
+
+
+            <apex:stylesheet value="{!URLFOR($Resource.E2ESpinner, 'spinner.css')}"/>
+            <!-- <apex:stylesheet value="{!URLFOR($Resource.bootstrap_3_3_7,'bootstrap-3.3.7/css/non-responsive.css')}"/> -->
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+            <title>Shell Tankkarten online bestellen</title>
+            <style>
+                @font-face {
+                    font-family: Montserrat;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-Regular.ttf')});
+                }
+
+                @font-face {
+                    font-family: Montserrat bold;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-Bold.ttf')});
+                }
+
+                @font-face {
+                    font-family: Montserrat light;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-Light.ttf')});
+                }
+
+                @font-face {
+                    font-family: Montserrat semibold;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-SemiBold.ttf')});
+                }
+
+                @font-face {
+                    font-family: Montserrat medium;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-Medium.ttf')});
+                }
+
+                .loadingField {
+                    ground-color: #ffffff;
+                    background-image: url({!URLFOR($Resource.E2ESpinner, 'field-spinner.gif')}) !important;
+                background-size: 15px 15px;
+                background-position: 90% center;
+                background-repeat: no-repeat;
+                }
+
+                .splashStatus {
+                    left: 40%;
+                }
+
+                .splashStatus .circle img {
+                    border-radius: 50%;
+                }
+
+                body {
+                    font-family: Montserrat;
+                    background: #F2F2F2;
+                    min-height: 100%;
+                    height: 100%;
+                    width: 100%;
+                }
+
+                main {
+                    margin-bottom: 80px;
+                    min-height: 565px;
+                }
+
+                footer {
+                    background: #FFFFFF;
+                    padding-bottom: 30px;
+                }
+
+                .container {
+                    max-width: 700px;
+                }
+
+                .wrapper-container {
+                    background: #FFFFFF;
+                    padding-top: 35px;
+                    padding-bottom: 35px;
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+                }
+
+                .col-centered{
+                    float: none;
+                    margin: 0 auto;
+                }
+
+                .page-logo {
+                    margin: 33px 45px 30px 5px;
+                }
+
+                .page-logo img {
+                    width: 160px;
+                    height: 17px;
+                }
+
+                .c-page-header {
+                    font-family: Montserrat bold;
+                    font-size: 36px;
+                    letter-spacing: -0.8px;
+                    color: #1A1A1A;
+                    margin-bottom: 30px;
+                    margin-left: 5px;
+                }
+
+                .copyright {
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: normal;
+                    font-size: 13px;
+                    text-align: center;
+                    color: #808080;
+                    margin-top: 30px;
+                }
+
+                .fleetcor .fleetcor-desc {
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: 15px;
+                    font-size: 13px;
+                    margin-left: 30px;
+                }
+
+                footer a {
+                    color: #777;
+                }
+
+                footer .page-logo {
+                    margin-left: 30px !important;
+                }
+
+                .b-block-header {
+                    font-family: Montserrat bold;
+                    line-height: 28px;
+                    font-size: 24px;
+                    letter-spacing: -0.3px;
+                    color: #1A1A1A;
+                    margin-bottom: 30px;
+                }
+
+                .btn-red {
+                    width: auto;
+                    height: auto;
+                    line-height: 25px;
+                    background: #EE3A43;
+                    font-family: Montserrat bold;
+                    font-size: 12px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    color: #FFFFFF;
+                    border-radius: unset;
+                    min-width: 125px;
+                    max-width: 200px;
+                    white-space: normal;
+                }
+
+                .btn-red.continue {
+                    float: right;
+                }
+
+                .btn-red:visited {
+                    color: #FFFFFF ;
+                }
+
+                .btn-red:hover{
+                    color: #FFFFFF;
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #EE3A43;
+                }
+
+                .btn-red:focus{
+                    color: #FFFFFF;
+                    background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), #EE3A43;
+                    outline: unset;
+                }
+
+                .btn-red[disabled] {
+                    pointer-events: none;
+                    cursor: not-allowed;
+                }
+
+                .btn-gray {
+                    width: auto;
+                    height: auto;
+                    line-height: 25px;
+                    background: #CECECE;
+                    font-size: 12px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    color: #1A1A1A;
+                    border-radius: unset;
+                    min-width: 100px;
+                    max-width: 200px;
+                    white-space: normal;
+                }
+
+                .btn-gray:visited {
+                    color: #1A1A1A;
+                }
+
+                .btn-gray:hover{
+                    color: #1A1A1A;
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), #CECECE;
+                }
+
+                .btn-gray:focus{
+                    outline: 0;
+                    color: #1A1A1A;
+                    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), #CECECE;
+                }
+
+                .row-wrapper {
+                    margin-top: 30px;
+                }
+
+                .mobile-error-page {
+                    color: #1a1a1a;
+                }
+
+                .mobile-error-page .b-error-text {
+                    margin: 6px 20px 24px 12px;
+                }
+
+                .mobile-error-page .btn-gray {
+                    min-width: 185px;
+                }
+
+                .mobile-error-info .customer-care {
+                    margin: 12px 20px 0px 12px;
+                }
+
+                .mobile-error-info .b-block-header {
+                    margin-top: 24px;
+                }
+
+                .mobile-error-info .customer-care {
+                    line-height: 1.85;
+                }
+
+                .mobile-error-info .assistance-info {
+                    color: #0093ee;
+                }
+
+                .mobile-error-info .customer-care img {
+                    margin-left: 10px;
+                    padding-bottom: 3px;
+                }
+
+                .station-header {
+                    font-family: Montserrat medium;
+                    font-style: normal;
+                    line-height: 23px;
+                    font-weight: 500;
+                    font-size: 18px;
+                }
+
+                .selected-station {
+                    font-family: Montserrat;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: 18px;
+                    font-size: 15px;
+                }
+            </style>
+            <script>
+                window.addEventListener('message', function(event) {
+                    if (event.data && event.data.hasOwnProperty('stationId')) {
+                        returnStation(JSON.stringify(event.data));
+                    } else {
+                        return;
+                    }
+                });
+            </script>
+        </head>
+        <body class="modal-open" style="overflow: auto">
+        <main>
+            <apex:actionStatus id="splashStatus" onstart="startSplash();" onstop="endSplash();"/>
+            <div class="splashStatus" id="splashDiv">
+                <div class="circle"><img src="{!URLFOR($Resource.e2e_images, 'preloader-loop.gif')}"/></div>
+            </div>
+            <apex:actionFunction name="returnStation" action="{! returnStation }" status="splashStatus" reRender="continue-btn, selectedStationName">
+                <apex:param name="jsonStation" value="" assignTo="{! jsonStation }"/>
+            </apex:actionFunction>
+
+            <span id="top-heading-viewport"></span>
+            <div class="container">
+                <apex:outputPanel layout="none" id="containerBlock">
+                    <div class="row">
+                        <div class="page-logo">
+                            <apex:image url="{!URLFOR($Resource.e2e_images, 'm-logo.png')}"/>
+                        </div>
+                    </div>
+
+                    <apex:outputPanel layout="block" rendered="{! NOT(errorMode) }">
+                        <div class="row">
+                            <div class="c-page-header">{! stepPagesMap['HEADER'].elements['TOP HEADING']['VALUE'].Value__c }</div>
+                        </div>
+                        <div class="row">
+                            <div class="wrapper-container">
+                                <div class="col-md-11 col-centered row-wrapper">
+                                    <div class="b-block-header">{! stepPagesMap['JITBLocator'].elements['BODY']['VALUE'].Value__c }</div>
+                                </div>
+
+                                <div class="col-md-11 col-centered row-wrapper">
+                                    <div class="row">
+                                        <div class="b-locator">
+                                            <div class="col-lg-12">
+                                                <iframe id="fleetcor-map" src="{! urlLocator }" width="100%" height="350" frameborder="0" class="frame center-block"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-11 col-centered row-wrapper">
+                                    <apex:outputPanel id="selectedStationName" layout="block">
+                                        <apex:outputPanel styleClass="station-header" rendered="{! NOT(ISBLANK(selectedStationAddress)) }">
+                                            {! stepPagesMap['JITBLocator'].elements['FAVOURITE STATION HEADING']['VALUE'].Value__c }
+                                        </apex:outputPanel><br/>
+                                        <apex:outputPanel styleClass="selected-station" rendered="{! NOT(ISBLANK(selectedStationAddress)) }">{! selectedStationName }</apex:outputPanel>
+                                    </apex:outputPanel>
+                                </div>
+
+                                <div class="col-md-11 col-centered row-wrapper">
+                                    <apex:commandButton id="continue-btn" action="{! goToTheForm }"
+                                                        value="{! stepPagesMap['JITBLocator'].elements['CHOOSE STATION BUTTON']['VALUE'].Value__c }"
+                                                        styleClass="btn btn-red" disabled="{! ISBLANK(selectedStationAddress) }" reRender="containerBlock" status="splashStatus">
+                                    </apex:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+                    <apex:outputPanel layout="block" styleClass="mobile-error-page" rendered="{! errorMode }">
+                        <div class="wrapper">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <apex:outputPanel layout="block" styleClass="b-block-header">
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['TOP HEADING']['HEADING'].Value__c }
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="block" styleClass="font-13 b-error-text">
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['DESCRIPTION']['VALUE'].Value__c }
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="font-13 b-error-text">
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['FEEDBACK HEADING']['HEADING'].Value__c }<br/>
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['PHONE']['VALUE'].Value__c }<br/>
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['EMAIL']['VALUE'].Value__c }<br/>
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['WORK TIME']['VALUE'].Value__c }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="buttons text-center">
+                                    <div class="col-lg-12">
+                                        <div class="error-text">
+                                            <a href="{! stepPagesMap['SYSTEM ERROR'].elements['RETURN TO SITE BUTTON']['URL'].Value__c }" class="btn btn-gray" style="min-width: 130px">
+                                                {! stepPagesMap['SYSTEM ERROR'].elements['RETURN TO SITE BUTTON']['BUTTON NAME'].Value__c }
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="fleetcor">
+                            <div class="page-logo" style="margin: 13px 0 10px 0px;">
+                                <apex:image url="{!URLFOR($Resource.e2e_images, 'm-logo.png')}"/>
+                            </div>
+                            <apex:outputPanel layout="block" styleClass="fleetcor-desc text-muted">
+                                {! stepPagesMap['FOOTER'].elements['DESCRIPTION']['VALUE'].Value__c }
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="copyright">
+                        <apex:outputPanel layout="block">
+                            <apex:outputLink value="{! stepPagesMap['FOOTER'].elements['COPYRIGHT']['URL'].Value__c }" target="_blank">
+                                {! stepPagesMap['FOOTER'].elements['COPYRIGHT']['VALUE'].Value__c }
+                            </apex:outputLink>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lightbox"></div>
+        </footer>
+        </body>
+    </apex:form>
+</apex:page>

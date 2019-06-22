@@ -1,98 +1,124 @@
 <template>
-    <c-fc-cart class="cart-configuration__header">
-        <h2 class="cart-configuration__header-title">Wie viele Karten benötigen Sie?</h2>
-        <div class="cart-configuration__header-group">
-            <c-enway-counter label="Anzahl der Karten" input-value="1" variant="required"
-                onchange={numberOfCardsHandler}>
-            </c-enway-counter>
-        </div>
-    </c-fc-cart>
-    <c-fc-cart class="cart-configuration__body">
-        <h2 class="cart-configuration__body-header">Welche Produkte und Dienstleistungen möchten Sie mit Ihrer Karte
-            bezahlen?</h2>
-        <p class="cart-configuration__body-description">Die Wahl der Kategorien beeinflusst die Kartengebühren nicht.
-        </p>
-        <c-fc-product-tabs class="cart-configuration__product-tabs" onchange={tabChangeHandler}></c-fc-product-tabs>
-        <h2 class="cart-configuration__body-header">Netzabdeckung für 1 Karte</h2>
-        <c-fc-check-box-ios class="cart-configuration__body-item" active="viuwbvw" title-on="ein" title-off="aus"
-            title="Tanken im Ausland"
-            help-text="Für mehr Flexibilität können Shell Karten auch in anderen europäischen Ländern verwendet werden."
-            subtitle="Erweitern Sie die Gültigkeit Ihrer Karte auf ganz Europa."
-            description="Tanken Sie auch, wenn Sie bzw. Ihr Fahrer weit weg von zuhause sind.">
-        </c-fc-check-box-ios>
-        <c-fc-check-box-ios class="cart-configuration__body-item" title-on="ein" title-off="aus"
-            title="Tanken an Shell Partnerstationen"
-            subtitle="Aktivieren Sie das Shell Partnernetz und tanken Sie in Deutschland bei ESSO, AVIA, OMV, Westfalen."
-            description="Bleiben Sie flexibel, wann immer es erforderlich ist.">
-        </c-fc-check-box-ios>
-    </c-fc-cart>
-    <c-fc-cart variant="blue" class="cart-configuration__footer">
-        <h2 class="cart-configuration__header-title">Gesamtgebühren</h2>
-        <div class="cart-configuration__greed">
-            <div class="cart-configuration__greed-item">
-                <c-fc-price-line class="cart-configuration__price-line" currency="€" price="3.95"
-                    title="Monatliche Kartengebühr" sublabel="für 1 Karte">
-                </c-fc-price-line>
-                <div class="cart-configuration__banner">
-                    <div class="cart-configuration__banner-title">Sparen Sie ganz einfach</div>
-                    <div class="cart-configuration__banner-title-price" data-currency="€">70</div>
-                    <p class="cart-configuration__banner-text">
-                        Schauen Sie sich unseren Sonderpreis für Benzin bei den nächsten Schritten an und erhalten Sie
-                        einen besonderen Anreiz, wenn Sie Ihre Bestellung online abschließen.
-                    </p>
-                    <ul class="cart-configuration__banner-list">
-                        <li class="cart-configuration__banner-list-item">Durchschnittliche Einsparungen pro Jahr
-                            basierend auf Ihrem Profil.</li>
-                    </ul>
-                </div>
-                <c-fc-accordion-item>
-                    <p class="cart-configuration__accordion-title">
-                        Werden nur in Sonderfällen erhoben
-                    </p>
-                    <c-fc-price-line variant="small" class="cart-configuration__tiny-item" currency="€" price="5.00"
-                        title="Rechnungsduplikat"
-                        help-text="Gebühren für Rechnungsduplikate werden nur erhoben, wenn ein Duplikat von einer Papierrechnung erstellt und per Post an Sie gesandt werden soll.">
-                    </c-fc-price-line>
-                    <c-fc-price-line variant="small" class="cart-configuration__tiny-item" currency="€" price="50.00"
-                        title="Zahlungsverzug"
-                        help-text="Eine Gebühr für die verspätete Zahlung wird nur dann auf Ihrer nächsten Rechnung aufgeführt, wenn die aktuelle Rechnung gar nicht oder nach dem Fälligkeitsdatum bezahlt wurde.">
-                    </c-fc-price-line>
-                </c-fc-accordion-item>
+    <template if:false={loading}>
+        <c-fc-cart class="cart-configuration__header">
+            <h2 class="cart-configuration__header-title">Wie viele Karten benötigen Sie?</h2>
+            <div class="cart-configuration__header-group">
+                <c-enway-counter 
+                    label={staticData.number_of_cards.label} 
+                    input-value={staticData.number_of_cards.value}  
+                    variant={staticData.number_of_cards.required} 
+                    onchange={numberOfCardsHandler}>
+                </c-enway-counter>
             </div>
-            <div class="cart-configuration__greed-item">
-                <div class="cart-configuration__tiny-header">
-                    <span class="cart-configuration__tiny-title">Nationale Transaktionen</span>
-                    <c-fc-tooltip
-                        help-text="Werden die Karten in Deutschland eingesetzt, können in bestimmten Fällen Zusatzgebühren pro Transaktion erhoben werden.">
-                    </c-fc-tooltip>
+        </c-fc-cart>
+        <c-fc-cart class="cart-configuration__body">
+            <h2 class="cart-configuration__body-header">{staticData.choose_type_section.single_card_header}</h2>
+            <p class="cart-configuration__body-description">{staticData.choose_type_section.remark}</p>
+            <!-- tabs -->
+            <c-fc-product-tabs class="cart-configuration__product-tabs" tabs={tabs} onchange={tabChangeHandler}></c-fc-product-tabs>
+            <!-- todo make method for recalculate price and sublabel-->
+            <h2 class="cart-configuration__body-header">Netzabdeckung {dynamic.str}</h2>
+            <template for:each={iosBoxes} for:item="item">
+                <c-fc-check-box-ios 
+                    key={item.Id} 
+                    class="cart-configuration__body-item" 
+                    title-on={item.true_value} 
+                    title-off={item.false_value}
+                    active={item.selected_value}
+                    title={item.label}
+                    subtitle={item.remark1}
+                    description={item.remark2}
+                    onchange={pumpChangeHanler}
+                ></c-fc-check-box-ios>
+            </template>
+        </c-fc-cart>
+        <c-fc-cart variant="blue" class="cart-configuration__footer">
+            <h2 class="cart-configuration__header-title">{staticData.feescosts_section.header}</h2>
+            <div class="cart-configuration__greed">
+                <div class="cart-configuration__greed-item">
+                    <!-- monatliche -->
+                    <!-- todo make method for recalculate price and sublabel-->
+                    <c-fc-price-line 
+                        class="cart-configuration__price-line" 
+                        currency={fSection.monatliche.currency}
+                        price={dynamic.cost}
+                        title={fSection.monatliche.label}
+                        sublabel={dynamic.str}>
+                    </c-fc-price-line>
+
+                    <!-- banner start -->
+                    <div class="cart-configuration__banner">
+                        <div class="cart-configuration__banner-title">{staticData.discount_section.header}</div>
+                        <div class="cart-configuration__banner-title-price" data-currency={staticData.discount_section.currency}>
+                            {staticData.discount_section.discount_value}
+                        </div>
+                        <p class="cart-configuration__banner-text">{staticData.discount_section.description}</p>
+                        <ul class="cart-configuration__banner-list">
+                            <template for:each={staticData.discount_section.items} for:item="item">
+                                    <li key={item.Id} class="cart-configuration__banner-list-item">{item.label}</li>
+                            </template>
+                        </ul>
+                    </div>
+
+                    <!-- weitere -->
+                    <c-fc-accordion-item title={fSection.weitere.collapse_header}>
+                        <p class="cart-configuration__accordion-title">{fSection.weitere.header}</p>
+                        <template for:each={fSection.weitere.items} for:item="item">
+                            <c-fc-price-line 
+                                key={item.Id} 
+                                variant="small" 
+                                class="cart-configuration__tiny-item" 
+                                currency={item.currency}
+                                price={item.value}
+                                title={item.label}
+                                help-text={item.help}>
+                            </c-fc-price-line>
+                        </template>
+                    </c-fc-accordion-item>
                 </div>
-                <c-fc-price-line variant="small" class="cart-configuration__tiny-item" currency="€" price="0.00"
-                    title="Kraftstoff (Shell Stationen)">
-                </c-fc-price-line>
-                <c-fc-price-line variant="small" class="cart-configuration__tiny-item" currency="€" price="2.00"
-                    title="Kraftstoff (Shell Partner)"
-                    help-text="Für mehr Flexibilität beim Einsatz der Shell Karte ist es möglich, auch an Shell Partnerstationen zu tanken. Für diese Tankvorgänge wird eine Zusatzgebühr erhoben.">
-                </c-fc-price-line>
-                <c-fc-price-line variant="small" class="cart-configuration__tiny-item" currency="€" price="1.00"
-                    title="Shopartikel"
-                    help-text="Alles, was mit einer Karte bezahlt wird und nicht mit Kraftstoffen zusammenhängt, gilt als Waren und Dienstleistungen.">
-                </c-fc-price-line>
-                <div class="cart-configuration__tiny-header cart-configuration__tiny-header_last">
-                    <span class="cart-configuration__tiny-title">Internationale Transaktionen</span>
-                    <c-fc-tooltip
-                        help-text="Wenn Karten außerhalb von Deutschland verwendet werden, wird sowohl für Kraftstoff-Transaktionen als auch für Waren und Dienstleistungen eine Zusatzgebühr erhoben.">
-                    </c-fc-tooltip>
+                
+                <div class="cart-configuration__greed-item">
+                    <!-- nationale -->
+                    <div class="cart-configuration__tiny-header">
+                        <span class="cart-configuration__tiny-title">{fSection.nationale.label}</span>
+                        <c-fc-tooltip help-text={fSection.nationale.help}></c-fc-tooltip>
+                    </div>
+                    <template for:each={fSection.nationale.items} for:item="item">
+                        <c-fc-price-line 
+                            key={item.Id} 
+                            variant="small" 
+                            class="cart-configuration__tiny-item" 
+                            title={item.label} 
+                            help-text={item.help}
+                            currency={item.currency} 
+                            price={item.value}
+                        ></c-fc-price-line>
+                    </template>
+
+                    <!-- internationale -->
+                    <div class="cart-configuration__tiny-header cart-configuration__tiny-header_last">
+                        <span class="cart-configuration__tiny-title">{fSection.internationale.header}</span>
+                        <c-fc-tooltip help-text={fSection.internationale.help}></c-fc-tooltip>
+                    </div>
+                    <c-fc-price-line 
+                        variant="small" 
+                        class="cart-configuration__tiny-item" 
+                        currency={fSection.internationale.currency}
+                        price={fSection.internationale.value}
+                        title={fSection.internationale.label}
+                        sublabel={fSection.internationale.remark}
+                    ></c-fc-price-line>
                 </div>
-                <c-fc-price-line variant="small" class="cart-configuration__tiny-item" currency="%" price="1.00"
-                    title="Alle Arten" sublabel="Alle Preise exkl. MwSt.">
-                </c-fc-price-line>
             </div>
-        </div>
-        <div class="cart-configuration__line"></div>
-        <div class="cart-configuration__actions">
-            <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
-            <c-fc-button onclick={stepSubmit} title="Weiter" disabled="none">
-            </c-fc-button>
-        </div>
-    </c-fc-cart>
+
+            <div class="cart-configuration__line"></div>
+            <div class="cart-configuration__actions">
+                <c-fc-button variant="gray" onclick={backStep} disabled={staticData.back_button.disabled} title={staticData.back_button.label}></c-fc-button>
+                <c-fc-button onclick={stepSubmit} disabled={staticData.continue_button.disabled} title={staticData.continue_button.label}></c-fc-button>
+            </div>
+        </c-fc-cart>
+    </template>
+    <template if:true={loading}>
+        <c-fc-loader></c-fc-loader>
+    </template>
 </template>

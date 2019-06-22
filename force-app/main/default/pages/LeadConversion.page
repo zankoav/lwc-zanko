@@ -1,0 +1,43 @@
+<apex:page controller="LeadConversionCtrl" action="{! init}" lightningStylesheets="true">
+    <apex:form >
+        <apex:pageMessages escape="false"/>
+        <style>
+            .ownerId select {
+                display: none;
+            }
+        </style>
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Owner"/>
+                    <apex:outputPanel styleClass="ownerId">
+                        <apex:inputField value="{! lead.OwnerId}"/> 
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Salutation"/>
+                    <apex:outputPanel >
+                        <apex:inputField value="{! lead.Salutation}"/>
+                        <apex:outputText style="display: inline-block; margin-left: 5px;" value="{! lead.FirstName}"/>
+                        <apex:outputText style="display: inline-block; margin-left: 5px;" value="{! lead.LastName}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:inputField value="{! lead.FirstName}" required="true"/>
+                <apex:inputField value="{! lead.Anzahl_der_Fahrzeuge__c}" required="true"/>
+                <apex:inputField value="{! lead.Branche_NACE__c}" required="{! IF(AND(lead.Country == 'Germany',lead.Sec_Channel__c == 'JITB', lead.Channel__c == 'Fax'), false, true) }"/>
+                <apex:inputField value="{! lead.Beschaeftigte__c}" required="{! IF(AND(lead.Country == 'Germany',lead.Sec_Channel__c == 'JITB', lead.Channel__c == 'Fax'), false, true) }"/>
+                <apex:inputField value="{! lead.Send_SEPA_approval_link__c}" required="true"/>
+                <apex:inputField value="{! lead.Country}" required="true"/>
+                <apex:inputField value="{! lead.Street}" required="true"/>
+                <apex:inputField value="{! lead.City}" required="true"/>
+                <apex:inputField value="{! lead.PostalCode}" required="true"/>
+                <apex:inputCheckbox label="Not duplicate" value="{! isNotDuplicate}" rendered="{! areDuplicatesFound}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{! backToLeadWithoutSavingFields}" value="Cancel" immediate="true"/>
+                <apex:commandButton action="{! backToLeadWithSavingFields}" value="Save & Back to Lead"/>
+                <apex:commandButton action="{! continueConvert}" value="Convert"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

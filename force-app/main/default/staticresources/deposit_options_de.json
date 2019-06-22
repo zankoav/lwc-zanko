@@ -1,0 +1,74 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",
+	"fields_header": "Kaution jetzt bezahlen",
+	"fields_subheader": "Um den Bestellprozess abzuschließen und Ihre Tankkarten sofort nach Erhalt nutzen zu können, möchten wir Sie bitten, die Kaution jetzt mit der Zahlungsmethode Ihrer Wahl einzuzahlen",
+	"select_block": {
+		"header": "Höhe der zu zahlenden Kaution:",
+		"deposit_value": "500",
+		"currency": "€",
+		"selected_method": "Visa",
+		"card_methods": {
+			"header": "Karten",
+			"subheader": "Allgemeine Kredit-/Debitkartenzahlungen",
+			"methods": [
+				{
+					"name": "Visa",
+					"img_name": "visa-logo.png",
+					"width": "110",
+					"height": "39"
+				},
+				{
+					"name": "MasterCard",
+					"img_name": "Mastercard-logo.png",
+					"width": "59",
+					"height": "46"
+				},
+				{
+					"name": "Maestro",
+					"img_name": "maestro-logo.png",
+					"width": "59",
+					"height": "46"
+				}
+			]
+		},
+		"bank_methods": {
+			"header": "Zahlung über Ihre Online-Bank",
+			"subheader": "Einfache, schnelle und bequeme Zahlungsmethode.",
+			"methods": [
+				{
+					"name": "Sofort",
+					"img_name": "SOFORT-logo.png",
+					"width": "64",
+					"height": "43"
+				},
+				{
+					"name": "Giropay",
+					"img_name": "giroPay-logo.png",
+					"width": "88",
+					"height": "38"
+				}
+			]
+		},
+		"footer": "Alle Zahlungen werden von Ingenico ePayments unterstützt, einem Bereich der Ingenico Group, einem führenden globalen Anbieter von sicheren Zahlungsverkehrsleistungen. Er bietet sichere, intelligente und nahtlose Zahlungslösungen, die Zahlungen weniger komplex machen und Einkäufe schnell, nahtlos und sicher abwickeln. Ingenico ePayments verpflichtet sich, die Sicherheit der verarbeiteten Zahlungen und der persönlichen Daten der Verbraucher zu schützen."
+	},
+	"deposit_agreement": {
+		"label1": "Ich erkläre mich mit der Zahlung der",
+		"label2": {
+			"value": "Kaution",
+			"iframe_url": "/apex/E2EAdditionalDocuments?hash="
+		},
+		"label3": "in Höhe von",
+		"label4": "€ einverstanden.",
+		"value": false
+	},
+	"back_button": {
+		"label": "Zurück",
+		"disabled": ""
+	},
+	"continue_button": {
+		"label": "Weiter zur Zahlung",
+		"disabled": "disabled"
+	}
+}

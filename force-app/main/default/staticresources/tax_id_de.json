@@ -1,0 +1,24 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",
+	"fields_header": "Bitte geben Sie Ihre Steuernummer ein",
+	"fields_subheader": "Die Steuernummer ist eine eindeutige Steuer-Identifikationsnummer",
+	"tax_id": {
+		"label": "Steuernummer",
+		"value": "",
+		"type": "text",
+		"required": "required",
+		"maxLength": 12,
+		"hint": "Die Steuernummer erhälten Sie bei dem für Ihren Unternehmen zuständigen Finanzamt, wenn Sie eine selbständige oder gewerbliche Tätigkeit anmeldest oder nachdem Sie das erste Mal eine Einkommensteuererklärung eingereicht haben.",
+		"errorMessage": "Bitte geben Sie Ihre Steuernummer im gültigen Format an. z.B. 12345678910. Nur Nummern sind erlaubt. Bitte verwenden Sie keinen Schrägstrich oder Leerzeichen."
+	},
+	"continue_button": {
+		"label": "continue",
+		"disabled": "disabled"
+	},
+	"back_button": {
+		"label": "zurück",
+		"disabled": ""
+	}
+}

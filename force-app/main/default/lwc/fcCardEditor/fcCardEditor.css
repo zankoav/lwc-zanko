@@ -193,3 +193,14 @@
         max-width: calc(100% - 200px);
 	}	
 }
+
+.card-info__paragraph{
+    padding-bottom: 1rem;
+    font-size: 15px;
+    color: #1A1A1A;
+    line-height: 18px;
+}
+
+.card-info__paragraph:last-child{
+    padding-bottom: 0;
+}

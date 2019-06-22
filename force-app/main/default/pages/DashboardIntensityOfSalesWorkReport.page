@@ -1,0 +1,82 @@
+<apex:page controller="DashboardIntensityOfSalesWorkReportCtrl" action="{! init }" readOnly="true">
+    <apex:includeScript value="{!$Resource.jQuery}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Highcharts,'js/highcharts.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Highcharts,'js/modules/exporting.js')}"/>
+    <apex:form >
+        <style>
+            .legendbox {
+                display: inline-block; 
+                height: 12px; 
+                width: 12px; 
+                margin-right: 5px;
+            }
+            .infoTable {
+                overflow:hidden;
+                border:1px solid #d3d3d3;
+                border-collapse: collapse;
+                width:100%;
+                margin:1% 0 0.5% 0;
+                -moz-border-radius:5px; /* FF1+ */
+                -webkit-border-radius:5px; /* Saf3-4 */
+                border-radius:5px;
+            }            
+            .infoTable th {
+                background: -moz-linear-gradient(100% 20% 90deg, #f2f3f3, #ededed);
+                background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#ededed), to(#f2f3f3));
+            }
+        </style>
+        <apex:pageBlock >
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <h1 style="margin-bottom: 10px; font-size: 15px; display: block;">Detailed report of sales intensity for 
+                    <apex:selectList value="{! selectedPeriod }" size="1" multiselect="false" style="margin-left: 5px;">
+                        <apex:selectOptions value="{! periodsList }"/>
+                        <apex:actionSupport action="{! init }" event="onchange"/>
+                    </apex:selectList>
+                    <apex:selectList value="{! selectedYear }" size="1" multiselect="false" style="margin: 0 5px;">
+                        <apex:selectOptions value="{! yearsList }"/>
+                        <apex:actionSupport action="{! changeYear }" event="onchange"/>
+                    </apex:selectList>({! startDateOfMonthString } - {! endDateOfMonthString })</h1>
+            </table>
+            <apex:pageMessages />
+        </apex:pageBlock>
+        <p>1) All Tasks with completed call logs in the selected period;</p>
+        <p>2) All Leads and Opportunities with non-terminal statuses OR changed to terminal status within selected period;</p>
+        <p><strong><span style="color: red;">Intensity = </span> 1 / 2</strong></p>
+
+        <table class="infoTable" width="100%" border="1">
+            <tr>
+                <th style="width: 20%;">Name</th>
+                <th style="width: 20%;">All Tasks</th>
+                <th style="width: 20%;">All Opportunities</th>
+                <th style="width: 20%;">All Leads</th>
+                <th style="width: 20%;">Intensity</th>
+            </tr>
+            <tr>
+                <td>{! currentUser.Name }</td>
+                <td>{! numberTasks }</td>
+                <td>{! numberOppties }</td>
+                <td>{! numberLeads }</td>
+                <td>{! ROUND(IF(OR(numberOppties != 0, numberLeads != 0), numberTasks / (numberOppties + numberLeads), 0), 2)}</td>
+            </tr>
+        </table>        
+        <apex:pageBlock title="Opportunities ({! numberOppties }) + Leads ({! numberLeads })">
+            <apex:pageBlockTable value="{! finalObjectStatisticMap }" var="key">
+                <apex:column headerValue="Lead Name">
+                    <apex:outputLink value="/{! IF(finalObjectStatisticMap[key].objectType = 'Lead', finalObjectStatisticMap[key].objectId, '') }" target="_blank">{! IF(finalObjectStatisticMap[key].objectType = 'Lead', finalObjectStatisticMap[key].objectName, '') }</apex:outputLink>
+                </apex:column>
+                <apex:column headerValue="Opportunity Name">
+                    <apex:outputLink value="/{! IF(finalObjectStatisticMap[key].objectType = 'Opportunity', finalObjectStatisticMap[key].objectId, '') }" target="_blank">{! IF(finalObjectStatisticMap[key].objectType = 'Opportunity', finalObjectStatisticMap[key].objectName, '') }</apex:outputLink>
+                </apex:column>
+                <apex:column headerValue="Created Date">
+                    {!finalObjectStatisticMap[key].createdDate}
+                </apex:column>
+                <apex:column headerValue="Days Since Creation">
+                    {!finalObjectStatisticMap[key].daysSinceCreation}
+                </apex:column>
+                <apex:column headerValue="Days Since Last Activity">
+                    {!finalObjectStatisticMap[key].daysSinceLastActivity}
+                </apex:column>
+            </apex:pageBlockTable>    
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

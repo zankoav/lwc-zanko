@@ -1,59 +1,66 @@
 <template>
     <c-fc-cart>
         <template if:false={loading}>
-            <h4 class="deposit-options__title">Kaution jetzt bezahlen</h4>
-            <div class="deposit-options__description">Um den Bestellprozess abzuschließen und Ihre Tankkarten sofort
-                nach Erhalt nutzen zu können, möchten wir Sie bitten, die Kaution jetzt mit der Zahlungsmethode Ihrer
-                Wahl einzuzahlen</div>
+            <h4 class="deposit-options__title">{staticData.fields_header}</h4>
+            <div class="deposit-options__description">{staticData.fields_subheader}</div>
             <div class="deposit-options__info">
-                <div class="deposit-options__info-title deposit-options__info-title_main">Höhe der zu zahlenden Kaution:
-                    6700 €</div>
-                <div class="deposit-options__info-title">Karten</div>
-                <div class="deposit-options__info-subtitle">Allgemeine Kredit-/Debitkartenzahlungen</div>
-                <div class="deposit-options__info-greed">
-                    <div class="deposit-options__info-greed-item">
-                        <c-fc-visa-card></c-fc-visa-card>
-                    </div>
-                    <div class="deposit-options__info-greed-item">
-                        <c-fc-visa-card></c-fc-visa-card>
-                    </div>
-                    <div class="deposit-options__info-greed-item">
-                        <c-fc-visa-card></c-fc-visa-card>
-                    </div>
+                <div class="deposit-options__info-title deposit-options__info-title_main">
+                    {staticData.select_block.header}
+                    {staticData.select_block.deposit_value}
+                    {staticData.select_block.currency}
                 </div>
-                <div class="deposit-options__info-title">Zahlung über Ihre Online-Bank</div>
-                <div class="deposit-options__info-subtitle">Einfache, schnelle und bequeme Zahlungsmethode.</div>
+                <div class="deposit-options__info-title">{staticData.select_block.card_methods.header}</div>
+                <div class="deposit-options__info-subtitle">{staticData.select_block.card_methods.subheader}</div>
                 <div class="deposit-options__info-greed">
-                    <div class="deposit-options__info-greed-item">
-                        <c-fc-visa-card></c-fc-visa-card>
-                    </div>
-                    <div class="deposit-options__info-greed-item">
-                        <c-fc-visa-card></c-fc-visa-card>
-                    </div>
+                    <template for:each={staticData.select_block.card_methods.methods} for:item="method">
+                        <div key={method.Id} class="deposit-options__info-greed-item">
+                            <c-fc-visa-card
+                                data-name={method.name}
+                                name={method.name}
+                                img-name={method.img_name}
+                                width={method.width}
+                                heigth={method.heigth}
+                                onactive={changeMethodHandler}
+                            ></c-fc-visa-card>
+                        </div>
+                    </template>
+
+                </div>
+                <div class="deposit-options__info-title">{staticData.select_block.bank_methods.header}</div>
+                <div class="deposit-options__info-subtitle">{staticData.select_block.bank_methods.subheader}</div>
+                <div class="deposit-options__info-greed">
+                    <template for:each={staticData.select_block.bank_methods.methods} for:item="method">
+                        <div key={method.Id} class="deposit-options__info-greed-item">
+                            <c-fc-visa-card
+                                data-name={method.name}
+                                name={method.name}
+                                img-name={method.img_name}
+                                width={method.width}
+                                heigth={method.heigth}
+                                onactive={changeMethodHandler}
+                            ></c-fc-visa-card>
+                        </div>
+                    </template>
                 </div>
                 <div class="deposit-options__line"></div>
                 <div class="deposit-options__info-footer">
-                    <div class="deposit-options__info-footer-left">
-                        Alle Zahlungen werden von Ingenico ePayments unterstützt, einem Bereich der Ingenico Group,
-                        einem führenden globalen Anbieter von sicheren Zahlungsverkehrsleistungen. Er bietet sichere,
-                        intelligente und nahtlose Zahlungslösungen, die Zahlungen weniger komplex machen und Einkäufe
-                        schnell, nahtlos und sicher abwickeln. Ingenico ePayments verpflichtet sich, die Sicherheit der
-                        verarbeiteten Zahlungen und der persönlichen Daten der Verbraucher zu schützen.
-                    </div>
+                    <div class="deposit-options__info-footer-left">{staticData.select_block.footer}</div>
                     <div class="deposit-options__info-footer-right">
                         <img class="deposit-options__info-footer-img"
                             src="https://e2e-e2efleetcor.cs101.force.com/resource/1559576527000/e2e_images/ingenico.png">
                     </div>
                 </div>
             </div>
-            <c-fc-checkbox class="deposit-options__block" onchange={changeZahlung}
-                label='Ich erkläre mich mit der Zahlung der <a href="#">Kaution</a> in Höhe von 6700 € einverstanden.'>
-            </c-fc-checkbox>
+            <c-fc-checkbox 
+                class="deposit-options__block" 
+                onchange={changeZahlung}
+                label='Ich erkläre mich mit der Zahlung der <a href="#">Kaution</a> in Höhe von 6700 € einverstanden.'
+                active={stepState.deposit_agreement}
+            ></c-fc-checkbox>
             <div class="deposit-options__line"></div>
             <div class="deposit-options__actions">
-                <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
-                <c-fc-button onclick={stepSubmit} title="Weiter zur Zahlung">
-                </c-fc-button>
+                <c-fc-button variant="gray" onclick={backStep} title={staticData.back_button.label} disabled={stepState.back_button}></c-fc-button>
+                <c-fc-button class="js-submit" onclick={stepSubmit} title={staticData.continue_button.label} disabled={stepState.continue_button}></c-fc-button>
             </div>
         </template>
         <template if:true={loading}>

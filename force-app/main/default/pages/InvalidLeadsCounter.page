@@ -1,0 +1,132 @@
+<apex:page controller="InvalidLeadsCounterCtrl" action="{!init}" sidebar="false" showHeader="false">
+    <style>
+        .buttonInvalidLeads {
+            color: #E84270 !important;
+            font-family: "Salesforce Sans", sans-serif;
+            font-size: 36px;
+            text-decoration: underline;
+        }
+
+        .invalidInfoTable {
+            border-collapse: collapse;
+        }
+
+        .invalidInfoTable td, 
+        .invalidInfoTable th {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        .invalidInfoTable th {
+            background: #ededed;
+            color: grey;
+            font-weight: bold;
+            text-align: center;
+            height: 30px;
+        }
+
+        .invalidInfoTable td {
+            color: #3f3f3f;
+        }
+
+        .card {
+            border: 1px solid #ededed;
+            width: 120px;
+            margin: 0 auto;
+            text-align: center; 
+            padding: 12px;
+            border-radius: 3px;
+            box-shadow: 0 3px 3px 0 #ccc;
+            color: #3f3f3f;
+        }
+
+        .openLeads {
+            color: #D17600;
+        }
+
+        .contactedLeads {
+            color: #0078AB;
+        }
+
+        .titleCountryTable {
+            background: #ededed !important;
+            height: 31px !important;
+            color: grey !important;
+            font-size: 12px !important;
+            border-bottom: 1px solid #ccc !important;
+        }
+        .help {
+            font-size: 12px;
+            float: right;
+            padding: 0 10px 5px 0;
+        }
+    </style>
+    <apex:pageMessages />
+
+    <apex:pageBlock rendered="{!OR(currentTeamType = 'outbound', currentTeamType = 'inbound')}" mode="maindetail">
+        <a href="/articles/Knowledge/Help-page-Unallocated-Leads-dashboard?popup=false" class="help" target="_blank">Help</a>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <td width="300px">
+                    <div class="card">
+                        <a href="/apex/InvalidLeadsCounterReport?userid={! currentUser }" class="buttonInvalidLeads" target="_blank">{! numberOfInvalidLeads }</a>
+                        <p><strong>Unallocated Leads(40000 max)</strong></p>
+                    </div>  
+                </td>
+                <td>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="invalidInfoTable">
+                        <tr>
+                            <th>Sec. Channel</th>
+                            <th>Status</th>
+                            <td rowspan="5" style="padding: 0" valign="top">
+                                <apex:pageBlockTable value="{! invalidLeadsCountriesMap }" var="key" style="border: none;">
+                                    <apex:column headerValue="Countries" headerClass="titleCountryTable" value="{! key }: {! invalidLeadsCountriesMap[key] }"/>
+                                </apex:pageBlockTable>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">
+                                <apex:outputPanel rendered="{! currentTeamType = 'outbound' }">
+                                    <strong>Outbound:</strong> {! invalidLeadsOutbound }    
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{! currentTeamType = 'inbound' }">
+                                    <strong>Inbound:</strong> {! invalidLeadsInbound }  
+                                </apex:outputPanel>
+                            </td>
+                            <td>
+                                <apex:outputPanel rendered="{! currentTeamType = 'outbound' }">
+                                    <strong class="openLeads">Open:</strong> {! invalidLeadsOutboundOpen }  
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{! currentTeamType = 'inbound' }">
+                                    <strong class="openLeads">Open:</strong> {! invalidLeadsInboundOpen }   
+                                </apex:outputPanel>
+                            </td>   
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputPanel rendered="{! currentTeamType = 'outbound' }">
+                                    <strong class="contactedLeads">Contacted:</strong> {! invalidLeadsOutboundContacted }
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{! currentTeamType = 'inbound' }">
+                                    <strong class="contactedLeads">Contacted:</strong> {! invalidLeadsInboundContacted }    
+                                </apex:outputPanel>     
+                            </td>
+                        </tr>
+                        <tr style="display: {! IF(currentTeamType == 'inbound','','none') }">
+                            <td rowspan="2">
+                                <strong>JITB:</strong> {! invalidLeadsJITB }</td>
+                            <td>
+                                <strong class="openLeads">Open:</strong> {! invalidLeadsJITBOpen }
+                            </td>
+                        </tr>
+                        <tr style="display: {! IF(currentTeamType == 'inbound','','none') }">
+                            <td>
+                                <strong class="contactedLeads">Contacted:</strong> {! invalidLeadsJITBContacted }               
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </apex:pageBlock>
+</apex:page>

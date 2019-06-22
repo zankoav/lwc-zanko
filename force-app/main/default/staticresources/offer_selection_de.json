@@ -1,0 +1,67 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",
+	"block_header": "Sparen Sie mit FLEETCOR und unserem exklusiven Angebot für Sie",
+	"block_subheader": "Entscheiden Sie sich für das passende Angebot",
+	"selected_offer": "",
+	"non_home_offers": [
+		{
+			"name": "Rabatt an allen Shell-Stationen bundesweit",
+			"product_name": "Inbound Typ B",
+			"description": "Mit diesem Angebot tanken Sie deutschlandweit flexibel.",
+			"discount": "2 Cent Rabatt",
+			"discount_unit": "pro Liter",
+			"discount_location": "auf alle Shell-Stationen",
+			"label_of_details": "Details",
+			"details": [
+				{
+					"label": "Rabatt:",
+					"value": "2 Cent Rabatt pro Liter"
+				},
+				{
+					"label": "Zeitraum:",
+					"value": "Unbegrenzt"
+				},
+				{
+					"label": "Menge:",
+					"value": "Unbegrenzt"
+				},
+				{
+					"label": "Kraftstoffart:",
+					"value": "Diesel (alle Arten), Benzin (alle Arten), außer V-Power"
+				},
+				{
+					"label": "Gebiet:",
+					"value": "Deutschland"
+				},
+				{
+					"label": "Stationen:",
+					"value": "alle Shell-Stationen"
+				},
+				{
+					"label": "Kraftstoffpreis:",
+					"value": "Ottokraftstoffe – Säulenpreis, Diesel (Premiumkraftstoffe ausgeschlossen) - Tagesfestpreis"
+				}
+			],
+			"select_offer_button": {
+				"label": "Auswählen",
+				"status": "show-enabled",
+				"warning_message": "Sie haben bereits ein Sonderangebot ausgewählt."
+			},
+			"remove_offer_button": {
+				"label": "Löschen",
+				"status": "hide"
+			}
+		}
+	],
+	"continue_button": {
+		"label": "Weiter",
+		"remark": "Wählen Sie ein Sonderangebot um fortzufahren",
+		"disabled": ""
+	},
+	"back_button": {
+		"label": "Zurück",
+		"disabled": ""
+	}
+}

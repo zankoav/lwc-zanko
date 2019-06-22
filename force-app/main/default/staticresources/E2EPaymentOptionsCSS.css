@@ -1,0 +1,37 @@
+/*SELECT PAYMENT METHOD BLOCK START*/
+.b-grey-block {
+    margin: 32px 32px 5px 30px;
+    border: 1px solid rgba(128, 128, 128, 0.26);
+    background-color: #F5F5F5;
+}
+
+.b-grey-block .b-block-header {
+    margin: 20px 30px 5px 35px;
+}
+
+.b-grey-blockx .i-helper {
+    vertical-align: middle;
+}
+
+.b-grey-block .b-row-header {
+    margin: 5px 30px 15px 35px;
+}
+
+.b-grey-block .b-text {
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.b-grey-block .b-text-img {
+    margin-left: -15px;
+}
+
+.b-grey-block .agree {
+    margin: 25px 0 35px -12px;
+}
+
+.b-grey-block .agree .text {
+    margin-left: 57px;
+} 
+/*SELECT PAYMENT METHOD BLOCK END*/

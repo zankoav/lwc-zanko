@@ -7,27 +7,20 @@ import save from '@salesforce/apex/stepTaxIdController.save';
 export default class StepTaxId extends BaseStep {
 
     nameStep = "taxId";
-    @api source = "hzAijhWTmfwWZOe6zK0zSXE%2BQ62FzKkm/IOf1N%2Bwa7tKfnnxPNj1mxWf6%2BjbT6T4";
     @api stepContent;
     @api apexService;
 
     @track staticData;
     @track stateStep;
+    @track loading = true;
     continueButton;
 
     connectedCallback () {
-        document.cookie.split(";").forEach(next => {
-            console.log(next);
-            if (next.split("=")[0].trim().toLowerCase() === "source") {
-                this.source = next.split("=")[1];
-            }  
-        });
-        console.log("source = ",this.source);
-
+        console.log("step : ", this.nameStep);
         getState({ 
             stepContent: this.stepContent, 
             apexService: this.apexService, 
-            source : this.source 
+            source : this.opportunitySource 
         })
             .then( (result) => {  
                 this.staticData = result;
@@ -35,11 +28,14 @@ export default class StepTaxId extends BaseStep {
                     tax_id : this.staticData.tax_id.value,
                     continue_button : this.staticData.continue_button.disabled,
                     back_button : this.staticData.back_button.disabled,
+                    opportunity_id: this.staticData.opportunity_id,
+                    account_id: this.staticData.account_id,
                 }
                 this.loading = false;
+                console.log("static data = ", this.staticData);
             })
             .catch( error => {
-                console.log(error);
+                console.log("static load error : ",error);
             });
     }
 
@@ -79,17 +75,11 @@ export default class StepTaxId extends BaseStep {
         }
     }
 
-    backHandle () {
-        this.backStep();
-    }
-
     stepSubmit() {
         this.loading = true;
         save({
-            stepContent : this.stepContent, 
             apexService : this.apexService, 
-            source : this.source,
-            data : this.stateStep
+            stateStep : this.stateStep
         })
             .then( () => {
                 console.log("save complete!");

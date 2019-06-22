@@ -36,11 +36,24 @@ export default class FcButton extends LightningElement {
         }
     }
 
+
     @api setState(value) {
         if (value) {
             this.activate();
         } else {
             this.deactivate();
+        }
+    }
+
+
+    @api setVariant(variant) {
+        switch (variant) {
+            case 'gray':
+                this.className = `${BASE_CLASS_NAME} ${GRAY_CLASS_NAME}`;
+                break;
+            default:
+                this.className = BASE_CLASS_NAME;
+                break;
         }
     }
 

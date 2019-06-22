@@ -1,0 +1,104 @@
+<apex:page controller="DashboardKamAccToProcess" action="{! init }" sidebar="false" showHeader="false">
+	<style>
+		.buttonInvalidLeads {
+			color: #E84270 !important;
+			font-family: "Salesforce Sans", sans-serif;
+			font-size: 36px;
+			text-decoration: underline;
+		}
+
+		.kamAccInfoTable {
+			border-collapse: collapse;
+		}
+
+		.kamAccInfoTable td, 
+		.kamAccInfoTable th {
+			border: 1px solid #ccc;
+			padding: 5px;
+		}
+
+		.kamAccInfoTable th {
+			background: #ededed;
+			color: grey;
+			font-weight: bold;
+			text-align: center;
+		}
+
+		.kamAccInfoTable td {
+			color: #3f3f3f;
+		}
+
+		.card {
+			border: 1px solid #ededed;
+			width: 120px;
+			margin: 0 auto;
+			text-align: center;	
+			padding: 12px;
+			border-radius: 3px;
+			box-shadow: 0 3px 3px 0 #ccc;
+			color: #3f3f3f;
+		}
+    </style>
+    <apex:pageMessages />
+
+    <apex:pageBlock rendered="{! OR(currentUser.Profile.Name = 'Key Account Manager', currentUser.Profile.Name = 'Sales Director', 
+    								currentUser.Profile.Name == 'System Administrator') }" mode="maindetail">
+		<table width="100%" cellspacing="0" cellpadding="0" border="0">
+			<tr>
+				<td width="300px">
+					<div class="card">
+						<a href="/apex/AccountKamReport?userid={! currentUser }" class="buttonInvalidLeads" target="_blank">{! quantityAllAccounts }</a>
+						<p><strong>Accounts without meeting tasks</strong></p>
+					</div>	
+				</td>
+				<td>
+			        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="kamAccInfoTable">
+			            <tr>
+			                <th>Country</th>
+			                <th>Quantity</th>
+			            </tr>
+
+			            <tr>
+			            	<td>
+			            		<apex:outputPanel >
+			            			<strong>Germany:</strong>	
+			            		</apex:outputPanel>
+			            	</td>
+			            	<td>
+			            		<apex:outputPanel >
+			            			{! quantityAccountsGermany }	
+			            		</apex:outputPanel>
+			            	</td>           	
+			            </tr>
+
+			            <tr>
+			            	<td>
+			            		<apex:outputPanel >
+			            			<strong>Austria:</strong>	
+			            		</apex:outputPanel>
+			            	</td>
+			            	<td>
+			            		<apex:outputPanel >
+					 				{! quantityAccountsAustria }	
+			            		</apex:outputPanel>
+			            	</td>
+						</tr>
+
+						<tr>
+							<td>
+			            		<apex:outputPanel >
+			            			<strong>Switzerland-DE:</strong>
+			            		</apex:outputPanel>
+			            	</td>
+			            	<td>
+			            		<apex:outputPanel >
+									{! quantityAccountsSwitzerlandDE }	
+			            		</apex:outputPanel>
+			            	</td>
+						</tr>
+			        </table>
+				</td>
+			</tr>
+		</table>
+    </apex:pageBlock>
+</apex:page>

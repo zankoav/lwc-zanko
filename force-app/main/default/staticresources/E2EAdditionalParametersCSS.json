@@ -1,0 +1,5 @@
+.b-grey-block {
+    margin: 32px 32px 5px 30px;
+    border: 1px solid rgba(128, 128, 128, 0.26);
+    background-color: #F5F5F5;
+}

@@ -1,0 +1,2068 @@
+<apex:page language="ru" controller="E2EFormRuCtrl" action="{!init}" id="e2eFormRu" docType="html-5.0" sideBar="false" showHeader="false" standardStylesheets="false" cache="false">
+
+    <head>
+        <title>ППР – оформление договора онлайн на топливные карты.</title>
+        <!-- Analitic code -->
+        <apex:includeScript value="{!URLFOR($Resource.google_analitycs)}"/>
+        <apex:includeScript value="{!$Resource.jQuery}"/>
+        <apex:includeScript value="{!$Resource.jqueryInputMask}"/>
+        <apex:includeScript value="{!URLFOR($Resource.e2eRu_bootstrap_min_js)}"/>
+        <apex:includeScript value="{!URLFOR($Resource.e2eLiveAgentDeployment)}"/>
+        <apex:includeScript value="{!URLFOR($Resource.yandex_metrika)}"/>
+        <apex:includeScript value="{!$Resource.e2eRu_libs_min}"/>
+        <apex:includeScript value="{!$Resource.jquerymCustomScrollbar}"/>
+        <apex:includeScript value="{!$Resource.e2eRu_scripts}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.e2eRu_bootstrap_min_css)}"/>
+        <apex:stylesheet value="{! $Resource.e2eRu_libs_min_css }"/>
+        <apex:stylesheet value="{! $Resource.e2eRu_styles }"/>
+        <apex:stylesheet value="{! $Resource.e2eRu_style_main_compact }"/>
+        <apex:stylesheet value="{! $Resource.e2eRu_style_chat }"/>
+
+        <link rel="icon shortcut" href="{!URLFOR($Resource.e2eRu_images,'PPRFavicon.png')}" type="image/x-icon"/>
+        <style>
+
+                html,
+                body {
+                   height:100%;
+                }
+                #container {
+                   min-height:100%;
+                   position:relative;
+                }
+                #footer {
+                   position:absolute;
+                   box-sizing: border-box;
+                   background-color: #ececec;
+                   position: absolute;
+                   color: #636363;
+                   line-height: 24px;
+                   bottom: 0;
+                   left: 0;
+                   right: 0;
+                }
+
+                @font-face {
+                    font-family: Proxima Nova light;
+                    src: url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-light-webfont.eot')});
+                    src: url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-light-webfont.eot?#iefix')}) format('embedded-opentype'),
+                        url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-light-webfont.woff2')}) format('woff2'),
+                        url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-light-webfont.woff')}) format('woff'),
+                        url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-light-webfont.ttf')}) format('truetype'),
+                        url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-light-webfont.svg#icon')}) format('svg');
+                    font-weight: 300;
+                    font-style: normal
+                }
+
+                @font-face {
+                    font-family: Proxima Nova reg;
+                    src: url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-reg-webfont.eot')});
+                    src: url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-reg-webfont.eot?#iefix')}) format('embedded-opentype'),
+                        url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-reg-webfont.woff2')}) format('woff2'),
+                        url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-reg-webfont.woff')}) format('woff'),
+                        url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-reg-webfont.ttf')}) format('truetype'),
+                        url({!URLFOR($Resource.e2eRu_online_fonts,'proximanova-reg-webfont.svg#icon')}) format('svg');
+                    font-weight: 400;
+                    font-style: normal
+                }
+
+                .stetps__blocks-footer .st__bl-btn.next:after {
+                    right: 30px;
+                    background: url({!URLFOR($Resource.e2eRu_images, 'arrow.png')});
+                }
+
+                .js-tooltips-text:after {
+                    position: absolute;
+                    bottom: -12px;
+                    left: 60px;
+                    width: 21px;
+                    height: 13px;
+                    content: '';
+                    background: url({!URLFOR($Resource.e2eRu_images,'bottom_tooltip.png')});
+                }
+
+                .block__inputs-radio .block__inputs-radio--fake {
+                    position: absolute;
+                    right: 19px;
+                    width: 23px;
+                    height: 23px;
+                    background-image: url({!URLFOR($Resource.e2eRu_images,'fake__checkbox.png')});
+                    -webkit-box-flex: 0;
+                    -webkit-flex: 0 0 auto;
+                    -ms-flex: 0 0 auto;
+                    flex: 0 0 auto;
+                }
+
+                .block__inputs .block_checkbox .fake__checkbox {
+                    width: 23px;
+                    height: 23px;
+                    margin-right: 6px;
+                    background-image: url({!URLFOR($Resource.e2eRu_images, 'fake__checkbox.png')});
+                    -webkit-box-flex: 0;
+                    -webkit-flex: 0 0 auto;
+                    -ms-flex: 0 0 auto;
+                    flex: 0 0 auto;
+                }
+
+                .block__list li:after {
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    width: 12px;
+                    height: 8px;
+                    content: '';
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    background: url({!URLFOR($Resource.e2eRu_images,'mark.jpg')}) no-repeat left center;
+                }
+
+                .block__list li:after {
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    width: 12px;
+                    height: 8px;
+                    content: '';
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    background: url({!URLFOR($Resource.e2eRu_images,'mark.png')}) no-repeat left center;
+                }
+
+                .block__inputs-podr.print:before {
+                    left: -27px;
+                    width: 18px;
+                    height: 16px;
+                    background: url({!URLFOR($Resource.e2eRu_images,'print.jpg')}) no-repeat left center;
+                }
+
+                .block__inputs.goods .input__obl:after {
+                    position: absolute;
+                    top: 50%;
+                    right: 20px;
+                    width: 12px;
+                    height: 9px;
+                    content: '';
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    background: url({!URLFOR($Resource.e2eRu_images,'mark.png')});
+                }
+
+                .block__inputs.erase .input__obl:after {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 50%;
+                    right: 20px;
+                    width: 10px;
+                    height: 10px;
+                    content: '';
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    background: url({!URLFOR($Resource.e2eRu_images,'cross.png')});
+                }
+
+                .block__inputs-podr.views:before {
+                    left: -28px;
+                    width: 20px;
+                    height: 21px;
+                    background: url({!URLFOR($Resource.e2eRu_images,'pdf.jpg')}) no-repeat left center;
+               }
+
+                .ordering__steps-item {
+                    font-size: 14px;
+                    font-weight: 300;
+                    line-height: 45px;
+                    display: inline-block;
+                    float: left;
+                    width: 100%;
+                    max-width: 326px;
+                    height: 48px;
+                    cursor: default;
+                    text-align: center;
+                    letter-spacing: 0;
+                    background-image: url({!URLFOR($Resource.e2eRu_images,'step_new1.png')});
+                    background-repeat: no-repeat;
+                    background-position: left center;
+                }
+
+                .ordering__steps-finish {
+                    max-width: 326px;
+                    margin: 0 0 0 -19px;
+                    background-image: url({!URLFOR($Resource.e2eRu_images,'step-finish_new1.png')});
+                }
+
+                .ordering__steps-finish.active {
+                    background-image: url({!URLFOR($Resource.e2eRu_images,'step-finish-active_new1.png')});
+                }
+
+                .ordering__steps-one {
+                    background-image: url({!URLFOR($Resource.e2eRu_images,'step-start_new1.png')});
+                }
+
+                .block__inputs .input__obl .close {
+                    position: absolute;
+                    z-index: 5;
+                    top: 50%;
+                    right: 20px;
+                    width: 10px;
+                    height: 10px;
+                    cursor: pointer;
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    background:url({!URLFOR($Resource.e2eRu_images,'cross.png')});
+                    opacity: .6;
+                }
+
+                .stetps__blocks-footer .st__bl-btn.prev:after {
+                    left: 30px;
+                    background: url({!URLFOR($Resource.e2eRu_images,'prev.png')});
+                }
+
+                .goods_data:before {
+                    position: absolute;
+                    top: 2px;
+                    left: -2px;
+                    width: 30px;
+                    height: 30px;
+                    content: '';
+                    background: url({!URLFOR($Resource.e2eRu_images,'check.png')});
+                 }
+
+                .chat-header .close {
+                    width: 15px;
+                    height: 15px;
+                    color: #3F536E;
+                    opacity: 1;
+                    margin: 7px 5px 5px 0;
+                    background: url({!URLFOR($Resource.e2eRu_images, 'close2.png')}) no-repeat;
+                }
+
+                .ordering__steps-step.active {
+                    background-image:  url({!URLFOR($Resource.e2eRu_images,'step-active_new1.png')});
+                }
+
+
+                @media (max-width: 767.99px) {
+                    .tooltip-image {
+                        background:url({!URLFOR($Resource.e2eRu_images, 'caret-down.png')}) no-repeat;
+                        width: 16px;
+                        height: 16px;
+                        right: -25px;
+                    }
+
+                    .tooltip-image-textarea {
+                        right: 5px;
+                    }
+
+                    .tooltip-image-checkbox {
+                        right: -5px;
+                    }
+                }
+
+                @media (min-width: 768px) {
+                    .tooltip-image {
+                        background:url({!URLFOR($Resource.e2eRu_images, 'tooltip-green.png')}) no-repeat;
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+
+                .arrow-up {
+                    background:url({!URLFOR($Resource.e2eRu_images, 'caret-up.png')}) no-repeat;
+                }
+
+                .arrow-down {
+                    background:url({!URLFOR($Resource.e2eRu_images, 'caret-down.png')}) no-repeat;
+                }
+
+
+                .clearable{
+                  background: #fff url({!URLFOR($Resource.e2eRu_images, 'cross.png')}) no-repeat right -20px center;
+                  border: 1px solid #999;
+                  padding: 3px 25px 3px 4px;     /* Use the same right padding (18) in jQ! */
+                  border-radius: 3px;
+                  transition: background 0.4s;
+                }
+                .clearable.x  { background-position: right 22px center; } /* (jQ) Show icon */
+                .clearable.onX{ cursor: pointer; }              /* (jQ) hover cursor style */
+                .clearable::-ms-clear {display: none; width:0; height:0;} /* Remove IE default X */
+
+                @keyframes spinner {
+                  to {transform: rotate(360deg);}
+                }
+
+                .spinner:before {
+                  content: '';
+                  box-sizing: border-box;
+                  position: absolute;
+                  width: 20px;
+                  height: 20px;
+                  margin-top: -10px;
+                  border-radius: 50%;
+                  border: 2px solid #ccc;
+                  border-top-color: #333;
+                  animation: spinner .6s linear infinite;
+                }
+
+                .disabled-div {
+                    pointer-events: none;
+                    opacity: 0.4;
+                    background-color: #ececec;
+                }
+
+                .lds-spinner {
+                  color: official;
+                  display: inline-block;
+                  width: 30px;
+                  height: 30px;
+                  margin-bottom: 12px;
+                }
+                .lds-spinner div {
+                  transform-origin: 25px 25px;
+                  animation: lds-spinner 1.2s linear infinite;
+                }
+                .lds-spinner div:after {
+                  content: " ";
+                  display: block;
+                  position: absolute;
+                  top: 14px;
+                  left: 24px;
+                  width: 2px;
+                  height: 7px;
+                  border-radius: 3%;
+                  background: #000;
+                }
+                .lds-spinner div:nth-child(1) {
+                  transform: rotate(0deg);
+                  animation-delay: -1.1s;
+                }
+                .lds-spinner div:nth-child(2) {
+                  transform: rotate(30deg);
+                  animation-delay: -1s;
+                }
+                .lds-spinner div:nth-child(3) {
+                  transform: rotate(60deg);
+                  animation-delay: -0.9s;
+                }
+                .lds-spinner div:nth-child(4) {
+                  transform: rotate(90deg);
+                  animation-delay: -0.8s;
+                }
+                .lds-spinner div:nth-child(5) {
+                  transform: rotate(120deg);
+                  animation-delay: -0.7s;
+                }
+                .lds-spinner div:nth-child(6) {
+                  transform: rotate(150deg);
+                  animation-delay: -0.6s;
+                }
+                .lds-spinner div:nth-child(7) {
+                  transform: rotate(180deg);
+                  animation-delay: -0.5s;
+                }
+                .lds-spinner div:nth-child(8) {
+                  transform: rotate(210deg);
+                  animation-delay: -0.4s;
+                }
+                .lds-spinner div:nth-child(9) {
+                  transform: rotate(240deg);
+                  animation-delay: -0.3s;
+                }
+                .lds-spinner div:nth-child(10) {
+                  transform: rotate(270deg);
+                  animation-delay: -0.2s;
+                }
+                .lds-spinner div:nth-child(11) {
+                  transform: rotate(300deg);
+                  animation-delay: -0.1s;
+                }
+                .lds-spinner div:nth-child(12) {
+                  transform: rotate(330deg);
+                  animation-delay: 0s;
+                }
+                @keyframes lds-spinner {
+                  0% {
+                    opacity: 1;
+                  }
+                  100% {
+                    opacity: 0;
+                  }
+                }
+
+                .ppr-header #desktop-free-service {display: inline-block;}
+                .ppr-header #mobile-free-service {display: none;}
+
+                .ppr-header #desktop-free-service.none {display: none;}
+                .ppr-header #mobile-free-service.none {display: none;}
+
+                .form-e2e {
+                    padding-bottom:210px;
+                }
+
+                @media (max-width: 767.99px){
+                    .ppr-header #desktop-free-service {display: none;}
+                    .ppr-header #mobile-free-service {display: block; padding: 0 20px; margin: 0 auto;}
+
+                    .ppr-header {
+                        font-size: 30px;
+                        font-weight: 400;
+                        line-height: 30px;
+                        font-family: Proxima Nova reg, Arial, Helvetica, sans-serif;
+                    }
+                    .form-e2e {
+                        padding-bottom: 220px;
+                    }
+
+                    #footer {
+                        height: 210px;
+                        margin-top: -380px;
+                        padding-top: 32px;
+                        text-align: center;
+                    }
+                }
+
+                @media only screen and (min-width: 1025px) {
+                    #footer {
+                        height: 200px;
+                        margin-top: -439px;
+                        padding-top: 63px;
+                    }
+                }
+
+                .glyphicon-gift-icon {
+                    width: 13px;
+                    height: 14px;
+                    background:url({!URLFOR($Resource.e2eRu_images, 'glyphicon-gift-color.png')}) no-repeat;
+                    display: inline-block;
+                }
+
+            </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                try{
+                ga('create', 'UA-45708837-1', 'auto', {'allowLinker': true});
+                ga('set', 'Visitor_id', '5785dd1398c42110fae6b130a88e0d4f');
+                ga('set', 'dimension1', '5785dd1398c42110fae6b130a88e0d4f');
+                ga('set', 'dimension2', 'none');
+                ga('require', 'linker');
+                ga('linker:autoLink',  ['online.petrolplus.ru', 'old-online.petrolplus.ru', 'petrolplus.ru']  );
+                ga('send', 'pageview');} catch(e){};
+
+            </script>
+        <script>
+                var isSole = false;
+                var allowPayOverdraft = false;
+
+                //Function is used to get splash status bar when server side call is going on
+                function startSplash() {
+                    document.getElementById('splashDiv').style.display='table-cell';
+                    jQuery('.lightbox').fadeIn(50);
+                    $('html, body').css({
+                        overflow: 'hidden',
+                        height: 'auto'
+                    });
+                    $("body").css("padding-right", "17px");
+                }
+
+                //Function will make the splash status to be stopped.
+                function endSplash() {
+                    document.getElementById('splashDiv').style.display='none';
+                    jQuery('.lightbox').fadeOut(50);
+                    $('html, body').css({
+                        overflow: '',
+                        height: ''
+                    });
+                    $("body").css("padding-right", "");
+                    /*footerPosition();*/
+                }
+
+                function startPayOverdraftSplash() {
+                    allowPayOverdraft = false;
+                    $('#payOverdraftLabel').css('margin-bottom', -2);
+                    $('#payOverdraft').hide();
+                    $('.pay-overdraft-spinner').show();
+                }
+
+                function stopPayOverdraftSplash() {
+                    if (allowPayOverdraft == true) {
+                        $('#payOverdraft').show();
+                    } else {
+                        $('#payOverdraft').hide();
+                    }
+                    $('.pay-overdraft-spinner').hide();
+                    $('#payOverdraftLabel').css('margin-bottom', 15);
+                }
+            </script>
+        <apex:stylesheet value="{!URLFOR($Resource.E2ESpinner, 'spinner.css')}"/>
+
+    </head>
+    <!-- <apex:actionFunction id="setupChatInit" name="setupChatInit"
+                             onComplete="setupChatInitialization('{!chatURL}','{!chatDeploymentId}','{!$Organization.Id}'.slice(0,-3),
+                                         '{!chatButtonId}','','','','','','{!activeStep}','');" reRender="setupChatInit" />-->
+    <body>
+    <div id="container">
+        <apex:form id="form" html-autocomplete="off" styleClass="form-e2e">
+            <apex:outputPanel id="onlineChatBlock">
+                <script>
+                function setupChatInit(){
+                    setupChatInitialization('{!chatURL}','{!chatDeploymentId}','{!$Organization.Id}'.slice(0,-3),'{!chatButtonId}','','','','','','{!activeStep}','');
+                }
+                function setupOnlineChat(){
+                    startOnlineChat('{!chatURL}','{!chatDeploymentId}','{!chatDeploymentJsURL}','{!$Organization.Id}'.slice(0,-3),'{!chatButtonId}',
+                                               '{!contactId}'.slice(0,-3),'{!opportunityId}'.slice(0,-3),'{!accountId}'.slice(0,-3),
+                                               '{!chatFirstMessage}','','{!activeStep}','manual');
+                    return false;
+                }
+
+                function setupOnlineAutoChat(){
+                    startOnlineChat('{!chatURL}','{!chatDeploymentId}','{!chatDeploymentJsURL}','{!$Organization.Id}'.slice(0,-3),'{!chatButtonId}',
+                                               '{!contactId}'.slice(0,-3),'{!opportunityId}'.slice(0,-3),'{!accountId}'.slice(0,-3),
+                                               '{!chatFirstMessage}','','{!activeStep}','automatical');
+                    return false;
+                }
+
+                function executeSetOpportunityFlagChat(modeOfChat){
+                    setOpportunityFlagChat('{!opportunityId}', '', '{!activeStep}', modeOfChat);
+                }
+
+                function executeSaveOfflineChat(offlineChatBody){
+                    saveOfflineChat('{!opportunityId}','{!contactId}', '', '{!activeStep}', offlineChatBody);
+                }
+            </script>
+
+            </apex:outputPanel>
+
+            <apex:outputPanel id="startStepBlock">
+                <!--<apex:actionFunction name="setStartStep" reRender="startStepBlock" onComplete="setActiveStep('{!activeStep}');footerPosition();" />-->
+                <apex:actionFunction name="setStartStep" reRender="startStepBlock" onComplete="setActiveStep('{!activeStep}');footerPosition();" />
+            </apex:outputPanel>
+
+            <apex:actionFunction name="setDeviceType" action="{! setDeviceType }" onComplete="console.log('device ok');">
+                <apex:param id="param0" name="deviceType" value="" />
+            </apex:actionFunction>
+
+            <!-- Yandex.Metrika counter -->
+            <script type="text/javascript" >
+                (function (d, w, c) {
+                    (w[c] = w[c] || []).push(function() {
+                        try {
+                            w.yaCounter1965880 = new Ya.Metrika2({
+                                id:1965880,
+                                clickmap:true,
+                                trackLinks:true,
+                                accurateTrackBounce:true,
+                                webvisor:true
+                            });
+                        } catch(e) { }
+                    });
+
+                    var n = d.getElementsByTagName("script")[0],
+                        s = d.createElement("script"),
+                        f = function () { n.parentNode.insertBefore(s, n); };
+                    s.type = "text/javascript";
+                    s.async = true;
+                    s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+                    if (w.opera == "[object Opera]") {
+                        d.addEventListener("DOMContentLoaded", f, false);
+                    } else { f(); }
+                })(document, window, "yandex_metrika_callbacks2");
+            </script>
+            <noscript><div><img src="https://mc.yandex.ru/watch/1965880" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+            <!-- /Yandex.Metrika counter -->
+
+            <!-- UTM metrics -->
+            <apex:inputHidden id="utmMedium" value="{!formParams.utmMedium}"/>
+            <apex:inputHidden id="utmSource" value="{!formParams.utmSource}"/>
+            <apex:inputHidden id="utmCampaign" value="{!formParams.utmCampaign}"/>
+            <apex:inputHidden id="utmTerm" value="{!formParams.utmTerm}"/>
+            <apex:inputHidden id="utmContent" value="{!formParams.utmContent}"/>
+            <apex:inputHidden id="websitePageForm" value="{!formParams.websitePageForm}"/>
+            <apex:inputHidden id="splitTesting" value="{!formParams.splitTesting}"/>
+
+            <script type="text/javascript">
+                function queryParam(name, url) {
+                    if (!url) url = window.location.href;
+                    url = url.replace('UTM_SOURCE', 'utm_source').replace('UTM_CAMPAIGN', 'utm_campaign').replace('UTM_MEDIUM', 'utm_medium').replace('UTM_CONTENT', 'utm_content').replace('UTM_TERM', 'utm_term');
+                    name = name.replace(/[\[\]]/g, "\\$&");
+                    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                        results = regex.exec(url);
+                    if (!results) return null;
+                    if (!results[2]) return '';
+                    return decodeURIComponent(results[2].replace(/\+/g, " "));
+                }
+
+                function commonUrlParam(param){
+                    var url_string = window.location.href;
+                    var url = new URL(url_string);
+                    var split = url.searchParams.get(param);
+                    if(split == null){
+                         return '';
+                    } else {
+                        return split;
+                    }
+                }
+
+                function setCookie(utm, utmvar, exdays) {
+                    var d = new Date();
+                    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                    var expires = "expires="+ d.toUTCString();
+                    var val = (utmvar == null || utmvar == undefined) ? " " : utmvar;
+                    document.cookie = utm + "=" + val + ";" + expires + ";path=/";
+                }
+
+                function getCookie(utm) {
+                    var name = utm + "=";
+                    var ca = document.cookie.split(';');
+                    for(var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                            c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                            return c.substring(name.length, c.length);
+                        }
+                    }
+                    return "";
+                }
+
+                function getCookieURL(website_page) {
+                    var name = website_page + "=";
+                    var ca = document.cookie.split(';');
+                    for(var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                            c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                            return c.substring(name.length, c.length);
+                        }
+                    }
+                    return "";
+                }
+
+                function getQueryStringVariables(){
+                    return {
+                        source: queryParam('utm_source'),
+                        campaign: queryParam('utm_campaign'),
+                        medium: queryParam('utm_medium'),
+                        content: queryParam('utm_content'),
+                        term: queryParam('utm_term'),
+                        website: window.location.href,
+                        split: commonUrlParam('split')
+                    }
+                }
+
+                function isQueryStringSet(){
+                    var queryStringVariables = getQueryStringVariables();
+                    if (queryStringVariables.source ||
+                        queryStringVariables.campaign ||
+                        queryStringVariables.medium ||
+                        queryStringVariables.content ||
+                        queryStringVariables.term) {
+                        return true;
+                    }
+                    return false;
+                }
+
+                function fetchCookieData() {
+                    return {
+                        source: getCookie("utm_source"),
+                        campaign: getCookie("utm_campaign"),
+                        medium: getCookie("utm_medium"),
+                        content: getCookie("utm_content"),
+                        term: getCookie('utm_term'),
+                        website: getCookieURL('website_page_form'),
+                        split: getCookie('split')
+                    };
+                };
+
+                function updateCookie() {
+                    var queryStringVariables = getQueryStringVariables();
+                    if (isQueryStringSet()) {
+                        setCookie("utm_source", queryStringVariables.source, 7);
+                        setCookie("utm_campaign", queryStringVariables.campaign, 7);
+                        setCookie("utm_medium", queryStringVariables.medium, 7);
+                        setCookie("utm_content", queryStringVariables.content, 7);
+                        setCookie("utm_term", queryStringVariables.term, 7);
+                        setCookie("website_page_form", queryStringVariables.website, 7);
+                    }
+                    if(queryStringVariables.split != ''){
+                        /*console.log('split ' + commonUrlParam('split'));*/
+                        setCookie("split", queryStringVariables.split, 7);
+                    }
+                }
+                updateCookie();
+
+                var cookieData = fetchCookieData();
+                /*console.log(cookieData);*/
+                $j('[id$=utmMedium]').val(cookieData.medium); /* Campaign_Medium */
+                $j('[id$=utmSource]').val(cookieData.source); /* Campaign_Source */
+                $j('[id$=utmCampaign]').val(cookieData.campaign); /* Campaign_CampaignName */
+                $j('[id$=utmTerm]').val(cookieData.term); /* Campaign_Term */
+                $j('[id$=utmContent]').val(cookieData.content); /* Campaign_Content */
+                $j('[id$=websitePageForm]').val(cookieData.website); /* Website Page Form */
+
+                if(cookieData.split != ''){
+                    $j('[id$=splitTesting]').val(cookieData.split); /* Website Page Form */
+                }
+
+            </script>
+            <!-- /UTM metrics -->
+
+            <apex:outputPanel layout="block" styleClass="ppr-header">
+                <apex:outputPanel layout="block" styleClass="default" style="padding: 30px 0px 30px 0px;">
+                    <div>
+                        <a target="_blank" style="text-decoration: none;" rel="noopener noreferrer" href="https://www.petrolplus.ru/">
+                            <img src="{!URLFOR($Resource.e2eRu_images, 'ppr-logo.png')}" alt="ppr-logo.png" height="73px"/>
+                        </a>
+                        <div id="desktop-free-service" class="{!if(formParams.sourcePP == '','','none')}">
+                            <img src="{!URLFOR($Resource.e2eRu_images, 'free-service-full.png')}" alt="free-service-full.png" height="125px"/>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel layout="block" styleClass="ppr-header-line" />
+                <div id="mobile-free-service" class="{!if(formParams.sourcePP == '','','none')}">
+                    <img style="max-width:100%;" src="{!URLFOR($Resource.e2eRu_images, 'free-service-mob.png')}" alt="free-service-mob.png"/>
+                </div>
+                <apex:outputPanel id="cards_header" layout="block">
+                    <apex:outputPanel layout="block" style="text-align:center;" styleClass="default {! IF(activeStep == 'Congratulations' || activeStep == 'CompanyInformation' || activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || errorStep != null, 'header-lock','')}">
+                        <apex:outputText escape="false"  value="{! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['CARDS REQUEST'].Value__c }"/>
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="block" style="text-align:center;" styleClass="default {! IF(activeStep == 'ContactDetails' || activeStep == 'Congratulations', 'header-lock','')}">
+                        <apex:outputText escape="false" value="{! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['CARDS ORDER'].Value__c }"/>
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="block" style="text-align:center;" styleClass="default {! IF(activeStep == 'ContactDetails' || activeStep == 'CompanyInformation' || activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || errorStep != null, 'header-lock','')}">
+                        <apex:outputText escape="false" value="{! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['CARDS CONTRACT'].Value__c }"/>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            <div class="ordering">
+                <div class="default">
+                    <apex:outputPanel layout="block" id="ordering__steps" styleClass="{! IF(activeStep == 'ContactDetails' || activeStep == 'Congratulations' , 'header-lock','')}">
+                        <apex:outputPanel layout="block" styleClass="ordering__steps" rendered="{! IF(activeStep == 'ErrorMessage', FALSE, TRUE)}">
+                            <apex:outputPanel layout="block" styleClass="ordering__steps-item ordering__steps-one {! IF(activeStep == 'CompanyInformation' || activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations' , 'active','')}">
+                                <apex:outputPanel >{! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['COMPANY INFORMATION HEADER'].Value__c }</apex:outputPanel>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="block" styleClass="ordering__steps-item ordering__steps-step {! IF(activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations' , 'active','')}">
+                                <apex:outputPanel >{! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['ORDER INFORMATION HEADER'].Value__c }</apex:outputPanel>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="block" styleClass="ordering__steps-item ordering__steps-finish {! IF(activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations' , 'active','')}">
+                                <apex:outputPanel >{! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['LEGAL DETAILS HEADER'].Value__c }</apex:outputPanel>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+
+                    <apex:actionStatus id="splashStatus" onstart="startSplash();" onstop="endSplash(); "/>
+                    <div class="splashStatus" id="splashDiv" >
+                        <div class="circle"><img src="{!URLFOR($Resource.e2eRu_images, 'spin.gif')}" alt="spin"/></div>
+                    </div>
+
+                    <div class="lightbox"></div>
+
+                    <apex:outputPanel layout="block" id="formBlock">
+                        <!-- STEP 1 CONTACT DETAILS -->
+                        <apex:outputPanel id="step1" layout="block" styleClass="step-contact-details stetps__blocks {! IF(activeStep == 'Congratulations', 'steps-lock','') }">
+                            <apex:outputPanel layout="block" styleClass="headers__stepts {! IF(activeStep == 'ContactDetails' || activeStep == 'CompanyInformation' || activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations' , 'header-is-active','')}">
+                                <span>{! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['CONTACT DETAILS HEADER'].Value__c }</span>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel rendered="{!IF(activeStep == 'ContactDetails' || activeStep == 'CompanyInformation' || activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations', TRUE, FALSE)}" layout="block"  styleClass="stetps__blocks_container">
+                                <apex:outputPanel layout="block" styleClass="stetps__blocks-content">
+                                    <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['CONTACT DETAILS'].fields }"
+                                                                field="MOBILE NUMBER"
+                                                                firstClass="block__inputs validations"
+                                                                secondClass="input__obl"
+                                                                inputClass="phoneNumber clearable"
+                                                                errorClass="error--text"
+                                                                maxLength="18"
+                                                                inputType="tel"
+                                                                position="bottom"/>
+                                    <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['CONTACT DETAILS'].fields }"
+                                                                field="EMAIL ADDRESS"
+                                                                firstClass="block__inputs validations"
+                                                                secondClass="input__obl"
+                                                                inputClass="emailAddress clearable"
+                                                                errorClass="error--text"
+                                                                maxLength="80"
+                                                                inputType="email"
+                                                                position="top"/>
+                                    <c:E2EComponentCheckboxWithCommandLink pageMap="{! pagesContentMap['CONTACT DETAILS'].fields }"
+                                                                           field="PERSONAL INFORMATION"
+                                                                           blockClass="block__inputs zero-margin"
+                                                                           validationClass="block_checkbox validations"
+                                                                           bottomDivClass="df"
+                                                                           className="personal_data_agreement"
+                                                                           errorClass="error--text"
+                                                                           firstTextPart="{! pagesContentMap['CONTACT DETAILS'].fields['PERSONAL INFORMATION'].elementItemsMap['LABEL'].Value__c }"
+                                                                           actionFunctionValue="{! pagesContentMap['CONTACT DETAILS'].fields['PERSONAL INFORMATION'].elementItemsMap['LINK LABEL'].Value__c }"
+                                                                           onClick="showPersonalInfoPolicy(); return false;"
+                                                                           actionFunctionClass="label-link-margin"
+                                                                           target="myModal"/>
+                                    <c:E2EComponentCheckboxWithCommandLink pageMap="{! pagesContentMap['CONTACT DETAILS'].fields }"
+                                                                           field="MARKETING DISPATCH"
+                                                                           blockClass="block__inputs zero-margin"
+                                                                           validationClass="block_checkbox validations "
+                                                                           bottomDivClass="df"
+                                                                           className="block__inputs validations agreement-to-receive-information"
+                                                                           errorClass="error--text"
+                                                                           firstTextPart="{! pagesContentMap['CONTACT DETAILS'].fields['MARKETING DISPATCH'].elementItemsMap['LABEL'].Value__c }"
+                                                                           actionFunctionValue="{! pagesContentMap['CONTACT DETAILS'].fields['MARKETING DISPATCH'].elementItemsMap['LINK LABEL'].Value__c }"
+                                                                           onClick="showSalesPromotion(); return false;"
+                                                                           actionFunctionClass="label-link-margin"
+                                                                           target="myModal"/>
+                                    <apex:inputHidden id="userDetector" value="{!formParams.companyFullNameDadata}" />
+                                    <c:E2EComponentModal pageMap="{! pagesContentMap['CONTACT DETAILS'].fields }"
+                                                         field="PERSONAL INFORMATION POLICY"
+                                                         target="myModal"
+                                                         buttonClass="modal-button preview-inside-button"
+                                                         modalClass="print-document-body"/>
+
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="block" styleClass="stetps__blocks-footer">
+                                    <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['NEXT STEP'].Value__c }"
+                                                          onclick="try{ga('send', 'event', 'button', 'click', 'next_1'); yaCounter1965880.reachGoal('button_next_1');} catch(e){}; validateContactDetails(); return false;"
+                                                          firstClass="component-button"
+                                                          className="st__bl-btn next go-next-step"
+                                                          buttonClass="st__bl-btn next-button"/>
+                                    <apex:actionFunction id="goToCompanyDetails"
+                                                         name="goToCompanyDetails"
+                                                         action="{!goToCompanyDetails}"
+                                                         oncomplete="try{ga('send', 'event', 'form', 'complete', 'step_1'); yaCounter1965880.reachGoal('step_1');} catch(e){}; setEvents_companyDetails(); switchDaDaOn(); setActiveStep('{!activeStep}');"
+                                                         status="splashStatus"
+                                                         reRender="step2, step3, legalAndPaymentDetails, ordering__steps, goToCompanyDetails, onlineChatBlock, errorProcessing, cards_header" />
+                                    <apex:actionFunction id="updateContactPhone"
+                                                         name="updateContactPhone"
+                                                         action="{! updateContactPhone }"
+                                                         status="splashStatus"
+                                                         oncomplete="checkPersonalDataAgreement(); return false;"/>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+
+                        <!-- STEP 2 COMPANY INFORMATION -->
+                        <apex:outputPanel id="step2" layout="block" styleClass="step-company-information stetps__blocks {! IF(activeStep == 'ContactDetails' || activeStep == 'Congratulations', 'steps-lock','')}">
+                            <apex:outputPanel layout="block" styleClass="headers__stepts {! IF(activeStep == 'CompanyInformation' || activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations' , 'header-is-active','')}">
+                                <span>1 / 3 {! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['COMPANY INFORMATION HEADER'].Value__c }</span>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel rendered="{!IF(activeStep == 'CompanyInformation' || activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations', TRUE, FALSE)}" layout="block" styleClass="stetps__blocks_container">
+                                <apex:outputPanel id="companyDetailsInner" layout="block" styleClass="stetps__blocks-content">
+                                    <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['COMPANY INFORMATION'].fields }"
+                                                                field="ACCOUNT NAME"
+                                                                firstClass="block__inputs search validations"
+                                                                secondClass="input__obl"
+                                                                inputClass="searchCompany uppercase-class clearable"
+                                                                errorClass="error--text"
+                                                                maxLength="50"
+                                                                inputType="text"
+                                                                position="bottom"/>
+                                    <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['COMPANY INFORMATION'].fields }"
+                                                                field="INN"
+                                                                firstClass="block__inputs validations"
+                                                                secondClass="input__obl"
+                                                                inputClass="companyInn clearable"
+                                                                errorClass="error--text"
+                                                                maxLength="12"
+                                                                inputType="text"
+                                                                position="top"/>
+                                    <c:E2EComponentCheckbox pageMap="{! pagesContentMap['COMPANY INFORMATION'].fields }"
+                                                            field="IS MANUAL ENTRY"
+                                                            blockClass="block__inputs zero-margin"
+                                                            validationClass="block_checkbox validations"
+                                                            bottomDivClass="df"
+                                                            className="companyNotExist"
+                                                            firstTextPart="{! pagesContentMap['COMPANY INFORMATION'].fields['IS MANUAL ENTRY'].elementItemsMap['LABEL'].Value__c }"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="block" styleClass="stetps__blocks-footer">
+                                    <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['PREVIOUS STEP'].Value__c }"
+                                                          onclick="try{ga('send', 'event', 'button', 'click', 'back_2'); yaCounter1965880.reachGoal('button_back_2');} catch(e){}; prepareBackToContactDetails(); return false;"
+                                                          firstClass="component-button"
+                                                          className="st__bl-btn prev"
+                                                          buttonClass="st__bl-btn prev-button"/>
+                                    <apex:actionFunction id="backToContactDetails"
+                                                         name="backToContactDetails"
+                                                         action="{!backToContactDetails}"
+                                                         onComplete="setActiveStep('{!activeStep}');"
+                                                         reRender="ordering__steps, backToContactDetails, onlineChatBlock" />
+                                    <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['ORDER CARDS'].Value__c }"
+                                                          onclick="try{ga('send', 'event', 'button', 'click', 'next_2'); yaCounter1965880.reachGoal('button_next_2');} catch(e){}; validateCompanyDetails(); return false;"
+                                                          firstClass="component-button"
+                                                          className="st__bl-btn next go-next-step"
+                                                          buttonClass="st__bl-btn order-button"/>
+                                    <apex:actionFunction id="goToOrderInformation"
+                                                         name="goToOrderInformation"
+                                                         action="{!goToOrderInformation}"
+                                                         onComplete="try{ga('send', 'event', 'form', 'complete', 'step_2'); yaCounter1965880.reachGoal('step_2');} catch(e){}; setActiveStep('{!activeStep}'); setEvents_order(); sparkRequest('{! opportunityId }', '{!formDataId}', '{!formParams.deduplicationStatus}'); animateScrollToTop('step-order-information');"
+                                                         status="splashStatus"
+                                                         reRender="step3, ordering__steps, goToOrderInformation, onlineChatBlock, errorProcessing, cards_header" />
+                                    <apex:actionFunction id="isManualEntryFunction"
+                                                         name="isManualEntryFunction"
+                                                         onComplete="setEvents_companyDetails(); setActiveStep('{!activeStep}'); switchDaDaOn();"
+                                                         reRender="companyDetailsInner"
+                                                         status="splashStatus"/>
+                                    <apex:actionFunction id="isManualEntryFunctionDaDataOff"
+                                                         name="isManualEntryFunctionDaDataOff"
+                                                         onComplete="setEvents_companyDetails(); setActiveStep('{!activeStep}'); companyDetailsManualEntryEvents();"
+                                                         reRender="companyDetailsInner"
+                                                         status="splashStatus"/>
+                                </apex:outputPanel>
+                                <apex:inputHidden id="companyInformationFullName" value="{!formParams.companyFullNameDadata}" />
+                                <apex:inputHidden id="soleProprietorLegalAddress" value="{!formParams.legalAddressSpark}" />
+                                <apex:inputHidden id="isSoleProprietor" value="{!formParams.isSoleProprietor}"/>
+                                <apex:inputHidden id="companyInfoSpark" value="{!companyInfoSpark}"/>
+                                <apex:inputHidden id="soleInfoSpark" value="{!soleInfoSpark}"/>
+                                <apex:inputHidden id="blackListDecision" value="{!formParams.verifiedDecisionCode}"/>
+                                <apex:inputHidden id="opportunityLostReason" value="{!formParams.opportunityLostReason}"/>
+                                <apex:inputHidden id="sendToInbound" value="{!formParams.sendToInbound}"/>
+                                <apex:inputHidden id="checkedInBlackList" value="{!formParams.checkedInBlackList}"/>
+                                <apex:inputHidden id="scoringPassed" value="{!formParams.scoringPassed}"/>
+                                <apex:inputHidden id="scoringDecision" value="{!formParams.scoringDecision}"/>
+                                <apex:inputHidden id="scoringDecisionCode" value="{!formParams.scoringDecisionCode}"/>
+                                <apex:inputHidden id="executiveId" value="{!formParams.executiveId}"/>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+
+                        <!-- STEP 3 Order Information -->
+                        <apex:outputPanel id="step3" layout="block" styleClass="step-order-information stetps__blocks {! IF(activeStep == 'ContactDetails' || activeStep == 'Congratulations', 'steps-lock','')}">
+                            <apex:outputPanel layout="block" styleClass="headers__stepts {! IF(activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations' , 'header-is-active','')}">
+                                <span>2 / 3 {! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['ORDER INFORMATION HEADER'].Value__c }</span>
+                            </apex:outputPanel>
+                            <apex:outputPanel id="step3-1" layout="block" rendered="{!IF( activeStep == 'Order' || activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations', TRUE, FALSE)}" styleClass="stetps__blocks_container step-3-1">
+                                <apex:outputPanel layout="block" styleClass="stetps__blocks-content">
+                                    <apex:outputPanel layout="block" styleClass="{!IF(productNotChange == true, '', 'promocode-lock')}">
+                                        <c:E2EComponentOutputOrderDetail pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                         field="PRODUCTS"/>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="block" styleClass="{!IF(productNotChange == false, '', 'promocode-lock')}">
+                                        <c:E2EComponentInputList pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                 field="PRODUCTS"
+                                                                 offer="{! offer }"
+                                                                 firstClass="block__inputs validations goods"
+                                                                 secondClass="input__obl"
+                                                                 inputClass="js-product"
+                                                                 maxLength="50"
+                                                                 inputType="text" />
+                                    </apex:outputPanel>
+                                    <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                field="AMOUNT CARD"
+                                                                firstClass="block__inputs validations"
+                                                                secondClass="input__obl"
+                                                                maxLength="3"
+                                                                inputType="tel"
+                                                                errorClass="error--text"
+                                                                inputClass="js-count-cart scroll__error"
+                                                                position="top"/>
+
+                                    <apex:outputPanel layout="block" styleClass="stetps__blocks_hide">
+
+                                        <apex:outputPanel layout="block" styleClass="block__inputs">
+                                            <apex:outputPanel styleClass="block__inputs--title mob__hide">
+                                                {! pagesContentMap['ORDER'].fields['SELECT TARIFF'].elementItemsMap['LABEL'].Value__c}
+                                            </apex:outputPanel>
+                                            <div id="TariffErrorDesktop" align="center" class="mob__hide error--text">{! pagesContentMap['ORDER'].fields['SELECT TARIFF'].elementItemsMap['ERROR'].Value__c}</div>
+
+                                            <apex:outputPanel layout="block" id="tariffsPropertiesMobile" styleClass="stetps__blocks_hide_mobile">
+                                                <apex:outputPanel layout="block" styleClass="block__inputs validations">
+                                                    <c:E2EComponentLabel pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                         field="SELECT TARIFF" />
+                                                    <apex:outputPanel layout="block" styleClass="block__inputs-flex">
+                                                        <div id="TariffErrorMobile" class="error--text">{! pagesContentMap['ORDER'].fields['SELECT TARIFF'].elementItemsMap['ERROR'].Value__c}</div>
+                                                        <c:E2EComponentTariffPills pageMap="{! msl_suffix }"/>
+                                                    </apex:outputPanel>
+                                                </apex:outputPanel>
+                                            </apex:outputPanel>
+
+                                            <apex:outputPanel layout="block" id="tariffsPropertiesDesktop" styleClass="tariffs-block">
+                                                <apex:outputPanel layout="block" id="isTariffsSeparation" style="display: none;">
+                                                    {! formParams.numberOfTariffsDependency }
+                                                </apex:outputPanel>
+                                                <apex:outputPanel layout="block" id="currentNumberOfCards" style="display: none;">
+                                                    {! pagesContentMap['ORDER'].fields['AMOUNT CARD'].elementItemsMap['DEFAULT VALUE'].Value__c }
+                                                </apex:outputPanel>
+                                                <c:E2EComponentCarouselTariffs pageMap="{! msl_suffix }"/>
+                                                <c:E2EComponentModal pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                     field="{! formParams.product }"
+                                                                     target="DiscountsModal"
+                                                                     buttonClass="modal-button preview-inside-button"
+                                                                     modalClass="print-discounts-body"/>
+                                            </apex:outputPanel>
+
+                                            <apex:outputPanel layout="block" id="promocodeComplete" styleClass="promocode-section {! IF(formParams.promoCode == '', 'promocode-lock', '') }">
+                                                <div class="block__inputs validations">
+                                                    <div class="block__inputs validations">
+                                                        <label>{! pagesContentMap['ORDER'].fields["PROMOCODE DESCRIPTION"].elementItemsMap['PROMOCODE LABEL'].Value__c}</label>
+                                                        <apex:outputPanel layout="block" styleClass="fake__inputs-text">
+                                                            {! pagesContentMap['ORDER'].fields["PROMOCODE DESCRIPTION"].elementItemsMap['PROMOCODE DESCRIPTION TITLE'].Value__c}
+                                                        </apex:outputPanel>
+                                                    </div>
+                                                </div>
+                                            </apex:outputPanel>
+
+                                            <apex:outputPanel layout="block" styleClass="block__dops" style="border-bottom:0;">
+                                                <div class="pay-overdraft-block df">
+                                                    <label id="payOverdraftLabel" style="margin-bottom: 15px;"> {! pagesContentMap['ORDER'].fields['ADDITIONAL SERVICES'].elementItemsMap['LABEL'].Value__c } </label>
+                                                    <div class="pay-overdraft-spinner lds-spinner" style="display: none;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                                </div>
+                                                <c:E2EComponentCheckboxService pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                               field="PERSONAL MANAGER"
+                                                                               firstClass="block_checkbox validations"
+                                                                               tooltipClass="tooltip-checkbox"/>
+                                                <c:E2EComponentCheckboxService pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                               field="DOCS DELIVERY"
+                                                                               firstClass="block_checkbox validations"
+                                                                               tooltipClass="tooltip-checkbox"/>
+                                                <div id="payOverdraft" style="display : none">
+                                                    <apex:outputPanel layout="block">
+                                                        <c:E2EComponentCheckboxService pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                                       field="PAY OVERDRAFT"
+                                                                                       firstClass="block_checkbox validations"
+                                                                                       tooltipClass="tooltip-checkbox"/>
+                                                    </apex:outputPanel>
+                                                </div>
+                                                <c:E2EComponentOutput pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                      field="NO OFFER"
+                                                                      className="block__dops-title no-offer" />
+
+                                                <apex:outputPanel layout="block" styleClass="mobile__tooltips"></apex:outputPanel>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel layout="block" styleClass="stetps__blocks-footer order-step-footer">
+                                                <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['PREVIOUS STEP'].Value__c }"
+                                                                      onclick="try{ga('send', 'event', 'button', 'click', 'back_3'); yaCounter1965880.reachGoal('button_back_3');} catch(e){}; backToCompanyInformation(); return false;"
+                                                                      firstClass="component-button"
+                                                                      className="st__bl-btn prev"
+                                                                      buttonClass="st__bl-btn prev-button"/>
+                                                <apex:actionFunction id="backToCompanyInformation"
+                                                                     name="backToCompanyInformation"
+                                                                     action="{!backToCompanyInformation}"
+                                                                     onComplete="setActiveStep('{!activeStep}');"
+                                                                     reRender="ordering__steps, backToCompanyInformation, onlineChatBlock" />
+                                                <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['ORDER CARDS'].Value__c }"
+                                                                      onclick="try{ga('send', 'event', 'button', 'click', 'next_3'); yaCounter1965880.reachGoal('button_next_3');} catch(e){}; validateOrderInformation(); return false;"
+                                                                      firstClass="component-button"
+                                                                      className="st__bl-btn next js-goods-order"
+                                                                      buttonClass="st__bl-btn order-button"/>
+                                                <apex:actionFunction id="goToSummaryOrder"
+                                                                     name="goToSummaryOrder"
+                                                                     action="{!goToSummaryOrder}"
+                                                                     onComplete="try{ga('send', 'event', 'form', 'complete', 'step_3'); yaCounter1965880.reachGoal('step_3');} catch(e){};setEvents_summaryOrder(); setActiveStep('{!activeStep}'); animateScrollToTop('step-order-information');"
+                                                                     status="splashStatus"
+                                                                     reRender="step-3-2, ordering__steps, goToSummaryOrder, onlineChatBlock, errorProcessing, cards_header"/>
+                                                <apex:actionFunction name="setTariff" action="{! setTariff }" onComplete="return false;">
+                                                    <apex:param id="param1" name="tariffName" value="" />
+                                                    <apex:param id="param2" name="tariffID" value="" />
+                                                </apex:actionFunction>
+                                                <apex:actionFunction name="setProduct"
+                                                                     action="{! setProduct }"
+                                                                     reRender="isTariffsSeparation, AzsLocator"
+                                                                     onComplete="startTariffsLoad(); ">
+                                                    <apex:param id="param3" name="productID" value="" />
+                                                </apex:actionFunction>
+                                                <apex:actionFunction name="loadTariffs"
+                                                                     rerender="tariffsPropertiesDesktop, tariffsPropertiesMobile, promocodeComplete, currentNumberOfCards"
+                                                                     status="splashStatus"
+                                                                     onComplete="setEvents_loadTariffs(); setEvents_checkPromocode(); getPromocodeResult(); lockPromocode(); setDefaultTariff(); setActiveStep('{!activeStep}'); " />
+                                                <apex:actionFunction name="checkPromocode"
+                                                                     action="{! checkPromocode }"
+                                                                     onComplete="setEvents_checkPromocode(); setActiveStep('{!activeStep}'); getPromocodeResult();"
+                                                                     status="splashStatus"
+                                                                     reRender="promocodeComplete">
+                                                    <apex:param id="param4" name="promocodeName" value="" />
+                                                </apex:actionFunction>
+                                                <apex:actionFunction name="setPromocodeItem" action="{! setPromocodeItem }" onComplete="return false;">
+                                                    <apex:param id="param5" name="promocodeItem" value="" />
+                                                </apex:actionFunction>
+                                                <apex:actionFunction name="setTariffsContent"
+                                                                     action="{! getTariffsOnCards }"
+                                                                     status="splashStatus"
+                                                                     reRender="isTariffsSeparation, tariffsPropertiesDesktop, tariffsPropertiesMobile, promocodeComplete, currentNumberOfCards"
+                                                                     onComplete="setEvents_loadTariffs(); setEvents_checkPromocode(); getPromocodeResult(); lockPromocode(); setDefaultTariff(); setActiveStep('{!activeStep}'); ">
+                                                    <apex:param id="param6" name="suffix" value="" />
+                                                </apex:actionFunction>
+                                            </apex:outputPanel>
+                                        </apex:outputPanel>
+
+                                    </apex:outputPanel>
+
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel id="step-3-2" styleClass="stetps__blocks_container step-3-2" layout="block">
+                                <apex:outputPanel layout="block" rendered="{!IF(activeStep == 'SummaryOrder' || activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations', TRUE, FALSE)}">
+                                    <apex:outputPanel layout="block" styleClass="stetps__blocks-content pb6">
+                                        <c:E2EComponentOutputOrderDetail pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                         field="PRODUCTS"/>
+                                        <c:E2EComponentOutputOrderDetail pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                         field="PRODUCT TARIFF"/>
+                                        <c:E2EComponentOutputOrderDetail pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                         field="AMOUNT CARD"/>
+                                        <c:E2EComponentOutputOrderDetail pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                         field="PAYMENT CONDITIONS"/>
+                                        <c:E2EComponentOutputOrderDetailProperty pageMap="{! pagesContentMap['ORDER'].fields}"
+                                                                                 productID="{! formParams.productSplitTesting }"
+                                                                                 source="{! offer }"/>
+                                        <apex:outputPanel layout="block" styleClass="block__inputs validations goods dop__services">
+
+                                            <label for="">{! pagesContentMap['ORDER'].fields["ADDITIONAL SERVICES"].elementItemsMap['LABEL'].Value__c }</label>
+                                            <c:E2EComponentServices pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                    field="PERSONAL MANAGER"
+                                                                    styleTop="200"/>
+                                            <c:E2EComponentServices pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                    field="DOCS DELIVERY"
+                                                                    styleTop="120"/>
+                                            <c:E2EComponentServices pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                                    field="PAY OVERDRAFT"
+                                                                    styleTop="160"/>
+
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="block" styleClass="promocode-result">
+                                            <div class="block__inputs validations">
+                                                <label>{! pagesContentMap['ORDER'].fields["PROMOCODE DESCRIPTION"].elementItemsMap['PROMOCODE LABEL'].Value__c}</label>
+                                                <apex:outputPanel layout="block" styleClass="fake__inputs-text">
+                                                    {! pagesContentMap['ORDER'].fields["PROMOCODE DESCRIPTION"].elementItemsMap['PROMOCODE DESCRIPTION TITLE'].Value__c}
+                                                </apex:outputPanel>
+                                            </div>
+                                        </apex:outputPanel>
+
+                                        <c:E2EComponentModal pageMap="{! pagesContentMap['ORDER'].fields }"
+                                                             field="{! formParams.product }"
+                                                             target="DiscountsModal"
+                                                             buttonClass="modal-button preview-inside-button"
+                                                             modalClass="print-discounts-body"/>
+
+                                        <apex:outputPanel id="AzsLocator" layout="block" styleClass="block__inputs validations goods">
+                                            <c:E2EComponentList list="{! pagesContentMap['ORDER'].fields["GIFT LIST"].elementItemsMap['LIST'].Value__c }"
+                                                                split=","
+                                                                ulClass="block__list"
+                                                                labelValue="{! pagesContentMap['ORDER'].fields["GIFT LIST"].elementItemsMap['LABEL'].Value__c }"
+                                                                labelClass="block__tables--title"/>
+                                        </apex:outputPanel>
+
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="block" styleClass="stetps__blocks-footer">
+                                        <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['PREVIOUS STEP'].Value__c }"
+                                                              onclick="try{ga('send', 'event', 'button', 'click', 'back_4'); yaCounter1965880.reachGoal('button_back_4');} catch(e){};goBackToOrderInformation(); return false;"
+                                                              firstClass="component-button"
+                                                              className="st__bl-btn prev"
+                                                              buttonClass="st__bl-btn prev-button"/>
+                                        <apex:actionFunction id="backToOrderInformation"
+                                                             name="backToOrderInformation"
+                                                             action="{!backToOrderInformation}"
+                                                             onComplete=" setActiveStep('{!activeStep}');"
+                                                             reRender="ordering__steps, backToOrderInformation, onlineChatBlock" />
+                                        <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['ORDER CARDS'].Value__c }"
+                                                              onclick="try{ga('send', 'event', 'button', 'click', 'order'); yaCounter1965880.reachGoal('button_order');} catch(e){}; validateSummaryOrder(); return false;"
+                                                              firstClass="component-button"
+                                                              className="st__bl-btn next js-end-order"
+                                                              buttonClass="st__bl-btn order-button"/>
+                                        <apex:actionFunction id="goToLegalDetails"
+                                                             name="goToLegalDetails"
+                                                             action="{!goToLegalDetails}"
+                                                             onComplete="try{ga('send', 'event', 'form', 'complete', 'step_4'); yaCounter1965880.reachGoal('step_4');} catch(e){}; setEvents_legalDetails(); setActiveStep('{!activeStep}'); animateScrollToTop('step-legal-and-payment-details');"
+                                                             status="splashStatus"
+                                                             reRender="legalAndPaymentDetails, ordering__steps, goToLegalDetails, onlineChatBlock, errorProcessing" />
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+
+                        </apex:outputPanel>
+
+                        <!-- STEP 4 LEGAL AND PAYMENT DETAILS -->
+                        <div id="outerLegalDetailsDiv">
+                            <apex:outputPanel layout="block" id="legalAndPaymentDetails" styleClass="step-legal-and-payment-details stetps__blocks {! IF(activeStep == 'ContactDetails' || activeStep == 'Congratulations', 'steps-lock','')}">
+                                <apex:outputPanel layout="block" styleClass="headers__stepts {! IF(activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations' , 'header-is-active','')}">
+                                    <span>3 / 3 {! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['LEGAL DETAILS HEADER'].Value__c }</span>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel id="legalDetails" layout="block" styleClass="step-legal-details">
+                                    <apex:outputPanel rendered="{!IF(activeStep == 'LegalDetails' || activeStep == 'PaymentDetails' || activeStep == 'Congratulations', TRUE, FALSE)}" layout="block" styleClass="stetps__blocks_container ">
+
+                                        <apex:outputPanel layout="block" styleClass="sole-proprietor" rendered="{! formParams.isSoleProprietor }">
+                                            <script>
+                                                $j(document).ready(function(){
+                                                    validateLegalDetailsIfSoleProprietorOnLoad();
+                                                });
+                                            </script>
+                                            <apex:outputPanel layout="block" styleClass="stetps__blocks-content">
+                                                <apex:outputPanel layout="block" id="dataFromSparkIP">
+                                                    <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                         field="OGRNIP"
+                                                                         firstClass="block__inputs validations"
+                                                                         secondClass="input__obl"
+                                                                         inputClass="ogrnip manual-entry clearable"
+                                                                         errorClass="error--text"
+                                                                         maxLength="15"
+                                                                         inputType="tel" />
+                                                    <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                         field="OKPO"
+                                                                         firstClass="block__inputs validations"
+                                                                         secondClass="input__obl"
+                                                                         inputClass="js-okpo clearable manual-entry"
+                                                                         errorClass="error--text"
+                                                                         maxLength="10"
+                                                                         inputType="tel" />
+                                                    <apex:outputPanel layout="block" styleClass="spark-values-checkbox {! IF(sparkCompanyNoDataFound == false, '', 'pay-overdraft-lock') }">
+                                                        <c:E2EComponentCheckbox pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                                field="REWRITE DEFAULT SPARK VALUES"
+                                                                                blockClass="block__inputs zero-margin"
+                                                                                validationClass="block_checkbox validations"
+                                                                                bottomDivClass="df"
+                                                                                className="rewrite-spark-values"
+                                                                                firstTextPart="{! pagesContentMap['LEGAL DETAILS'].fields['REWRITE DEFAULT SPARK VALUES'].elementItemsMap['LABEL'].Value__c }"/>
+                                                    </apex:outputPanel>
+                                                    <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                         field="LEGAL ADDRESS"
+                                                                         firstClass="block__inputs validations"
+                                                                         secondClass="input__obl"
+                                                                         inputClass="legal-address clearable"
+                                                                         errorClass="error--text"
+                                                                         maxLength="1030"
+                                                                         inputType="text" />
+                                                    <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                         field="LEGAL ADDRESS ADDITIONALLY"
+                                                                         firstClass="block__inputs validations"
+                                                                         secondClass="input__obl"
+                                                                         inputClass="legal-address-additionally clearable"
+                                                                         errorClass="error--text"
+                                                                         maxLength="1030"
+                                                                         inputType="text" />
+                                                </apex:outputPanel>
+
+                                                <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                     field="POSTAL ADDRESS"
+                                                                     firstClass="block__inputs validations address-validation"
+                                                                     secondClass="input__obl"
+                                                                     inputClass="document-address clearable"
+                                                                     errorClass="error--text"
+                                                                     maxLength="1030"
+                                                                     inputType="text" />
+                                                <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                     field="POSTAL ADDRESS ADDITIONALLY"
+                                                                     firstClass="block__inputs validations"
+                                                                     secondClass="input__obl"
+                                                                     inputClass="document-address-additionally clearable"
+                                                                     errorClass="error--text"
+                                                                     maxLength="1030"
+                                                                     inputType="text" />
+                                                <c:E2EComponentCheckbox pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                        field="MATCHES LEGAL ADDRESS"
+                                                                        blockClass="block__inputs zero-margin"
+                                                                        validationClass="block_checkbox validations"
+                                                                        bottomDivClass="df"
+                                                                        className="address-2"
+                                                                        firstTextPart="{! pagesContentMap['LEGAL DETAILS'].fields['MATCHES LEGAL ADDRESS'].elementItemsMap['LABEL'].Value__c }"/>
+                                                <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                            field="CODE WORD"
+                                                                            firstClass="block__inputs validations"
+                                                                            secondClass="input__obl"
+                                                                            inputClass="codeWord clearable"
+                                                                            errorClass="error--text"
+                                                                            maxLength="20"
+                                                                            inputType="text"
+                                                                            position="top"/>
+                                                <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                            field="USER ACCOUNT EMAIL"
+                                                                            firstClass="block__inputs validations"
+                                                                            secondClass="input__obl"
+                                                                            inputClass="account-email clearable"
+                                                                            errorClass="error--text"
+                                                                            maxLength="80"
+                                                                            inputType="text"
+                                                                            position="top"/>
+                                                <c:E2EComponentInputTextArea pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                             field="CARDS DELIVERY INFORMATION"
+                                                                             firstClass="block__inputs validations"
+                                                                             secondClass="input__obl"
+                                                                             inputClass="delivery-info clearable"
+                                                                             tooltipClass="tooltip-textarea"
+                                                                             errorClass="error--text"
+                                                                             position="top"/>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel layout="block" styleClass="stetps__blocks-footer">
+                                                <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['PREVIOUS STEP'].Value__c }"
+                                                                      onclick="try{ga('send', 'event', 'button', 'click', 'back_5'); yaCounter1965880.reachGoal('button_back_5');} catch(e){}; goBackToSummaryOrder(); return false;"
+                                                                      firstClass="component-button"
+                                                                      className="st__bl-btn prev"
+                                                                      buttonClass="st__bl-btn prev-button"/>
+                                                <apex:actionFunction id="backToSummaryOrder"
+                                                                     name="backToSummaryOrder"
+                                                                     action="{!backToSummaryOrder}"
+                                                                     onComplete="setEvents_summaryOrder(); setActiveStep('{!activeStep}');"
+                                                                     reRender="ordering__steps, backToSummaryOrder, onlineChatBlock" />
+                                                <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['ORDER CARDS'].Value__c }"
+                                                                      onclick="try{ga('send', 'event', 'button', 'click', 'next_5'); yaCounter1965880.reachGoal('button_next_5');} catch(e){}; validateLegalDetailsIfSoleProprietor(); return false;"
+                                                                      firstClass="component-button"
+                                                                      className="st__bl-btn next go-to-congratulations"
+                                                                      buttonClass="st__bl-btn order-button"/>
+                                                <apex:actionFunction id="goToPaymentDetails"
+                                                                     name="goToPaymentDetails"
+                                                                     action="{!goToPaymentDetails}"
+                                                                     onComplete="try{ga('send', 'event', 'form', 'complete', 'step_5'); yaCounter1965880.reachGoal('step_5');} catch(e){}; setEvents_paymentDetails(); setActiveStep('{!activeStep}');animateScrollToNextBlock('outerLegalDetailsDiv');"
+                                                                     status="splashStatus"
+                                                                     reRender="paymentDetails, ordering__steps, goToPaymentDetails, onlineChatBlock, errorProcessing" />
+                                            </apex:outputPanel>
+                                        </apex:outputPanel>
+
+                                        <apex:outputPanel layout="block" styleClass="legal-entity" rendered="{! !formParams.isSoleProprietor }">
+                                            <script>
+                                                $j(document).ready(function(){
+                                                    validateLegalDetailsIfLegalEntityOnLoad();
+                                                });
+                                            </script>
+                                            <apex:outputPanel layout="block" styleClass="stetps__blocks-content">
+                                                <apex:outputPanel layout="block" id="dataFromSparkCompany" styleClass="spark-fields">
+                                                    <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                         field="OGRN"
+                                                                         firstClass="block__inputs validations"
+                                                                         secondClass="input__obl"
+                                                                         inputClass="js-orgn manual-entry clearable"
+                                                                         errorClass="error--text"
+                                                                         maxLength="13"
+                                                                         inputType="tel" />
+                                                    <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                         field="KPP"
+                                                                         firstClass="block__inputs validations"
+                                                                         secondClass="input__obl"
+                                                                         inputClass="js-kpp manual-entry clearable"
+                                                                         errorClass="error--text"
+                                                                         maxLength="9"
+                                                                         inputType="tel" />
+                                                    <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                         field="OKPO"
+                                                                         firstClass="block__inputs validations"
+                                                                         secondClass="input__obl"
+                                                                         inputClass="js-okpo manual-entry clearable"
+                                                                         errorClass="error--text"
+                                                                         maxLength="8"
+                                                                         inputType="tel" />
+                                                    <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                         field="LEGAL ADDRESS"
+                                                                         firstClass="block__inputs validations"
+                                                                         secondClass="input__obl"
+                                                                         inputClass="legal-address manual-entry clearable"
+                                                                         errorClass="error--text"
+                                                                         maxLength="1030"
+                                                                         inputType="text" />
+                                                    <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                         field="LEGAL ADDRESS ADDITIONALLY"
+                                                                         firstClass="block__inputs validations"
+                                                                         secondClass="input__obl"
+                                                                         inputClass="legal-address-additionally manual-entry clearable"
+                                                                         errorClass="error--text"
+                                                                         maxLength="1030"
+                                                                         inputType="text" />
+                                                    <apex:outputPanel layout="block" styleClass="spark-values-checkbox {! IF(sparkCompanyNoDataFound == false, '', 'pay-overdraft-lock') }">
+                                                        <c:E2EComponentCheckbox pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                                field="REWRITE DEFAULT SPARK VALUES"
+                                                                                blockClass="block__inputs zero-margin"
+                                                                                validationClass="block_checkbox validations"
+                                                                                bottomDivClass="df"
+                                                                                className="rewrite-spark-values"
+                                                                                firstTextPart="{! pagesContentMap['LEGAL DETAILS'].fields['REWRITE DEFAULT SPARK VALUES'].elementItemsMap['LABEL'].Value__c }"/>
+                                                    </apex:outputPanel>
+                                                </apex:outputPanel>
+                                                <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                     field="POSTAL ADDRESS"
+                                                                     firstClass="block__inputs validations"
+                                                                     secondClass="input__obl"
+                                                                     inputClass="document-address clearable"
+                                                                     errorClass="error--text"
+                                                                     maxLength="1030"
+                                                                     inputType="text" />
+                                                <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                     field="POSTAL ADDRESS ADDITIONALLY"
+                                                                     firstClass="block__inputs validations input-zero-margin"
+                                                                     secondClass="input__obl"
+                                                                     inputClass="document-address-additionally clearable"
+                                                                     errorClass="error--text"
+                                                                     maxLength="1030"
+                                                                     inputType="text" />
+                                                <c:E2EComponentCheckbox pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                        field="MATCHES LEGAL ADDRESS"
+                                                                        blockClass="block__inputs zero-margin"
+                                                                        validationClass="block_checkbox validations"
+                                                                        bottomDivClass="df"
+                                                                        className="address-2"
+                                                                        firstTextPart="{! pagesContentMap['LEGAL DETAILS'].fields['MATCHES LEGAL ADDRESS'].elementItemsMap['LABEL'].Value__c }"/>
+                                                <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                     field="EXECUTIVE PERSON"
+                                                                     firstClass="block__inputs validations"
+                                                                     secondClass="input__obl"
+                                                                     inputClass="executivePersonFullName clearable"
+                                                                     errorClass="error--text"
+                                                                     maxLength="50"
+                                                                     inputType="text"/>
+                                                <c:E2EComponentInput pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                     field="EXECUTIVE PERSON POSITION"
+                                                                     firstClass="block__inputs validations"
+                                                                     secondClass="input__obl"
+                                                                     inputClass="executivePersonPosition clearable"
+                                                                     errorClass="error--text"
+                                                                     maxLength="50"
+                                                                     inputType="text"/>
+                                                <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                            field="CODE WORD"
+                                                                            firstClass="block__inputs validations"
+                                                                            secondClass="input__obl"
+                                                                            inputClass="codeWord clearable"
+                                                                            errorClass="error--text"
+                                                                            maxLength="20"
+                                                                            inputType="text"
+                                                                            position="top"/>
+                                                <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                            field="USER ACCOUNT EMAIL"
+                                                                            firstClass="block__inputs validations"
+                                                                            secondClass="input__obl"
+                                                                            inputClass="account-email clearable"
+                                                                            errorClass="error--text"
+                                                                            maxLength="80"
+                                                                            inputType="text"
+                                                                            position="top"/>
+                                                <c:E2EComponentInputTextArea pageMap="{! pagesContentMap['LEGAL DETAILS'].fields }"
+                                                                             field="CARDS DELIVERY INFORMATION"
+                                                                             firstClass="block__inputs validations"
+                                                                             secondClass="input__obl"
+                                                                             inputClass="delivery-info"
+                                                                             tooltipClass="tooltip-textarea"
+                                                                             errorClass="error--text"
+                                                                             position="top"/>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel layout="block" styleClass="stetps__blocks-footer">
+                                                <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['PREVIOUS STEP'].Value__c }"
+                                                                      onclick="try{ga('send', 'event', 'button', 'click', 'back_5'); yaCounter1965880.reachGoal('button_back_5');} catch(e){}; goBackToSummaryOrder(); return false;"
+                                                                      firstClass="component-button"
+                                                                      className="st__bl-btn prev"
+                                                                      buttonClass="st__bl-btn prev-button"/>
+                                                <apex:actionFunction id="backToSummaryOrder2"
+                                                                     name="backToSummaryOrder"
+                                                                     action="{!backToSummaryOrder}"
+                                                                     onComplete="setEvents_summaryOrder(); setActiveStep('{!activeStep}');"
+                                                                     reRender="ordering__steps, backToSummaryOrder2, onlineChatBlock" />
+                                                <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['ORDER CARDS'].Value__c }"
+                                                                      onclick="try{ga('send', 'event', 'button', 'click', 'next_5'); yaCounter1965880.reachGoal('button_next_5');} catch(e){}; validateLegalDetailsIfLegalEntity(); return false;"
+                                                                      firstClass="component-button"
+                                                                      className="st__bl-btn next go-to-congratulations"
+                                                                      buttonClass="st__bl-btn order-button"/>
+                                                <apex:actionFunction id="goToPaymentDetails2"
+                                                                     name="goToPaymentDetails"
+                                                                     action="{!goToPaymentDetails}"
+                                                                     onComplete="try{ga('send', 'event', 'form', 'complete', 'step_5'); yaCounter1965880.reachGoal('step_5');} catch(e){}; setEvents_paymentDetails(); setActiveStep('{!activeStep}');animateScrollToTop('step-legal-and-payment-details');"
+                                                                     status="splashStatus"
+                                                                     reRender="paymentDetails, ordering__steps, goToPaymentDetails2, onlineChatBlock" />
+                                            </apex:outputPanel>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel id="address-information-block" >
+                                            <apex:inputHidden id="legalAddressInformationCity" value="{! pagesContentMap['LEGAL DETAILS'].fields['LEGAL ADDRESS'].elementItemsMap['CITY'].Value__c }" />
+                                            <apex:inputHidden id="legalAddressInformationPostalCode" value="{! pagesContentMap['LEGAL DETAILS'].fields['LEGAL ADDRESS'].elementItemsMap['POSTAL CODE'].Value__c }" />
+                                            <apex:inputHidden id="legalAddressInformationState" value="{! pagesContentMap['LEGAL DETAILS'].fields['LEGAL ADDRESS'].elementItemsMap['STATE'].Value__c }" />
+                                            <apex:inputHidden id="legalAddressInformationStreet" value="{! pagesContentMap['LEGAL DETAILS'].fields['LEGAL ADDRESS'].elementItemsMap['STREET'].Value__c }" />
+                                            <apex:inputHidden id="legalAddressInformationHouse" value="{! pagesContentMap['LEGAL DETAILS'].fields['LEGAL ADDRESS'].elementItemsMap['HOUSE NUMBER'].Value__c }" />
+
+                                            <apex:inputHidden id="postalAddressInformationCity" value="{! pagesContentMap['LEGAL DETAILS'].fields['POSTAL ADDRESS'].elementItemsMap['CITY'].Value__c }" />
+                                            <apex:inputHidden id="postalAddressInformationPostalCode" value="{! pagesContentMap['LEGAL DETAILS'].fields['POSTAL ADDRESS'].elementItemsMap['POSTAL CODE'].Value__c }" />
+                                            <apex:inputHidden id="postalAddressInformationState" value="{! pagesContentMap['LEGAL DETAILS'].fields['POSTAL ADDRESS'].elementItemsMap['STATE'].Value__c }" />
+                                            <apex:inputHidden id="postalAddressInformationStreet" value="{! pagesContentMap['LEGAL DETAILS'].fields['POSTAL ADDRESS'].elementItemsMap['STREET'].Value__c }" />
+                                            <apex:inputHidden id="postalAddressInformationHouse" value="{! pagesContentMap['LEGAL DETAILS'].fields['POSTAL ADDRESS'].elementItemsMap['HOUSE NUMBER'].Value__c }" />
+                                        </apex:outputPanel>
+                                        <apex:actionFunction id="recoverDataSpark"
+                                                             name="recoverDataSpark"
+                                                             status="splashStatus"
+                                                             action="{! returnDataSpark }"
+                                                             onComplete="setEvents_sparkFields();"
+                                                             reRender="dataFromSparkIP, dataFromSparkCompany, address-information-block"/>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel id="paymentDetails" layout="block" styleClass="step-payment-details">
+                                    <apex:outputPanel rendered="{!IF(activeStep == 'PaymentDetails' || activeStep == 'Congratulations', TRUE, FALSE)}" layout="block" styleClass="stetps__blocks_container">
+                                        <script>
+                                            $j(document).ready(function(){
+                                                validatePaymentDetailsOnLoad();
+                                            });
+                                        </script>
+                                        <apex:actionFunction id="previewContract"
+                                                             name="previewContract"
+                                                             action="{! activatePreviewContract }"
+                                                             onComplete="openPDF('{! previewContractContent }'); return false;"
+                                                             status="splashStatus"/>
+                                        <script>
+                                            function openPDF(data) {
+                                                if (data != undefined && data != '') {
+                                                    var pageNumber = Math.floor((Math.random() * 100) + 1);
+                                                    var win = window.open("about:blank", "_blank",'PopUp' + pageNumber + ',scrollbars=1,menubar=0,resizable=1,width=850,height=500');
+                                                    win.document.write('<iframe width="100%" height="100%" src="data:application/pdf;base64,' + data + '" frameborder="0" allowfullscreen></iframe>')
+                                                } else {
+                                                    alert('Попробуйте сгенерировать отчет позже!');
+                                                }
+                                            }
+                                        </script>
+                                        <apex:outputPanel layout="block" styleClass="stetps__blocks-content">
+                                            <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['PAYMENT DETAILS'].fields }"
+                                                                        field="BANK NAME"
+                                                                        firstClass="block__inputs validations"
+                                                                        secondClass="input__obl"
+                                                                        inputClass="bankName uppercase-class clearable"
+                                                                        errorClass="error--text"
+                                                                        maxLength="50"
+                                                                        inputType="text"
+                                                                        position="top"/>
+                                            <c:E2EComponentInput pageMap="{! pagesContentMap['PAYMENT DETAILS'].fields }"
+                                                                 field="BIC"
+                                                                 firstClass="block__inputs validations"
+                                                                 secondClass="input__obl"
+                                                                 inputClass="js-bik clearable"
+                                                                 errorClass="error--text"
+                                                                 maxLength="9"
+                                                                 inputType="text"/>
+                                            <c:E2EComponentInput pageMap="{! pagesContentMap['PAYMENT DETAILS'].fields }"
+                                                                 field="CHECKING ACCOUNT"
+                                                                 firstClass="block__inputs validations"
+                                                                 secondClass="input__obl"
+                                                                 inputClass="checkingAccount clearable"
+                                                                 errorClass="error--text"
+                                                                 maxLength="20"
+                                                                 inputType="text"/>
+                                            <c:E2EComponentInput pageMap="{! pagesContentMap['PAYMENT DETAILS'].fields }"
+                                                                 field="CORR BANK ACCOUNT"
+                                                                 firstClass="block__inputs validations"
+                                                                 secondClass="input__obl"
+                                                                 inputClass="corAccount clearable"
+                                                                 errorClass="error--text"
+                                                                 maxLength="20"
+                                                                 inputType="text"/>
+                                            <c:E2EComponentInputTooltip pageMap="{! pagesContentMap['PAYMENT DETAILS'].fields }"
+                                                                        field="PREPAYMENT AMOUNT"
+                                                                        firstClass="block__inputs validations"
+                                                                        secondClass="input__obl"
+                                                                        inputClass="prepayment clearable"
+                                                                        errorClass="error--text"
+                                                                        maxLength="7"
+                                                                        inputType="text"
+                                                                        position="top"/>
+                                            <c:E2EComponentOutput pageMap="{! pagesContentMap['PAYMENT DETAILS'].fields }"
+                                                                  field="MATCHING PAYMENT DETAILS"
+                                                                  className="block__dops-title match-payment-details" />
+
+                                            <apex:outputPanel layout="block" styleClass="{! IF(formParams.sendToInbound == false, '', 'pay-overdraft-lock') }">
+                                                <c:E2EComponentCustomLink valueName="{! pagesContentMap['PAYMENT DETAILS'].fields['PRINT BLOCK'].elementItemsMap['LABEL'].Value__c }"
+                                                                          className="block__inputs-podr views"
+                                                                          onclick="try{ga('send', 'event', 'checkbox', 'click', 'contract'); yaCounter1965880.reachGoal('checkbox_contract');} catch(e){}; validatePaymentDetailsToShowAgreement(); return false;"
+                                                                          hrefLink=""/>
+                                            </apex:outputPanel>
+
+                                            <div class="modal fade" id="myModal2" role="dialog" >
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content ">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            <div class="modal-title">
+                                                                {! pagesContentMap['PAYMENT DETAILS'].fields['FREE EXPRESS DELIVERY'].elementItemsMap['TITLE'].Value__c }
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-body modal-delivery-bonus">
+                                                            <apex:outputPanel layout="block" styleClass="b-modal-text">
+                                                                <apex:outputText escape="false" value="{! pagesContentMap['PAYMENT DETAILS'].fields['FREE EXPRESS DELIVERY'].elementItemsMap['BODY'].Value__c }"/>
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="modal-buttons-block">
+                                                                <div class="modal-button preview-outside-button">
+                                                                    <apex:commandButton value="{! pagesContentMap['PAYMENT DETAILS'].fields['FREE EXPRESS DELIVERY'].elementItemsMap['BUTTON'].Value__c }"
+                                                                                        action="{! goToCongratulations }"
+                                                                                        styleClass="modal-button preview-inside-button modal-button-continue"
+                                                                                        reRender="congratulations, ordering__steps, onlineChatBlock, showWarningGoToCongratulation, errorProcessing, step1, step2, step3, legalAndPaymentDetails, cards_header"
+                                                                                        onComplete="setEvents_Congratulations(); setActiveStep('{!activeStep}');"
+                                                                                        status="splashStatus"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="block" styleClass="stetps__blocks-footer">
+                                            <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['PREVIOUS STEP'].Value__c }"
+                                                                  onclick="return goBacktoLegalDetails();"
+                                                                  firstClass="component-button"
+                                                                  className="st__bl-btn prev"
+                                                                  buttonClass="st__bl-btn prev-button" />
+                                            <apex:actionFunction id="backToLegalDetails"
+                                                                 name="backToLegalDetails"
+                                                                 action="{!backToLegalDetails}"
+                                                                 onComplete="setEvents_legalDetails(); setActiveStep('{!activeStep}');"
+                                                                 reRender="ordering__steps, backToLegalDetails, onlineChatBlock" />
+                                            <c:E2EComponentButton value="{! pagesContentMap['SHARED RESOURCES'].fields['BUTTONS'].elementItemsMap['ORDER CARDS'].Value__c }"
+                                                                  onclick="return validatePaymentDetails();"
+                                                                  firstClass="component-button"
+                                                                  className="st__bl-btn next go-next-step open-modal-btn"
+                                                                  buttonClass="st__bl-btn order-button"
+                                                                  status="splashStatus"/>
+                                        </apex:outputPanel>
+                                        <apex:inputHidden id="bankInformationShortName" value="{!formParams.bankNameShort}" />
+                                        <apex:inputHidden id="bankInformationOKPO" value="{!formParams.bankOkpo}" />
+                                        <apex:inputHidden id="bankInformationTown" value="{!formParams.bankTown}" />
+                                        <apex:inputHidden id="bankInformationAddress" value="{!formParams.bankAddress}" />
+                                        <apex:inputHidden id="bankInformationInvalid" value="{!formParams.isBankInformationInvalid}" />
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </div>
+
+                        <!-- STEP 5 CONGRATULATIONS -->
+                        <apex:outputPanel layout="block" id="congratulations" styleClass="step-congratulations stetps__blocks {! IF(activeStep == 'ContactDetails' , 'steps-lock','')}">
+                            <apex:outputPanel layout="block" styleClass="headers__stepts {! IF(activeStep == 'Congratulations' , 'header-is-active','')}">
+                                <span>{! pagesContentMap['SHARED RESOURCES'].fields['HEADERS'].elementItemsMap['CONGRATULATIONS HEADER'].Value__c }</span>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel rendered="{!IF(activeStep == 'Congratulations', TRUE, FALSE)}" layout="block" styleClass="stetps__blocks_container">
+
+                                <apex:outputPanel layout="block" styleClass="stetps__blocks-content">
+                                    <apex:outputPanel layout="block" styleClass="blocks__order">
+                                        <c:E2EComponentOutputText pageMap="{! pagesContentMap['CONGRATULATIONS'].fields }"
+                                                                  field="ORDER NUMBER BLOCK"
+                                                                  textClass="name__order"
+                                                                  outputText="ORDER NUMBER"
+                                                                  valueText="VALUE"
+                                                                  valueTextStyle="text-display-inline"/>
+                                        <c:E2EComponentImage url="{!if(formParams.product == 'PetrolPlus_Rover' || formParams.product == 'Partner_Rover', URLFOR($Resource.e2eRu_images,'card.jpg'), URLFOR($Resource.e2eRu_images,'card_gas.png'))}"/>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="block" styleClass="stetps__blocks-footer stetps__blocks-footer-order">
+                                    <c:E2EComponentOutputText pageMap="{! pagesContentMap['CONGRATULATIONS'].fields }"
+                                                              field="ADDITIONAL INFO"
+                                                              textClass="contract-congratulations"
+                                                              outputText="LABEL"/>
+                                    <c:E2EComponentOutputText pageMap="{! pagesContentMap['CONGRATULATIONS'].fields }"
+                                                              field="AGREEMENT INFO"
+                                                              textClass="contract-congratulations contract-congratulations-last"
+                                                              outputText="LABEL"/>
+                                    <!--<apex:outputPanel layout="block" styleClass="block__inputs-podr print">
+                                        <c:E2EComponentCustomLink valueName="{! pagesContentMap['CONGRATULATIONS'].fields['PRINT BLOCK'].elementItemsMap['LABEL'].Value__c }"
+                                                                  className="print-document"
+                                                                  onclick="openAgreementPDF(); return false;"
+                                                                  hrefLink=""/>
+                                    </apex:outputPanel>-->
+                                    <!--<apex:outputPanel layout="block" styleClass="lk">
+                                        <c:E2EComponentOutputText pageMap="{! pagesContentMap['CONGRATULATIONS'].fields }"
+                                                                  field="LINK BLOCK"
+                                                                  textClass="link-text"
+                                                                  outputText="LABEL"/>
+                                        <c:E2EComponentCustomLink valueName="{! pagesContentMap['CONGRATULATIONS'].fields['LINK BLOCK'].elementItemsMap['LINK NAME'].Value__c }"
+                                                                  className="link-content"
+                                                                  onclick=""
+                                                                  hrefLink="{! pagesContentMap['CONGRATULATIONS'].fields['LINK BLOCK'].elementItemsMap['URL'].Value__c }"/>
+                                    </apex:outputPanel>-->
+                                    <c:E2EComponentButton value="{! pagesContentMap['CONGRATULATIONS'].fields['BACK TO SITE'].elementItemsMap['LABEL'].Value__c }"
+                                                          onclick="redirectToPPR(); return false;"
+                                                          firstClass="component-button"
+                                                          className="st__bl-btn finish back-to-site"
+                                                          buttonClass="st__bl-btn back-to-site"/>
+                                    <script>
+                                        function redirectToPPR(){
+                                            window.location.replace("{! pagesContentMap['CONGRATULATIONS'].fields['BACK TO SITE'].elementItemsMap['URL'].Value__c }");
+                                        }
+                                    </script>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+
+                        </apex:outputPanel>
+
+                    </apex:outputPanel>
+
+                    <!--ERROR PROCESS-->
+                    <apex:outputPanel layout="block" id="errorProcessing">
+                        <apex:outputPanel layout="block"  styleClass="b-error"
+                                          rendered="{! OR(
+                                              errorStep = 'RefuseToCooperate',
+                                              errorStep = 'Inbound',
+                                              errorStep = 'IsAClient',
+                                              errorStep = 'SystemError')
+                                              }">
+                            <apex:outputPanel layout="block" styleClass="error-header">
+                                {!  IF(errorStep = 'RefuseToCooperate', pagesContentMap['SYSTEM ERROR'].fields['REFUSE TO COOPERATE'].elementItemsMap['HEADER'].Value__c,
+                                IF(errorStep = 'Inbound', pagesContentMap['SYSTEM ERROR'].fields['INBOUND'].elementItemsMap['HEADER'].Value__c,
+                                IF(errorStep = 'IsAClient', pagesContentMap['SYSTEM ERROR'].fields['IS A CLIENT'].elementItemsMap['HEADER'].Value__c,
+                                IF(errorStep = 'SystemError', pagesContentMap['SYSTEM ERROR'].fields['SYSTEM ERROR'].elementItemsMap['HEADER'].Value__c,'')))) }
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="block" styleClass="error-text">
+                                <apex:outputPanel layout="block" styleClass="error-content">
+                                    {!  IF(errorStep = 'RefuseToCooperate', pagesContentMap['SYSTEM ERROR'].fields['REFUSE TO COOPERATE'].elementItemsMap['BODY'].Value__c,
+                                    IF(errorStep = 'Inbound', pagesContentMap['SYSTEM ERROR'].fields['INBOUND'].elementItemsMap['BODY'].Value__c,
+                                    IF(errorStep = 'IsAClient', pagesContentMap['SYSTEM ERROR'].fields['IS A CLIENT'].elementItemsMap['BODY'].Value__c,
+                                    IF(errorStep = 'SystemError', pagesContentMap['SYSTEM ERROR'].fields['SYSTEM ERROR'].elementItemsMap['BODY'].Value__c,'')))) }
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="block" styleClass="error-footer">
+
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+
+                </div>
+
+            </div>
+
+            <script  type="text/javascript">
+            function sparkRequest(sOpportunityId, sFormDataId, deduplicationStatus) {
+                if(deduplicationStatus == 'E2EProcess' || deduplicationStatus == 'E2EWithOutUpdate'){
+                    var opportunityId = sOpportunityId;
+                    var formDataId = sFormDataId;
+                    var companyInnBlock = $j('.companyInn');
+                    var companyInn = '';
+                    companyInn = companyInnBlock.val();
+                    if(companyInn.length == 10) {
+                        isSole = false;
+                        startPayOverdraftSplash();
+                        $j('[id$=isSoleProprietor]').val(false);
+                        getCompanyDataFromSpark(companyInn, isSole, opportunityId, formDataId);
+                    } else if(companyInn.length == 12){
+                        isSole = true;
+                        $j('[id$=isSoleProprietor]').val(true);
+                        getEntrepreneurShortReportByInn(companyInn, isSole, opportunityId, formDataId);
+                    }
+                }
+            }
+
+            function getCompanyDataFromSpark(companyInn, isSole, opportunityId, formDataId){
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.E2EFormRuCtrl.remoteGetCompanySparkInfoByInn}',
+                    companyInn,
+                    function(result, event){
+                        if (event.status) {
+                            $j('[id$=companyInfoSpark]').val(JSON.stringify(result));
+                            /*console.log('getCompanyDataFromSpark result: ' + result);*/
+                            remoteUpdateCompanySparkInfo(JSON.stringify(result), formDataId, opportunityId, companyInn);
+                            remoteCreateEmployee(formDataId, JSON.stringify(result.extendedReport.leaderList));
+                            checkCompany(isSole, opportunityId, formDataId);
+                        } else if (event.type === 'exception') {
+                            $j('[id$=sendToInbound]').val(true);
+                            console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                        } else {
+                            console.debug(event.message);
+                        }
+                    }
+                );
+            }
+
+            function remoteUpdateCompanySparkInfo(companySparkInfo, formDataId, opportunityId, companyInn) {
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.E2EFormRuCtrl.remoteUpdateCompanySparkInfo}',
+                    companySparkInfo, formDataId, opportunityId, companyInn,
+                    function(result, event){
+                        if (event.status) {
+                        } else if (event.type === 'exception') {
+                            $j('[id$=sendToInbound]').val(true);
+                            stopPayOverdraftSplash();
+                            console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                        } else {
+                            console.debug(event.message);
+                            stopPayOverdraftSplash();
+                        }
+                    }
+                );
+            }
+
+            function remoteCreateEmployee(formDataId, leaderList) {
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.E2EFormRuCtrl.remoteCreateExecutiveEmployee}',
+                    formDataId, leaderList,
+                    function(result, event){
+                        if (event.status) {
+                            $j('[id$=executiveId]').val(result);
+                        } else if (event.type === 'exception') {
+                            console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                        } else {
+                            console.debug(event.message);
+                        }
+                    }
+                );
+            }
+
+            function getEntrepreneurShortReportByInn(companyInn, isSole, opportunityId, formDataId){
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.E2EFormRuCtrl.remoteGetEntrepreneurShortReportByInn}',
+                    companyInn,
+                    function(result, event){
+                        if (event.status) {
+                            $j('[id$=soleInfoSpark]').val(JSON.stringify(result));
+                            /*console.log('getEntrepreneurShortReportByInn result: ' + result);*/
+                            updateEntrepreneurShortReportData(JSON.stringify(result), formDataId);
+                            checkCompany(isSole, opportunityId, formDataId);
+                        } else if (event.type === 'exception') {
+                            $j('[id$=sendToInbound]').val(true);
+                            stopPayOverdraftSplash();
+                            console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                        } else {
+                            console.debug(event.message);
+                            stopPayOverdraftSplash();
+                        }
+                    }
+                );
+            }
+
+            function updateEntrepreneurShortReportData(soleInfoSpark, formDataId) {
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.E2EFormRuCtrl.remoteUpdateEntrepreneurShortReport}',
+                    soleInfoSpark, formDataId,
+                    function(result, event){
+                        if (event.status) {
+                        } else if (event.type === 'exception') {
+                            $j('[id$=sendToInbound]').val(true);
+                            stopPayOverdraftSplash();
+                            console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                        } else {
+                            console.debug(event.message);
+                            stopPayOverdraftSplash();
+                        }
+                    }
+                );
+            }
+
+            function checkCompany(isSole, opportunityId, formDataId){
+                var isManualEntry = $j('.companyNotExist').is(":checked") == true;
+                if(!isManualEntry){
+                    var companyInfo = '';
+                    if(isSole == true) {
+                        companyInfo = $j('[id$=soleInfoSpark]').val();
+                    } else {
+                        companyInfo = $j('[id$=companyInfoSpark]').val();
+                    }
+                    if(companyInfo != ''){
+                        var company = JSON.parse(companyInfo);
+                        var companyInn = isSole === 'true' ? company.inn : company.inn;
+                        var companySparkId =  isSole === 'true' ? company.sparkID : company.sparkID;
+                        Visualforce.remoting.Manager.invokeAction(
+                        '{!$RemoteAction.E2EFormRuCtrl.checkCompany}',
+                        isSole, companyInn, companySparkId, opportunityId,
+                            function(verification, event){
+                                if (event.status) {
+                                    if(verification != null){
+
+                                        // TODO updateVerifiedDecision
+
+                                        Visualforce.remoting.Manager.invokeAction(
+                                        '{!$RemoteAction.E2EFormRuCtrl.updateVerifiedDecision}',
+                                        formDataId, opportunityId, companyInn, JSON.stringify(verification),
+                                            function(result, event){
+                                                if (event.status) {
+
+                                                } else if (event.type === 'exception') {
+                                                    $j('[id$=sendToInbound]').val(true);
+                                                    console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                                                } else {
+                                                    console.debug(event.message);
+                                                }
+                                            }
+                                        );
+                                        $j('[id$=blackListDecision]').val(verification.decision);
+                                        if (verification.decision == 3) {
+                                            $j('[id$=opportunityLostReason]').val('Другое');
+                                            stopPayOverdraftSplash();
+                                        } else if (verification.decision == 1 || verification.decision == 4) {
+                                            $j('[id$=sendToInbound]').val(true);
+                                            stopPayOverdraftSplash();
+                                        }
+                                        $j('[id$=checkedInBlackList]').val(' > CheckedInBlackList');
+                                        if (isSole == false && verification.decision != 3) {
+                                            getScoreDecision(isManualEntry, companyInn, companySparkId,
+                                            opportunityId, JSON.stringify(verification), formDataId);
+                                        }
+                                    } else {
+                                        $j('[id$=sendToInbound]').val(true);
+                                        stopPayOverdraftSplash();
+                                    }
+                                } else if (event.type === 'exception') {
+                                    $j('[id$=sendToInbound]').val(true);
+                                    console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                                    stopPayOverdraftSplash();
+                                } else {
+                                    console.debug(event.message);
+                                    stopPayOverdraftSplash();
+                                }
+                            }
+                        );
+                    } else {
+                        $j('[id$=sendToInbound]').val(true);
+                    }
+                }
+            }
+
+            function getScoreDecision(isManualEntry, inn, sparkId, opportunityId, verificationDecision, formDataId){
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.E2EFormRuCtrl.getScore}',
+                    isManualEntry, inn, sparkId, opportunityId, verificationDecision,
+                    function(decision, event){
+                        if (event.status) {
+                            if(decision != null){
+                                $j('[id$=scoringPassed]').val(' > ScoringPassed');
+                                $j('[id$=scoringDecisionCode]').val(decision.decision);
+
+                                if (decision.decision == 0) {
+                                    allowPayOverdraft = true;
+                                }
+                                updateScoreDecision(formDataId, opportunityId, JSON.stringify(decision));
+                                stopPayOverdraftSplash();
+                            } else {
+                                stopPayOverdraftSplash();
+                                $j('[id$=scoringDecision]').val('Предоплата');
+                            }
+                        } else if (event.type === 'exception') {
+                            console.debug("exception");
+                            $j('[id$=sendToInbound]').val(true);
+                            console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                            stopPayOverdraftSplash();
+                        } else {
+                            console.debug(event.message);
+                            stopPayOverdraftSplash();
+                        }
+                    }
+                );
+            }
+
+            function updateScoreDecision(formDataId, opportunityId, verificationDecision) {
+                console.debug("execute updateScoreDecision");
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.E2EFormRuCtrl.updateScoreDecision}',
+                    formDataId, opportunityId, verificationDecision,
+                    function(decision, event){
+                        if (event.status) {
+                            console.debug("updateScoreDecision: OK");
+                        } else if (event.type === 'exception') {
+                            $j('[id$=sendToInbound]').val(true);
+                            console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                        } else {
+                            console.debug(event.message);
+                        }
+                    }
+                );
+            }
+
+            function setOpportunityFlagChat(oppId, activeStep, activeSubStep, modeOfChat){
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.E2EFormRuCtrl.setFlagChatToOpportunity}',
+                    oppId, activeStep, activeSubStep, modeOfChat,
+                    function(result, event){
+                         if (event.status) {
+                            } else if (event.type === 'exception') {
+                                console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                            } else {
+                                console.debug(document.getElementById("responseErrors").innerHTML = event.message);
+                            }
+                        }
+                    );
+                }
+
+                function saveOfflineChat(oppId, conId, activeStep, activeSubStep, offlineChatBody){
+                    Visualforce.remoting.Manager.invokeAction(
+                        '{!$RemoteAction.E2EFormRuCtrl.saveOfflineChatLog}',
+                         oppId, conId, activeStep, activeSubStep, offlineChatBody,
+                         function(result, event){
+                             if (event.status) {
+
+                            } else if (event.type === 'exception') {
+                                console.debug(event.message + "<br/>\n<pre>" + event.where + "</pre>");
+                            } else {
+                                console.debug(event.message);
+                            }
+                        }
+                    );
+                }
+        </script>
+
+            <div id="footer" >
+                <div class="default">
+                    <div>© 2018, «Передовые Платежные Решения»</div>
+                    <div style="padding-top:10px;">Вся представленная информация на данном сайте носит информационный характер, и ни при каких условиях не является публичной или иной офертой,
+                        определяемой положениями Гражданского кодекса РФ.</div>
+                </div>
+            </div>
+        </apex:form>
+    </div>
+    </body>
+    <!--<footer class="ppr-footer">-->
+    <!--</footer>-->
+    <!-- CHAT BLOCK -->
+    <div class="default">
+        <div class="chat-button" id="chat-button-offline" style="display: none; visibility: hidden;" onclick="setupOfflineChat(); return false;">
+            <apex:image url="{!URLFOR($Resource.e2eRu_images, 'chat.png')}" />
+        </div>
+        <div  class="chat-button" id="chat-button-online" style="display: none; visibility: hidden;" onclick="setupOnlineChat(); return false;">
+            <apex:image url="{!URLFOR($Resource.e2eRu_images, 'chat.png')}" />
+        </div>
+        <div class="chat-box" id="chatOfflineBlock">
+                    <span>
+                        <div class="no_save no_brand" id="liveAgentClientChatSettings">
+                            <div class="liveAgentState" id="liveAgentClientChat">
+                                <div class="chat-header">{! pageMapChat['CHAT'].elements['CHAT HEADING']['TEXT'].Value__c }
+                                    <span id="clientChatEndButtonID">
+                                        <button class="close liveAgentEndButton" onclick="closeChat('offline'); return false;" />
+                                    </span>
+                                </div>
+                                <div class="chat-status">
+                                        {! pageMapChat['CHAT'].elements['CHAT OFFLINE']['VALUE'].Value__c }
+                                </div>
+                                <div>
+                                    <div>
+                                        <span>
+                                            <div class="liveAgentAlert" id="liveAgentMessageContainer"></div>
+                                        </span>
+                                        <div style="word-wrap: break-word; padding-top:1px;">
+                                            <span>
+                                                <div class="liveAgentChatElement" id="liveAgentChatLog">
+                                                    <div id="liveAgentChatLogText" class="liveAgentChatLogText" style="margin-top:10px;">
+                                                        <span class="chat-operator">
+                                                            <span class="chat-name"><strong>ППР</strong>
+                                                                <span class="chat-customDateTime" style="display: inline"></span>
+                                                            </span>
+                                                            <span class="chat-messageText">
+                                                                    {! pageMapChat['CHAT'].elements['CHAT OFFLINE GREETING']['VALUE'].Value__c }
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="chat-operator" id="liveAgentChatLogTyping" style="display: none;"></span>
+                                                </div>
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-9 col-lg-9 col-md-9 col-sm-9" style="padding: 0px;">
+                                            <span>
+                                                <div class="liveAgentChatElement liveAgentChatInput" id="liveAgentChatInput">
+                                                    <textarea class="liveAgentChatTextArea" id="liveAgentChatTextArea" maxlength="6000"
+                                                              placeholder=" {! pageMapChat['CHAT'].elements['TEXTAREA']['PLACEHOLDER'].Value__c }" wrap="soft" data-uidsfdc="3" />
+                                                </div>
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-3 col-lg-3 col-md-3 col-sm-3" style="padding: 0px;">
+                                            <span>
+                                                <button class="liveAgentChatElement liveAgentSendButton" onclick="updateOfflineChat();return false;" > {! pageMapChat['CHAT'].elements['SEND BUTTON']['TEXT'].Value__c} </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+        </div>
+        <div class="chat-box" id="chatOnlineBlock">
+            <div class="chat-header" style="margin:0px;">
+                <button class="close liveAgentEndButton"
+                        onclick="closeChat('online'); return false;"
+                        style="position:absolute; right:6px; top:8px;"
+                        id="clientChatEndButtonID" label="x">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <apex:outputPanel layout="block">
+
+    </apex:outputPanel>
+</apex:page>

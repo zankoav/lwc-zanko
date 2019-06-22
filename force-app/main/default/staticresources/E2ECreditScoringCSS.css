@@ -1,0 +1,62 @@
+.b-page-header {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: -0.8px;
+    color: #1A1A1A;
+    margin: 0 0 30px 45px;
+}
+
+.block {
+    margin: 5px 30px 10px 30px;
+}
+
+.credit-line .pay-method-msg,
+.credit-line .billing-period-msg {
+    margin-top: 4px;
+}
+
+.credit-line .credit-limit .label-last {
+    line-height: 35px;
+    margin-left: -25px;
+}
+
+.credit-line .credit-limit .range-slider {
+    margin-top: 12px;
+}
+
+.credit-line .credit-limit .credit-limit-value {
+    vertical-align: middle;
+    line-height: 18px;
+    margin: 11px 0;
+}
+
+.credit-limit-value .action-btn {
+    width: 40px;
+}
+
+.credit-limit-value .credit-value-block {
+    background-color: #eee; width: 80px; cursor: initial;
+}
+
+.credit-line #slider {
+    width: 275px;
+    margin: 0 10px 0 10px;
+}
+
+.credit-line .slider-label-first,
+.credit-line .slider-label-last {
+    color: #808080;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 12px;
+}
+
+.credit-line .slider-label-first {
+    margin-right: 5px;
+}
+
+.credit-line .slider-label-last {
+    margin-left: 5px;
+}

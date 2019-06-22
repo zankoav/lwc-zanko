@@ -141,3 +141,11 @@
     color: #fff;
     border-radius: 100%;
   }
+
+  .congratulations__paragraph{
+    margin-bottom: 1em;
+    margin-top: 1em;
+    font-size: 15px;
+    color: #1a1a1a;
+    line-height: 18px;
+  }

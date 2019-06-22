@@ -2,17 +2,14 @@
     <div class={className}>
         <div class="product-tab__header" onclick={clickHandler}>
             <div class="product-tab__header-wrapp">
-                <span class="product-tab__header-title">Fahrzeugbezoge-ne Produkte ?</span>
-                <c-fc-tooltip
-                    help-text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur magni fugit ab? At et ducimus totam, maiores ab expedita aliquid. Officia vero reprehenderit consectetur odit repellendus eum ea fugit at.">
-                </c-fc-tooltip>
+                <span class="product-tab__header-title">{tabLabel}</span>
+                <c-fc-tooltip if:true={tabHelp} help-text={tabHelp}></c-fc-tooltip>
             </div>
         </div>
         <ul class="product-tab__list">
-            <li class="product-tab__item">1</li>
-            <li class="product-tab__item">2</li>
-            <li class="product-tab__item">3</li>
-            <li class="product-tab__item">4</li>
+            <template for:each={tabItems} for:item="item">
+                <li key={item.Id} class="product-tab__item">{item}</li>
+            </template>
         </ul>
     </div>
 </template>

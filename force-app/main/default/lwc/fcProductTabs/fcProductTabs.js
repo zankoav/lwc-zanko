@@ -1,15 +1,16 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 export default class FcProductTabs extends LightningElement {
 
-    tabs;
+    @api tabs;
+    tabElems;
 
     renderedCallback() {
-        this.tabs = this.template.querySelectorAll('c-fc-product-tab');
+        this.tabElems = this.template.querySelectorAll('c-fc-product-tab');
     }
 
     tabChange(event) {
-        this.tabs.forEach(item => {
+        this.tabElems.forEach(item => {
             const isTargetTab = item.tabValue === event.target.tabValue
             if(isTargetTab){
                 item.changeState("active");

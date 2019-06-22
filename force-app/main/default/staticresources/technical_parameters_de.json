@@ -1,0 +1,66 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",
+	"card_complete_header": "Zusätzliche Parameter für Karte",
+	"card_subheader": "Fahrzeugbezogene Produkte, Tanken in Deutschland, Tanken an Shell und Partnerstationen",
+	"card_what_to_emboss": "Was möchten Sie auf Ihrer Karte prägen?",
+	"card_incomplete_header": "Karte Nr.",
+	"edit_label": "Ändern",
+	"card_type_teaser_1": "Fahrzeugbezogene Produkte",
+	"card_type_teaser_2": "Kraftstoff: alle Arten",
+	"card_type_teaser_3": "Kraftstoff: Diesel",
+	"internal_pump_teaser": "Tanken in Deutschland",
+	"external_pump_teaser": "Tanken im Ausland",
+	"partners_pump_teaser": "Tanken an Shell und Partnerstationen",
+	"not_partners_pump_teaser": "Nur bei Shell tanken",
+	"pkw_type_teaser": "Fahrzeugtyp: PKW",
+	"lkw_type_teaser": "Fahrzeugtyp: LKW",
+	"true_odometer_teaser": "Kilometerzähler-Option: EIN",
+	"false_odometer_teaser": "Kilometerzähler-Option: AUS",
+	"card_type_emboss": "Shell Card",
+	"card_number_emboss": "1111 2222 3333 4444 023",
+	"emit_date_emboss": "06/23",
+	"card_firmname": "Firmenname (alle Karten)",
+	"need_odometer": "Für welchen Fahrzeugtyp wird diese Karte verwendet?",
+	"odometer_label": "Fahrzeugtyp",
+	"odometer_header": "Kilometerzähler-Option",
+	"odometer_subheader": "Um die Ausgaben besser unter Kontrolle zu haben, kann beim Tanken die zurückgelegte Strecke erfasst werden.",
+	"car_type": {
+		"options": [
+			{
+				"value": "PKW",
+				"label": "PKW"
+			},
+			{
+				"value": "LKW",
+				"label": "LKW"
+			}
+		]
+	},
+	"cards": [
+		{
+			"status": "edit",
+			"card_type": "All vehicle related product",
+			"internal_pump": "true",
+			"partners_pump": "true",
+			"company_name": "",
+			"card_name": "Shell Card",
+			"type_of_car": "PKW",
+			"need_odometer_options": "true",
+			"isconfigured": "false"
+		}
+	],
+	"continue_button": {
+		"label": "Weiter",
+		"disabled": ""
+	},
+	"save_card": {
+		"label": "Speichern",
+		"disabled": ""
+	},
+	"back_button": {
+		"label": "Zurück",
+		"disabled": ""
+	}
+}

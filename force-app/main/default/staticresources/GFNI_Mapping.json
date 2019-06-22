@@ -1,0 +1,975 @@
+{
+    "CountryCode": {
+        "Germany": "DE",
+        "Austria": "AT",
+        "Belgium": "BE",
+        "Netherlands": "NL",
+        "France": "FR",
+        "Hungary": "HU",
+        "Poland": "PL",
+        "Luxembourg": "LU",
+        "Switzerland": "CH",
+        "Czech Republic": "CZ",
+        "Slovakia": "SK"
+    },
+    "CultureCode": {
+        "Germany": "de-DE",
+        "Austria": "de-DE",
+        "Belgium": "nl-NL",
+        "Belgium-NL": "nl-NL",
+        "Belgium-FR": "fr-FR",
+        "Netherlands": "nl-NL",
+        "France": "fr-FR",
+        "Hungary": "hu-HU",
+        "Poland": "pl-PL",
+        "Luxembourg": "fr-FR",
+        "Switzerland": "de-DE",
+        "Switzerland-DE": "de-DE",
+        "Switzerland-FR": "fr-FR",
+        "Switzerland-IT": "it-it",
+        "Czech Republic": "cs-CZ",
+        "Slovakia": "sk-SK"
+    },
+    "LanguageCode": {
+        "German": "DE",
+        "English": "EN",
+        "French": "FR",
+        "Dutch": "NL",
+        "Hungarian": "hu",
+        "Polish": "pl",
+        "Italian": "it",
+        "Czech": "cs",
+        "Slovak": "sk"
+    },
+    "CompanyId": {
+        "Germany": 1,
+        "Austria": 2,
+        "Belgium": 3,
+        "Netherlands": 4,
+        "France": 5,
+        "Hungary": 6,
+        "Poland": 7,
+        "Luxembourg": 79,
+        "Switzerland": 80,
+        "Czech Republic": 81,
+        "Slovakia": 82
+    },
+    "OutputTypeId": {
+        "Print": 6,
+        "Link": 28,
+        "PDF": 1
+    },
+    "PaymentTermsId": {
+        "7": 1,
+        "10": 2,
+        "14": 3,
+        "21": 12,
+        "27": 14,
+        "30": 8,
+        "35": 13,
+        "45": 10
+    },
+    "PaymentMethodId": {
+        "DE": {
+            "Bank transfer": 6,
+            "Direct debit": {
+                "Core": 9,
+                "B2B": 8
+            }
+        },
+        "AT": {
+            "Bank transfer": 6,
+            "Direct debit": {
+                "Core": 9,
+                "B2B": 8
+            }
+        },
+        "CH": {
+            "Bank transfer": 2,
+            "Direct debit": {
+                "Core": 10,
+                "B2B": 11
+            }
+        },
+        "BE": {
+            "Bank transfer": 6,
+            "Direct debit": {
+                "Core": 9,
+                "B2B": 8
+            }
+        },
+        "LU": {
+            "Bank transfer": 6,
+            "Direct debit": {
+                "Core": 9,
+                "B2B": 8
+            }
+        },
+        "HU": {
+            "Bank transfer": 6,
+            "Direct debit": {
+                "Core": 6,
+                "B2B": 6
+            }
+        },
+        "NL": {
+            "Bank transfer": 6,
+            "Direct debit": {
+                "Core": 9,
+                "B2B": 8
+            }
+        },
+        "FR": {
+            "Bank transfer": 6,
+            "Direct debit": {
+                "Core": 9,
+                "B2B": 8
+            }
+        },
+        "PL": {
+            "Bank transfer": 6,
+            "Direct debit": {
+                "Core": 6,
+                "B2B": 6
+            }
+        },
+        "CZ": {
+            "Bank transfer": 2,
+            "Direct debit": {
+                "Core": 2,
+                "B2B": 2
+            }
+        },
+        "SK": {
+            "Bank transfer": 2,
+            "Direct debit": {
+                "Core": 2,
+                "B2B": 2
+            }
+        }
+    },
+    "PaymentFrequencyId": {
+        "DE": {
+            "7 days": 9,
+            "15 days": 84,
+            "30 days": 10
+        },
+        "AT": {
+            "15 days": 41,
+            "30 days": 40
+        },
+        "CH": {
+            "30 days": 40
+        },
+        "BE": {
+            "7 days": 80,
+            "15 days": 84,
+            "30 days": 10
+        },
+        "LU": {
+            "7 days": 80,
+            "15 days": 84,
+            "30 days": 10
+        },
+        "HU": {
+            "7 days": 80,
+            "15 days": 84,
+            "30 days": 10
+        },
+        "NL": {
+            "7 days": 91,
+            "15 days": 50,
+            "30 days": 12
+        },
+        "FR": {
+            "7 days": 92,
+            "15 days": 94,
+            "30 days": 13
+        },
+        "PL": {
+            "7 days": 150,
+            "15 days": 88,
+            "30 days": 11
+        },
+        "CZ": {
+            "7 days": 107,
+            "15 days": 120,
+            "30 days": 40
+        },
+        "SK": {
+            "7 days": 107,
+            "15 days": 120,
+            "30 days": 40
+        }
+    },
+    "CardCategoryId": {
+        "Vehicle": 1,
+        "Driver": 2
+    },
+    "EmbossingId": {
+        "Vehicle": 2,
+        "Driver": 1
+    },
+    "CardTypeId": {
+        "DE": {
+            "LKW": {
+                "Multi Network Card -- International": 34,
+                "Multi Network Card -- National": 2,
+                "Single Network Card -- National": 1
+            },
+            "PKW": {
+                "Multi Network Card -- International": 36,
+                "Multi Network Card -- National": 4,
+                "Single Network Card -- National": 3
+            }
+        },
+        "AT": {
+            "LKW": {
+                "Multi Network Card -- International": 54,
+                "Multi Network Card -- National": 6,
+                "Single Network Card -- National": 5
+            },
+            "PKW": {
+                "Multi Network Card -- International": 56,
+                "Multi Network Card -- National": 8,
+                "Single Network Card -- National": 7
+            }
+        },
+        "CH": {
+            "LKW": {},
+            "PKW": {
+                "Single Network Card -- National": 65,
+                "Single Network Card -- International": 71
+            }
+        },
+        "BE": {
+            "LKW": {
+                "Multi Network Card -- International": 38,
+                "Multi Network Card -- National": 10,
+                "Single Network Card -- National": 9,
+                "Single Network Card -- International": 37
+            },
+            "PKW": {
+                "Multi Network Card -- International": 40,
+                "Multi Network Card -- National": 12,
+                "Single Network Card -- National": 11,
+                "Single Network Card -- International": 39
+            }
+        },
+        "NL": {
+            "LKW": {
+                "Multi Network Card -- International": 42,
+                "Multi Network Card -- National": 14,
+                "Single Network Card -- National": 13,
+                "Single Network Card -- International": 41
+            },
+            "PKW": {
+                "Multi Network Card -- International": 44,
+                "Multi Network Card -- National": 16,
+                "Single Network Card -- National": 15,
+                "Single Network Card -- International": 43
+            }
+        },
+        "FR": {
+            "LKW": {
+                "Multi Network Card -- International": 58,
+                "Multi Network Card -- National": 18
+            },
+            "PKW": {
+                "Multi Network Card -- International": 60,
+                "Multi Network Card -- National": 20
+            }
+        },
+        "LU": {
+            "LKW": {
+                "Multi Network Card -- International": 68,
+                "Multi Network Card -- National": 62,
+                "Single Network Card -- National": 61,
+                "Single Network Card -- International": 67
+            },
+            "PKW": {
+                "Multi Network Card -- International": 70,
+                "Multi Network Card -- National": 64,
+                "Single Network Card -- National": 63,
+                "Single Network Card -- International": 69
+            }
+        },
+        "PL": {
+            "LKW": {
+                "Multi Network Card -- International": 50,
+                "Multi Network Card -- National": 30,
+                "Single Network Card -- National": 29,
+                "Single Network Card -- International": 49
+            },
+            "PKW": {
+                "Multi Network Card -- International": 52,
+                "Multi Network Card -- National": 32,
+                "Single Network Card -- National": 31,
+                "Single Network Card -- International": 51
+            }
+        },
+        "HU": {
+            "LKW": {
+                "Multi Network Card -- International": 46,
+                "Multi Network Card -- National": 26,
+                "Single Network Card -- National": 25,
+                "Single Network Card -- International": 45
+            },
+            "PKW": {
+                "Multi Network Card -- International": 48,
+                "Multi Network Card -- National": 28,
+                "Single Network Card -- National": 27,
+                "Single Network Card -- International": 47
+            }
+        },
+        "CZ": {
+            "LKW": {
+                "Multi Network Card -- International": 78,
+                "Single Network Card -- International": 77
+            },
+            "PKW": {
+                "Multi Network Card -- International": 80,
+                "Multi Network Card -- National": 76,
+                "Single Network Card -- National": 75,
+                "Single Network Card -- International": 79
+            }
+        },
+        "SK": {
+            "LKW": {
+                "Multi Network Card -- International": 86,
+                "Multi Network Card -- National": 82,
+                "Single Network Card -- National": 81,
+                "Single Network Card -- International": 85
+            },
+            "PKW": {
+                "Multi Network Card -- International": 88,
+                "Multi Network Card -- National": 84,
+                "Single Network Card -- National": 83,
+                "Single Network Card -- International": 87
+            }
+        }
+    },
+    "PurchaseCategoryId": {
+        "DE": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 1,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 2,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 3,
+            "3 Category 2 plus all shop items": {
+                "National": 4,
+                "International": 6
+            }
+        },
+        "AT": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 1,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 2,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 3,
+            "3 Category 2 plus all shop items": {
+                "National": 4,
+                "International": 7
+            }
+        },
+        "CH": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 1,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 2,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 3,
+            "3 Category 2 plus all shop items": 4
+        },
+        "BE": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 3,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 8,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 9,
+            "3 Category 2 plus all shop items": {
+                "National": 10,
+                "International": 17
+            }
+        },
+        "NL": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 1,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 2,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 3,
+            "3 Category 2 plus all shop items": {
+                "National": 4,
+                "International": 14
+            }
+        },
+        "FR": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 1,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 2,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 3,
+            "3 Category 2 plus all shop items": {
+                "National": 4,
+                "International": 6
+            }
+        },
+        "LU": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 3,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 8,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 9,
+            "3 Category 2 plus all shop items": {
+                "National": 10,
+                "International": 17
+            }
+        },
+        "PL": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 1,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 2,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 3,
+            "3 Category 2 plus all shop items": 5
+        },
+        "HU": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 1,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 2,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 3,
+            "3 Category 2 plus all shop items": {
+                "National": 4,
+                "International": 5
+            }
+        },
+        "CZ": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 18,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 19,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 20,
+            "3 Category 2 plus all shop items": 22
+        },
+        "SK": {
+            "0 Diesel, tunnel-, highway- and ferry toll fees": 23,
+            "1 All fuels, tunnel-, highway- and ferry toll fees": 24,
+            "2 Category 1 plus vehicle-related goods and services (oils, car wash)": 25,
+            "3 Category 2 plus all shop items": 27
+        }
+    },
+    "CreditRatingId": {
+        "Low": 1,
+        "Medium": 2,
+        "High": 3,
+        "Very": 4
+    },
+    "CreditSystemRating": {
+        "0–EX": "0EX",
+        "5-EX": "5EX",
+        "Keine Bonität": "0"
+    },
+    "SalutationId": {
+        "Frau": 2,
+        "Frau Dr.": 2,
+        "Frau Prof.": 2,
+        "Slečna": 2,
+        "Herr": 1,
+        "Herr Dr.": 1,
+        "Herr Prof.": 1,
+        "Mrs.": 2,
+        "Mr.": 1
+    },
+    "LegalEntityId": {
+        "DE": 20,
+        "AT": 100,
+        "CH": 800,
+        "BE": 200,
+        "NL": 300,
+        "FR": 400,
+        "LU": 700,
+        "PL": 600,
+        "HU": 500,
+        "CZ": 824,
+        "SK": 825
+    },
+    "CustomerSegmentationId": {
+        "0": 1,
+        "1": 2,
+        "2": 2,
+        "3": 2,
+        "4": 3,
+        "5": 3,
+        "6": 3,
+        "7": 3,
+        "8": 3,
+        "9": 3,
+        "10": 3,
+        "11": 4
+    },
+    "MarketingSegmentationId": {
+        "5 Cent Neujahrs-Angebot": 29,
+        "6 Cent Neujahrs-Angebot": 30,
+        "7 Cent Neujahrs-Angebot": 31,
+        "EuroShell Standard RTL": 27,
+        "FREE 7": 16,
+        "FREE 8": 17,
+        "HOME 1": 20,
+        "HOME 3": 19,
+        "HOMESTATION MOBIL": 18,
+        "Inbound Typ A": 23,
+        "Inbound Typ B": 24,
+        "Inbound Typ C": 25,
+        "Gold": 36,
+        "Platin": 37,
+        "Sales no fee promo Feb 2016": 6,
+        "Swiss Pro": 34,
+        "Swiss Star": 35,
+        "Shell Standard 2019": 38,
+        "Sales standard": 9,
+        "Middle Class": 14,
+        "Shell Promo 2019": 39,
+        "Home Station offer (v.1)": 9,
+        "SME (BNF 0,025 € + fixed fee)": 14,
+        "SME (BNF 0,025 € + % fee)": 14
+    },
+    "FeeGroupId": {
+        "DE": {
+            "Sales no fee promo Feb 2016": 13,
+            "Inbound Typ B": {
+                "Bank transfer": 40,
+                "Direct debit": 41
+            },
+            "Inbound Typ C": {
+                "Bank transfer": 42,
+                "Direct debit": 43
+            },
+            "Platin": 49
+        },
+        "AT": {
+            "Home Station offer (v.1)": 9,
+            "Sales no fee promo Feb 2016": 4
+        },
+        "CH": {
+            "Sales no fee promo Feb 2016": 4,
+            "Swiss Pro": 7,
+            "Swiss Star": 6
+        },
+        "BE": {
+            "Home Station offer (v.1)": 38,
+            "Sales no fee promo Feb 2016": 9,
+            "SME (BNF 0,025 € + fixed fee)": 33,
+            "SME (BNF 0,025 € + % fee)": 33
+        },
+        "NL": {
+            "SME (BNF 0,025 € + % fee)": 40,
+            "SME (BNF 0,025 € + fixed fee)": 40,
+            "HOME 1": {
+                "Bank transfer": 43,
+                "Direct debit": 42
+            }
+        },
+        "FR": {
+            "Home Station offer (v.1)": 12,
+            "Sales no fee promo Feb 2016": 5
+        },
+        "LU": {
+            "Home Station offer (v.1)": 7,
+            "Sales no fee promo Feb 2016": 4
+        },
+        "PL": {
+            "Shell Standard 2019": {
+                "Bank transfer": 39,
+                "Direct debit": 41
+            },
+            "Shell Promo 2019": {
+                "Bank transfer": 40,
+                "Direct debit": 42
+            }
+        },
+        "HU": {
+            "Shell Standard 2019": {
+                "Bank transfer": 6,
+                "Direct debit": 8
+            },
+            "Shell Promo 2019": {
+                "Bank transfer": 7,
+                "Direct debit": 9
+            }
+        },
+        "CZ": {
+            "Shell Standard 2019": {
+                "Bank transfer": 33,
+                "Direct debit": 35
+            },
+            "Shell Promo 2019": {
+                "Bank transfer": 34,
+                "Direct debit": 36
+            }
+        },
+        "SK": {
+            "Shell Standard 2019": {
+                "Bank transfer": 27,
+                "Direct debit": 29
+            },
+            "Shell Promo 2019": {
+                "Bank transfer": 28,
+                "Direct debit": 30
+            }
+        }
+    },
+    "PriceProfileId": {
+        "DE": {
+            "Sales no fee promo Feb 2016": 8,
+            "Inbound Typ B": {
+                "Bank transfer": 3,
+                "Direct debit": 4
+            },
+            "Inbound Typ C": {
+                "Bank transfer": 8,
+                "Direct debit": 8
+            },
+            "Platin": 12
+        },
+        "AT": {
+            "Home Station offer (v.1)": {
+                "Bank transfer": 1,
+                "Direct debit": 1
+            },
+            "Sales no fee promo Feb 2016": 1
+        },
+        "CH": {
+            "Sales no fee promo Feb 2016": 1,
+            "Swiss Pro": 4,
+            "Swiss Star": 3
+        },
+        "BE": {
+            "Home Station offer (v.1)": {
+                "Bank transfer": 1,
+                "Direct debit": 1
+            },
+            "Sales no fee promo Feb 2016": 1,
+            "SME (BNF 0,025 € + fixed fee)": 2,
+            "SME (BNF 0,025 € + % fee)": 2
+        },
+        "NL": {
+            "SME (BNF 0,025 € + % fee)": 2,
+            "SME (BNF 0,025 € + fixed fee)": 2,
+            "HOME 1": {
+                "Bank transfer": 1,
+                "Direct debit": 1
+            }
+        },
+        "FR": {
+            "Home Station offer (v.1)": {
+                "Bank transfer": 1,
+                "Direct debit": 1
+            },
+            "Sales no fee promo Feb 2016": 1
+        },
+        "LU": {
+            "Home Station offer (v.1)": {
+                "Bank transfer": 1,
+                "Direct debit": 1
+            },
+            "Sales no fee promo Feb 2016": 1
+        },
+        "PL": {
+            "Shell Standard 2019": {
+                "Bank transfer": 8,
+                "Direct debit": 8
+            },
+            "Shell Promo 2019": {
+                "Bank transfer": 1,
+                "Direct debit": 1
+            }
+        },
+        "HU": {
+            "Shell Standard 2019": {
+                "Bank transfer": 4,
+                "Direct debit": 4
+            },
+            "Shell Promo 2019": {
+                "Bank transfer": 1,
+                "Direct debit": 1
+            }
+        },
+        "CZ": {
+            "Shell Standard 2019": {
+                "Bank transfer": 6,
+                "Direct debit": 6
+            },
+            "Shell Promo 2019": {
+                "Bank transfer": 1,
+                "Direct debit": 1
+            }
+        },
+        "SK": {
+            "Shell Standard 2019": {
+                "Bank transfer": 6,
+                "Direct debit": 6
+            },
+            "Shell Promo 2019": {
+                "Bank transfer": 1,
+                "Direct debit": 1
+            }
+        }
+    },
+    "ConclusionOffer": {
+        "DE": {
+            "Inbound Typ C": "Manual Discount on Home Site (Bonus Fee)"
+        },
+        "AT": {
+            "Home Station offer (v.1)": "Manual Discounts (HS, Shell) + Manual postponed Card Fee, Transaction Fee and Eco fee"
+        },
+        "BE": {
+            "Home Station offer (v.1)": "Manual Discount at all Shell stations (+postpone) + Manual postponed Card Fee and Shell Transaction Fee",
+            "SME (BNF 0,025 € + fixed fee)": "Manual Account Management Fee",
+            "SME (BNF 0,025 € + % fee)": "Manual Account Management Fee"
+        },
+        "NL": {
+            "SME (BNF 0,025 € + % fee)": "Manual Account Management Fee",
+            "SME (BNF 0,025 € + fixed fee)": "Manual Account Management Fee",
+            "HOME 1": "Manual Discount at Home Station"
+        },
+        "FR": {
+            "Home Station offer (v.1)": "Manual Discount (+postpone) + Manual postponed Card Fee and Transaction Fee"
+        },
+        "LU": {
+            "Home Station offer (v.1)": "Manual Discount at all Shell stations (+postpone) + Manual postponed Card Fee and Shell Transaction Fee"
+        }
+    },
+    "AcquisitionChannelId": {
+        "DE": {
+            "Migrated": 3,
+            "Inbound": 10,
+            "Outbound": 19,
+            "JITB": 20,
+            "Partner Vimcar": 56,
+            "Field": 57,
+            "Partner BVK": 58,
+            "Partner IVD": 59,
+            "Partner sevDesk": 62,
+            "Partner BDS/BVMU": 63,
+            "Partner Billomat": 64,
+            "Partner FleetGo": 65,
+            "Partner ABVP": 66
+        },
+        "AT": {
+            "Migrated": 3,
+            "JITB": 21,
+            "Inbound": 22,
+            "Outbound": 23
+        },
+        "CH": {
+            "Migrated": 3,
+            "Inbound": 39,
+            "Outbound": 40,
+            "JITB": 41
+        },
+        "BE": {
+            "Migrated": 3,
+            "Inbound": 24,
+            "JITB": 25,
+            "Outbound": 26
+        },
+        "NL": {
+            "Migrated": 3,
+            "Inbound": 27,
+            "JITB": 28,
+            "Outbound": 29
+        },
+        "FR": {
+            "Migrated": 3,
+            "Inbound": 30,
+            "JITB": 31
+        },
+        "LU": {
+            "Migrated": 3,
+            "Inbound": 42,
+            "JITB": 44
+        },
+        "PL": {
+            "Migrated": 3,
+            "Inbound": 36,
+            "Outbound": 37,
+            "JITB": 38,
+            "Partner Fleetmatics": 52
+        },
+        "HU": {
+            "Migrated": 3,
+            "Inbound": 33,
+            "Outbound": 34,
+            "JITB": 35
+        },
+        "CZ": {
+            "Migrated": 3,
+            "Inbound": 45,
+            "JITB": 49
+        },
+        "SK": {
+            "Migrated": 3,
+            "Inbound": 46,
+            "Outbound": 48,
+            "JITB": 50
+        }
+    },
+    "SecurityTypeId": {
+        "Deposit": 4,
+        "Bank guarantee": 1,
+        "Personal guarantee": 3,
+        "Parent/cross corporate guarantee": 2,
+        "Promissory note/ Weksel": 5
+    },
+    "ServiceId": {
+        "VAT Recovery": 3
+    },
+    "NumberOfCardsSelfService": {
+        "DE": 30,
+        "AT": 30,
+        "CH": 30,
+        "BE": 30,
+        "NL": 30,
+        "FR": 30,
+        "LU": 30,
+        "PL": 30,
+        "HU": 30,
+        "CZ": 30,
+        "SK": 30
+    },
+    "PhoneCodes": {
+        "DE": "00049",
+        "AT": "00043",
+        "CH": "00041",
+        "BE": "00032",
+        "NL": "00031",
+        "FR": "00033",
+        "LU": "000352",
+        "PL": "00048",
+        "HU": "00036",
+        "CZ": "000420",
+        "SK": "000421"
+    },
+    "DirectDebitMandateTypeID": {
+        "Core": 1,
+        "B2B": 2
+    },
+    "SpecialCharacters": {
+        "ä": "A",
+        "ö": "O",
+        "ü": "U",
+        "ß": "SS",
+        "à": "A",
+        "â": "A",
+        "æ": "AE",
+        "ç": "C",
+        "è": "E",
+        "é": "E",
+        "ê": "E",
+        "ë": "E",
+        "í": "I",
+        "î": "I",
+        "ï": "I",
+        "ñ": "N",
+        "ò": "O",
+        "ó": "O",
+        "ô": "O",
+        "œ": "OE",
+        "ù": "U",
+        "ú": "U",
+        "û": "U",
+        "ý": "Y",
+        "ÿ": "Y",
+        "ů": "U",
+        "ě": "E",
+        "ž": "Z",
+        "š": "S",
+        "č": "C",
+        "ř": "R",
+        "ď": "D",
+        "ť": "T",
+        "ň": "N",
+        "á": "A",
+        "ű": "U",
+        "ő": "O",
+        "ì": "I",
+        "ą": "A",
+        "ę": "E",
+        "ż": "Z",
+        "ź": "Z",
+        "ś": "S",
+        "ń": "N",
+        "ł": "L",
+        "ć": "C",
+        "ĺ": "L",
+        "ľ": "L",
+        "ŕ": "R",
+        "Ä": "A",
+        "Ö": "O",
+        "Ü": "U",
+        "À": "A",
+        "Â": "A",
+        "Æ": "AE",
+        "Ç": "C",
+        "È": "E",
+        "É": "E",
+        "Ê": "E",
+        "Ë": "E",
+        "Ì": "I",
+        "Í": "I",
+        "Î": "I",
+        "Ï": "I",
+        "Ñ": "N",
+        "Ò": "O",
+        "Ó": "O",
+        "Ô": "O",
+        "Œ": "OE",
+        "Ù": "U",
+        "Ú": "U",
+        "Û": "U",
+        "Ý": "Y",
+        "Ÿ": "Y",
+        "Ů": "U",
+        "Ě": "E",
+        "Ž": "Z",
+        "Š": "S",
+        "Č": "C",
+        "Ř": "R",
+        "Ď": "D",
+        "Ť": "T",
+        "Ň": "N",
+        "Á": "A",
+        "Ű": "U",
+        "Ő": "O",
+        "Ą": "A",
+        "Ę": "E",
+        "Ż": "Z",
+        "Ź": "Z",
+        "Ś": "S",
+        "Ń": "N",
+        "Ł": "L",
+        "Ć": "C",
+        "Ĺ": "L",
+        "Ľ": "L",
+        "Ŕ": "R",
+        "Ã": "A",
+        "ã": "A",
+        "Ă": "A",
+        "ă": "A",
+        "B": "B",
+        "b": "B",
+        "C": "C",
+        "c": "C",
+        "Ẽ": "E",
+        "ẽ": "E",
+        "Ĩ": "I",
+        "ĩ": "I",
+        "J": "J",
+        "j": "J",
+        "L": "L",
+        "l": "L",
+        "M": "M",
+        "m": "M",
+        "Õ": "O",
+        "õ": "O",
+        "T": "T",
+        "t": "T",
+        "Ũ": "U",
+        "ũ": "U",
+        "Ỹ": "Y",
+        "ỹ": "Y",
+        "Z": "Z",
+        "z": "Z",
+        "Ş": "S",
+        "ş": "S",
+        "Ǎ": "A",
+        "ǎ": "A",
+        "A": "A",
+        "a": "A"
+    },
+    "AddressTypeId": [
+        2,
+        10,
+        13
+    ]
+}

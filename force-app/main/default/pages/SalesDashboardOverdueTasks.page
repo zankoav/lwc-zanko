@@ -1,0 +1,359 @@
+<apex:page controller="SalesDashboardOverdueTasksCtrl" action="{! init }" showHeader="false" sidebar="false">
+    <apex:includeScript value="{!$Resource.jQuery}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Highcharts,'js/highcharts.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Highcharts,'js/modules/exporting.js')}"/>
+    <apex:form >
+    <apex:outputPanel rendered="{! OR(currentUser.Profile.Name == 'Harte Hank Teamleiter',currentUser.Profile.Name == 'Salesteamleiter') }">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td style="width: 49%;">
+                    <apex:pageBlock >
+                        <h1 style="margin-bottom: 10px; font-size: 15px; display: block;">% Opportunities by Method of Payment ({! currentMonth })</h1>
+                        <apex:pageMessages />
+
+                        <div>
+                            <div id="banktransfer" style="width: 100%; height: 440px;"></div>
+                        </div>
+                    </apex:pageBlock>
+                </td>
+                <td style="width: 2%;"></td>
+                <td style="width: 49%;">
+                    <apex:pageBlock >
+                        <h1 style="margin-bottom: 10px; font-size: 15px; display: block;">Overdue activities for 
+                        <apex:selectList value="{! selectedMonth }" size="1" multiselect="false" style="margin-left: 5px;" 
+                            rendered="{! OR(currentUser.Profile.Name == 'Salesteamleiter',currentUser.Profile.Name == 'Harte Hank Teamleiter') }">
+                            <apex:selectOptions value="{! currentMonths }"/>
+                            <apex:actionSupport action="{! init }" event="onchange"/>
+                        </apex:selectList> <apex:selectList value="{! selectedYear }" size="1" multiselect="false" style="margin: 0 5px;">
+                            <apex:selectOptions value="{! years }"/>
+                            <apex:actionSupport action="{! changeYear }" event="onchange"/>
+                        </apex:selectList>({! startDateOfMonthString } - {! endDateOfMonthString })</h1>
+                        <apex:pageMessages />
+
+                        <div>
+                            <div id="overduetasks" style="width: 100%; height: 440px;"></div>
+                        </div>
+                    </apex:pageBlock>
+                </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered="{! OR(currentUser.Profile.Name == 'Harte Hanke (Sales)',currentUser.Profile.Name == 'Sales', currentUser.Profile.Name == 'Sales Inbound') }">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td style="width: 49%;">
+                    <apex:pageBlock >
+                        <h1 style="margin-bottom: 10px; font-size: 15px; display: block;">% Opportunities by Method of Payment ({! currentMonth })</h1>
+                        <apex:pageMessages />
+
+                        <div>
+                            <div id="banktransfersales" style="width: 100%; height: 200px;"></div>
+                        </div>
+                    </apex:pageBlock>
+                </td>
+                <td style="width: 2%;"></td>
+                <td style="width: 49%;">
+                    <apex:pageBlock >
+                        <h1 style="margin-bottom: 2px; font-size: 15px; display: block;">Overdue activities for 
+                        <apex:selectList value="{! selectedMonth }" size="1" multiselect="false" style="margin-left: 5px;" 
+                            rendered="{! OR(currentUser.Profile.Name == 'Harte Hanke (Sales)',currentUser.Profile.Name == 'Sales', currentUser.Profile.Name == 'Sales Inbound') }">
+                            <apex:selectOptions value="{! currentMonths }"/>
+                            <apex:actionSupport action="{! init }" event="onchange"/>
+                        </apex:selectList> <apex:selectList value="{! selectedYear }" size="1" multiselect="false" style="margin: 0 5px;">
+                            <apex:selectOptions value="{! years }"/>
+                            <apex:actionSupport action="{! init }" event="onchange"/>
+                        </apex:selectList>({! startDateOfMonthString } - {! endDateOfMonthString })</h1>
+                        <p style="margin: 0; padding: 0;">Please close all overdue activities by <span style="color: red; font-weight: bold;">Friday <apex:outputText style="margin-left: 5px;" value="{0,date,dd/MM/yy}"><apex:param value="{! fridayDate }" /> </apex:outputText></span></p>
+                        <apex:pageMessages />
+
+                        <div>
+                            <div id="overduetaskssales" style="width: 100%; height: 200px;"></div>
+                        </div>
+                    </apex:pageBlock>
+                </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+
+    <script>
+        $(function () {
+            var userToOtherOppsJS = {};
+            var userTodirectDebOppsJS = {};
+            <apex:repeat value="{! salesTeamFinalList }" var="final">
+                userToOtherOppsJS["{! final.Name }"] = "{! userToOtherOpps[final.Id] }";
+                userTodirectDebOppsJS["{! final.Name }"] = "{! userTodirectDebOpps[final.Id] }";
+            </apex:repeat>
+
+            $('#banktransfer').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: '',
+                    style: {
+                        display: 'none'
+                    }
+                },
+                xAxis: {
+                    categories: [
+                    <apex:repeat value="{! salesTeamFinalList }" var="final">
+                        '{! final.Name }',
+                    </apex:repeat>
+                    ]
+                },
+                yAxis: [{
+                    min: 0,
+                    title: {
+                        text: ''
+                    }
+                }, {
+                    title: {
+                        text: 'Opportunities'
+                    },
+                    opposite: true
+                }],
+                legend: {
+                    shadow: false,
+                    labelFormatter: function() {
+                      var total = 0;
+                      for(var i=this.yData.length; i--;) { total += this.yData[i]; };
+                      return this.name + ' - Total: ' + total;
+                    }
+                },
+                exporting: { enabled: false },
+                credits: {
+                      enabled: false
+                },
+                tooltip: {
+                    enabled: true,
+                    formatter: function() {
+                        var key = this.x;
+                        if (this.series.name == '# of total closed won in the period') {
+                            return this.series.name + ' = <b>' + this.y + '</b> that equals to <b>100%</b>';
+                        } else if (this.series.name == '# of closed won direct debit') {
+                            var perc = Math.round((parseInt(userTodirectDebOppsJS[key]) / parseInt(userToOtherOppsJS[key])) * 100);
+                            return this.series.name + ' = <b>' + this.y + '</b> that equals to <b>' + perc + '%</b>';
+                        }
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        grouping: false,
+                        shadow: false,
+                        borderWidth: 0
+                    },
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                series: [{
+                    name: '# of total closed won in the period',
+                    color: '#ccc',
+                    data: [
+                    <apex:repeat value="{! salesTeamFinalList }" var="final">{! userToOtherOpps[final.Id] },</apex:repeat>],
+                    pointPadding: -0.5,
+                    pointPlacement: -0.15
+                }, {
+                    name: '# of closed won direct debit',
+                    color: 'rgba(126,86,134,.9)',
+                    data: [
+                    <apex:repeat value="{! salesTeamFinalList }" var="final">{! userTodirectDebOpps[final.Id] },</apex:repeat>],
+                    pointPadding: -0.5,
+                    pointPlacement: 0.15
+                },]
+            });
+
+            $('#overduetasks').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: '',
+                    style: {
+                        display: 'none'
+                    }
+                },
+                xAxis: {
+                    categories: [<apex:repeat value="{! salesTeamFinalOverdueList }" var="final">'{! final.Name }',</apex:repeat>],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Number of Activites',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+
+                },
+                exporting: { enabled: false },
+                credits: {
+                      enabled: false
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    shadow: false,
+                    labelFormatter: function() {
+                      var total = 0;
+                      for(var i=this.yData.length; i--;) { total += this.yData[i]; };
+                      return this.name + ' - Total: ' + total;
+                    },
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF')
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Number of Activites',
+                    data: [<apex:repeat value="{! salesTeamFinalOverdueList }" var="final">{! overdueTasks[final.Id] },</apex:repeat>]
+                }]
+            });
+
+            $('#banktransfersales').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: '',
+                    style: {
+                        display: 'none'
+                    }
+                },
+                xAxis: {
+                    categories: [
+                    ''
+                    ]
+                },
+                yAxis: [{
+                    min: 0,
+                    title: {
+                        text: ''
+                    }
+                }, {
+                    title: {
+                        text: 'Opportunities'
+                    },
+                    opposite: true
+                }],
+                legend: {
+                    shadow: false
+                },
+                exporting: { enabled: false },
+                credits: {
+                      enabled: false
+                },
+                tooltip: {
+                    enabled: true,
+                    formatter: function() {
+                        var allOppsJS = parseInt({! allOpps });
+                        var allDirectDebitOppsJS = parseInt({! allDirectDebitOpps });
+                        if (this.series.name == '# of total closed won in the period') {
+                            return this.series.name + ' = <b>' + this.y + '</b> that equals to <b>100%</b>';
+                        } else if (this.series.name == '# of closed won direct debit') {
+                            var perc = Math.round((allDirectDebitOppsJS / allOppsJS) * 100);
+                            return this.series.name + ' = <b>' + this.y + '</b> that equals to <b>' + perc + '%</b>';
+                        }
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        grouping: false,
+                        shadow: false,
+                        borderWidth: 0
+                    },
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                series: [{
+                    name: '# of total closed won in the period',
+                    color: '#ccc',
+                    data: [
+                    {! allOpps }],
+                    pointPadding: -0.5,
+                    pointPlacement: -0.15
+                }, {
+                    name: '# of closed won direct debit',
+                    color: 'rgba(126,86,134,.9)',
+                    data: [
+                    {! allDirectDebitOpps }],
+                    pointPadding: -0.5,
+                    pointPlacement: 0.15
+                },]
+            });
+
+            $('#overduetaskssales').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: '',
+                    style: {
+                        display: 'none'
+                    }
+                },
+                xAxis: {
+                    categories: [''],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Number of Activites',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+
+                },
+                exporting: { enabled: false },
+                credits: {
+                      enabled: false
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    shadow: false,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF')
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Number of Activites',
+                    data: [{! overdueSalesTasks }]
+                }]
+            });
+        });
+    </script> 
+    </apex:form>
+</apex:page>

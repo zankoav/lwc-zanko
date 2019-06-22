@@ -7,8 +7,10 @@ export default class FcProductTab extends LightningElement {
 
     @track className;
 
-    @api tabItem;
+    @api tabItems;
     @api tabValue;
+    @api tabLabel;
+    @api tabHelp;
     @api active;
 
     @api changeState(value) {

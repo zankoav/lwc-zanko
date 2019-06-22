@@ -1,12 +1,12 @@
 <template>
         <c-fc-cart>
             <template if:false={loading}>
-                <template for:each={cards} for:item="acc">
-                    <c-fc-card-editor key={acc}></c-fc-card-editor>
+                <template iterator:it={cards}>
+                    <c-fc-card-editor oncardready={cardReadyHandler} number={it.index} staic-data={staticData} card={it.value} key={it.value.card_id}></c-fc-card-editor>
                 </template>
                 <div class="technical_parameters__actions">
-                    <c-fc-button variant="gray" onclick={stepBack} title="Zurück"></c-fc-button>
-                    <c-fc-button onclick={stepSubmit} title="Weiter" disabled="disabled">
+                    <c-fc-button variant="gray" onclick={backStep} title={staticData.back_button.label}></c-fc-button>
+                    <c-fc-button class="js-button-submit" onclick={stepSubmit} title={staticData.continue_button.label} disabled={submitButtonStatus}>
                     </c-fc-button>
                 </div>
             </template>

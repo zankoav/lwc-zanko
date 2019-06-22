@@ -1,0 +1,43 @@
+<apex:page controller="CustomSubmitForApprovalAMLCtrl" action="{! init }" sidebar="true">
+	<apex:form >
+		<body>
+			<style>
+				.submitButton {
+					margin-left: 10% !important;
+				}
+				.saveAndBack {
+					margin: 5px !important;
+				}
+				body .bPageBlock .pbBody .black .pbSubheader {
+                	background-color: black;
+            	}
+			</style>
+			<apex:pageMessages />				
+			<apex:pageBlock id="mainBlock">
+				<apex:outputPanel styleClass="black" layout="block" id="panelblock">
+					<apex:pageBlockSection title="Account" columns="1" collapsible="false">
+						<apex:repeat value="{! finalAccountFieldsList }" var="accFieldApiName">
+							<apex:inputField value="{! acc[accFieldApiName] }" required="true"/>
+						</apex:repeat>
+						<apex:pageBlockSectionItem >
+		                	<apex:outputLabel value="Registered Country"/>
+		                	<apex:outputPanel >
+		                		<apex:outputField value="{! acc.BillingCountry }"/><apex:commandLink action="{! changeRegisteredCountry }" value="[Change]" style="margin-left: 5px;" immediate="true"/>
+		                	</apex:outputPanel>
+		                </apex:pageBlockSectionItem>
+					</apex:pageBlockSection>
+				</apex:outputPanel>
+	            <apex:outputPanel styleClass="black" layout="block">
+					<apex:pageBlockSection title="Opportunity" columns="1" collapsible="false">
+						<apex:repeat value="{! finalOpportunityFieldsList }" var="oppFieldApiName">
+							<apex:inputField value="{! opp[oppFieldApiName] }" required="true"/>
+						</apex:repeat>
+					</apex:pageBlockSection>
+				</apex:outputPanel>
+	        </apex:pageBlock>     
+	        <apex:commandButton value="Submit for Approval AML" action="{! submitForApprovalAML }" styleClass="submitButton"/>
+	        <apex:commandButton value="Save and Back" action="{! saveAndBack }" styleClass="saveAndBack"/>
+	        <apex:commandButton value="Cancel" action="{! backToOpportunity }" immediate="true"/>
+        </body>
+	</apex:form>
+</apex:page>

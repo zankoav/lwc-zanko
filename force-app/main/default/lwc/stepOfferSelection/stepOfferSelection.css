@@ -22,12 +22,10 @@
     }
 }
 
-@media (min-width:1280px){
-	.offer-section__line{
-		height: 2px;
-		background-color: #DEDEDE;
-		margin: 2rem 0 1.5rem;
-	}
+.offer-section__line{
+    height: 2px;
+    background-color: #DEDEDE;
+    margin: 2rem 0 1.5rem;
 }
 
 
@@ -42,71 +40,53 @@
     padding: 2rem;
     padding-right: 0;
     padding-top: 1.5rem;
+    margin-bottom: 2rem;
 }
 
-.offer-block__info {
-    max-width: 250px;
-}
-
-.offer-block__info-title {
+.offer-block__title {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: .75rem;
     color: #333;
 }
 
-.offer-block__info-text {
+.offer-block__wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .25rem;
+}
+
+.offer-block__wrapper-info {
+    max-width: 250px;
+}
+
+.offer-block__wrapper-text {
     color: #333;
     font-size: 15px;
     margin-bottom: .25rem;
 }
 
-.offer-block__info-text-bold {
+.offer-block__wrapper-text-bold {
     color: #333;
     font-weight: 600;
 }
-
-.flag-wrapper {
-    display: flex;
-    align-items: center;
-}
-
-.flag {
-    background-color: #E0E9ED;
-    width: 170px;
-    height: 56px;
-    margin-left: -20px;
-    color: #333333;
-    text-align: right;
-    vertical-align: middle;
-    padding-right: .5rem;
-}
-
-.flag-title {
-    font-size: 18px;
-    font-weight: 500;
-    margin-top: .5rem;
-}
-
-.flag-text {
-    font-size: 15px;
-}
-
-.arrow {
-    width: 40px;
-    height: 40px;
-    background-color: #F6F6F6;
-    transform: rotate(45deg);
-}
-
 
 .detail-line {
     font-size: 12px;
     color: #333333;
     display: flex;
-    margin-bottom: .25rem;
+    margin-top: .25rem;
 }
 
 .detail-line-label {
-    width: 100px;
+    max-width: 120px;
+    flex: 1 0 120px;
+}
+
+.offer-block__button {
+    margin-top: 2rem;
+}
+
+.detail-line-value{
+    flex: 1;
 }

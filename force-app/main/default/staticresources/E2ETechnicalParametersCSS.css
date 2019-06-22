@@ -1,0 +1,108 @@
+.b-switch-block {
+    background: #f6f6f6;
+    margin: 20px 20px 20px 30px;
+    width: 90.5%;
+    min-height: 90px;
+    height: auto;
+    overflow: hidden;
+}
+
+.b-switch-block .switch-info {
+    margin: 14px 5px 14px -5px;
+}
+
+.b-switch-block .switch-info .i-helper {
+    margin-left: 8px;
+}
+
+.b-switch-block .switch-info .s-header {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 15px;
+}
+
+.b-switch-block .switch-info .s-add {
+    color: #808080;
+}
+
+.onoffswitch {
+    margin: 20px 0px 25px 0px;
+    position: relative;
+    width: 64px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #CECECE;
+    border-radius: 20px;
+}
+
+.onoffswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 12px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 13px;
+    background-color: #EE3A43;
+    color: #FFFFFF;
+    text-align: left;
+}
+
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 8px;
+    background-color: #EEEEEE;
+    color: #505050;
+    text-align: right;
+}
+
+.onoffswitch-switch {
+    display: block;
+    width: 18px;
+    margin: 8px;
+    background: #FFFFFF;
+    border: 0px solid;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0px;
+    -moz-transition: all 0.3s ease-in 0s;
+    -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+}

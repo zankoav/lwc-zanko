@@ -1,0 +1,22 @@
+<apex:page controller="ClosedLostE2EOpportunityCtrl" action="{! init }">
+	<apex:form >
+		<apex:outputPanel id="errorMsg">
+			<apex:pageMessages escape="false"/>
+		</apex:outputPanel>
+        <apex:pageBlock id="pageBlockId" rendered="{! OR(errorMessage = 'Please fill in Reason Lost.', errorMessage = 'Please provide a reason, why the customer was lost.') }">
+            <apex:pageBlockSection columns="1">
+            	<apex:inputField value="{! oppty.StageName }" style="display: none;">{! oppty.StageName }</apex:inputField>
+                <apex:inputField value="{! oppty.Gruende_verloren__c }">
+                	<apex:actionSupport event="onchange" reRender="pageBlockId, errorMsg">
+                        <apex:param name="testParam" value="{! IF(OR(oppty.Gruende_verloren__c = 'Sonstige', oppty.Gruende_verloren__c = 'Other'), oppty.CCS_Reason_Lost_Other__c, '') }" assignTo="{! oppty.CCS_Reason_Lost_Other__c }"/>
+                    </apex:actionSupport>
+            	</apex:inputField>
+    			<apex:inputField value="{! oppty.CCS_Reason_Lost_Other__c }" rendered="{! OR(oppty.Gruende_verloren__c = 'Sonstige', oppty.Gruende_verloren__c = 'Other') }"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{! doSave }" value="Save"/>
+                <apex:commandButton action="{! doCancel }" value="Cancel" immediate="true"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

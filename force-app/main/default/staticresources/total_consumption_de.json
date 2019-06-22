@@ -1,0 +1,26 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",
+	"fields_header": "Wie viel Kraftstoff verbrauchen alle Fahrzeuge zusammen?",
+	"total_consumption": {
+		"label": "Kraftstoffverbrauch aller Fahrzeuge",
+		"label2": "Liter / Monat",
+		"value": "",
+		"type": "text",
+		"required": "required",
+		"maxLength": 5,
+		"minLength": 1,
+		"remark": "Für Ihren Komfort haben wir den durchschnittlichen Kraftstoffverbrauch, basierend auf der von Ihnen angegebenen Kartenanzahl, ermittelt.",
+		"errorMessage": "Bitte geben Sie Ihren monatlichen Kraftstoffverbrauch in Litern an (mindestens 75 Liter).",
+		"errorMessage2": "Bitte geben Sie Ihren monatlichen Kraftstoffverbrauch in Litern an (höchstens 50.000 Liter)."
+	},
+	"continue_button": {
+		"label": "continue",
+		"disabled": "disabled"
+	},
+	"back_button": {
+		"label": "zurück",
+		"disabled": ""
+	}
+}

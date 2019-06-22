@@ -9,6 +9,7 @@
     background: #F6F6F6;
     padding: 1rem;
     transition: .4s ease-out;
+    height: 210px;
 }
 
 .product-tab_active{

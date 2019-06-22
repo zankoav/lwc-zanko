@@ -9,7 +9,6 @@ import save from '@salesforce/apex/StepSearchCompanyController.save';
 export default class StepSearchCompany extends BaseStep {
 
     nameStep = "searchCompany";
-    @api source = "hzAijhWTmfwWZOe6zK0zSXE%2BQ62FzKkm/IOf1N%2Bwa7tKfnnxPNj1mxWf6%2BjbT6T4";
     @api stepContent;
     @api apexService;
 
@@ -20,23 +19,21 @@ export default class StepSearchCompany extends BaseStep {
 
     selectedCompany;
     @track companies;
+    @track loading = true;
 
     connectedCallback () {
-        document.cookie.split(";").forEach(next => {
-            console.log(next);
-            if (next.split("=")[0].trim().toLowerCase() === "source") {
-                this.source = next.split("=")[1];
-            }  
-        });
-        console.log("source = ",this.source);
+        console.log("step : ", this.nameStep);
+        console.log("companies = ", this.companies);
         getState({ 
             stepContent: this.stepContent, 
             apexService: this.apexService, 
-            source : this.source 
+            source : this.opportunitySource 
         })
             .then( (result) => {  
                 console.log("static data loaded.");
+                
                 this.staticData = result;
+                console.log(this.staticData);
                 this.stateStep = {
                     company_name: this.staticData.company_name.value,
                     city: this.staticData.city.value,
@@ -45,7 +42,7 @@ export default class StepSearchCompany extends BaseStep {
                     continue_button: this.staticData.continue_button.disabled,
                     opportunity_id: this.staticData.opportunity_id,
                     account_id: this.staticData.account_id,
-                    selected_company_id: ''
+                    selected_company_id: '',
                 }
                 this.loading = false;
             })
@@ -178,17 +175,12 @@ export default class StepSearchCompany extends BaseStep {
         }
     }
 
-    backHandle () {
-        this.backStep();
-    }
-
     stepSubmit() {
         this.loading = true;
         this.stateStep.selected_company_id = this.selectedCompany;
         save({
-            stepContent : this.stepContent, 
             apexService : this.apexService, 
-            data : this.stateStep
+            stateStep : this.stateStep
         })
             .then( () => {
                 console.log("save complete!");

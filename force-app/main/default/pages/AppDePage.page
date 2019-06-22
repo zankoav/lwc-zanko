@@ -42,16 +42,16 @@
                     props.expires = exp.toUTCString();
                 }
 
-                value = encodeURIComponent(value)
-                var updatedCookie = name + "=" + value;
+                value = encodeURIComponent(value);
+                var updatedCookie = name + "=" + value + "; path=/";
 
-                for (var propName in props) {
-                    updatedCookie += "; " + propName;
-                    var propValue = props[propName];
-                    if (propValue !== true) {
-                        updatedCookie += "=" + propValue;
-                    }
-                }
+                // for (var propName in props) {
+                //     updatedCookie += "; " + propName;
+                //     var propValue = props[propName];
+                //     if (propValue !== true) {
+                //         updatedCookie += "=" + propValue;
+                //     }
+                // }
 
                 document.cookie = updatedCookie;
             }

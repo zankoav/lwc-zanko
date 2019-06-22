@@ -1,0 +1,965 @@
+<apex:page language="en-US" controller="LongFormJITBController" id="longFormJITB" action="{! init }" sidebar="false" showHeader="false" standardStylesheets="false" docType="html-5.0" cache="false">
+    <apex:form id="form" styleClass="form-horizontal" html-autocomplete="off">
+        <head>
+            <link rel="shortcut icon" href="{!$Resource.FleetcorFavicon}" type="image/x-icon; charset=binary"/>
+            <apex:includeScript value="{!$Resource.jQuery}"/>
+            <!-- <apex:includeScript value="{! URLFOR($Resource.E2E_Analytics_DE) }"/> -->
+            <apex:includeScript value="{! URLFOR($Resource.jQueryUISlider,'jquery-ui-1.12.1.custom/jquery-ui.min.js') }"/>
+            <!-- <apex:includeScript value="{!$Resource.jqueryInputMask}"/> -->
+            <!-- <apex:includeScript value="{!$Resource.e2e_scripts_de}"/> -->
+            <!-- <apex:includeScript value="{!$Resource.e2e_scripts_de_mobile}"/> -->
+            <apex:includeScript value="{!URLFOR($Resource.bootstrap_3_3_7,'bootstrap-3.3.7/js/bootstrap.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.e2eLiveAgentDeployment)}"/>
+            <script>
+
+                $j = jQuery.noConflict();
+
+                var chatActivityTimeout;
+                var chatOfflineUpdateTimeout;
+                var chatOfflineOLDText;
+                var chatDeviceHeight;
+                var autoChatLastStep;
+
+                $j(document).ready(function () {
+                    setChatOptions();
+
+                    // var chatButtonOnline = document.getElementById('chat-button-online');
+                    // var chatButtonOffline = document.getElementById('chat-button-offline');
+                    // if (chatButtonOnline != null) chatButtonOnline.style.visibility = "visible";
+                    // if (chatButtonOffline != null) chatButtonOffline.style.visibility = "visible";
+                });
+
+                //Function is used to get splash status bar when server side call is going on
+                function startSplash() {
+                    document.getElementById('splashDiv').style.display='table-cell';
+                    jQuery('.lightbox').fadeIn(50);
+                }
+
+                //Function will make the splash status to be stopped.
+                function endSplash() {
+                    document.getElementById('splashDiv').style.display='none';
+                    jQuery('.lightbox').fadeOut(50);
+                }
+
+                // function getCookie(name) {
+                //     var value = "; " + document.cookie;
+                //     var parts = value.split("; " + name + "=");
+                //     if (parts.length == 2) return parts.pop().split(";").shift();
+                // }
+                function setChatOptions() {
+
+                    //First chat init
+                    setupChatInit();
+                    //Event to reset active form  for client on form (auto chat call)
+                    $j(document).on('keydown click', function(){resetInActive()});
+
+                    //First reset form inactive
+                    resetInActive();
+
+                    //press "Enter" event on offline chat form
+                    document.getElementById('liveAgentChatTextArea').onkeydown = function(event){
+                        if(event.keyCode==13){
+                            updateOfflineChat();
+                            return false;
+                        }
+                    };
+
+                    //add language parameter to online chat form submit
+                    var params = getAllUrlParams(String(document.location));
+                    var country;
+                    if(params.country != null) country = params.country;
+                    if(country == null && params.Country != null) country = params.Country;
+                    var elementBody = $j('.modal-open');
+                    elementBody.bind('DOMSubtreeModified', function(){
+                        var elementForms = document.getElementsByTagName('form');
+                        for (var i = 0; i < elementForms.length; i++) {
+                            if (elementForms[i].target == 'frameChat'){
+                                if (elementForms[i].action.toString().indexOf('language%3D%23') != -1){
+                                    elementForms[i].action = elementForms[i].action.replace('language%3D','language%3D'+country);
+                                }
+                            }
+                        }
+                    });
+
+                    if (screen.width < 800) {
+                        $j('.chat-box').css('left', 0);
+                    }
+
+                    if(screen.width < 1199){
+                        $j('#liveAgentChatLog').height(screen.height*0.5 - 160);
+                        $j('.chat-box').height(screen.height*0.5 - 25);
+                    } else {
+                        //events to offline textarea
+                        $j('.liveAgentSendButton').hide();
+                        $j('#liveAgentChatTextArea').focus(function(event){
+                            if(!$j('.liveAgentSendButton').is(":visible")){
+                                $j('#liveAgentChatLog').height($j('#liveAgentChatLog').height()-20);
+                                $j('#liveAgentChatTextArea').height($j('#liveAgentChatTextArea').height()+15);
+                                $j('.liveAgentSendButton').show();
+                            }
+                        });
+                        $j('#liveAgentChatTextArea').focusout(function(event){
+                            if($j(event.relatedTarget).hasClass('liveAgentSendButton')){
+                                $j('.liveAgentSendButton').show();
+                            }
+                            else {
+                                $j('#liveAgentChatLog').height($j('#liveAgentChatLog').height()+20);
+                                $j('#liveAgentChatTextArea').height($j('#liveAgentChatTextArea').height()-15);
+                                $j('.liveAgentSendButton').hide();
+                            }
+                        });
+                    }
+
+                    $j(".liveAgentSendButton").mousedown(function() {
+                        return false;
+                    });
+                };
+
+                function setupChatInitialization(urlChat, deploymentID, organizationID, buttonID, contactID, opportunityID, accountID, chatFirstMessage, activeStep, activeSubStep, mode){
+                    // if(activeStep.toString() == '0'){
+                    //     document.getElementById("chat-button-online").style.visibility = "hidden";
+                    //     document.getElementById("chat-button-offline").style.visibility = "hidden";
+                    // }
+                    liveagent.disconnect();
+                    if (opportunityID != ''){
+                        liveagent.addCustomDetail("OpportunityID", opportunityID, false).saveToTranscript('Opportunity__c');
+                        liveagent.findOrCreate("Opportunity").map("ID","OpportunityID",true,true,true).saveToTranscript("OpportunityId").showOnCreate();
+                        liveagent.addCustomDetail("AccountID", accountID, false).saveToTranscript('AccountID');
+                        liveagent.findOrCreate("Account").map("ID","AccountID",true,true,true).saveToTranscript("AccountId").showOnCreate();
+                    }
+                    if (contactID != ''){
+                        liveagent.addCustomDetail("ContactID", contactID, false).saveToTranscript('ContactID');
+                        liveagent.findOrCreate("Contact").map("ID","ContactID",true,true,true).saveToTranscript("ContactId").showOnCreate();
+                    }
+                    liveagent.setName(chatFirstMessage);
+                    liveagent.addCustomDetail("Step", activeStep + ' ' + activeSubStep , false).saveToTranscript('E2E_Step__c');
+                    liveagent.addCustomDetail("Mode of initialization", mode, false).saveToTranscript('Mode_of_initialization__c');
+                    liveagent.addCustomDetail("Type of chat", 'online', false).saveToTranscript('Type__c');
+                    liveagent.init(urlChat, deploymentID, organizationID);
+                    //Start initialization button for visible online/offline chat
+                    if(buttonID != ''){
+                        if (!window._laq) { window._laq = []; }
+                        window._laq.push(function(){
+                            liveagent.showWhenOnline(buttonID, document.getElementById("chat-button-online"));
+                            liveagent.showWhenOffline(buttonID, document.getElementById("chat-button-offline"));
+                        });
+                    }
+                };
+
+                function startOnlineChat(urlChat, deploymentID, deploymentJsURL, organizationID, buttonID, contactID, opportunityID, accountID, chatFirstMessage, activeStep, activeSubStep, mode){
+                    if(mode == 'automatical'){
+                        if(autoChatLastStep != activeSubStep){
+                            autoChatLastStep = activeSubStep;
+                            delete liveagent;
+                            delete liveAgentDeployment;
+                            jQuery.loadScript(deploymentJsURL, function() {
+                                executeOnlineChat(urlChat, deploymentID, organizationID, buttonID, contactID, opportunityID, accountID, chatFirstMessage, activeStep, activeSubStep, mode);
+                            });
+                        }
+                    }
+                    else {
+                        delete liveagent;
+                        delete liveAgentDeployment;
+                        jQuery.loadScript(deploymentJsURL, function() {
+                            executeOnlineChat(urlChat, deploymentID, organizationID, buttonID, contactID, opportunityID, accountID, chatFirstMessage, activeStep, activeSubStep, mode);
+                        });
+                    }
+                };
+
+                jQuery.loadScript = function (url, callback) {
+                    jQuery.ajax({ url: url,  dataType: 'script', success: callback,  async: true });
+                };
+
+                function executeOnlineChat(urlChat, deploymentID, organizationID, buttonID, contactID, opportunityID, accountID, chatFirstMessage, activeStep, activeSubStep, mode){
+                    if ((document.getElementById("frameChat") == null) && (document.getElementById('chat-button-online').style.display != 'none')) {
+                        document.getElementById('chat-button-offline').style.visibility = 'hidden';
+                        document.getElementById('chat-button-online').style.visibility = 'hidden';
+                        setupChatInitialization(urlChat, deploymentID, organizationID, '', contactID, opportunityID, accountID, chatFirstMessage, activeStep, activeSubStep, mode);
+                        var frameChat = document.createElement("iframe");
+                        frameChat.id = 'frameChat';
+                        frameChat.name = 'frameChat';
+                        frameChat.classList.add('frameChat');
+                        document.getElementById("chatOnlineBlock").appendChild(frameChat);
+                        setTimeout(function startChatWithWindow() {
+                            try {
+                                liveagent.startChatWithWindow(buttonID,'frameChat');
+                                document.getElementById('chatOnlineBlock').classList.add('popup-on');
+                                // setOpportunityFlagChat(mode);
+                            }
+                            catch (err){
+                                document.getElementById('chat-button-offline').style.visibility = 'visible';
+                                document.getElementById('chat-button-online').style.visibility = 'visible';
+                                document.getElementById('chatOnlineBlock').classList.remove('popup-on');
+                                var frameChat = document.getElementById("frameChat");
+                                frameChat.remove();
+                                var frameChatForms = document.getElementsByTagName('form');
+                                for(var i=0; i< frameChatForms.length; i++){
+                                    if(frameChatForms[i].target == 'frameChat'){
+                                        frameChatForms[i].remove();
+                                    }
+                                }
+                            }
+                        }, 800);
+                    }
+                };
+
+                function resetInActive() {
+                    clearTimeout(chatActivityTimeout);
+                    chatActivityTimeout = setTimeout(inActive, 60000);
+                };
+
+                function inActive() {
+                    var chatOnlineButton = document.getElementById('chat-button-online');
+                    if ((chatOnlineButton.style.display != 'none') && (chatOnlineButton.style.visibility != 'hidden')) {
+
+                        var frameChatOnline = document.getElementById('frameChat');
+                        if((frameChatOnline == null) && !($j('#chatOfflineBlock').hasClass('popup-on'))){
+                            setupOnlineAutoChat();
+                        }
+                    }
+                    resetInActive();
+                };
+
+                function setupOfflineChat() {
+                    document.getElementById('chat-button-offline').style.visibility = 'hidden';
+                    document.getElementById('chat-button-online').style.visibility = 'hidden';
+                    var chatLog = document.getElementById("liveAgentChatLog");
+                    document.getElementById('chatOfflineBlock').classList.add('popup-on');
+                    chatLog.scrollTop = chatLog.scrollHeight;
+                    chatOfflineOLDText = '';
+                    chatOfflineUpdateTimeout = setTimeout(updateDatabaseOfflineChat, 5000);
+                };
+
+                function updateOfflineChat() {
+                    var chatTextArea = document.getElementById('liveAgentChatTextArea');
+                    if (chatTextArea.value != ''){
+                        var chatLog = document.getElementById('liveAgentChatLogText');
+                        var currentDate = new Date();
+                        var hours = currentDate.getHours();
+                        var minutes = currentDate.getMinutes();
+                        var ampm = hours >= 12 ? 'PM' : 'AM';
+                        hours = hours % 12;
+                        hours = hours ? hours : 12; // the hour '0' should be '12'
+                        minutes = minutes < 10 ? '0' + minutes : minutes;
+                        var strTime = hours + ':' + minutes + ' ' + ampm;
+                        chatLog.innerHTML = chatLog.innerHTML + '<span class="chat-client"> <span class="chat-name"> <strong>You </strong>' +
+                            '<span class="chat-customDateTime" style="display: inline"> ' + strTime + ' </span> </span> <span class="chat-messageText">'+chatTextArea.value+'</span> <span>';
+                        chatTextArea.value = '';
+                    }
+                    var chatLog = document.getElementById("liveAgentChatLog");
+                    chatLog.scrollTop = chatLog.scrollHeight;
+                };
+
+                function updateDatabaseOfflineChat() {
+                    if ($j('.liveAgentChatLogText').html()) {
+                        var chatLogDbUpdate = $j('.liveAgentChatLogText').html().split('<span class="chat-operator">').join('<br><span class="chat-operator">').split('<span class="chat-client">').join('<br><span class="chat-client">');
+                        if (chatLogDbUpdate != chatOfflineOLDText){
+                            chatOfflineOLDText = chatLogDbUpdate;
+                            saveOfflineChat(chatLogDbUpdate);
+                            // setOpportunityFlagChat('manual');
+                        }
+                    }
+                    clearTimeout(chatOfflineUpdateTimeout);
+                    chatOfflineUpdateTimeout = setTimeout(updateDatabaseOfflineChat, 5000);
+                };
+
+                function closeChat(status){
+                    if (status == 'online'){
+                        document.getElementById('chatOnlineBlock').classList.remove('popup-on');
+                        var frameChat = document.getElementById("frameChat");
+                        frameChat.remove();
+                        var frameChatForms = document.getElementsByTagName('form');
+                        for(var i=0; i< frameChatForms.length; i++){
+                            if(frameChatForms[i].target == 'frameChat'){
+                                frameChatForms[i].remove();
+                            }
+                        }
+                    }
+                    else if (status == 'offline'){
+                        document.getElementById('chatOfflineBlock').classList.remove('popup-on');
+                    }
+                    document.getElementById('chat-button-offline').style.visibility = 'visible';
+                    document.getElementById('chat-button-online').style.visibility = 'visible';
+                    resetInActive();
+                };
+
+                function getAllUrlParams(url) {
+                    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+                    var obj = {};
+                    if (queryString) {
+                        queryString = queryString.split('#')[0];
+                        var arr = queryString.split('&');
+                        for (var i=0; i<arr.length; i++) {
+                            var a = arr[i].split('=');
+
+                            var paramNum = undefined;
+                            var paramName = a[0].replace(/\[\d*\]/, function(v) {
+                                paramNum = v.slice(1,-1);
+                                return '';
+                            });
+
+                            var paramValue = typeof(a[1])==='undefined' ? true : a[1];
+
+                            if (obj[paramName]) {
+                                if (typeof obj[paramName] === 'string') {
+                                    obj[paramName] = [obj[paramName]];
+                                }
+                                if (typeof paramNum === 'undefined') {
+                                    obj[paramName].push(paramValue);
+                                }
+                                else {
+                                    obj[paramName][paramNum] = paramValue;
+                                }
+                            }
+                            else {
+                                obj[paramName] = paramValue;
+                            }
+                        }
+                    }
+                    return obj;
+                };
+            </script>
+            <apex:stylesheet value="{! URLFOR($Resource.jQueryUI,'jquery-ui-1.12.1/jquery-ui.css') }"/>
+            <apex:stylesheet value="{!URLFOR($Resource.bootstrap_3_3_7,'bootstrap-3.3.7/css/desktop_bootstrap.min.css')}"/>
+            <!-- <apex:stylesheet value="{!$Resource.e2e_style_de_desktop}"/> -->
+
+
+            <!-- <apex:stylesheet value="{!$Resource.e2e_style_de_desktop}"/> -->
+            <!-- <apex:stylesheet value="{!$Resource.e2e_style_de_mobile}"/> -->
+
+
+            <apex:stylesheet value="{!URLFOR($Resource.E2ESpinner, 'spinner.css')}"/>
+            <!-- <apex:stylesheet value="{!URLFOR($Resource.bootstrap_3_3_7,'bootstrap-3.3.7/css/non-responsive.css')}"/> -->
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+            <title>Shell Tankkarten online bestellen</title>
+            <style>
+                @font-face {
+                    font-family: Montserrat;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-Regular.ttf')});
+                }
+
+                @font-face {
+                    font-family: Montserrat bold;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-Bold.ttf')});
+                }
+
+                @font-face {
+                    font-family: Montserrat light;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-Light.ttf')});
+                }
+
+                @font-face {
+                    font-family: Montserrat semibold;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-SemiBold.ttf')});
+                }
+
+                @font-face {
+                    font-family: Montserrat medium;
+                    src: url({!URLFOR($Resource.e2eFonts, '/Montserrat-Medium.ttf')});
+                }
+
+                .loadingField {
+                    ground-color: #ffffff;
+                    background-image: url({!URLFOR($Resource.E2ESpinner, 'field-spinner.gif')}) !important;
+                background-size: 15px 15px;
+                background-position: 90% center;
+                background-repeat: no-repeat;
+                }
+
+                .splashStatus {
+                    left: 40%;
+                }
+
+                .splashStatus .circle img {
+                    border-radius: 50%;
+                }
+
+                body {
+                    font-family: Montserrat;
+                    background: #F2F2F2;
+                    min-height: 100%;
+                    height: 100%;
+                    width: 100%;
+                }
+
+                main {
+                    margin-bottom: 80px;
+                    min-height: 565px;
+                }
+
+                footer {
+                    background: #FFFFFF;
+                    padding-bottom: 30px;
+                }
+
+                .container {
+                    max-width: 700px;
+                }
+
+                .wrapper-container {
+                    background: #FFFFFF;
+                    padding-top: 35px;
+                    padding-bottom: 35px;
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+                }
+
+                .col-centered{
+                    float: none;
+                    margin: 0 auto;
+                }
+
+                .page-logo {
+                    margin: 33px 45px 30px 5px;
+                }
+
+                .page-logo img {
+                    width: 160px;
+                    height: 17px;
+                }
+
+                .c-page-header {
+                    font-family: Montserrat bold;
+                    font-size: 36px;
+                    letter-spacing: -0.8px;
+                    color: #1A1A1A;
+                    margin-bottom: 30px;
+                    margin-left: 5px;
+                }
+
+                .copyright {
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: normal;
+                    font-size: 13px;
+                    text-align: center;
+                    color: #808080;
+                    margin-top: 30px;
+                }
+
+                .fleetcor .fleetcor-desc {
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: 15px;
+                    font-size: 13px;
+                    margin-left: 30px;
+                }
+
+                footer a {
+                    color: #777;
+                }
+
+                footer .page-logo {
+                    margin-left: 30px !important;
+                }
+
+                .b-block-header {
+                    font-family: Montserrat bold;
+                    line-height: 28px;
+                    font-size: 24px;
+                    letter-spacing: -0.3px;
+                    color: #1A1A1A;
+                    margin-bottom: 30px;
+                }
+
+                .btn-red {
+                    width: auto;
+                    height: auto;
+                    line-height: 25px;
+                    background: #EE3A43;
+                    font-family: Montserrat bold;
+                    font-size: 12px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    color: #FFFFFF;
+                    border-radius: unset;
+                    min-width: 125px;
+                    max-width: 200px;
+                    white-space: normal;
+                }
+
+                .btn-red.continue {
+                    float: right;
+                }
+
+                .btn-red:visited {
+                    color: #FFFFFF ;
+                }
+
+                .btn-red:hover{
+                    color: #FFFFFF;
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #EE3A43;
+                }
+
+                .btn-red:focus{
+                    color: #FFFFFF;
+                    background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), #EE3A43;
+                    outline: unset;
+                }
+
+                .btn-red[disabled] {
+                    pointer-events: none;
+                    cursor: not-allowed;
+                }
+
+                .btn-gray {
+                    width: auto;
+                    height: auto;
+                    line-height: 25px;
+                    background: #CECECE;
+                    font-size: 12px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    color: #1A1A1A;
+                    border-radius: unset;
+                    min-width: 100px;
+                    max-width: 200px;
+                    white-space: normal;
+                }
+
+                .btn-gray:visited {
+                    color: #1A1A1A;
+                }
+
+                .btn-gray:hover{
+                    color: #1A1A1A;
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), #CECECE;
+                }
+
+                .btn-gray:focus{
+                    outline: 0;
+                    color: #1A1A1A;
+                    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), #CECECE;
+                }
+
+                .row-wrapper {
+                    margin-top: 30px;
+                }
+
+                .mobile-error-page {
+                    color: #1a1a1a;
+                }
+
+                .mobile-error-page .b-error-text {
+                    margin: 6px 20px 24px 12px;
+                }
+
+                .mobile-error-page .btn-gray {
+                    min-width: 185px;
+                }
+
+                .mobile-error-info .customer-care {
+                    margin: 12px 20px 0px 12px;
+                }
+
+                .mobile-error-info .b-block-header {
+                    margin-top: 24px;
+                }
+
+                .mobile-error-info .customer-care {
+                    line-height: 1.85;
+                }
+
+                .mobile-error-info .assistance-info {
+                    color: #0093ee;
+                }
+
+                .mobile-error-info .customer-care img {
+                    margin-left: 10px;
+                    padding-bottom: 3px;
+                }
+
+                .station-header {
+                    font-family: Montserrat medium;
+                    font-style: normal;
+                    line-height: 23px;
+                    font-weight: 500;
+                    font-size: 18px;
+                }
+
+                .selected-station {
+                    font-family: Montserrat;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: 18px;
+                    font-size: 15px;
+                }
+
+                /*Chat interface */
+                .chat-button{
+                    background: linear-gradient(0deg, #1A1A1A, #1A1A1A); border-radius: 25px;
+                    bottom: 10px;
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 25px;
+                    position: fixed;
+                    /*margin-left: 85%;*/
+                    right: 10%;
+                }
+
+                .chat-button:hover {
+                    cursor: pointer;
+                }
+
+                .chat-box {
+                    background-color: #ffffff;
+                    border: 1px solid #b0b0b0;
+                    height: 362px;
+                    bottom: 10px;
+                    display: none;
+                    position: fixed;
+                    width: 362px !important;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                    /*margin-left:632px;*/
+                    width: inherit;
+                    /*left: 0;*/
+                    min-width: 300px;
+                }
+
+                .popup-on {
+                    display: block;
+                }
+
+                .frameChat {
+                    width : 100%;
+                    height : 100%;
+                    border : 0px;
+                }
+
+                .chat-button img{
+                    width: 24px;
+                    height: 23px;
+                    margin: 15px 13px;
+                }
+
+                #waitingMessage {
+                    height: 100%;
+                    width: 100%;
+                    vertical-align: middle;
+                    text-align: center;
+                    display: none;
+                }
+
+                #liveAgentClientChat.liveAgentStateWaiting #waitingMessage {
+                    display: table;
+                }
+
+                .liveAgentEndButton {
+                    display: block !important;
+                    border: 0px;
+                    background: #ffffff;
+                    float:right;
+                    margin: 0px 10px 0px 0px;
+                    font-size:20px;
+                    padding:0px;
+                }
+
+                #liveAgentChatLogText .chat-messageText {
+                    display: block;
+                }
+
+
+                .liveAgentChatInput {
+                    width: 100%;
+                    border-width: 0px;;
+                    padding: 2px 0 2px 4px;
+                    background: #ffffff;
+                    margin: 5px;
+                    height:40px;
+                }
+
+                .liveAgentSendButton {
+                    width: 90%;
+                    padding: 0 0 3px;
+                    margin: 15px 5px 5px 5px;
+                    color: #0093EE;
+                    background: #ffffff;
+                    border:0px;
+                    border-color: #ffffff;
+                    font-family: Montserrat;
+                    font-size: 15px;
+                    line-height: 18px;
+                    font-weight: normal;
+                    height:40px;
+                }
+
+                #liveAgentChatLog {
+                    width: auto;
+                    height: 245px;
+                    overflow-y: auto;
+                    border-color:#cecece;
+                    background-color: #F7F7F7;
+                    border-top: 1px solid #EE3A43;
+                }
+
+                .liveAgentAlert{
+                    margin: 10px;
+                }
+
+                .chat-header {
+                    font-family: Montserrat medium;
+                    font-style: normal;
+                    line-height: 26px;
+                    font-weight: 500;
+                    font-size: 18px;
+                    margin: 8px 8px 0px 8px;
+                }
+
+
+                .chat-status {
+                    font-family: Montserrat medium;
+                    font-style: normal;
+                    line-height: 20px;
+                    font-weight: 500;
+                    font-size: 15px;
+                    margin: 0px 8px 8px 8px;
+                    color:#EE3A43;
+                }
+
+                .liveAgentChatTextArea {
+                    font-family: Montserrat;
+                    font-size: 15px;
+                    line-height: 20px;
+                    height:40px;
+                    width:100%;
+                    border:none;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    resize: none;
+                    color : #222;
+                    white-space: pre-wrap;
+                    overflow-y: auto;
+                    overflow-x:hidden;
+                    word-wrap: break-word;
+                }
+
+                .liveAgentChatTextArea:focus {
+                    outline: none;
+                    border:0px solid black;
+                }
+
+                .liveAgentAlert button{
+                    display:none;
+                }
+
+                .chat-operator{
+                    left: 0px;
+                    background-color: #ffffff;
+                    border: 1px solid #E5E5E5;
+                    border-radius: 4px 4px 0 4px;
+                    margin: 10px 20% 10px 10px;
+                    padding: 4px;
+                    display:block;
+                }
+
+                .chat-client{
+                    right: 10px;
+                    background-color: #ffffff;
+                    margin: 0px 10px 10px 20%;
+                    border: 1px solid #E5E5E5;
+                    border-radius: 4px 4px 0 4px;
+                    padding: 0px 4px 4px 4px;
+                    display: block;
+                }
+
+                .chat-name{
+                    color: rgba(0,0,0,0.9);
+                    font-family: Montserrat medium;
+                    font-size: 13px;
+                    font-weight: bold;
+                    line-height: 16px;
+                    letter-spacing: 1px;
+                }
+
+                .chat-messageText {
+                    color: #1A1A1A;
+                    font-family: Montserrat;
+                    font-size: 15px;
+                    line-height: 18px;
+                    margin-top: 4px;
+                    margin-bottom: 2px;
+                }
+
+                .chat-customDateTime{
+                    color: #1A1A1A;
+                    font-family: Montserrat;
+                    font-size: 13px;
+                    line-height: 18px;
+                    font-weight: normal;
+                }
+
+                .chat-header .close {
+                    width: 15px;
+                    height: 15px;
+                    color: #3F536E;
+                    opacity: 1;
+                    margin: 7px 5px 5px 0;
+                    background: url({!URLFOR($Resource.e2e_images, 'close.png')}) no-repeat;
+                }
+
+            </style>
+            <script>
+                window.addEventListener('message', function(event) {
+                    if (event.data && event.data.hasOwnProperty('stationId')) {
+                        returnStation(JSON.stringify(event.data));
+                    } else {
+                        return;
+                    }
+                });
+            </script>
+        </head>
+        <body class="modal-open" style="overflow: auto">
+        <main>
+            <apex:actionStatus id="splashStatus" onstart="startSplash();" onstop="endSplash();"/>
+            <div class="splashStatus" id="splashDiv">
+                <div class="circle"><img src="{!URLFOR($Resource.e2e_images, 'preloader-loop.gif')}"/></div>
+            </div>
+            <apex:actionFunction name="returnStation" action="{! returnStation }" status="splashStatus" reRender="continue-btn, selectedStationName">
+                <apex:param name="jsonStation" value="" assignTo="{! jsonStation }"/>
+            </apex:actionFunction>
+
+            <apex:outputPanel id="onlineChatBlock">
+                <script>
+                    function setupOnlineChat(){
+                        startOnlineChat('{!chatURL}','{!chatDeploymentId}','{!chatDeploymentJsURL}','{!$Organization.Id}'.slice(0,-3),'{!chatButtonId}',
+                            ''.slice(0,-3),''.slice(0,-3),''.slice(0,-3),
+                            '{!chatFirstMessage}','0','','manual');
+                        return false;
+                    }
+
+                    function setupOnlineAutoChat(){
+                        startOnlineChat('{!chatURL}','{!chatDeploymentId}','{!chatDeploymentJsURL}','{!$Organization.Id}'.slice(0,-3),'{!chatButtonId}',
+                            ''.slice(0,-3),''.slice(0,-3),''.slice(0,-3),
+                            '{!chatFirstMessage}','0','','automatical');
+                        return false;
+                    }
+                </script>
+            </apex:outputPanel>
+            <apex:actionFunction id="setupChatInit" name="setupChatInit"
+                                 onComplete="setupChatInitialization('{!chatURL}','{!chatDeploymentId}','{!$Organization.Id}'.slice(0,-3),
+                                         '{!chatButtonId}','','','','','0','','');" reRender="setupChatInit" />
+
+            <!-- <apex:actionFunction id="viewportInit" name="viewportInit"
+                                     onComplete="goToActiveViewport('{!activeStep}', '{!activeSubStep}');"/> -->
+
+            <!-- <apex:actionFunction name="setOpportunityFlagChat" action="{!setFlagChatToOpportunity}" rerender="rerenderNothing" >
+                    <apex:param name="modeOfChat" value="" />
+                </apex:actionFunction> -->
+            <apex:actionFunction name="saveOfflineChat" action="{!saveOfflineChatLog}" rerender="rerenderNothing" >
+                <apex:param name="offlineChatBody" value="" />
+            </apex:actionFunction>
+
+            <span id="top-heading-viewport"></span>
+            <div class="container">
+                <apex:outputPanel layout="none" id="containerBlock">
+                    <div class="row">
+                        <div class="page-logo">
+                            <apex:image url="{!URLFOR($Resource.e2e_images, 'm-logo.png')}"/>
+                        </div>
+                    </div>
+
+                    <apex:outputPanel layout="block" rendered="{! NOT(errorMode) }">
+                        <div class="row">
+                            <div class="c-page-header">{! stepPagesMap['HEADER'].elements['TOP HEADING']['VALUE'].Value__c }</div>
+                        </div>
+                        <div class="row">
+                            <div class="wrapper-container">
+                                <div class="col-md-11 col-centered row-wrapper">
+                                    <div class="b-block-header">{! stepPagesMap['JITBLocator'].elements['BODY']['VALUE'].Value__c }</div>
+                                </div>
+
+                                <div class="col-md-11 col-centered row-wrapper">
+                                    <div class="row">
+                                        <div class="b-locator">
+                                            <div class="col-lg-12">
+                                                <iframe id="fleetcor-map" src="{! urlLocator }" width="100%" height="350" frameborder="0" class="frame center-block"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-11 col-centered row-wrapper">
+                                    <apex:outputPanel id="selectedStationName" layout="block">
+                                        <apex:outputPanel styleClass="station-header" rendered="{! NOT(ISBLANK(selectedStationAddress)) }">
+                                            {! cardPagesMap['CARD CONFIGURATION. SPECIAL OFFERS'].elements['INBOUND TYPE C OFFER #1']['FAVOURITE STATION HEADING'].Value__c }
+                                        </apex:outputPanel><br/>
+                                        <apex:outputPanel styleClass="selected-station" rendered="{! NOT(ISBLANK(selectedStationAddress)) }">{! selectedStationName }</apex:outputPanel>
+                                    </apex:outputPanel>
+                                </div>
+
+                                <div class="col-md-11 col-centered row-wrapper">
+                                    <apex:commandButton id="continue-btn" action="{! goToTheForm }"
+                                                        value="{! cardPagesMap['CARD CONFIGURATION. SPECIAL OFFERS'].elements['INBOUND TYPE C OFFER #1']['CHOOSE STATION BUTTON'].Value__c}"
+                                                        styleClass="btn btn-red" disabled="{! ISBLANK(selectedStationAddress) }" reRender="containerBlock" status="splashStatus">
+                                    </apex:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+                    <apex:outputPanel layout="block" styleClass="mobile-error-page" rendered="{! errorMode }">
+                        <div class="wrapper">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <apex:outputPanel layout="block" styleClass="b-block-header">
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['TOP HEADING']['HEADING'].Value__c }
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="block" styleClass="font-13 b-error-text">
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['DESCRIPTION']['VALUE'].Value__c }
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="font-13 b-error-text">
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['FEEDBACK HEADING']['HEADING'].Value__c }<br/>
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['PHONE']['VALUE'].Value__c }<br/>
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['EMAIL']['VALUE'].Value__c }<br/>
+                                        {! stepPagesMap['SYSTEM ERROR'].elements['WORK TIME']['VALUE'].Value__c }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="buttons text-center">
+                                    <div class="col-lg-12">
+                                        <div class="error-text">
+                                            <a href="{! stepPagesMap['SYSTEM ERROR'].elements['RETURN TO SITE BUTTON']['URL'].Value__c }" class="btn btn-gray" style="min-width: 130px">
+                                                {! stepPagesMap['SYSTEM ERROR'].elements['RETURN TO SITE BUTTON']['BUTTON NAME'].Value__c }
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="fleetcor">
+                            <div class="page-logo" style="margin: 13px 0 10px 0px;">
+                                <apex:image url="{!URLFOR($Resource.e2e_images, 'm-logo.png')}"/>
+                            </div>
+                            <apex:outputPanel layout="block" styleClass="fleetcor-desc text-muted">
+                                {! stepPagesMap['FOOTER'].elements['DESCRIPTION']['VALUE'].Value__c }
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="copyright">
+                        <apex:outputPanel layout="block">
+                            <apex:outputLink value="{! stepPagesMap['FOOTER'].elements['COPYRIGHT']['URL'].Value__c }" target="_blank">
+                                {! stepPagesMap['FOOTER'].elements['COPYRIGHT']['VALUE'].Value__c }
+                            </apex:outputLink>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+            </div>
+            <div class="lightbox"></div>
+        </footer>
+        </body>
+    </apex:form>
+</apex:page>

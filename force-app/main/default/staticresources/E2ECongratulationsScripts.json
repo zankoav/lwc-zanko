@@ -1,0 +1,92 @@
+{
+	"e2eContentElements": [
+		{
+			"name": "HEADER",
+			"value": "Kunde werden und Tankkarten beantragen"
+		},
+		{
+			"name": "SUBHEADER",
+			"value": "Jetzt Kunde werden – schnell und einfach! Nehmen Sie sich zehn Minuten Zeit und beantragen Sie Ihre Shell Card von FLEETCOR über unser Online-Formular für Neukunden."
+		},	
+		{
+			"name": "FIELDS HEADER",
+			"value": "Kontaktdaten"
+		},
+		{
+			"name": "FIELDS SUBHEADER",
+			"value": "Ansprechpartner, der für das Unternehmen zeichnungsberechtigt ist"
+		},
+		{
+			"name": "SALUTATION",
+			"label": "SALUTATION",
+			"value": "mr",
+			"type": "field",
+			"errorMessage": "",
+			"options": [
+				{
+					"label": "Herr",
+					"value": "mr"
+				},
+				{
+					"label": "Frau",
+					"value": "mrs"
+				}
+			]
+		},			
+		{
+			"name": "FIRST NAME",
+			"label": "Vorname",
+			"value": "",
+			"validationRegex": "^[a-zA-ZÀ-ž\\x7f-\\xff\\s\'-]+$",
+			"maxLength": "",
+			"type": "field",
+			"errorMessage": "Bitte geben Sie Ihren Vornamen ein."
+		},
+		{
+			"name": "LAST NAME",
+			"label": "Nachname",
+			"value": "",
+			"validationRegex": "^[a-zA-ZÀ-ž\\x7f-\\xff\\s\'-]+$",
+			"maxLength": "",
+			"type": "field",
+			"errorMessage": "Bitte geben Sie Ihren Nachnamen ein."
+		},
+		{
+			"name": "PHONE",
+			"label": "Handynummer",
+			"value": "",
+			"validationRegex": "^([0-9+]{13,15})$",
+			"maxLength": "",
+			"type": "field",
+			"errorMessage": "Bitte geben Sie Ihre Handynummer im korrekten Format ein."
+		},
+		{
+			"name": "EMAIL",
+			"label": "E-Mail-Adresse",
+			"value": "",
+			"validationRegex": "^\\w+([.-]\\w+)*@\\w+([.-]\\w+)*(\\.\\w{2,4})+$",
+			"maxLength": "",			
+			"type": "field",
+			"errorMessage": "Bitte geben Sie Ihre E-Mail-Adresse im korrekten Format ein."
+		},
+		{
+			"name": "NUMBER OF CARDS",
+			"label": "Anzahl der Karten",
+			"value": "",
+			"type": "field",
+			"errorMessage": "Bitte geben Sie Ihre E-Mail-Adresse im korrekten Format ein."
+		},								
+		{
+			"name": "NEWS AGREEMENT",
+			"label": "Ja, ich möchte von der FLEETCOR Deutschland GmbH Informationen und Werbung für die Shell Tankkarte erhalten. Ich möchte zu diesem Zweck per Email, Textnachricht oder Telefonanruf kontaktiert werden. Diese Einwilligung ist jederzeit widerruflich. Durch den Widerruf der Einwilligung wird die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung nicht berührt. Ihren Widerruf können Sie an die FLEETCOR Deutschland GmbH, Frankenstraße 150c, 90461 Nürnberg richten oder per E-Mail an kundenservice@fleetcor.de erklären. Die Verarbeitung Ihrer Daten erfolgt entsprechend unserer <a href='https://fleetcor.de/datenschutzrichtlinie' target='_blank'>Datenschutzerklärung.</a>",
+			"value": "",
+			"type": "field",
+			"errorMessage": "Invalid value"
+		},
+		{
+			"name": "CONTINUE BUTTON",
+			"label": "CONTINUE",
+			"value": ""
+		}					
+	]
+}

@@ -39,8 +39,7 @@ public class AppDeController {
         ApexPages.currentPage().setCookies(new Cookie[]{sourceCookie});
 
         // Need to remove
-        state.put('step', ApexPages.currentPage().getParameters().get('step'));
-
+//        state.put('step', ApexPages.currentPage().getParameters().get('step'));
         return state;
     }
 

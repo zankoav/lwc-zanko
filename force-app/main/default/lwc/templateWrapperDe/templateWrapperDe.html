@@ -70,16 +70,16 @@
                 <c-step-additional-parameters 
                     data-step 
                     lang={lang} 
-                    step-content="additiona_parameters_de"
-                    apex-service="">
-                </c-step-additional-parameters>
+                    step-content="additional_parameters_de"
+                    apex-service="E2EAdditionalParametersBasicImpl"
+                ></c-step-additional-parameters >
             </c-step>
             <c-step order="10">
                 <c-step-payment-details 
                     data-step 
                     lang={lang} 
-                    step-content="payment_details_de"
-                    apex-service="">
+                    step-content="payment_options_de"
+                    apex-service="E2EPaymentOptionsBasicImpl">
                 </c-step-payment-details >
             </c-step>
             <c-step order="11">
@@ -87,7 +87,7 @@
                     data-step 
                     lang={lang} 
                     step-content="deposit_options_de"
-                    apex-service="">
+                    apex-service="E2EDepositOptionsBasicImpl">
                 </c-step-deposit-options>
             </c-step>
             <c-step order="12">
@@ -95,7 +95,7 @@
                     data-step 
                     lang={lang} 
                     step-content="congratulations_de"
-                    apex-service="">
+                    apex-service="E2ECongratulationsBasicImpl">
                 </c-step-congratulations>
             </c-step>
         </c-step-router>

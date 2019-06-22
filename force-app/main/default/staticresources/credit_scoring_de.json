@@ -1,0 +1,98 @@
+{
+	"country": "Germany",
+	"language": "German",
+	"header": "Kunde werden und Tankkarten beantragen",
+	"fields_header": "Folgender Kreditrahmen steht Ihnen zur Verfügung",
+	"payment_method": {
+		"label": "Welche Zahlungsmethode bevorzugen Sie?",
+		"value": "Lastschrift",
+		"options": [
+			{
+				"label": "Lastschrift",
+				"value": "Lastschrift",
+				"description": "Eine Lastschrift ist der direkte Einzug des geforderten Rechnungsbetrags von Ihrem Bankkonto, der nach Ihrer Einzugsermächtigung erfolgt. Sie sparen Zeit und vermeiden das Risiko, dass Karten nicht genutzt werden können."
+			},
+			{
+				"label": "Überweisung",
+				"value": "Banküberweisung",
+				"description": "Überweisungen führen Sie auf der Basis der Rechnungen und des bevorzugten Abrechnungszeitraums selbst durch. Die Rechnungen müssen rechtzeitig bezahlt werden, ansonsten besteht die Gefahr, dass Karten nicht genutzt werden können, bis die Rechnung beglichen ist"
+			}
+		]
+	},
+	"billing_period": {
+		"label": "Wie oft möchten Sie Rechnungen zahlen?",
+		"value": "15",
+		"options": [
+			{
+				"label": "Wöchentlich",
+				"value": "7",
+				"description": "Die Kontobelastung findet am 7ten Tag nach Ablauf statt.",
+				"disabled": ""
+			},
+			{
+				"label": "Vierzehntägig",
+				"value": "15",
+				"description": "Die Kontobelastung findet am 15ten Tag nach Ablauf statt.",
+				"disabled": ""
+			},
+			{
+				"label": "Monatlich",
+				"value": "30",
+				"description": "Die Kontobelastung findet am 30ten Tag nach Ablauf statt.",
+				"disabled": ""
+			}
+		]
+	},
+	"credit_limit_header": "Wählen Sie Ihr Kreditlimit",
+	"credit_limit_subheader": "Dieses Kreditlimit deckt alle Karten ab, die Sie bestellen möchten",
+	"credit_limit": {
+		"label": "Kreditlimit",
+		"value": "",
+		"currency": "€",
+		"type": "text",
+		"required": "required"
+	},
+	"max_value": "",
+	"max_value_7": "",
+	"max_value_15": "",
+	"max_value_30": "",
+	"credit_limit_min": "",	
+	"credit_limit_min_7": "",	
+	"credit_limit_min_15": "",	
+	"credit_limit_min_30": "",	
+	"credit_limit_max": "",
+	"credit_limit_max_7": "",
+	"credit_limit_max_15": "",
+	"credit_limit_max_30": "",
+	"credit_limit_step": "100",
+	"credit_limit_decrease_button": {
+		"value": "-",
+		"disabled": ""
+	},
+	"credit_limit_increase_button": {
+		"value": "+",
+		"disabled": ""
+	},
+	"deposit": {
+		"label": "Kaution",
+		"description": "Muss nur einmalig gezahlt werden",
+		"no_deposit_description": "No deposit",
+		"helpText": "Die Kaution ist eine Einzahlung auf das Konto. Sie wird einmalig gezahlt und verbleibt unangetastet auf Ihrem Konto. Falls Rechnungen nicht rechtzeitig beglichen werden, können wir den offenen Betrag von der Kaution einziehen. Die Karten werden erst ausgestellt, nachdem die Kaution eingezahlt wurde.",
+		"value": "",
+		"currency": "€",
+		"type": "text",
+		"required": "required"
+	},
+	"deposit_7": "",
+	"deposit_15": "",
+	"deposit_30": "",
+	"currency": "€",
+	"continue_button": {
+		"label": "continue",
+		"disabled": ""
+	},
+	"back_button": {
+		"label": "zurück",
+		"disabled": ""
+	}
+}
